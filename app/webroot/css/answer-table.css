@@ -1,0 +1,85 @@
+#answer-table {
+    overflow-x: auto;
+}
+
+#answer-table table tr td {
+    /*white-space: nowrap;*/
+}
+
+#answer-table table tr th {
+    vertical-align: top;
+}
+
+#answer-table table tr td .manual-scoring .col-md-7 {
+    padding-right: 0px;
+}
+
+#answer-table table tr td .manual-scoring .col-md-5 {
+    padding-left: 5px;
+}
+
+.question-collapse {
+    display: none;
+}
+
+#answer-table-filter .nav-tabs {
+	margin-top: 0px; 
+}
+
+#answer-table-filter .nav-tabs li, #answer-table-filter .nav-tabs li.active {
+	border: 1px solid adadad;
+}
+
+#answer-table-filter .nav>li>a {
+	padding: 5px;
+	color: #d9534f;
+}
+
+#answer-table-filter .nav-tabs>li.active>a, #answer-table-filter .nav-tabs>li.active>a:hover, #answer-table-filter .nav-tabs>li.active>a:focus {
+	color: #d9534f;
+}
+
+#details .table tbody tr td .label {
+    color: #e21414 !important;
+    padding: 0;
+    font-size: 10 !important;
+}
+
+#tabs {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border: none;
+}
+
+#tabs li{
+    width: 50%;
+    padding: 0;
+    margin: 0;
+}
+
+.update-score {
+  width: 40%;
+  float: left;
+}
+
+#tabs li {
+  border: none !important;
+}
+
+#tabs li {
+  border: none;
+}
+
+ul#tabs li#answer-table-show a {
+  color: #fff;
+}
+
+ul#tabs li#answer-table-overview a {
+  color: #333;
+}
+
+ul#tabs li#answer-table-show a:hover {
+  color: #337ab7;
+}

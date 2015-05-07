@@ -1,0 +1,83 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2014-11-25 22:42+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: View/Elements/Quiz/edit.question.ctp:4
+msgid "Enter the question"
+msgstr ""
+
+#: View/Elements/Quiz/edit.question.ctp:19
+msgid "Edit"
+msgstr ""
+
+#: View/Elements/Quiz/edit.question.ctp:20
+msgid "Delete"
+msgstr ""
+
+#: View/Quiz/add.ctp:5
+msgid "Quiz Name"
+msgstr ""
+
+#: View/Quiz/add.ctp:6
+#: View/Quiz/edit.ctp:6
+msgid "Name the quiz"
+msgstr ""
+
+#: View/Quiz/add.ctp:22
+#: View/Quiz/edit.ctp:35
+msgid "Add New Question"
+msgstr ""
+
+#: View/Quiz/add.ctp:24
+#: View/Quiz/edit.ctp:37
+msgid "Finish"
+msgstr ""
+
+#: View/Quiz/edit.ctp:10
+msgid "Quiz Description"
+msgstr ""
+
+#: View/Quiz/edit.ctp:11
+msgid "Describe the quiz to respondents"
+msgstr ""
+
+#: View/Quiz/edit.ctp:50
+msgid "Edit Quiz"
+msgstr ""
+
+#: View/Quiz/index.ctp:5
+msgid "Create New Quiz"
+msgstr "Luo uusi Quiz"
+
+#: View/Quiz/index.ctp:17
+msgid "Let's Quiz"
+msgstr "Katsotaanpa Quiz"
+
+#: View/Quiz/index.ctp:24
+msgid "My Quizzes"
+msgstr "Minun tietovisat"
+
+#: View/Quiz/present.ctp:17
+msgid "Read the QR code with your mobile service"
+msgstr ""
+
+#: View/Quiz/present.ctp:18
+msgid "OR"
+msgstr ""
+
+#: View/Quiz/present.ctp:19
+msgid "Surf to this web address:"
+msgstr ""
+
