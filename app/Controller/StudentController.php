@@ -104,21 +104,11 @@ class StudentController extends AppController {
                     } elseif ($value2['Question']['question_type_id'] == 4) {
                         // short manual point
                         $manual_scoring_short = $this->QuestionType->findById(4, array('QuestionType.manual_scoring'));
-                        if (!empty($value1['text'])) {
-                            $data['Answer'][$key1]['score'] = $manual_scoring_short['QuestionType']['manual_scoring'];
-                            $correct_answer = $correct_answer + $manual_scoring_short['QuestionType']['manual_scoring'];
-                        } else {
-                            $data['Answer'][$key1]['score'] = 0;
-                        }
+                        $data['Answer'][$key1]['score'] = 0;
 
                     } else {
                         $manual_scoring_essay = $this->QuestionType->findById(5, array('QuestionType.manual_scoring'));
-                        if (!empty($value1['text'])) {
-                            $data['Answer'][$key1]['score'] = $manual_scoring_essay['QuestionType']['manual_scoring'];
-                            $correct_answer = $correct_answer + $manual_scoring_essay['QuestionType']['manual_scoring'];
-                        } else {
-                            $data['Answer'][$key1]['score'] = 0;
-                        }
+                        $data['Answer'][$key1]['score'] = 0;
                     }
                 } 
             }
@@ -149,12 +139,13 @@ class StudentController extends AppController {
 
         $correct_answer = $correct_answer < 0 ? 0 : $correct_answer;
 
-        // pr($data);
-        // exit;
         // save data in ranking table
         $data['Ranking']['quiz_id'] = $quizId;
         $data['Ranking']['total'] = $total;
         $data['Ranking']['score'] = $correct_answer;
+
+        // pr($data);
+        // exit;
         
         if ($this->Student->saveAssociated($data)) {
             return $this->redirect(array('action' => 'success'));
