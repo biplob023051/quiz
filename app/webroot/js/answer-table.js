@@ -27,6 +27,9 @@ function checkRow(row) {
         if (marks < 0) {
             alert("Give a postive number!");
             return;
+        } else if ((marks == '') || (current_score == '')) {
+            alert("To rate please give a value!");
+            return;
         } else if (marks == current_score) {
             alert("Current score given!");
             return;
