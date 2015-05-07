@@ -115,9 +115,26 @@ class StudentController extends AppController {
         }
 
         $total = 0;
+        //pr($choices);
+        $checkQuestion = array();
         foreach ($choices as $key => $value) {
-            if (($value['Question']['question_type_id'] == 1) || 
-                ($value['Question']['question_type_id'] == 3) || ($value['Question']['question_type_id'] == 2)) {
+            if ($value['Question']['question_type_id'] == 1) {
+                if (!in_array($value['Question']['id'], $checkQuestion)) {
+                    array_push($checkQuestion, $value['Question']['id']);
+                    $checkMax = 0;
+                    foreach ($choices as $key1 => $value1) {
+                        if ($value1['Question']['question_type_id'] == 1) {
+                            if ($value['Question']['id'] == $value1['Question']['id']) {
+                                if ($value1['Choice']['points'] > 0) {
+                                    $checkMax = $checkMax < $value1['Choice']['points'] ? $value1['Choice']['points'] : $checkMax;    
+                                }
+                            }
+                        }
+                    } 
+                    $total = $total + $checkMax;   
+                }
+                    
+            } elseif (($value['Question']['question_type_id'] == 3) || ($value['Question']['question_type_id'] == 2)) {
                 if ($value['Choice']['points'] > 0) {
                     $total = $total + $value['Choice']['points'];    
                 }
@@ -143,9 +160,6 @@ class StudentController extends AppController {
         $data['Ranking']['quiz_id'] = $quizId;
         $data['Ranking']['total'] = $total;
         $data['Ranking']['score'] = $correct_answer;
-
-        // pr($data);
-        // exit;
         
         if ($this->Student->saveAssociated($data)) {
             return $this->redirect(array('action' => 'success'));
