@@ -10,7 +10,8 @@
                         'div' => array('class' => 'form-group'),
                         'class' => 'form-control c-text',
                         'label' => false,
-                        'type' => 'textarea'
+                        'type' => 'textarea',
+                        'id' => false
                     ));
                     ?>
                 </div>

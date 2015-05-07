@@ -316,10 +316,10 @@ var webQuiz = {
     dataValidation: function (questionTypeId) {
         var validationError = false;
 
+        var currentEditQid = $("#q" + webQuiz.currentEditQid),
+        choiceContainer = currentEditQid.find("div.choices");
+        
         if ((questionTypeId == 1) || (questionTypeId == 3)) {
-
-            var currentEditQid = $("#q" + webQuiz.currentEditQid),
-            choiceContainer = currentEditQid.find("div.choices");
 
             // choice validation
             validationError = webQuiz.choiceValidation(
@@ -339,6 +339,39 @@ var webQuiz = {
                     choiceContainer
                 );
             }
+        } else if (questionTypeId == 4) {
+            validationError = webQuiz.manualRatingValidation(
+                choiceContainer
+            );
+        } else if (questionTypeId == 5) {
+            validationError = webQuiz.essayValidation(
+                choiceContainer
+            );
+        }
+
+        return validationError;
+    },
+    essayValidation: function (choiceContainer) 
+    {
+        var validationError = false;
+        if ($("#ChoiceText").val() == '') {
+            if ($('.alert-danger').length) {
+                $('.alert-danger').remove();
+            }
+            validationError = true;
+            choiceContainer.prepend('<div class="alert alert-danger">At least points should be greater than 0</div>');
+        }
+        return validationError;
+    },
+    manualRatingValidation: function (choiceContainer) 
+    {
+        var validationError = false;
+        if ($("#ChoicePoints").val() == '') {
+            if ($('.alert-danger').length) {
+                $('.alert-danger').remove();
+            }
+            validationError = true;
+            choiceContainer.prepend('<div class="alert alert-danger">At least points should be greater than 0</div>');
         }
         return validationError;
     },
