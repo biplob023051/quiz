@@ -347,31 +347,80 @@ var webQuiz = {
             validationError = webQuiz.essayValidation(
                 choiceContainer
             );
+        } else {
+            validationError = webQuiz.automaticRatingValidation(
+                choiceContainer
+            );
         }
 
+        return validationError;
+    },
+    automaticRatingValidation: function (choiceContainer) 
+    {
+        var validationError = false;
+
+        // correct answer validation
+        choiceContainer.find(':input[type="text"]').each(function(){
+            if ($(this).val() == '') {
+                if ($('.alert-danger').length){
+                        $('.alert-danger').remove();
+                }
+                validationError = true;
+                choiceContainer.prepend('<div class="alert alert-danger">Enter correct answers, if multiple answers comma separated</div>');
+            }
+            
+        });
+
+        // point validation
+        if (validationError == false) {
+            choiceContainer.find(':input[type="number"]').each(function(){
+                if ($(this).val() > 0) {
+                    validationError = false;
+                    return false;
+                } else {
+                    validationError = true;
+                }
+            });
+            if (validationError == true) {
+                if ($('.alert-danger').length){
+                    $('.alert-danger').remove();
+                }
+                choiceContainer.prepend('<div class="alert alert-danger">At least point should be greater than 0</div>');
+            }
+        }
         return validationError;
     },
     essayValidation: function (choiceContainer) 
     {
         var validationError = false;
-        if ($("#ChoiceText").val() == '') {
-            if ($('.alert-danger').length) {
-                $('.alert-danger').remove();
+        choiceContainer.find(':input[type="text"]').each(function(){
+            if ($(this).val() == '') {
+                if ($('.alert-danger').length){
+                        $('.alert-danger').remove();
+                }
+                validationError = true;
+                choiceContainer.prepend('<div class="alert alert-danger">At least points should be greater than 0</div>');
             }
-            validationError = true;
-            choiceContainer.prepend('<div class="alert alert-danger">At least points should be greater than 0</div>');
-        }
+            
+        });
         return validationError;
     },
     manualRatingValidation: function (choiceContainer) 
     {
         var validationError = false;
-        if ($("#ChoicePoints").val() == '') {
-            if ($('.alert-danger').length) {
+        choiceContainer.find(':input[type="number"]').each(function(){
+            if ($(this).val() > 0) {
+                validationError = false;
+                return false;
+            } else {
+                validationError = true;
+            }
+        });
+        if (validationError == true) {
+            if ($('.alert-danger').length){
                 $('.alert-danger').remove();
             }
-            validationError = true;
-            choiceContainer.prepend('<div class="alert alert-danger">At least points should be greater than 0</div>');
+            choiceContainer.prepend('<div class="alert alert-danger">At least point should be greater than 0</div>');
         }
         return validationError;
     },
