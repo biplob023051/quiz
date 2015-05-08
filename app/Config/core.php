@@ -216,7 +216,9 @@
  *
  */
 	Configure::write('Session', array(
-		'defaults' => 'php'
+		'defaults' => 'database',
+	    'cookie' => 'VERKKOTESTI',
+	    'timeout' => 4320 //3 days
 	));
 
 /**
@@ -390,4 +392,4 @@ Cache::config('_cake_model_', array(
  * Here you can change your email, where the invoice sent.
  * 
  */
-	Configure::write('AdminEmail', 'bcsarkar02@gmail.com');
+	Configure::write('AdminEmail', 'pietu.halonen@gmail.com');

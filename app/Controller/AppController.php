@@ -35,6 +35,7 @@ class AppController extends Controller {
     public $components = array(
         'DebugKit.Toolbar',
         'Session',
+        'Cookie',
         'Auth' => array(
             'loginRedirect' => array(
                 'controller' => 'quiz',
@@ -62,6 +63,16 @@ class AppController extends Controller {
     );
 
     public function beforeFilter() {
+        
+        //default cookie seetings
+        $this->Cookie->name = 'VERKKOTESTI';
+        $this->Cookie->time = 3600;  // or '1 hour'
+        $this->Cookie->path = '/';
+        $this->Cookie->domain = false;
+        $this->Cookie->secure = false;
+        $this->Cookie->httpOnly = true;
+
+        // check user language, default language finish
         $language = $this->Auth->user('language');
         if (empty($language) or !file_exists(APP . 'Locale' . DS . $language . DS . 'LC_MESSAGES' . DS . 'default.po'))
             $language = 'fin';
