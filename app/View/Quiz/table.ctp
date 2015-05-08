@@ -11,6 +11,7 @@ $this->assign('title', __('Answer Table'));
 ?>
 <form class="form" id="answer-table-filter" method="post">
     <div class="row">
+        <div class="alert alert-danger" id="error-message" style="display: none"></div>
         <div class="col-md-3 col-xs-12">
             <?php
             echo $this->Form->input('Filter.daterange', array(

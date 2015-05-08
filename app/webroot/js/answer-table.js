@@ -25,11 +25,13 @@ function checkRow(row) {
         var current_score = $(this).attr("value"); 
         
         if (marks < 0) {
-            alert("Give a postive number!");
-            return;
+            $("#error-message").show();
+            $("#error-message").html('Please Give a postive number!');
+            return false;
         } else if (marks == current_score) {
-            alert("Current score given!");
-            return;
+            $("#error-message").show();
+            $("#error-message").html('You have not updated score yet!');
+            return false;
         } else if (marks > max) {
             // alert("Marks not allowed more than " + max + " value");
             // return;
@@ -57,6 +59,7 @@ function checkRow(row) {
     var appData = $.parseJSON($("#app-data").text());
 
     $(document).on('click', '#answer-table-overview', function () {
+        $("#error-message").hide();
         if($(this).hasClass('active'))
             return;
         $(this).addClass('active');
@@ -66,6 +69,7 @@ function checkRow(row) {
     });
 
     $(document).on('click', '#answer-table-show', function () {
+        $("#error-message").hide();
         if($(this).hasClass('active'))
             return;
         $(this).addClass('active');
