@@ -17,12 +17,14 @@ echo $this->Form->create('Student', array(
         'div' => array('class' => 'form-group'),
         'class' => 'form-control input-lg',
     ),
+    'novalidate' => true,
     'url' => array('controller' => 'student', 'action' => 'submit', $data['Quiz']['id'])
 ));
 ?>
 
 <div class="panel panel-primary">
     <div class="panel-heading">
+        <div class="alert alert-danger" id="error-message" style="display: none;"></div>
         <div class="row">
             <div class="col-xs-12 col-md-4">
                 <?php

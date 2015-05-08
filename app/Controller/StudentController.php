@@ -21,6 +21,7 @@ class StudentController extends AppController {
                 $error[] = $_error[0];
             }
             $this->Session->write('FormData', $data);
+            $this->Session->setFlash($error, 'error_form', array(), 'error');
             return $this->redirect(array(
                         'controller' => 'Quiz',
                         'action' => 'live',
