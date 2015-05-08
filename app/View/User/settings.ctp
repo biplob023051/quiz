@@ -49,15 +49,17 @@ echo $this->Form->create('User', array(
         ?>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-5 col-md-offset-3 col-xs-12 col-sm-12">
-        <div class="form-group">
-            <?php
-            echo $this->element('Invoice/invoice_button', array('btn_text' => __('Upgrade Account')));
-            ?>
+<?php if ($data['canCreateQuiz'] != 1): ?>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3 col-xs-12 col-sm-12">
+            <div class="form-group">
+                <?php
+                echo $this->element('Invoice/invoice_button', array('btn_text' => __('Upgrade Account')));
+                ?>
+            </div>
         </div>
     </div>
-</div>
+<?php endif; ?>
 <div class="row">
     <div class="col-md-5 col-md-offset-3 col-xs-12 col-sm-12">
         <?php

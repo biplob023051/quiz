@@ -27,9 +27,6 @@ function checkRow(row) {
         if (marks < 0) {
             alert("Give a postive number!");
             return;
-        } else if ((marks == '') || (current_score == '')) {
-            alert("To rate please give a value!");
-            return;
         } else if (marks == current_score) {
             alert("Current score given!");
             return;
@@ -51,8 +48,6 @@ function checkRow(row) {
             {
                 if (response.success || response.success === "true")
                 {
-                    // window.location.href = appData.baseUrl + '/quiz/table/' + response.quiz_id + '/answers';
-                    // window.location.href = window.location.href + "?answers";
                     location.reload();
                 }
             }

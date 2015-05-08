@@ -93,7 +93,9 @@ class UserController extends AppController {
                 return $this->redirect(array('action' => 'settings'));
             }
         }
-        $this->set('data', $this->User->getUser());
+        $data = $this->User->getUser();
+        $data['canCreateQuiz'] = $this->User->canCreateQuiz();
+        $this->set(compact('data'));
     }
     
 }
