@@ -237,7 +237,15 @@ h1 {
 }
 
 /* large border adding on edit question */
-tr.EditQuestionBorder{
+tr.EditQuestionBorder {
     border: 3px solid #d43f3a;
     /*border-bottom: 3px solid #ddd;*/ 
+}
+
+tr.incativeQuiz {
+    background: #F9F9F9;
+}
+
+tr.incativeQuiz a {
+    color: #aaa;
 }

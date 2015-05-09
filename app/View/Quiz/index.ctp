@@ -44,7 +44,8 @@ $this->assign('title', __('My Quizzes'));
         <tbody>
             <!--nocache-->
             <?php foreach ($data['quizzes'] as $id => $quiz): ?> 
-                <tr>
+                <?php $class = empty($quiz['Quiz']['status']) ? 'incativeQuiz' : 'activeQuiz'; ?>
+                <tr class="<?php echo $class; ?>">
                     <td>
                         <button type="button" class="btn btn-danger btn-sm delete-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>">
                             <i class="glyphicon glyphicon-trash"></i>
