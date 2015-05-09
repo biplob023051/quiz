@@ -66,6 +66,8 @@ function checkRow(row) {
 
     $(document).on('click', '#answer-table-overview', function () {
         $("#error-message").hide();
+        // tab information insert into cookie to keep tracking
+        setCookie("tabInfo", "answer-table-overview", 1);
         if($(this).hasClass('active'))
             return;
         $(this).addClass('active');
@@ -76,6 +78,8 @@ function checkRow(row) {
 
     $(document).on('click', '#answer-table-show', function () {
         $("#error-message").hide();
+        // tab information insert into cookie to keep tracking
+        setCookie("tabInfo", "answer-table-show", 1);
         if($(this).hasClass('active'))
             return;
         $(this).addClass('active');
@@ -91,9 +95,47 @@ function checkRow(row) {
     $("#answer-table table").find('tr').each(function(){
         checkRow($(this));
     });
-
-    if (answer_tab == true) {
+    
+    // get tab information
+    var currentTab = getCookie("tabInfo");
+    if (currentTab == 'answer-table-overview') {
+        $('#answer-table-overview').trigger('click');
+    } else {
         $('#answer-table-show').trigger('click');
     }
     
 })(jQuery);
+
+
+// javascript cookie functions
+function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname+"="+cvalue+"; "+expires;
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function checkCookie() {
+    var user=getCookie("username");
+    if (user != "") {
+        alert("Welcome again " + user);
+    } else {
+       user = prompt("Please enter your name:","");
+       if (user != "" && user != null) {
+           setCookie("username", user, 30);
+       }
+    }
+}

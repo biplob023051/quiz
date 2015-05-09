@@ -159,11 +159,3 @@ $this->assign('title', __('Answer Table'));
     ));
     ?>
 </script>
-
-<script type="text/javascript">
-<?php if (isset($answer_tab)) : ?>
-    var answer_tab = true;
-<?php else: ?>
-    var answer_tab = false;
-<?php endif; ?>
-</script>

@@ -219,11 +219,6 @@ class QuizController extends AppController {
 
         // pr($quizDetails);
         // exit;
-        if ($this->Session->check('answer_tab')) {
-            $this->set('answer_tab', true);  
-            $this->Session->delete('answer_tab');  
-        }
-
         $classes = Hash::combine($checkPermission['Student'], '{n}.class', '{n}.class');
         $classes = Hash::merge(array('all' => __('All')), $classes);
 

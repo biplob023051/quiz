@@ -35,7 +35,6 @@ class ScoreController extends AJAXController {
                 $response['quiz_id'] = $ranking['Ranking']['quiz_id'];
             }
         }
-        $this->Session->write('answer_tab', true);
         $this->set('data', $response);
     }
 
