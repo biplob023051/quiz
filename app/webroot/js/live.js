@@ -3,6 +3,9 @@
 		var validateStdError = checkValidation();
 		if (validateStdError == false) {
 			event.preventDefault();
+			$('html, body').animate({
+		        scrollTop: $(".page-header").offset().top
+		    }, 500);
 		}
 	});
 

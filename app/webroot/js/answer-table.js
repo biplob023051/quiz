@@ -27,10 +27,16 @@ function checkRow(row) {
         if (marks < 0) {
             $("#error-message").show();
             $("#error-message").html('Please Give a postive number!');
+            $('html, body').animate({
+                scrollTop: $(".page-header").offset().top
+            }, 500);
             return false;
         } else if (marks == current_score) {
             $("#error-message").show();
             $("#error-message").html('You have not updated score yet!');
+            $('html, body').animate({
+                scrollTop: $(".page-header").offset().top
+            }, 500);
             return false;
         } else if (marks > max) {
             // alert("Marks not allowed more than " + max + " value");

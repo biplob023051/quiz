@@ -249,3 +249,12 @@ tr.incativeQuiz {
 tr.incativeQuiz a {
     color: #aaa;
 }
+
+tr.incativeQuiz mark {
+    background: none !important;
+}
+
+tr.incativeQuiz mark a {
+    margin-left: 73px;
+    background: none !important;
+}
