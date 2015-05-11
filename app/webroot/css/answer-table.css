@@ -60,8 +60,13 @@
 }
 
 .update-score {
-  width: 40%;
+  width: 80px;
   float: left;
+}
+
+#details table tr td {
+    min-width: 125px;
+    max-width: 100%;
 }
 
 #tabs li {

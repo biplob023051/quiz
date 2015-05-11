@@ -22,18 +22,15 @@ class ScoreController extends AJAXController {
                 $data['score'] = $choice['Choice']['points'];
             
             $response['data'] = $this->Answer->updateScore($data['id'], $data['student_id'], $data['score']);
-            if ($this->Answer->updateScore($data['id'], $data['student_id'], $data['score']))
-            {
-                // update ranking score as well
-                $this->loadModel('Ranking');
-                $ranking = $this->Ranking->findByStudentId($data['student_id']);
-                $score = $ranking['Ranking']['score'] + $data['score'] - $data['current_score'];
-                $this->Ranking->id = $ranking['Ranking']['id'];
-                $this->Ranking->saveField('score', $score);
-                $response['success'] = true;
-                $response['score'] = $data['score'];
-                $response['quiz_id'] = $ranking['Ranking']['quiz_id'];
-            }
+            // update ranking score as well
+            $this->loadModel('Ranking');
+            $ranking = $this->Ranking->findByStudentId($data['student_id']);
+            $score = $ranking['Ranking']['score'] + $data['score'] - $data['current_score'];
+            $this->Ranking->id = $ranking['Ranking']['id'];
+            $this->Ranking->saveField('score', $score);
+            $response['success'] = true;
+            $response['score'] = $score;
+            $response['student_id'] = $ranking['Ranking']['student_id'];
         }
         $this->set('data', $response);
     }

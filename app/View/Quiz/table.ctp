@@ -75,7 +75,7 @@ $this->assign('title', __('Answer Table'));
                                 <?php foreach ($quizDetails['Ranking'] as $key2 => $value2) : ?>
                                     <?php if ($value1['id'] == $value2['student_id']) : ?>
                                         <td>
-                                            <span id="studentscr-<?php echo $value1['id']; ?>"><?php echo $value2['score']; ?></span>/<?php echo $value2['total']; ?>
+                                            <span id="studentscr1-<?php echo $value1['id']; ?>"><?php echo $value2['score']; ?></span>/<?php echo $value2['total']; ?>
                                         </td>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
@@ -119,7 +119,7 @@ $this->assign('title', __('Answer Table'));
                                 <?php foreach ($quizDetails['Ranking'] as $key2 => $value2) : ?>
                                     <?php if ($value1['id'] == $value2['student_id']) : ?>
                                         <td>
-                                            <span id="studentscr-<?php echo $value1['id']; ?>"><?php echo $value2['score']; ?></span>/<?php echo $value2['total']; ?>
+                                            <span id="studentscr2-<?php echo $value1['id']; ?>"><?php echo $value2['score']; ?></span>/<?php echo $value2['total']; ?>
                                         </td>
                                     <?php endif; ?>
                                 <?php endforeach; ?>

@@ -22,7 +22,8 @@ function checkRow(row) {
     $('#details input').blur(function() {
         var marks = $(this).val();
         var max = $(this).attr("max");
-        var current_score = $(this).attr("value"); 
+        var current_score = $(this).attr("current-score"); 
+        $("#error-message").hide();
         
         if (marks < 0) {
             $("#error-message").show();
@@ -39,9 +40,15 @@ function checkRow(row) {
             }, 500);
             return false;
         } else if (marks > max) {
-            // alert("Marks not allowed more than " + max + " value");
-            // return;
+            $("#error-message").show();
+            $("#error-message").html('Marks not allowed more than ' + max + ' value');
+            $('html, body').animate({
+                scrollTop: $(".page-header").offset().top
+            }, 500);
+            return false;
         } 
+
+        $(this).attr("current-score", marks);
 
         var std_id = $(this).attr("name");
         var q_id = $(this).attr("question");
@@ -51,12 +58,16 @@ function checkRow(row) {
             dataType: 'json',
             url: appData.baseUrl + '/score/update',
             type: 'post',
-            data: {'id': q_id, 'student_id': std_id, 'score': marks, 'current_score' : current_score},
+            data: {'id': q_id, 'student_id': std_id, 'score': marks, 'current_score' : current_score, 'max' : max},
             success: function (response)
             {
+                console.log(response);
                 if (response.success || response.success === "true")
                 {
-                    location.reload();
+                    $("#studentscr2-" + std_id).text(response.score);
+                    $("#studentscr1-" + std_id).text(response.score);
+                } else {
+                    alert('Something went wrong, try again later');
                 }
             }
         });
