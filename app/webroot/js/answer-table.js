@@ -54,9 +54,9 @@ function checkRow(row) {
     });
 
     $('#details input').donetyping(function(){
-        var marks = $(this).val();
-        var max = $(this).attr("max");
-        var current_score = $(this).attr("current-score"); 
+        var marks = parseInt($(this).val());
+        var max = parseInt($(this).attr("max"));
+        var current_score = parseInt($(this).attr("current-score")); 
         $("#ajax-message").hide();
 
         if (marks < 0) {
@@ -90,8 +90,8 @@ function checkRow(row) {
 
         $(this).attr("current-score", marks);
 
-        var std_id = $(this).attr("name");
-        var q_id = $(this).attr("question");
+        var std_id = parseInt($(this).attr("name"));
+        var q_id = parseInt($(this).attr("question"));
 
 
         $.ajax({
