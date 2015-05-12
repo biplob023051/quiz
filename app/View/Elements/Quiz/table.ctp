@@ -18,7 +18,7 @@
             <?php else : ?>
                 <?php echo $value4['text'] . '<br />'; ?>
                 <input 
-            placeholder="Rate!" 
+            placeholder="<?php echo __('Rate!'); ?>" 
             type="number" 
             class="form-control update-score" 
             name="<?php echo $value1['id'] ?>"

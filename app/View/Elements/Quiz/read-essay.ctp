@@ -12,7 +12,7 @@
             <div class="modal-footer">
                 <span>
                     <input 
-            placeholder="Rate!" 
+            placeholder="<?php echo __('Rate!'); ?>" 
             type="number" 
             class="form-control update-score" 
             name="<?php echo $value1['id'] ?>"

@@ -1,106 +1,60 @@
 # LANGUAGE translation of CakePHP Application
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"PO-Revision-Date: 2015-04-25 22:15+0600\n"
+"POT-Creation-Date: 2015-02-28 18:22+0100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
-"Language-Team:  <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: \n"
-"X-Generator: Poedit 1.7.6\n"
-"Language: fi_FI\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: Controller/InvoiceController.php:23
 #: View/Elements/Invoice/invoice_error_dialog.ctp:7
 #: View/Elements/Invoice/invoice_send_dialog.ctp:7
 #: View/Elements/Invoice/invoice_success_dialog.ctp:7
-#: View/User/settings.ctp:56
+#: View/User/settings.ctp:55
 msgid "Upgrade Account"
-msgstr "Päivitä tili"
+msgstr "Päivitä käyttäjätili"
 
-#: Controller/QuestionController.php:72
-msgid "Choice %d"
-msgstr "Valinta %d"
-
-#: Controller/QuestionController.php:105
+#: Controller/QuestionController.php:60
 msgid "New Question"
 msgstr "Uusi kysymys"
 
-#: Controller/QuizController.php:104 View/Quiz/edit.ctp:41
+#: Controller/QuizController.php:104
+#: View/Quiz/edit.ctp:41
 msgid "Name the quiz"
-msgstr "Nimi tietokilpailu"
+msgstr "Nimeä testi"
 
-#: Controller/UserController.php:27
-msgid "Registration success"
-msgstr "Rekisteröinti menestyksen"
-
-#: Controller/UserController.php:59
-msgid "You have logged out"
-msgstr "Kirjauduit ulos"
-
-#: Controller/UserController.php:79
-msgid "Settings has been saved"
-msgstr "Asetukset tallennettu"
-
-#: View/Answer/mark.ctp:11 View/Quiz/edit.ctp:17
-msgid "Edit Quiz"
-msgstr "Muokkaa tenttiä"
-
-#: View/Answer/table.ctp:10 View/Quiz/table.ctp:10
+#: View/Answer/table.ctp:10
 msgid "Answer Table"
-msgstr "Vastaus"
+msgstr "Vastaustaulukko"
 
-#: View/Answer/table.ctp:45 View/Quiz/table.ctp:45
-msgid "Overview"
-msgstr "Yleiskatsaus"
-
-#: View/Answer/table.ctp:46 View/Quiz/table.ctp:46
-msgid "Answers"
-msgstr "Vastaukset"
-
-#: View/Answer/table.ctp:57 View/Quiz/table.ctp:58;95
-msgid "Timestamp"
-msgstr "aikaleima"
-
-#: View/Answer/table.ctp:58 View/Quiz/table.ctp:59;96
-#: View/User/settings.ctp:26
-msgid "Name"
-msgstr "Nimi"
-
-#: View/Answer/table.ctp:59 View/Quiz/live.ctp:44 View/Quiz/table.ctp:60;97
-msgid "Class"
-msgstr "Luokka"
-
-#: View/Answer/table.ctp:60 View/Quiz/table.ctp:61;98
-msgid "Total Points"
-msgstr "Pisteitä yhteensä"
-
-#: View/Answer/table.ctp:159
+#: View/Answer/table.ctp:129
 msgid "No Submission"
-msgstr "Lähetystä"
+msgstr "No Submission KÄÄNNÄ"
 
-#: View/Answer/table.ctp:169
+#: View/Answer/table.ctp:139
 #: View/Elements/Invoice/invoice_error_dialog.ctp:13
 msgid "Close"
 msgstr "Sulje"
 
-#: View/Elements/navbar.ctp:20 View/Elements/userbar.ctp:22
+#: View/Elements/navbar.ctp:20
 #: View/User/settings.ctp:7
 msgid "Settings"
-msgstr "Asetukset tallennettu"
+msgstr "Asetukset"
 
-#: View/Elements/navbar.ctp:23 View/Elements/userbar.ctp:32
+#: View/Elements/navbar.ctp:23
 msgid "Logout"
 msgstr "Kirjaudu ulos"
 
 #: View/Elements/Invoice/invoice_error_dialog.ctp:10
-msgid ""
-"Send invoice failed, please try close this dialog and click Upgrade again."
+msgid "Send invoice failed, please try close this dialog and click Upgrade again."
 msgstr "Laskun lähetys epäonnistui! Yritä uudelleen."
 
 #: View/Elements/Invoice/invoice_send_dialog.ctp:10
@@ -108,58 +62,48 @@ msgid "An invoice will be sent to upgrade your account. Proceed?"
 msgstr "Lasku lähetetään sähköpostiisi. Jatketaanko?"
 
 #: View/Elements/Invoice/invoice_success_dialog.ctp:10
-msgid ""
-"You will receive an invoice into your email shortly. By paying it you can "
-"upgrade your account."
+msgid "You will receive an invoice into your email shortly. By paying it you can upgrade your account."
 msgstr "Kiitos tilauksesta! Lasku lähetetään sähköpostiisi mahdollisimman pian. Laskun maksettuasi käyttäjätilisi päivittyy."
-
-#: View/Elements/Quiz/edit/Handlebars/choice.essay.edit.ctp:27
-#: View/Elements/Quiz/edit/Handlebars/choice.short_manual.edit.ctp:12
-msgid "Max. points"
-msgstr "Pisteitä yhteensä"
-
-#: View/Elements/Quiz/edit/Handlebars/choice.multiple_many.edit.ctp:17;51
-#: View/Elements/Quiz/edit/Handlebars/choice.multiple_one.edit.ctp:17;51
-msgid "Choice"
-msgstr "Valinta %d"
-
-#: View/Elements/Quiz/edit/Handlebars/choice.multiple_many.edit.ctp:25;59
-#: View/Elements/Quiz/edit/Handlebars/choice.multiple_one.edit.ctp:25;59
-#: View/Elements/Quiz/edit/Handlebars/choice.short_auto.edit.ctp:26
-msgid "Points"
-msgstr "Pisteitä yhteensä"
 
 #: View/Elements/Quiz/edit/Handlebars/choice.short_auto.edit.ctp:12
 msgid "Corect answers separated by comma"
 msgstr "Oikeat vastaukset pilkulla erotettuna"
 
+#: View/Elements/Quiz/edit/Handlebars/choice.short_auto.edit.ctp:26
+msgid "Points"
+msgstr "Pisteet"
+
+#: View/Elements/Quiz/edit/Handlebars/choice.short_manual.edit.ctp:12
+msgid "Max. points"
+msgstr "Maksimipisteet"
+
 #: View/Elements/Quiz/edit/Handlebars/question.edit.ctp:10
 msgid "Enter the question"
-msgstr "Uusi kysymys"
+msgstr "Kirjoita kysymys"
 
 #: View/Elements/Quiz/edit/Handlebars/question.edit.ctp:42
 msgid "Explanation text"
 msgstr "Kysymyksen selite (vapaaehtoinen)"
 
-#: View/Elements/Quiz/edit/Handlebars/question.edit.ctp:57
-msgid "Add Choice"
-msgstr "Valinta %d"
+#: View/Quiz/edit.ctp:17
+msgid "Edit Quiz"
+msgstr "Testin muokkaus"
 
 #: View/Quiz/edit.ctp:50
 msgid "Describe the quiz to respondents"
-msgstr "Nimi tietokilpailu"
+msgstr "Testin esittely (vapaaehtoinen)"
 
 #: View/Quiz/edit.ctp:86
 msgid "Add New Question"
-msgstr "Uusi kysymys"
+msgstr "Lisää kysymys"
 
 #: View/Quiz/edit.ctp:92
 msgid "Finish"
-msgstr "Sulje"
+msgstr "Tallenna ja sulje"
 
 #: View/Quiz/finish.ctp:1
 msgid "Thank you"
-msgstr "Kirjauduit ulos"
+msgstr "Kiitos!"
 
 #: View/Quiz/index.ctp:5
 msgid "My Quizzes"
@@ -167,7 +111,7 @@ msgstr "Omat testit"
 
 #: View/Quiz/index.ctp:16
 msgid "Create New Quiz"
-msgstr "Uusi kysymys"
+msgstr "Luo uusi testi"
 
 #: View/Quiz/index.ctp:20
 msgid "Upgrade to Create More Quiz"
@@ -179,23 +123,27 @@ msgstr "Pidä testi!"
 
 #: View/Quiz/index.ctp:40
 msgid "Answers (%s)"
-msgstr "Vastaukset"
+msgstr "Katso tulokset (%s)"
 
 #: View/Quiz/live.ctp:8
 msgid "Quiz: "
-msgstr "Muokkaa tenttiä"
+msgstr "Testi: "
 
 #: View/Quiz/live.ctp:30
 msgid "First Name"
-msgstr "Nimi"
+msgstr "Etunimi"
 
 #: View/Quiz/live.ctp:37
 msgid "Last Name"
-msgstr "Nimi"
+msgstr "Sukunimi"
+
+#: View/Quiz/live.ctp:44
+msgid "Class"
+msgstr "Luokka"
 
 #: View/Quiz/live.ctp:76
 msgid "Turn in your quiz"
-msgstr "Nimi tietokilpailu"
+msgstr "Palauta testi"
 
 #: View/Quiz/present.ctp:5
 msgid "Read the QR code with your mobile service"
@@ -203,104 +151,89 @@ msgstr "Lue QR-koodi mobiililaitteella"
 
 #: View/Quiz/present.ctp:6
 msgid "OR"
-msgstr "tai"
+msgstr "TAI"
 
 #: View/Quiz/present.ctp:7
 msgid "Surf to this web address:"
 msgstr "surffaa osoitteeseen:"
 
-#: View/Quiz/table.ctp:18
-msgid "All"
-msgstr "kaikki"
-
-#: View/Quiz/table.ctp:19
-msgid "Today"
-msgstr "tänään"
-
-#: View/Quiz/table.ctp:20
-msgid "This Year"
-msgstr "Tämä vuosi"
-
-#: View/Quiz/table.ctp:21
-msgid "This Month"
-msgstr "tässä kuussa"
-
-#: View/Quiz/table.ctp:22
-msgid "This Week"
-msgstr "tällä viikolla"
-
-#: View/Quiz/table.ctp:85;189
-msgid "Quiz not taken yet!"
-msgstr "Nimi tietokilpailu"
-
-#: View/Quiz/table.ctp:130;138;145;162
-msgid "Not Answered"
-msgstr "ei Vastasi"
-
-#: View/Quiz/table.ctp:157;174 View/User/settings.ctp:81
-msgid "Save"
-msgstr "Tallenna"
-
-#: View/Quiz/table.ctp:200
-msgid "Back"
-msgstr "takaisin"
-
 #: View/Student/success.ctp:1
 msgid "Success"
-msgstr "Rekisteröinti menestyksen"
+msgstr "Onnistui!"
 
-#: View/User/create.ctp:3
+#: View/Student/success.ctp:3
+msgid "Thank You!"
+msgstr "Thank You!"
+
+#: View/Student/success.ctp:4
+msgid "Your answer(s) has been submitted successfully."
+msgstr "Vastauksesi (t) on lähetetty."
+
+#: View/User/create.ctp:5
 msgid "Create Account"
-msgstr "Päivitä tili"
+msgstr "Luo käyttäjätili"
 
-#: View/User/create.ctp:49
+#: View/User/create.ctp:45
 msgid "Create Account & Log In"
-msgstr "Päivitä tili"
+msgstr "Luo käyttäjätili ja kirjaudu sisään"
 
 #: View/User/login.ctp:2;40
 msgid "Login"
 msgstr "Kirjaudu sisään"
 
-#: View/User/login.ctp:22 View/User/settings.ctp:36
+#: View/User/login.ctp:22
+#: View/User/settings.ctp:36
 msgid "Email"
 msgstr "Sähköpostiosoite"
 
-#: View/User/login.ctp:31 View/User/settings.ctp:45
+#: View/User/login.ctp:31
+#: View/User/settings.ctp:45
 msgid "Password"
 msgstr "Salasana"
-
-#: View/User/login.ctp:31 View/User/create.ctp:35
-msgid "Password Verify"
-msgstr "SALASANA VERIFY"
 
 #: View/User/login.ctp:46
 msgid "Register"
 msgstr "Rekisteröidy"
 
-#: View/User/login.ctp:58
-msgid "If you don’t have account?"
-msgstr "Jos sinulla ei ole tilin?"
-
 #: View/User/login.ctp:59
 msgid "Register Now!"
 msgstr "Rekisteröidy nyt!"
+
+#: View/User/settings.ctp:26
+msgid "Name"
+msgstr "Nimi"
 
 #: View/User/settings.ctp:46
 msgid "Fill if you want to change password"
 msgstr "Kirjoita uusi salasana"
 
-#: View/User/settings.ctp:87
+#: View/User/settings.ctp:80
+msgid "Save"
+msgstr "Tallenna"
+
+#: View/User/settings.ctp:86
 msgid "Cancel"
 msgstr "Peruuta"
 
 #: Model/Quiz.php:validation for field name
 msgid "Quiz name must be alphanumeric"
-msgstr "Nimi tietokilpailu"
+msgstr "Testin nimessä saa olla vain kirjaimia tai numeroita."
 
-#: Model/Student.php:validation for field fname;validation lname;validation
-#: class
+#: Model/Quiz.php:construct
+msgid "Active Quizzes"
+msgstr "aktiivinen Tietokilpailut"
+
+#: Model/Quiz.php:construct
+msgid "Archived Quizzes"
+msgstr "arkistoidut Tietokilpailut"
+
+#: Model/Quiz.php:construct
+msgid "All Quizzes"
+msgstr "kaikki Tietokilpailut"
+
+#: Model/Student.php:validation for field fname;validation for field lname
 msgid "Invalid Name"
-msgstr "Nimi"
+msgstr "Virheellinen nimi"
 
 #: Model/User.php:validation for field name
 msgid "Name contains invalid character"
@@ -308,7 +241,7 @@ msgstr "Nimi sisältää virheellisiä merkkejä"
 
 #: Model/User.php:validation for field email
 msgid "Invalid email"
-msgstr "Virheellinen sähköposti"
+msgstr "Virheellinen email"
 
 #: Model/User.php:validation for field email
 msgid "Email already registered"
@@ -318,9 +251,46 @@ msgstr "Email jo rekisteröity"
 msgid "Password must be 8 characters long"
 msgstr "Salasanassa on oltava vähintään 8 merkkiä"
 
-#: Model/User.php:validation for field passwordVerify
-msgid "Password did not match, please try again"
-msgstr "Salasana ei täsmää, yritä uudelleen"
+#: Plugin/Recaptcha/Controller/Component/RecaptchaComponent.php:111
+msgid "You must set your private Recaptcha key using Configure::write('Recaptcha.privateKey', 'your-key');!"
+msgstr ""
+
+#: Plugin/Recaptcha/Controller/Component/RecaptchaComponent.php:153
+msgid "Invalid API response, please contact the site admin."
+msgstr ""
+
+#: Plugin/Recaptcha/Controller/Component/RecaptchaComponent.php:162
+msgid "Incorrect captcha"
+msgstr "Virheellinen captcha-teksti"
+
+#: Plugin/Recaptcha/View/Helper/RecaptchaHelper.php:185
+msgid "To use reCAPTCHA Mailhide, you need to have the mcrypt php module installed."
+msgstr "To use reCAPTCHA Mailhide, you need to have the mcrypt php module installed."
+
+#: Plugin/Recaptcha/View/Helper/RecaptchaHelper.php:217
+msgid "You need to set a private and public mail hide key. Please visit http://mailhide.recaptcha.net/apikey"
+msgstr "You need to set a private and public mail hide key. Please visit http://mailhide.recaptcha.net/apikey"
+
+#: View/Errors/error400.ctp:19
+#: View/Errors/error500.ctp:19
+msgid "Error"
+msgstr "Virhe"
+
+#: View/Errors/error400.ctp:21
+msgid "The requested address %s was not found on this server."
+msgstr "Osoitetta %s ei löytynyt palvelimelta."
+
+#: View/Errors/error500.ctp:20
+msgid "An Internal Error Has Occurred."
+msgstr "Ohjelmistovirhe"
+
+#: View/Layouts/error.ctp:17
+msgid "CakePHP: the rapid development php framework"
+msgstr "CakePHP: the rapid development php framework"
+
+#: webroot/test.php:103
+msgid "Debug setting does not allow access to this url."
+msgstr "Debug setting does not allow access to this url."
 
 #: Question type description
 msgid "Multiple choice - One correct"
@@ -341,3 +311,80 @@ msgstr "Lyhyt Teksti - Pisteytys käsin"
 #: Question type description
 msgid "Essay"
 msgstr "Essee"
+
+#: Adding a new multiple choice
+msgid "Add Choice"
+msgstr "Lisää vaihtoehto"
+
+#: A placeholder for an empty choice textbox
+msgid "Choice"
+msgstr "Vastaus"
+
+#: Error when creating quiz without a name
+msgid "Quiz name is required"
+msgstr "Lisää testin nimi"
+
+#: Delete quiz dialog - delete
+msgid "Delete"
+msgstr "Poista"
+
+#: Answer table - no answer
+msgid "Not Answered"
+msgstr "Ei vastattu"
+
+#: Answer table - Total points
+msgid "Total Points"
+msgstr "Yhteispisteet"
+
+#: Answer table - Timestamp
+msgid "Timestamp"
+msgstr "Ajankohta"
+
+#: Answer table - Overview
+msgid "Overview"
+msgstr "Yhteenveto"
+
+#: Answer table - Answers
+msgid "Answers"
+msgstr "Vastaukset"
+
+#: Answer table - Back
+msgid "Back"
+msgstr "Sulje"
+
+#: Answer table - Back
+msgid "All"
+msgstr "kaikki"
+
+#: Answer table - Back
+msgid "Today"
+msgstr "tänään"
+
+#: Answer table - Back
+msgid "This Year"
+msgstr "Tämä vuosi"
+
+#: Answer table - Back
+msgid "This Month"
+msgstr "tässä kuussa"
+
+#: Answer table - Back
+msgid "This Week"
+msgstr "tällä viikolla"
+
+#: Answer table - Back
+msgid "Rate!"
+msgstr "Arvostele!"
+
+#: Settings - Language
+msgid "Language"
+msgstr "Kieli"
+
+#: Settings - Finnish
+msgid "Finnish"
+msgstr "Suomi"
+
+#: My Quizzes - Settings notification
+msgid "Settings has been saved"
+msgstr "Asetukset on tallennettu"
+
