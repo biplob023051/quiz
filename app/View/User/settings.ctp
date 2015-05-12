@@ -65,7 +65,7 @@ echo $this->Form->create('User', array(
         <?php
         $languages = array(
             'eng' => 'English',
-            'fin' => 'Finnish'
+            'fin' => 'Suomi'
         );
         echo $this->Form->input('language', array(
             'options' => $languages,
