@@ -30,6 +30,10 @@ class UserController extends AppController {
                     $this->Session->delete('UserCreateFormData');
                     // auto login of the newly registered user to the site
                     if ($this->Auth->login()) {
+                        // save statistics data
+                        $arrayToSave['Statistic']['logged_user_id'] = $this->Auth->user('id');
+                        $arrayToSave['Statistic']['type'] = 'user_login';
+                        $this->User->Statistic->save($arrayToSave);
                         $this->Session->setFlash(__('Registration success'), 'notification_form', array(), 'notification');
                         return $this->redirect($this->Auth->redirectUrl());
                     } else {
@@ -54,8 +58,13 @@ class UserController extends AppController {
 
     public function login() {
         if ($this->request->is('post')) {
-            if ($this->Auth->login())
+            if ($this->Auth->login()) {
+                // save statistics data
+                $arrayToSave['Statistic']['logged_user_id'] = $this->Auth->user('id');
+                $arrayToSave['Statistic']['type'] = 'user_login';
+                $this->User->Statistic->save($arrayToSave);
                 return $this->redirect($this->Auth->redirectUrl());
+            }
 
             $this->Session->setFlash($this->Auth->authError, 'error_form', array(), 'error');
         }

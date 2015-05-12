@@ -139,6 +139,11 @@ class QuizController extends AppController {
                 'user_id' => $userId
             )
         ));
+        // save statistics data
+        $this->loadModel('Statistic');
+        $arrayToSave['Statistic']['logged_user_id'] = $this->Auth->user('id');
+        $arrayToSave['Statistic']['type'] = 'quiz_create';
+        $this->Statistic->save($arrayToSave);
 
         return $this->redirect(array(
                     'action' => 'edit',
