@@ -23,25 +23,31 @@ function checkRow(row) {
         var marks = $(this).val();
         var max = $(this).attr("max");
         var current_score = $(this).attr("current-score"); 
-        $("#error-message").hide();
+        $("#ajax-message").hide();
         
         if (marks < 0) {
-            $("#error-message").show();
-            $("#error-message").html('Please Give a postive number!');
+            $("#ajax-message").removeClass('alert-success');
+            $("#ajax-message").addClass('alert-danger');
+            $("#ajax-message").show();
+            $("#ajax-message").html('Please Give a postive number!');
             $('html, body').animate({
                 scrollTop: $(".page-header").offset().top
             }, 500);
             return false;
         } else if (marks == current_score) {
-            $("#error-message").show();
-            $("#error-message").html('You have not updated score yet!');
+            $("#ajax-message").removeClass('alert-success');
+            $("#ajax-message").addClass('alert-danger');
+            $("#ajax-message").show();
+            $("#ajax-message").html('You have not updated score yet!');
             $('html, body').animate({
                 scrollTop: $(".page-header").offset().top
             }, 500);
             return false;
         } else if (marks > max) {
-            $("#error-message").show();
-            $("#error-message").html('Marks not allowed more than ' + max + ' value');
+            $("#ajax-message").removeClass('alert-success');
+            $("#ajax-message").addClass('alert-danger');
+            $("#ajax-message").show();
+            $("#ajax-message").html('Points not allowed more than ' + max + ' value');
             $('html, body').animate({
                 scrollTop: $(".page-header").offset().top
             }, 500);
@@ -66,6 +72,10 @@ function checkRow(row) {
                 {
                     $("#studentscr2-" + std_id).text(response.score);
                     $("#studentscr1-" + std_id).text(response.score);
+                    $("#ajax-message").removeClass('alert-danger');
+                    $("#ajax-message").addClass('alert-success');
+                    $("#ajax-message").show();
+                    $("#ajax-message").html('Points updated successfully');
                 } else {
                     alert('Something went wrong, try again later');
                 }
@@ -76,7 +86,7 @@ function checkRow(row) {
     var appData = $.parseJSON($("#app-data").text());
 
     $(document).on('click', '#answer-table-overview', function () {
-        $("#error-message").hide();
+        $("#ajax-message").hide();
         // tab information insert into cookie to keep tracking
         setCookie("tabInfo", "answer-table-overview", 1);
         if($(this).hasClass('active'))
@@ -88,7 +98,7 @@ function checkRow(row) {
     });
 
     $(document).on('click', '#answer-table-show', function () {
-        $("#error-message").hide();
+        $("#ajax-message").hide();
         // tab information insert into cookie to keep tracking
         setCookie("tabInfo", "answer-table-show", 1);
         if($(this).hasClass('active'))
@@ -114,6 +124,11 @@ function checkRow(row) {
     } else {
         $('#answer-table-show').trigger('click');
     }
+
+    // essay pop up modal
+    $(document).on('click', 'button.read-essay', function () {
+        $(this).next().modal('show');
+    });
     
 })(jQuery);
 

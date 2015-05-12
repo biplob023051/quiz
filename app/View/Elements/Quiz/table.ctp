@@ -33,19 +33,10 @@
             <?php if (empty($value4['text'])) : ?>
                 <p class="text-danger"><span class="label"><?php echo __('Not Answered'); ?></span></p>
             <?php else : ?>
-                <?php echo $value4['text'] . '<br />'; ?>
-                <span>
-                <input 
-            placeholder="Rate!" 
-            type="number" 
-            class="form-control update-score" 
-            name="<?php echo $value1['id'] ?>"
-            question="<?php echo $value3['id'] ?>"
-            value="<?php echo empty($value4['score']) ? '' : $value4['score']; ?>"
-            current-score="<?php echo empty($value4['score']) ? 0 : $value4['score']; ?>"
-            max="<?php echo empty($value3['Choice'][0]['points']) ? $value3['QuestionType']['manual_scoring'] : $value3['Choice'][0]['points']; ?>"
-            /> / <?php echo empty($value3['Choice'][0]['points']) ? $value3['QuestionType']['manual_scoring'] : $value3['Choice'][0]['points']; ?>
-                </span>
+                <button type="button" class="btn btn-danger btn-sm read-essay" quiz-id="">
+                    <?php echo __('READ'); ?>
+                </button>
+                <?php echo $this->element('Quiz/read-essay', array('value1' => $value1, 'value3' => $value3, 'value4' => $value4)); ?>
             <?php endif; ?>
         <?php endif; ?>
     <?php endif; ?>
