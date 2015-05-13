@@ -13,6 +13,9 @@ class StudentController extends AppController {
     public function submit($quizId) {
 
         $data = $this->request->data;
+        
+        // remove unwanted space and make uppercase for student class
+        $data['Student']['class'] = strtoupper(preg_replace('/\s+/', '', $data['Student']['class']));
 
         $this->Student->set($data['Student']);
         if (!$this->Student->validates()) {
