@@ -1,6 +1,7 @@
 (function($) { 
 	$("#StudentLiveForm").submit(function(event) {
 		event.preventDefault();
+		$("#error-message").hide();
 		var validateStdError = checkValidation();
 		if (validateStdError == true) {
 			$('html, body').animate({

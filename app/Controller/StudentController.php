@@ -7,7 +7,7 @@ class StudentController extends AppController {
     public $helpers = array('Html');
 
     public function beforeFilter() {
-        $this->Auth->allow();
+        $this->Auth->allow('submit', 'success');
     }
 
     public function submit($quizId) {
@@ -170,4 +170,35 @@ class StudentController extends AppController {
     }
     
     public function success() {}
+
+    public function deleteStudent() {
+        $this->autoRender = false;
+        $response = array('success' => false);
+        $student_id = $this->request->data['student_id'];
+        $studentInfo = $this->Student->find('first', array(
+                'conditions' => array(
+                    'Student.id' => $student_id
+                )
+            )
+        );
+
+        if ($studentInfo['Quiz']['user_id'] == $this->Auth->user('id')) {
+            $answerIds = Hash::combine($studentInfo['Answer'], '{n}.id', '{n}.id');
+            // delete ranking data
+            $this->Student->Ranking->delete($studentInfo['Ranking']['id']);
+            // delete answer data
+            $this->Student->Answer->deleteAll(array('Answer.id' => $answerIds));
+
+            if ($this->Student->delete($student_id)) {
+                $response['success'] = true;
+                $response['message'] = __('Successfully removed');
+            }
+
+        } else {
+            $response['message'] = __('You are not authorized to continue this operation!');
+        } 
+
+        echo json_encode($response);
+        exit;
+    }
 }

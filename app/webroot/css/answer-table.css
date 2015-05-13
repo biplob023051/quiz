@@ -110,3 +110,7 @@ ul#tabs li#answer-table-show a:hover {
 .all-button {
   float: right;
 }
+
+.serial {
+  min-width: 1% !important;
+}

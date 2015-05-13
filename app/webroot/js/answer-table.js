@@ -231,6 +231,33 @@ function checkRow(row) {
     $(document).on('click', 'button.read-essay', function () {
         $(this).next().next().modal('show');
     });
+
+    // delete unwanted answer
+    $(document).on('click', 'button.delete-answer', function () {
+       var std_id = $(this).attr('std-id');
+       var button_box = $(this);
+       $.ajax({
+            dataType: 'json',
+            url: appData.baseUrl + '/student/deleteStudent',
+            type: 'post',
+            data: {'student_id': std_id},
+            success: function (response)
+            {
+                console.log(response);
+                if (response.success || response.success === "true")
+                {
+                    $("#ajax-message").removeClass('alert-danger');
+                    $("#ajax-message").addClass('alert-success');
+                    button_box.closest('tr').remove();
+                } else {
+                    $("#ajax-message").removeClass('alert-success');
+                    $("#ajax-message").addClass('alert-danger');
+                }
+                $("#ajax-message").show();
+                $("#ajax-message").html(response.message);
+            }
+        });
+    });
     
 })(jQuery);
 
