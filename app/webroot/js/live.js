@@ -9,9 +9,12 @@
 		} else {
 			var infoModal = $('#confirm-submit');
 			var str = '';
+			var i = 0;
 			$("#questions").find('.form-group :input').each(function(){
+				i++;
 	            if ($(this).val() == '') {
-	            	str += $(this).closest('tr').attr('id').match(/\d+/) + ',';
+	            	// $(this).closest('tr').attr('id').match(/\d+/)
+	            	str += i + ',';
 	            }          
 	        });
 
