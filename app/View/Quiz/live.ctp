@@ -77,7 +77,7 @@ echo $this->Form->create('Student', array(
         </table>
     </div>
 </div>
-
+<?php echo $this->element('Quiz/confirm_submit'); ?>
 <div class="row">
     <div class="col-xs-12 col-md-3 pull-right">
         <button type="submit" class="btn btn-primary btn-lg btn-block"><?php echo __('Turn in your quiz') ?></button>
