@@ -92,6 +92,7 @@ function checkRow(row) {
 
         var std_id = parseInt($(this).attr("name"));
         var q_id = parseInt($(this).attr("question"));
+        var inputField = $(this);
 
 
         $.ajax({
@@ -106,10 +107,11 @@ function checkRow(row) {
                 {
                     $("#studentscr2-" + std_id).text(response.score);
                     $("#studentscr1-" + std_id).text(response.score);
-                    $("#ajax-message").removeClass('alert-danger');
-                    $("#ajax-message").addClass('alert-success');
-                    $("#ajax-message").show();
-                    $("#ajax-message").html('Points updated successfully');
+                    inputField.css({ 'background-color' : 'green', 'color' : 'white' });
+                    if (inputField.parents('.read-essay').first().length > 0) {
+                        inputField.parents('.read-essay').first().prev().text(marks);
+                    }
+                    //console.log(inputField.parents('.read-essay').first());
                 } else {
                     alert('Something went wrong, try again later');
                 }
@@ -227,7 +229,7 @@ function checkRow(row) {
 
     // essay pop up modal
     $(document).on('click', 'button.read-essay', function () {
-        $(this).next().modal('show');
+        $(this).next().next().modal('show');
     });
     
 })(jQuery);
