@@ -6,9 +6,9 @@
             <?php else : ?>
                 <!-- check correct and incorrect -->
                 <?php if ($value4['score'] > 0) : ?>
-                    <p class="text-success"><?php echo $value4['text'] . ' ' . $value4['score'] . '<br/>'; ?></div>
+                    <p class="text-success"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
                 <?php else : ?>
-                    <p class="text-danger"><?php echo $value4['text'] . ' ' . $value4['score'] . '<br/>'; ?></div>
+                    <p class="text-danger"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
                 <?php endif; ?>     
             <?php endif; ?> 
         <!-- short manual scoring -->
