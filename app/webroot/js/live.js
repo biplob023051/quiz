@@ -1,5 +1,6 @@
 (function($) { 
-	$("#StudentLiveForm").submit(function(event) {
+   	
+   	$("#StudentLiveForm").submit(function(event) {
 		event.preventDefault();
 		$("#error-message").hide();
 		var validateStdError = checkValidation();
@@ -15,9 +16,44 @@
 				i++;
 	            if ($(this).val() == '') {
 	            	// $(this).closest('tr').attr('id').match(/\d+/)
-	            	str += i + ',';
+	            	var j = $(this).closest('tr').attr('id').match(/\d+/);
+            		str += j + ',';
 	            }          
 	        });
+
+	        var radioArray = [];
+			$("#questions").find('.radio :input').each(function(){
+				if(jQuery.inArray($(this).attr('name'), radioArray)!==-1) {
+
+				} else {
+					radioArray.push($(this).attr('name'));
+				}        
+		    });
+		    if (radioArray.length > 0) {
+		    	$.each( radioArray, function( key, value ) {
+				  	if (!$("input[name='"+value+"']:checked").val()) {
+					   var j = $("input[name='"+value+"']").closest('tr').attr('id').match(/\d+/);
+					   str += j + ',';
+					}
+				});
+		    }
+
+		    var checkboxArray = [];
+			$("#questions").find('.checkbox :input').each(function(){
+				if(jQuery.inArray($(this).attr('name'), checkboxArray)!==-1) {
+
+				} else {
+					checkboxArray.push($(this).attr('name'));
+				}        
+		    });
+		    if (checkboxArray.length > 0) {
+		    	$.each( checkboxArray, function( key, value ) {
+				  	if (!$("input[name='"+value+"']:checked").val()) {
+					   var j = $("input[name='"+value+"']").closest('tr').attr('id').match(/\d+/);
+					   str += j + ',';
+					}
+				});
+		    }
 
 	        if (str.length > 0) {
 	        	str = str.slice(0,-1);
