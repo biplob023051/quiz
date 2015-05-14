@@ -10,14 +10,14 @@
 		    }, 500);
 		} else {
 			var infoModal = $('#confirm-submit');
-			var str = '';
+			var numbers = [];
 			var i = 0;
 			$("#questions").find('.form-group :input').each(function(){
 				i++;
 	            if ($(this).val() == '') {
 	            	// $(this).closest('tr').attr('id').match(/\d+/)
 	            	var j = $(this).closest('tr').attr('id').match(/\d+/);
-            		str += j + ',';
+            		numbers.push(j);
 	            }          
 	        });
 
@@ -33,7 +33,7 @@
 		    	$.each( radioArray, function( key, value ) {
 				  	if (!$("input[name='"+value+"']:checked").val()) {
 					   var j = $("input[name='"+value+"']").closest('tr').attr('id').match(/\d+/);
-					   str += j + ',';
+					   numbers.push(j);
 					}
 				});
 		    }
@@ -50,17 +50,24 @@
 		    	$.each( checkboxArray, function( key, value ) {
 				  	if (!$("input[name='"+value+"']:checked").val()) {
 					   var j = $("input[name='"+value+"']").closest('tr').attr('id').match(/\d+/);
-					   str += j + ',';
+					   numbers.push(j);
 					}
 				});
 		    }
 
-	        if (str.length > 0) {
-	        	str = str.slice(0,-1);
+	        if (numbers.length > 0) {
+	        	// array sorting
+	        	numbers.sort(function(a,b) {
+				  if (isNaN(a) || isNaN(b)) {
+				    return a > b ? 1 : -1;
+				  }
+				  return a - b;
+				});
+				// array implode by delimiter ','
+	        	var str = numbers.join();
 	        	str = 'Questions ' + str + ' unanswered. Turn in your quiz?';
-	        	
 	        } else {
-	        	str = 'All questions answered. Turn in your quiz?';
+	        	var str = 'All questions answered. Turn in your quiz?';
 	        } 
 	        infoModal.find('.modal-body').html(str);
 	        infoModal.modal('show');

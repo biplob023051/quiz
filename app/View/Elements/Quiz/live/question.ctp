@@ -1,5 +1,5 @@
 <?php echo $this->Form->hidden("Answer.{$number}.question_id", array("default" => $id)); ?>
-<tr id="q<?php echo $id ?>">
+<tr id="q<?php echo $number ?>">
     <td>                    
         <div class="row">
             <div class="col-xs-12 col-md-6">            
