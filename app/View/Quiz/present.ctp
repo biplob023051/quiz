@@ -9,7 +9,7 @@
             </li>
         </ol>
     </div>
-    <div class="col-md-6 col-xs-12" align="center">
+    <div class="col-md-6 col-xs-12 qr-image" align="center">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=<?php echo $url ?>" />
     </div>
 </div>

@@ -1,3 +1,6 @@
+<?php 
+    if ($this->request->action != 'ajax_update') : 
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -54,3 +57,6 @@
         <?php echo $this->fetch('script'); ?>
     </body>
 </html>
+<?php else: ?>
+    <?php echo $this->fetch('content'); ?>
+<?php endif ?>

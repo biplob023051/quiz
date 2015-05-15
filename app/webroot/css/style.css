@@ -258,3 +258,12 @@ tr.incativeQuiz mark a {
     margin-left: 73px;
     background: none !important;
 }
+
+.bg-info {
+    font-size: 36px;
+}
+
+.qr-image img{
+    height: 100%;
+    width: 100%;
+}

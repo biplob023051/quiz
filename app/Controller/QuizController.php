@@ -221,13 +221,58 @@ class QuizController extends AppController {
         }
 
         $quizDetails = $this->Quiz->quizDetails($quizId, $filter);
-
-        // pr($quizDetails);
-        // exit;
+        // get student id's for ajax auto checking
+        $studentIds = Hash::combine($quizDetails['Student'], '{n}.id', '{n}.id');
+        $studentIds = json_encode($studentIds);
+        // get student classes
         $classes = Hash::combine($checkPermission['Student'], '{n}.class', '{n}.class');
-        $classes = Hash::merge(array('all' => __('All')), $classes);
+        // classes merge with all class
+        $classes = Hash::merge(array('all' => __('All Classes')), $classes);
 
-        $this->set(compact('quizDetails', 'classes', 'filter'));
+        $this->set(compact('quizDetails', 'classes', 'filter', 'studentIds', 'quizId'));
+    }
+
+    public function ajax_latest() {
+        $this->autoRender = false;
+        if (!$this->Session->check('Filter')) {
+            $filter = array('class' => 'all', 'daterange' => 'all');
+            $this->Session->write('Filter', $filter);
+        } else {
+            $filter = $this->Session->read('Filter');
+        }
+        $quizDetails = $this->Quiz->quizDetails((int) $this->request->data['quizId'], $filter);
+        // get student id's for ajax auto checking
+        $studentIds = Hash::combine($quizDetails['Student'], '{n}.id', '{n}.id');
+       
+        echo json_encode($studentIds);
+    }
+
+    public function ajax_update() {
+        // authenticate or not
+        $checkPermission = $this->Quiz->checkPermission((int)$this->request->data['quizId'], $this->Auth->user('id'));
+        if (empty($checkPermission)) {
+            throw new ForbiddenException;
+        }
+
+        $currentTab = $this->request->data['currentTab'];
+
+        if (!$this->Session->check('Filter')) {
+            $filter = array('class' => 'all', 'daterange' => 'all');
+            $this->Session->write('Filter', $filter);
+        } else {
+            $filter = $this->Session->read('Filter');
+        }
+        $quizDetails = $this->Quiz->quizDetails((int)$this->request->data['quizId'], $filter);
+        
+
+        $studentIds = Hash::combine($quizDetails['Student'], '{n}.id', '{n}.id');
+        $studentIds = json_encode($studentIds);
+        // get student classes
+        $classes = Hash::combine($checkPermission['Student'], '{n}.class', '{n}.class');
+        // classes merge with all class
+        $classes = Hash::merge(array('all' => __('All Classes')), $classes);
+
+        $this->set(compact('quizDetails', 'classes', 'filter', 'studentIds', 'quizId', 'currentTab'));
     }
 
     /*

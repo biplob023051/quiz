@@ -258,6 +258,38 @@ function checkRow(row) {
             }
         });
     });
+
+    interval = setInterval(getUpdated, 2000);
+
+    function getUpdated() {
+        var quizId = $("#quizId").text();
+        $.ajax({
+            type: "POST",
+            url: appData.baseUrl + '/quiz/ajax_latest',
+            data: {quizId:quizId},
+            async: true,
+            success: function(data) {
+                if ($("#prev_data").html() == data) {
+                    // do nothing
+                } else {
+                    clearInterval(interval);
+                    $("#prev_data").html(data);
+                    var openTab = getCookie("tabInfo");
+                    $.ajax({
+                        dataType: 'html',
+                        type: "POST",
+                        url: appData.baseUrl + '/quiz/ajax_update',
+                        data: {quizId:quizId, currentTab:openTab},
+                        async: true,
+                        success: function(data) {
+                            $("#my-tab-content").html(data);
+                            interval = setInterval(getUpdated, 1000);
+                        }
+                    });
+                }
+            }
+        });
+    }
     
 })(jQuery);
 
