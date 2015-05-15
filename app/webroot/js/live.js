@@ -1,7 +1,26 @@
-(function($) { 
+(function($) {
+
+	var appData = $.parseJSON($("#app-data").text());
+
+	function checkNetConnection(){
+		jQuery.ajaxSetup({async:false});
+		re="";
+		r=Math.round(Math.random() * 10000);
+		$.get(appData.baseUrl + 'img/dot.png',{subins:r},function(d){
+		re=true;
+		}).error(function(){
+		re=false;
+		});
+		return re;
+	} 
    	
    	$("#StudentLiveForm").submit(function(event) {
 		event.preventDefault();
+		var netConnection = checkNetConnection();
+		if (netConnection == false) {
+			alert('Internent connection has been lost, please try again later');
+			return;
+		}
 		$("#error-message").hide();
 		var validateStdError = checkValidation();
 		if (validateStdError == true) {

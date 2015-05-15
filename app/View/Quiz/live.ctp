@@ -85,3 +85,11 @@ echo $this->Form->create('Student', array(
 </div>
 
 <?php echo $this->Form->end(); ?>
+
+<script id="app-data" type="application/json">
+    <?php
+    echo json_encode(array(
+        'baseUrl' => $this->Html->url('/', true)
+    ));
+    ?>
+</script>
