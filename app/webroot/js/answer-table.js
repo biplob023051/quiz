@@ -259,7 +259,7 @@ function checkRow(row) {
         });
     });
 
-    interval = setInterval(getUpdated, 2000);
+    interval = setInterval(getUpdated, 10000);
 
     function getUpdated() {
         var quizId = $("#quizId").text();
@@ -283,7 +283,7 @@ function checkRow(row) {
                         async: true,
                         success: function(data) {
                             $("#my-tab-content").html(data);
-                            interval = setInterval(getUpdated, 1000);
+                            interval = setInterval(getUpdated, 10000);
                         }
                     });
                 }
