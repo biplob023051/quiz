@@ -267,3 +267,45 @@ tr.incativeQuiz mark a {
     height: 100%;
     width: 100%;
 }
+
+
+/*custom icons adding*/
+i.archive {
+    background-image:url(../img/icons/16x16/archive.png); 
+    background-position: center center;
+    height: 16px;
+    line-height: 16px;
+    width: 16px;
+}
+
+i.recycle {
+    background-image:url(../img/icons/16x16/recycle.png); 
+    background-position: center center;
+    height: 16px;
+    line-height: 16px;
+    width: 16px;
+}
+
+i.trash {
+    background-image:url(../img/icons/16x16/trash.png); 
+    background-position: center center;
+    height: 16px;
+    line-height: 16px;
+    width: 16px;   
+}
+
+i.pencil {
+    background-image:url(../img/icons/16x16/pencil.png); 
+    background-position: center center;
+    height: 16px;
+    line-height: 16px;
+    width: 16px;    
+}
+
+i.close {
+    background-image:url(../img/icons/16x16/close.png); 
+    background-position: center center;
+    height: 16px;
+    line-height: 16px;
+    width: 16px;    
+}

@@ -59,7 +59,7 @@
                     <tr id="student-<?php echo $value1['id']; ?>">
                         <td class="serial">
                             <button type="button" class="btn btn-danger btn-sm delete-answer" std-id="<?php echo $value1['id']; ?>">
-                                <i class="glyphicon glyphicon-trash"></i>
+                                <i class="glyphicon trash"></i>
                             </button>
                             <?php echo $sl; ?>
                         </td>

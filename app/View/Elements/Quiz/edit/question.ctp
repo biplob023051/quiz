@@ -21,10 +21,10 @@ echo json_encode(array(
         <div class="col-xs-12 col-md-3">
             <div class="btn-group preview-btn">
                 <button type="button" class="btn btn-default btn-sm edit-question" id="edit-q<?php echo $id ?>">
-                    <i class="glyphicon glyphicon-edit"></i>
+                    <i class="glyphicon pencil"></i>
                 </button>
                 <button type="button" class="btn btn-danger btn-sm delete-question" id="delete-q<?php echo $id ?>">
-                    <i class="glyphicon glyphicon-trash"></i>
+                    <i class="glyphicon trash"></i>
                 </button>
             </div>
         </div>

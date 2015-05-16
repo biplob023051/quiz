@@ -48,15 +48,15 @@ $this->assign('title', __('My Quizzes'));
                 <tr class="<?php echo $class; ?>">
                     <td>
                         <button type="button" class="btn btn-danger btn-sm delete-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>">
-                            <i class="glyphicon glyphicon-trash"></i>
+                            <i class="glyphicon trash"></i>
                         </button>
                         <?php if ($quiz['Quiz']['status']) : ?>
                             <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>">
-                                <i class="glyphicon glyphicon-minus-sign"></i>
+                                <i class="glyphicon archive"></i>
                             </button>
                         <?php else: ?>
                             <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>">
-                                <i class="glyphicon glyphicon-plus-sign"></i>
+                                <i class="glyphicon recycle"></i>
                             </button>
                         <?php endif; ?>
                         <?php echo $this->Html->link($quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id'])); ?>
