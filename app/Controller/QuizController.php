@@ -153,14 +153,14 @@ class QuizController extends AppController {
     }
 
     public function present($id) {
-        $data = $this->Quiz->find('count', array(
-            'conditions' => array('Quiz.id' => $id)
+        $quiz = $this->Quiz->find('first', array(
+            'conditions' => array('Quiz.id' => $id),
+            'recursive' => -1
         ));
 
-        if ($data < 1)
+        if (empty($quiz))
             throw new NotFoundException;
-
-        $this->set('id', $id);
+        $this->set(compact('quiz', 'id'));
     }
 
     public function live($quizId) {

@@ -107,9 +107,14 @@ function checkRow(row) {
                 {
                     $("#studentscr2-" + std_id).text(response.score);
                     $("#studentscr1-" + std_id).text(response.score);
+                    var originalBackgroundColor = inputField.css('background-color'),
+                        originalColor = inputField.css('color');
                     inputField.css({ 'background-color' : 'green', 'color' : 'white' });
+                    setTimeout(function(){
+                      inputField.css({ 'background-color' : originalBackgroundColor, 'color' : originalColor });
+                    }, 5000);
                     if (inputField.parents('.read-essay').first().length > 0) {
-                        inputField.parents('.read-essay').first().prev().text(marks);
+                        inputField.parents('.read-essay').first().prev().children().text(marks);
                     }
                     //console.log(inputField.parents('.read-essay').first());
                 } else {
@@ -118,6 +123,15 @@ function checkRow(row) {
             }
         });
     });
+
+    // var $el = $("#my-element"),
+    //     x = 5000,
+    //     originalColor = $el.css("background");
+
+    // $el.css("background", "red");
+    // setTimeout(function(){
+    //   $el.css("background", originalColor);
+    // }, x);
 
     
     // update essay score

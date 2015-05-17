@@ -36,7 +36,7 @@
                 <button type="button" class="btn btn-danger btn-sm read-essay" quiz-id="">
                     <?php echo __('READ'); ?>
                 </button>
-                <span class="essay-points"><?php echo empty($value4['score']) ? 0 : $value4['score']; ?></span>
+                <span class="essay-points"><?php echo empty($value4['score']) ? ' <span class="score">' . 0 . '</span>' : ' <span class="score">' . $value4['score'] . '</span>'; ?></span>
                 <?php echo $this->element('Quiz/read-essay', array('value1' => $value1, 'value3' => $value3, 'value4' => $value4)); ?>
             <?php endif; ?>
         <?php endif; ?>
