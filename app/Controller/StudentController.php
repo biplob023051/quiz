@@ -204,4 +204,25 @@ class StudentController extends AppController {
         echo json_encode($response);
         exit;
     }
+
+    public function confirmDeleteStudent() {
+        $this->autoRender = false;
+        $response = array('success' => false);
+        $student_id = $this->request->data['student_id'];
+        $studentInfo = $this->Student->find('first', array(
+                'conditions' => array(
+                    'Student.id' => $student_id
+                )
+            )
+        );
+        if (!empty($studentInfo)) {
+            $response['success'] = true;
+            $response['student_id'] = $studentInfo['Student']['id'];
+            $response['student_full_name'] = $studentInfo['Student']['fname'] . ' ' . $studentInfo['Student']['lname'];
+            $response['student_class'] = $studentInfo['Student']['class'];
+            $response['student_score'] = $studentInfo['Ranking']['score'] . '/' . $studentInfo['Ranking']['total'];
+        } 
+        echo json_encode($response);
+        exit;
+    }
 }

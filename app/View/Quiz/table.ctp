@@ -1,3 +1,4 @@
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <?php
 $this->Html->script('answer-table', array(
     'inline' => false
@@ -112,7 +113,7 @@ $this->assign('title', __('Answer Table'));
                     <?php foreach ($quizDetails['Student'] as $key1 => $value1) : $sl++; ?>
                         <tr id="student-<?php echo $value1['id']; ?>">
                             <td class="serial">
-                                <button type="button" class="btn btn-danger btn-sm delete-answer" std-id="<?php echo $value1['id']; ?>">
+                                <button type="button" class="btn btn-danger btn-sm delete-answer" id="<?php echo $value1['id']; ?>">
                                     <i class="glyphicon trash"></i>
                                 </button>
                                 <?php echo $sl; ?>
@@ -150,6 +151,7 @@ $this->assign('title', __('Answer Table'));
         </table>
     </div>
 </div>
+<?php echo $this->element('Answer/confirm_delete'); ?>
 <div id="prev_data" style="display : none;"><?php echo $studentIds; ?></div>
 <div id="quizId" style="display : none;"><?php echo $quizId; ?></div>
 <div class="row">

@@ -248,8 +248,31 @@ function checkRow(row) {
 
     // delete unwanted answer
     $(document).on('click', 'button.delete-answer', function () {
-       var std_id = $(this).attr('std-id');
-       var button_box = $(this);
+        var infoModal = $('#confirm-delete');
+        var std_id = $(this).attr('id');
+        $.ajax({
+            dataType: 'json',
+            url: appData.baseUrl + '/student/confirmDeleteStudent',
+            type: 'post',
+            data: {'student_id': std_id},
+            success: function (response)
+            {
+                if (response.success || response.success === "true")
+                {
+                    var str = 'Are you sure you want to remove ' + response.student_full_name + ' of class ' + response.student_class + ', answer with points ' + response.student_score + '?';
+                    infoModal.find('.modal-body').html(str);
+                    infoModal.find('.modal-footer button#confirmed').attr('value', response.student_id);
+                    infoModal.modal('show');
+                } else {
+                    alert('Something went wrong!!! Please try again later');
+                }
+            }
+        });
+    });
+
+    $(document).on('click', 'button#confirmed', function () {
+       var std_id = $(this).attr('value');
+       var infoModal = $('#confirm-delete');
        $.ajax({
             dataType: 'json',
             url: appData.baseUrl + '/student/deleteStudent',
@@ -258,11 +281,12 @@ function checkRow(row) {
             success: function (response)
             {
                 console.log(response);
+                infoModal.modal('hide');
                 if (response.success || response.success === "true")
                 {
                     $("#ajax-message").removeClass('alert-danger');
                     $("#ajax-message").addClass('alert-success');
-                    button_box.closest('tr').remove();
+                    $("button#" + std_id).closest('tr').remove();
                 } else {
                     $("#ajax-message").removeClass('alert-success');
                     $("#ajax-message").addClass('alert-danger');
