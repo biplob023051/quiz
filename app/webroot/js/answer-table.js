@@ -97,7 +97,7 @@ function checkRow(row) {
 
         $.ajax({
             dataType: 'json',
-            url: appData.baseUrl + '/score/update',
+            url: appData.baseUrl + 'score/update',
             type: 'post',
             data: {'id': q_id, 'student_id': std_id, 'score': marks, 'current_score' : current_score, 'max' : max},
             success: function (response)
@@ -178,7 +178,7 @@ function checkRow(row) {
 
     //     $.ajax({
     //         dataType: 'json',
-    //         url: appData.baseUrl + '/score/update',
+    //         url: appData.baseUrl + 'score/update',
     //         type: 'post',
     //         data: {'id': q_id, 'student_id': std_id, 'score': marks, 'current_score' : current_score, 'max' : max},
     //         success: function (response)
@@ -252,7 +252,7 @@ function checkRow(row) {
         var std_id = $(this).attr('id');
         $.ajax({
             dataType: 'json',
-            url: appData.baseUrl + '/student/confirmDeleteStudent',
+            url: appData.baseUrl + 'student/confirmDeleteStudent',
             type: 'post',
             data: {'student_id': std_id},
             success: function (response)
@@ -275,7 +275,7 @@ function checkRow(row) {
        var infoModal = $('#confirm-delete');
        $.ajax({
             dataType: 'json',
-            url: appData.baseUrl + '/student/deleteStudent',
+            url: appData.baseUrl + 'student/deleteStudent',
             type: 'post',
             data: {'student_id': std_id},
             success: function (response)
@@ -303,7 +303,7 @@ function checkRow(row) {
         var quizId = $("#quizId").text();
         $.ajax({
             type: "POST",
-            url: appData.baseUrl + '/quiz/ajax_latest',
+            url: appData.baseUrl + 'quiz/ajax_latest',
             data: {quizId:quizId},
             async: true,
             success: function(data) {
@@ -316,7 +316,7 @@ function checkRow(row) {
                     $.ajax({
                         dataType: 'html',
                         type: "POST",
-                        url: appData.baseUrl + '/quiz/ajax_update',
+                        url: appData.baseUrl + 'quiz/ajax_update',
                         data: {quizId:quizId, currentTab:openTab},
                         async: true,
                         success: function(data) {
