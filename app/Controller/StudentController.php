@@ -7,6 +7,7 @@ class StudentController extends AppController {
     public $helpers = array('Html');
 
     public function beforeFilter() {
+        parent::beforeFilter();
         $this->Auth->allow('submit', 'success');
     }
 
@@ -15,7 +16,7 @@ class StudentController extends AppController {
         $data = $this->request->data;
         
         // remove unwanted space and make uppercase for student class
-        $data['Student']['class'] = strtoupper(preg_replace('/\s+/', '', $data['Student']['class']));
+        $data['Student']['class'] = strtolower(preg_replace('/\s+/', '', $data['Student']['class']));
 
         $this->Student->set($data['Student']);
         if (!$this->Student->validates()) {
@@ -108,11 +109,11 @@ class StudentController extends AppController {
                     } elseif ($value2['Question']['question_type_id'] == 4) {
                         // short manual point
                         $manual_scoring_short = $this->QuestionType->findById(4, array('QuestionType.manual_scoring'));
-                        $data['Answer'][$key1]['score'] = 0;
+                        $data['Answer'][$key1]['score'] = null;
 
                     } else {
                         $manual_scoring_essay = $this->QuestionType->findById(5, array('QuestionType.manual_scoring'));
-                        $data['Answer'][$key1]['score'] = 0;
+                        $data['Answer'][$key1]['score'] = null;
                     }
                 } 
             }

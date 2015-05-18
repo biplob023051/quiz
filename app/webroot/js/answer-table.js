@@ -31,7 +31,7 @@ function checkRow(row) {
                 var $el = $(el);
                 // Chrome Fix (Use keyup over keypress to detect backspace)
                 // thank you @palerdot
-                $el.is(':input') && $el.on('keyup keypress',function(e){
+                $el.is(':input') && $el.on('keyup keypress mouseup',function(e){
                     // This catches the backspace button in chrome, but also prevents
                     // the event from triggering too premptively. Without this line,
                     // using tab/shift+tab will make the focused element fire the callback.
@@ -112,7 +112,7 @@ function checkRow(row) {
                     inputField.css({ 'background-color' : 'green', 'color' : 'white' });
                     setTimeout(function(){
                       inputField.css({ 'background-color' : originalBackgroundColor, 'color' : originalColor });
-                    }, 5000);
+                    }, 1000);
                     if (inputField.parents('.read-essay').first().length > 0) {
                         inputField.parents('.read-essay').first().prev().children().text(marks);
                     }
@@ -259,7 +259,7 @@ function checkRow(row) {
             {
                 if (response.success || response.success === "true")
                 {
-                    var str = 'Are you sure you want to remove ' + response.student_full_name + ' of class ' + response.student_class + ', answer with points ' + response.student_score + '?';
+                    var str = lang_strings[0] + response.student_full_name + ' (' + response.student_class + lang_strings[1] + response.student_score + '?';
                     infoModal.find('.modal-body').html(str);
                     infoModal.find('.modal-footer button#confirmed').attr('value', response.student_id);
                     infoModal.modal('show');

@@ -309,11 +309,11 @@ i.pencil {
 }
 
 i.close {
-    background-image:url(../img/icons/20x20/close.png); 
+    background-image:url(../img/icons/16x16/close.png); 
     background-position: center center;
-    height: 20px;
-    line-height: 20px;
-    width: 20px;    
+    height: 16px;
+    line-height: 16px;
+    width: 16px;    
 }
 
 .btn-danger {
@@ -326,4 +326,8 @@ i.close {
   padding-bottom: 9px;
   margin: 20px 0;
   border-bottom: 1px solid #eee;
+}
+
+.remove-choice {
+    margin-top: 5px;
 }

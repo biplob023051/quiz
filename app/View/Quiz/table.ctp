@@ -56,6 +56,7 @@ $this->assign('title', __('Answer Table'));
         <table class="table table-hover table-responsive table-striped">
             <thead>
                 <tr>
+                    <th class="serial"><?php echo __('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'); ?></th>
                     <th><?php echo __('Timestamp'); ?></th>
                     <th><?php echo __('Name'); ?></th>
                     <th><?php echo __('Class'); ?></th>
@@ -63,9 +64,15 @@ $this->assign('title', __('Answer Table'));
                 </tr>
             </thead>
             <tbody>
-                <?php if (!empty($quizDetails)) : ?>
-                    <?php foreach ($quizDetails['Student'] as $key1 => $value1) : ?>
+                <?php $sl = 0; if (!empty($quizDetails)) : ?>
+                    <?php foreach ($quizDetails['Student'] as $key1 => $value1) : $sl++;  ?>
                         <tr id="student-<?php echo $value1['id']; ?>">
+                            <td class="serial">
+                                <?php echo $sl; ?>
+                                <button type="button" class="btn btn-danger btn-sm delete-answer" id="<?php echo $value1['id']; ?>">
+                                    <i class="glyphicon trash"></i>
+                                </button>
+                            </td>
                             <td><?php echo $value1['submitted'] ?></td>
                             <td>
                                 <?php echo $value1['fname']; ?> 
@@ -93,7 +100,7 @@ $this->assign('title', __('Answer Table'));
         <table class="table table-hover table-responsive table-striped">
             <thead>
                 <tr>
-                    <th class="serial"><?php echo __('Sl'); ?></th>
+                    <th class="serial"><?php echo __('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'); ?></th>
                     <th><?php echo __('Timestamp'); ?></th>
                     <th><?php echo __('Name'); ?></th>
                     <th><?php echo __('Class'); ?></th>
@@ -112,10 +119,10 @@ $this->assign('title', __('Answer Table'));
                     <?php foreach ($quizDetails['Student'] as $key1 => $value1) : $sl++; ?>
                         <tr id="student-<?php echo $value1['id']; ?>">
                             <td class="serial">
+                                <?php echo $sl; ?>
                                 <button type="button" class="btn btn-danger btn-sm delete-answer" id="<?php echo $value1['id']; ?>">
                                     <i class="glyphicon trash"></i>
                                 </button>
-                                <?php echo $sl; ?>
                             </td>
                             <td><?php echo $value1['submitted'] ?></td>
                             <td>
@@ -167,4 +174,8 @@ $this->assign('title', __('Answer Table'));
         'baseUrl' => $this->Html->url('/', true)
     ));
     ?>
+</script>
+
+<script type="text/javascript">
+    var lang_strings = <?php echo json_encode($lang_strings) ?>;
 </script>

@@ -23,7 +23,7 @@
             class="form-control update-score" 
             name="<?php echo $value1['id'] ?>"
             question="<?php echo $value3['id'] ?>"
-            value="<?php echo empty($value4['score']) ? '' : $value4['score']; ?>"
+            value="<?php echo $value4['score']; ?>"
             current-score="<?php echo empty($value4['score']) ? '' : $value4['score']; ?>"
             max="<?php echo empty($value3['Choice'][0]['points']) ? $value3['QuestionType']['manual_scoring'] : $value3['Choice'][0]['points']; ?>"
             /> / <?php echo empty($value3['Choice'][0]['points']) ? $value3['QuestionType']['manual_scoring'] : $value3['Choice'][0]['points']; ?>

@@ -62,10 +62,10 @@
 .update-score {
   width: 80px;
   float: left;
-  -webkit-transition: all 300ms ease-out 0s;
-  -moz-transition: all 300ms ease-out 0s;
-  -ms-transition: all 300ms ease-out 0s;
-  transition: all 300ms ease-out 0s;
+  -webkit-transition: all 800ms ease-out 0s;
+  -moz-transition: all 800ms ease-out 0s;
+  -ms-transition: all 800ms ease-out 0s;
+  transition: all 800ms ease-out 0s;
 }
 
 #details table tr td {
@@ -116,7 +116,7 @@ ul#tabs li#answer-table-show a:hover {
 }
 
 .serial {
-  min-width: 1% !important;
+ 
 }
 
 span.score {

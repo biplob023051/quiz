@@ -184,8 +184,18 @@ class QuizController extends AppController {
         if (empty($data))
             throw new NotFoundException;
 
+        $lang_strings[0] = __('Internet connection has been lost, please try again later.');
+        $lang_strings[1] = __('All questions answered. Turn in your quiz?');
+        $lang_strings[2] = __('Questions ');
+        $lang_strings[3] = __(' unanswered.');
+        $lang_strings[4] = __(' Turn in your quiz?');
+        $lang_strings[5] = __('First Name is Required');
+        $lang_strings[6] = __('Last Name is Required');
+        $lang_strings[7] = __('Class is Required');
+
         $this->disableCache();
         $this->set('data', $data);
+        $this->set(compact('lang_strings'));
     }
 
     public function finish() {
@@ -229,7 +239,10 @@ class QuizController extends AppController {
         // classes merge with all class
         $classes = Hash::merge(array('all' => __('All Classes')), $classes);
 
-        $this->set(compact('quizDetails', 'classes', 'filter', 'studentIds', 'quizId'));
+        $lang_strings[0] = __('Are you sure you want to remove ');
+        $lang_strings[1] = __(') answer with points ');
+
+        $this->set(compact('quizDetails', 'classes', 'filter', 'studentIds', 'quizId', 'lang_strings'));
     }
 
     public function ajax_latest() {

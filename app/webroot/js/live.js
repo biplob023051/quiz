@@ -18,7 +18,7 @@
 		event.preventDefault();
 		var netConnection = checkNetConnection();
 		if (netConnection == false) {
-			alert('Internent connection has been lost, please try again later');
+			alert(lang_strings[0]);
 			return;
 		}
 		$("#error-message").hide();
@@ -84,9 +84,9 @@
 				});
 				// array implode by delimiter ','
 	        	var str = numbers.join();
-	        	str = 'Questions ' + str + ' unanswered. Turn in your quiz?';
+	        	str = lang_strings[2] + str + lang_strings[3] + lang_strings[4];
 	        } else {
-	        	var str = 'All questions answered. Turn in your quiz?';
+	        	var str = lang_strings[1];
 	        } 
 	        infoModal.find('.modal-body').html(str);
 	        infoModal.modal('show');
@@ -101,19 +101,19 @@
 	function checkValidation() {
 		if ($("#StudentFname").val() == '') {
 			$("#error-message").show();
-			$("#error-message").html('First Name is Required');
+			$("#error-message").html(lang_strings[5]);
 			return true;
 		}
 
 		if ($("#StudentLname").val() == '') {
 			$("#error-message").show();
-			$("#error-message").html('Last Name is Required');
+			$("#error-message").html(lang_strings[6]);
 			return true;
 		}
 
 		if ($("#StudentClass").val() == '') {
 			$("#error-message").show();
-			$("#error-message").html('Class is Required');
+			$("#error-message").html(lang_strings[7]);
 			return true;
 		}
 		return false;
