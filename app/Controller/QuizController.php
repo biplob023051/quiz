@@ -124,7 +124,16 @@ class QuizController extends AppController {
             $this->set(compact('initial'));
         }
 
+        $lang_strings['empty_question'] = __('Empty Question Is Not Permit');
+        $lang_strings['same_choice'] = __('Empty or Same Choices Are Not Permit');
+        $lang_strings['single_greater'] = __('At least a point should be greater than 0');
+        $lang_strings['correct_answer'] = __('Enter correct answers, if multiple answers comma separated');
+        $lang_strings['point_greater'] = __('At least point should be greater than 0');
+        $lang_strings['two_greater'] = __('At least 2 points should be greater than 0');
+        $lang_strings['insert_another'] = __('You put only one correct answers, please choose another point greater than 0!!!');
+
         $this->set('data', $data);
+        $this->set(compact('lang_strings'));
     }
 
     public function add() {

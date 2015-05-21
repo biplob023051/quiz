@@ -29,7 +29,7 @@
                         ?>
                     </div>
                     <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
-                        <?php echo $this->Form->button('<i class="glyphicon close"></i>', array('type' => 'button', 'choice' => '{{id}}', 'class' => 'remove-choice')); ?>
+                        <?php echo $this->Form->button('<i class="glyphicon close"></i>', array('type' => 'button', 'choice' => '{{id}}', 'class' => 'remove-choice', 'title' => __('Remove choice'))); ?>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                         ?>
                     </div>
                     <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
-                        <?php echo $this->Form->button('<i class="glyphicon close"></i>', array('type' => 'button', 'choice' => '{{id}}', 'class' => 'remove-choice')); ?>
+                        <?php echo $this->Form->button('<i class="glyphicon close"></i>', array('type' => 'button', 'choice' => '{{id}}', 'class' => 'remove-choice', 'title' => __('Remove choice'))); ?>
                     </div>
                 </div>
             </div>

@@ -47,15 +47,15 @@ $this->assign('title', __('My Quizzes'));
                 <?php $class = empty($quiz['Quiz']['status']) ? 'incativeQuiz' : 'activeQuiz'; ?>
                 <tr class="<?php echo $class; ?>">
                     <td>
-                        <button type="button" class="btn btn-danger btn-sm delete-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>">
+                        <button type="button" class="btn btn-danger btn-sm delete-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Remove quiz'); ?>">
                             <i class="glyphicon trash"></i>
                         </button>
                         <?php if ($quiz['Quiz']['status']) : ?>
-                            <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>">
+                            <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Archive quiz'); ?>">
                                 <i class="glyphicon archive"></i>
                             </button>
                         <?php else: ?>
-                            <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>">
+                            <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Activate quiz'); ?>">
                                 <i class="glyphicon recycle"></i>
                             </button>
                         <?php endif; ?>

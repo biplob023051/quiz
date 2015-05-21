@@ -122,7 +122,7 @@ var debugVar;
         if ($('#QuestionText').val() == '') {
             var currentEditQid = $("#q" + webQuiz.currentEditQid),
             choiceContainer = currentEditQid.find("div.choices");
-            choiceContainer.prepend('<div class="alert alert-danger">Empty Question Is Not Permit</div>');
+            choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['empty_question'] + '</div>');
             return;
         }
         var questionTypeId = $('#questions select.choice-type-selector').val();

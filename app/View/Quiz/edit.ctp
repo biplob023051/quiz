@@ -131,3 +131,7 @@ echo json_encode(array(
     </script>
 
 <?php endforeach; ?>
+
+<script type="text/javascript">
+    var lang_strings = <?php echo json_encode($lang_strings) ?>;
+</script>

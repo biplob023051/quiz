@@ -5,6 +5,11 @@
             <a class="navbar-brand" href="#"></a>
         </div>
         <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="nav navbar-nav navbar-left">
+                <?php if ($this->Session->check('Auth.User.name')): ?>
+                    <li><?php echo $this->Html->link(__('My Quizzes'), '/'); ?></li>
+                <?php endif; ?>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php if ($this->Session->check('Auth.User.name')): ?>
                     <!--nocache-->

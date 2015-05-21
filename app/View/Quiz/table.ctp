@@ -69,7 +69,7 @@ $this->assign('title', __('Answer Table'));
                         <tr id="student-<?php echo $value1['id']; ?>">
                             <td class="serial">
                                 <?php echo $sl; ?>
-                                <button type="button" class="btn btn-danger btn-sm delete-answer" id="<?php echo $value1['id']; ?>">
+                                <button type="button" class="btn btn-danger btn-sm delete-answer" id="<?php echo $value1['id']; ?>" title="<?php echo __('Remove answer'); ?>">
                                     <i class="glyphicon trash"></i>
                                 </button>
                             </td>
@@ -120,7 +120,7 @@ $this->assign('title', __('Answer Table'));
                         <tr id="student-<?php echo $value1['id']; ?>">
                             <td class="serial">
                                 <?php echo $sl; ?>
-                                <button type="button" class="btn btn-danger btn-sm delete-answer" id="<?php echo $value1['id']; ?>">
+                                <button type="button" class="btn btn-danger btn-sm delete-answer" id="<?php echo $value1['id']; ?>" title="<?php echo __('Remove answer'); ?>">
                                     <i class="glyphicon trash"></i>
                                 </button>
                             </td>

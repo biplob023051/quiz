@@ -366,7 +366,7 @@ var webQuiz = {
                         $('.alert-danger').remove();
                 }
                 validationError = true;
-                choiceContainer.prepend('<div class="alert alert-danger">Enter correct answers, if multiple answers comma separated</div>');
+                choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['correct_answer'] + '</div>');
             }
             
         });
@@ -385,7 +385,7 @@ var webQuiz = {
                 if ($('.alert-danger').length){
                     $('.alert-danger').remove();
                 }
-                choiceContainer.prepend('<div class="alert alert-danger">At least point should be greater than 0</div>');
+                choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['point_greater'] + '</div>');
             }
         }
         return validationError;
@@ -399,7 +399,7 @@ var webQuiz = {
                         $('.alert-danger').remove();
                 }
                 validationError = true;
-                choiceContainer.prepend('<div class="alert alert-danger">At least points should be greater than 0</div>');
+                choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['point_greater'] + '</div>');
             }
             
         });
@@ -420,7 +420,7 @@ var webQuiz = {
             if ($('.alert-danger').length){
                 $('.alert-danger').remove();
             }
-            choiceContainer.prepend('<div class="alert alert-danger">At least point should be greater than 0</div>');
+            choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['point_greater'] + '</div>');
         }
         return validationError;
     },
@@ -437,7 +437,7 @@ var webQuiz = {
                         $('.alert-danger').remove();
                 }
                 validationError = true;
-                choiceContainer.prepend('<div class="alert alert-danger">Empty or Same Choices Are Not Permit</div>');
+                choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['same_choice'] + '</div>');
             }
             
         });
@@ -458,7 +458,7 @@ var webQuiz = {
             if ($('.alert-danger').length){
                 $('.alert-danger').remove();
             }
-            choiceContainer.prepend('<div class="alert alert-danger">At least a point should be greater than 0</div>');
+            choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['single_greater'] + '</div>');
         }
         return validationError;
     },
@@ -475,13 +475,13 @@ var webQuiz = {
             if ($('.alert-danger').length){
                 $('.alert-danger').remove();
             }
-            choiceContainer.prepend('<div class="alert alert-danger">At least 2 points should be greater than 0</div>');
+            choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['two_greater'] + '</div>');
             validationError = true;   
         } else if(count == 1) {
             if ($('.alert-danger').length){
                 $('.alert-danger').remove();
             }
-            choiceContainer.prepend('<div class="alert alert-danger">You put only one correct answers, please choose another point greater than 0!!!</div>');
+            choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['insert_another'] + '</div>');
             validationError = true;
         } else {
             validationError = false;
