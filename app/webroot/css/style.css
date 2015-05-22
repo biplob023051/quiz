@@ -331,3 +331,8 @@ i.close {
 .remove-choice {
     margin-top: 5px;
 }
+
+/*admin css*/
+.error-message {
+    color: red;
+}

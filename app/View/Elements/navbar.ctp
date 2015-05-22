@@ -13,6 +13,10 @@
             <ul class="nav navbar-nav navbar-right">
                 <?php if ($this->Session->check('Auth.User.name')): ?>
                     <!--nocache-->
+                    <?php if ($this->Session->read('Auth.User.account_level') == 51): ?>
+                        <li><?php echo $this->Html->link(__('Create Help'), array('controller' => 'helps', 'action' => 'titles', 'admin' => true)); ?></li>
+                    <?php endif ?>
+                    <li><?php echo $this->Html->link(__('Help'), '/helps'); ?></li>
                     <li>
                         <div class="user-image"></div>
                     </li>
