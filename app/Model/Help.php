@@ -26,7 +26,7 @@ class Help extends AppModel {
         'url' => array(
             'notempty' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'Video url is required',
+                'message' => 'Youtube video url is required',
             ),
             'website'=>array(
                  'rule'      => 'url',

@@ -20,7 +20,7 @@ class Student extends AppModel {
             'alphaNumericWithSpace' => array(
                 'rule' => array('custom', "/[a-zA-Z0-9]+/"),
                 'required' => true,
-                'message' => 'Invalid Name'
+                'message' => 'Invalid First Name'
             )
         ),
         'lname' => array(
@@ -33,7 +33,7 @@ class Student extends AppModel {
             'alphaNumericWithSpace' => array(
                 'rule' => array('custom', "/[a-zA-Z0-9]+/"),
                 'required' => true,
-                'message' => 'Invalid Name'
+                'message' => 'Invalid Last Name'
             )
         ),
         'class' => array(
@@ -46,7 +46,7 @@ class Student extends AppModel {
             'alphaNumericWithSpace' => array(
                 'rule' => array('custom', "/[a-zA-Z0-9]+/"),
                 'required' => true,
-                'message' => 'Invalid Name'
+                'message' => 'Invalid Class'
             )
         )
     );

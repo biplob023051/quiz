@@ -1,5 +1,10 @@
 <?php
 
+$this->Html->script(array(
+    'user-create'
+    ), array('inline' => false)
+);
+
 $this->assign('title', __('Create Account'));
 $form_data = $this->Session->read('UserCreateFormData');
 
@@ -29,7 +34,10 @@ echo $this->Session->flash('error');
         ));
 
         echo $this->Form->input('password', array(
-            'type' => 'password'
+            'type' => 'password',
+            'data-toggle' => 'tooltip',
+            'data-placement' => 'bottom',
+            'data-original-title' => __('Password must be 8 characters long')
         ));
 
         echo $this->Form->input('passwordVerify', array(

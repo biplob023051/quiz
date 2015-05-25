@@ -63,7 +63,7 @@ class HelpsController extends AppController {
 					return $this->redirect(array('controller' => 'helps', 'action' => 'index', 'admin' => true));
 				}
 			} else {
-				$this->Session->setFlash(__('Help created failed'), 'error_form', array(), 'error');
+				$this->Session->setFlash(__('Help saved failed'), 'error_form', array(), 'error');
 			}
 		} elseif(!empty($help_id)) {
 			$conditions = array(
@@ -88,7 +88,7 @@ class HelpsController extends AppController {
 	public function admin_titles() {
 		if ($this->Auth->user('account_level') != 51)
             throw new ForbiddenException;
-		$this->set('title_for_layout',__('Main Titles List'));
+		$this->set('title_for_layout',__('Main Title List'));
 		
 		$options = array(
 			'conditions' => array(
@@ -129,7 +129,7 @@ class HelpsController extends AppController {
 					return $this->redirect(array('controller' => 'helps', 'action' => 'titles', 'admin' => true));
 				}
 			} else {
-				$this->Session->setFlash(__('Title created failed'), 'error_form', array(), 'error');
+				$this->Session->setFlash(__('Title saved failed'), 'error_form', array(), 'error');
 			}
 		} elseif(!empty($help_id)) {
 			$conditions = array(
@@ -227,10 +227,10 @@ class HelpsController extends AppController {
 			if($help){
 				$this->Help->id=$help['Help']['id'];
 				if($this->Help->moveDown()==false)
-					$this->Session->setFlash(__('Can not sort'), 'error_form', array(), 'error');
+					$this->Session->setFlash(__('Sort failed'), 'error_form', array(), 'error');
 			}	
 		} else {
-			$this->Session->setFlash(__('Can not sort'), 'error_form', array(), 'error');
+			$this->Session->setFlash(__('Sort failed'), 'error_form', array(), 'error');
 		}			
 			
 		if(isset($this->params['url']['redirect_url'])){			
@@ -255,10 +255,10 @@ class HelpsController extends AppController {
 			if($help){
 				$this->Help->id=$help['Help']['id'];
 				if($this->Help->moveUp()==false)
-					$this->Session->setFlash(__('Can not sort'), 'error_form', array(), 'error');
+					$this->Session->setFlash(__('Sort failed'), 'error_form', array(), 'error');
 			}	
 		} else {
-			$this->Session->setFlash(__('Can not sort'), 'error_form', array(), 'error');
+			$this->Session->setFlash(__('Sort failed'), 'error_form', array(), 'error');
 		}		
 			
 		if(isset($this->params['url']['redirect_url'])){			

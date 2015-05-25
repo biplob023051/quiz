@@ -21,9 +21,9 @@
                         <th class="text-center col-md-1"><?php echo __('id'); ?></th>
                         <th class="text-center"><?php echo __('Main Title'); ?></th>
                         <th class="text-center"><?php echo __('Created'); ?></th>
-                        <th class="text-center col-md-1"><?php echo __('SORT'); ?></th>
-                        <th class="text-center col-md-1"><?php echo __('STATUS'); ?></th>
-                        <th class="text-center col-md-1"><?php echo __('ACTION'); ?></th>
+                        <th class="text-center col-md-1"><?php echo __('Sort'); ?></th>
+                        <th class="text-center col-md-1"><?php echo __('Status'); ?></th>
+                        <th class="text-center col-md-1"><?php echo __('Action'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,15 +38,15 @@
                             </td>
                             <td class="text-center" nowrap="nowrap">
                                 <?php if($help['Help']['status']):?>
-                                    <?php echo $this->Form->postLink('<div class="btn-group"><button type="button" class="btn btn-default btn-xs active">'.__('ON').'</button><button type="button" class="btn btn-default btn-xs inactive">'.__('OFF').'</button></div>', array('action' => 'active', $help['Help']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('escape'=>false), __('Confirm inactive title %s?', trim($help['Help']['id']))); ?>
+                                    <?php echo $this->Form->postLink('<div class="btn-group"><button type="button" class="btn btn-default btn-xs active">'.__('On').'</button><button type="button" class="btn btn-default btn-xs inactive">'.__('Off').'</button></div>', array('action' => 'active', $help['Help']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('escape'=>false), __('Confirm inactive title %s?', trim($help['Help']['id']))); ?>
                                 <?php else :?>
-                                    <?php echo $this->Form->postLink('<div class="btn-group"><button type="button" class="btn btn-default btn-xs inactive">'.__('ON').'</button><button type="button" class="btn btn-default btn-xs active">'.__('OFF').'</button></div>', array('action' => 'active', $help['Help']['id'],1,'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('escape'=>false), __('Confirm active title %s?', trim($help['Help']['id']))); ?>
+                                    <?php echo $this->Form->postLink('<div class="btn-group"><button type="button" class="btn btn-default btn-xs inactive">'.__('On').'</button><button type="button" class="btn btn-default btn-xs active">'.__('Off').'</button></div>', array('action' => 'active', $help['Help']['id'],1,'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('escape'=>false), __('Confirm active title %s?', trim($help['Help']['id']))); ?>
                                 <?php endif;?>
                             </td>
                             <td class="text-center" nowrap="nowrap">
-                                <?php echo $this->Html->link(__('EDIT'), array('action' => 'add', $help['Help']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('class'=>'btn btn-primary btn-xs','escape'=>false)); ?>
+                                <?php echo $this->Html->link(__('Edit'), array('action' => 'add', $help['Help']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('class'=>'btn btn-primary btn-xs','escape'=>false)); ?>
                                 <?php if(!$help['Help']['status']):?>
-                                    <?php echo $this->Form->postLink(__('DELETE'), array('action' => 'delete', $help['Help']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('class'=>'btn btn-danger btn-xs','escape'=>false), __('Confirm delete of title %s?', trim($help['Help']['id']))); ?>
+                                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $help['Help']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('class'=>'btn btn-danger btn-xs','escape'=>false), __('Confirm delete of title %s?', trim($help['Help']['id']))); ?>
                                 <?php endif;?>
                             </td>
                         </tr>

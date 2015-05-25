@@ -201,6 +201,9 @@ class QuizController extends AppController {
         $lang_strings[5] = __('First Name is Required');
         $lang_strings[6] = __('Last Name is Required');
         $lang_strings[7] = __('Class is Required');
+        $lang_strings['last_name_invalid'] = __('Invalid Last Name');
+        $lang_strings['first_name_invalid'] = __('Invalid First Name');
+        $lang_strings['class_invalid'] = __('Invalid Class');
 
         $this->disableCache();
         $this->set('data', $data);
@@ -248,8 +251,12 @@ class QuizController extends AppController {
         // classes merge with all class
         $classes = Hash::merge(array('all' => __('All Classes')), $classes);
 
-        $lang_strings[0] = __('Are you sure you want to remove ');
-        $lang_strings[1] = __(') answer with points ');
+        $lang_strings['remove_question'] = __('Are you sure you want to remove ');
+        $lang_strings['with_points'] = __(') answer with points ');
+        $lang_strings['positive_number'] = __('Please Give a postive number!');
+        $lang_strings['update_require'] = __('You have not updated score yet!');
+        $lang_strings['more_point_1'] = __('Points not allowed more than ');
+        $lang_strings['more_point_2'] = __(' value');
 
         $this->set(compact('quizDetails', 'classes', 'filter', 'studentIds', 'quizId', 'lang_strings'));
     }

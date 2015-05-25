@@ -26,6 +26,10 @@ msgstr "Päivitä käyttäjätili"
 msgid "New Question"
 msgstr "Uusi kysymys"
 
+#: Controller/UserController.php:37
+msgid "Registration success"
+msgstr "Rekisteröinti valmis"
+
 #: Controller/QuizController.php:104
 #: View/Quiz/edit.ctp:41
 msgid "Name the quiz"
@@ -77,6 +81,22 @@ msgstr "Pisteet"
 msgid "Max. points"
 msgstr "Maksimipisteet"
 
+#: View/Elements/Quiz/edit/Handlebars/question.preview.ctp:13
+msgid "Edit question"
+msgstr "Muokkaa kysymystä"
+
+#: View/Elements/Quiz/edit/Handlebars/question.preview.ctp:15
+msgid "Remove question"
+msgstr "Poista kysymys"
+
+#: View/Elements/Quiz/edit/question.ctp:23
+msgid "Edit question"
+msgstr "Muokkaa kysymystä"
+
+#: View/Elements/Quiz/edit/question.ctp:26
+msgid "Remove question"
+msgstr "Poista kysymys"
+
 #: View/Elements/Quiz/edit/Handlebars/question.edit.ctp:10
 msgid "Enter the question"
 msgstr "Kirjoita kysymys"
@@ -124,6 +144,18 @@ msgstr "Pidä testi!"
 #: View/Quiz/index.ctp:40
 msgid "Answers (%s)"
 msgstr "Katso tulokset (%s)"
+
+#: View/Quiz/index.ctp:50
+msgid "Remove quiz"
+msgstr "Poista testi"
+
+#: View/Quiz/index.ctp:54
+msgid "Archive quiz"
+msgstr "Arkistoi testi"
+
+#: View/Quiz/index.ctp:58
+msgid "Activate quiz"
+msgstr "Aktivoi testi"
 
 #: View/Quiz/live.ctp:8
 msgid "Quiz: "
@@ -221,15 +253,15 @@ msgstr "Testin nimessä saa olla vain kirjaimia tai numeroita."
 
 #: Model/Quiz.php:construct
 msgid "Active Quizzes"
-msgstr "aktiivinen Tietokilpailut"
+msgstr "Aktiiviset testit"
 
 #: Model/Quiz.php:construct
 msgid "Archived Quizzes"
-msgstr "arkistoidut Tietokilpailut"
+msgstr "Arkistoidut testit"
 
 #: Model/Quiz.php:construct
 msgid "All Quizzes"
-msgstr "kaikki Tietokilpailut"
+msgstr "Kaikki testit"
 
 #: Model/Student.php:validation for field fname;validation for field lname
 msgid "Invalid Name"
@@ -388,3 +420,294 @@ msgstr "Suomi"
 msgid "Settings has been saved"
 msgstr "Asetukset on tallennettu"
 
+#: Remove choice
+msgid "Remove choice"
+msgstr "Poista vaihtoehto"
+
+#: Remove answer
+msgid "Remove answer"
+msgstr "Poista vastaus"
+
+#: Controller/QuizController.php:127
+msgid "Empty Question Is Not Permit"
+msgstr "Kirjoita kysymys."
+
+#: Controller/QuizController.php:128
+msgid "Empty or Same Choices Are Not Permit"
+msgstr "Älä käytä täsmälleen samoja tai kokonaan tyhjiä vastausvaihtoehtoja."
+
+#: Controller/QuizController.php:129
+msgid "At least a point should be greater than 0"
+msgstr "Ainakin yhden vaihtoehdon pisteytyksen täytyy olla suurempi kuin 0."
+
+#: Controller/QuizController.php:130
+msgid "Enter correct answers, if multiple answers comma separated"
+msgstr "Kirjoita oikeat vastausvaihtoehdot pilkulla erotettuna."
+
+#: Controller/QuizController.php:131
+msgid "At least point should be greater than 0"
+msgstr "Ainakin yhden vaihtoehdon pisteytyksen täytyy olla suurempi kuin 0."
+
+#: Controller/QuizController.php:132
+msgid "At least 2 points should be greater than 0"
+msgstr "Ainakin kahden vastausvaihtoehdon pisteytyksen täytyy olla suurempi kuin 0."
+
+#: Controller/QuizController.php:133
+msgid "You put only one correct answers, please choose another point greater than 0!!!"
+msgstr "Valitse vielä toinen vastausvaihtoehto, jonka pisteytys on suurempi kuin 0."
+
+#: Controller/QuizController.php:251
+msgid "Are you sure you want to remove "
+msgstr "Pietu Halonen rem "
+
+#: Controller/QuizController.php:252
+msgid ") answer with points "
+msgstr ") Pietu Halonen poin "
+
+#: Controller/QuizController.php:253
+msgid "Please Give a postive number!"
+msgstr "Pietu Halonen posi num"
+
+#: Controller/QuizController.php:254
+msgid "You have not updated score yet!"
+msgstr "Pietu Halonen not up sc"
+
+#: Controller/QuizController.php:255
+msgid "Points not allowed more than "
+msgstr "Pietu Halonen not all mo th "
+
+#: Controller/QuizController.php:256
+msgid " value"
+msgstr " val Pietu Halonen"
+
+#: View/Elements/Answer/confirm_delete.ctp:5
+msgid "Remove answer?"
+msgstr "Pietu Halonen re?"
+
+#: View/Elements/Answer/confirm_delete.ctp:12
+msgid "Confirm"
+msgstr "Pietu Halonen con"
+
+#: Menu item Help
+msgid "Help"
+msgstr "Apua"
+
+#: Menu item Help
+msgid "Create Help"
+msgstr "Pietu Halonen cre"
+
+#: Menu item Help
+msgid "If you don’t have account?"
+msgstr "Ei vielä tunnuksia?"
+
+#: View/Helps/index.ctp:13
+msgid "Getting started"
+msgstr "Pietu Halonen Get"
+
+#: View/Helps/index.ctp:16
+msgid "Use scenarios"
+msgstr "Pietu Halonen scena"
+
+#: View/Helps/admin_titles.ctp:5
+msgid "Main Title List"
+msgstr "Pietu Halonen M L"
+
+#: View/Helps/admin_titles.ctp:6
+msgid "New Main Title"
+msgstr "Pietu Halonen N M T"
+
+#: View/Helps/admin_titles.ctp:7
+msgid "Helps List"
+msgstr "Pietu Halonen H L"
+
+#: View/Helps/admin_titles.ctp:8
+msgid "New Help"
+msgstr "Pietu Halonen N H"
+
+#: View/Helps/admin_titles.ctp:21
+msgid "id"
+msgstr "Pietu Halonen id"
+
+#: View/Helps/admin_titles.ctp:22
+msgid "Main Title"
+msgstr "Pietu Halonen M T"
+
+#: View/Helps/admin_titles.ctp:23
+msgid "Created"
+msgstr "Pietu Halonen Crea"
+
+#: View/Helps/admin_titles.ctp:24
+msgid "Sort"
+msgstr "Pietu Halonen Sor"
+
+#: View/Helps/admin_titles.ctp:25
+msgid "Status"
+msgstr "Pietu Halonen Stat"
+
+#: View/Helps/admin_titles.ctp:26
+msgid "Action"
+msgstr "Pietu Halonen Ac"
+
+#: View/Helps/admin_titles.ctp:41
+msgid "On"
+msgstr "Pietu Halonen On"
+
+#: View/Helps/admin_titles.ctp:41
+msgid "Confirm inactive title %s?"
+msgstr "Pietu Halonen i t %s?"
+
+#: View/Helps/admin_titles.ctp:43
+msgid "Off"
+msgstr "Pietu Halonen Off"
+
+#: View/Helps/admin_titles.ctp:43
+msgid "Confirm active title %s?"
+msgstr "Pietu Halonen a t %s?"
+
+#: View/Helps/admin_titles.ctp:47
+msgid "Edit"
+msgstr "Pietu Halonen Edit"
+
+#: View/Helps/admin_index.ctp:27
+msgid "Title"
+msgstr "Pietu Halonen Tit"
+
+#: View/Helps/admin_index.ctp:28
+msgid "Sub Title"
+msgstr "Pietu Halonen S Tit"
+
+#: View/Helps/admin_index.ctp:30
+msgid "Url"
+msgstr "Pietu Halonen U"
+
+#: View/Helps/admin_add.ctp:31
+msgid "Please insert main title"
+msgstr "Pietu Halonen i m t"
+
+#: View/Helps/admin_add.ctp:37
+msgid "BACK"
+msgstr "Pietu Halonen B"
+
+#: View/Helps/admin_add.ctp:41
+msgid "SAVE"
+msgstr "Pietu Halonen S"
+
+#: View/Helps/admin_insert.ctp:31
+msgid "Select One"
+msgstr "Pietu Halonen S O"
+
+#: View/Helps/admin_insert.ctp:32
+msgid "Please insert help title"
+msgstr "Pietu Halonen i h t"
+
+#: View/Helps/admin_insert.ctp:33
+msgid "Please insert help sub title"
+msgstr "Pietu Halonen i h s t"
+
+#: View/Helps/admin_insert.ctp:34
+msgid "Youtube Video Url"
+msgstr "Pietu Halonen Y V U"
+
+#: View/Helps/admin_insert.ctp:34
+msgid "Please insert youtube video url here"
+msgstr "Pietu Halonen i y v u h"
+
+#: Controller/HelpsController.php:117
+msgid "Edit Main Title"
+msgstr "Pietu Halonen e m t"
+
+#: Controller/HelpsController.php:125
+msgid "Title saved successfully"
+msgstr "Pietu Halonen t s s"
+
+#: Controller/HelpsController.php:132
+msgid "Title saved failed"
+msgstr "Pietu Halonen t s f"
+
+#: Controller/HelpsController.php:146
+msgid "Title not found"
+msgstr "Pietu Halonen t n f"
+
+#: Controller/HelpsController.php:170
+msgid "Can not delete"
+msgstr "Pietu Halonen c n d"
+
+#: Controller/HelpsController.php:38
+msgid "Edit Help"
+msgstr "Pietu Halonen e h"
+
+#: Controller/HelpsController.php:59
+msgid "Help saved successfully"
+msgstr "Pietu Halonen h s s"
+
+#: Controller/HelpsController.php:66
+msgid "Help saved failed"
+msgstr "Pietu Halonen h s f"
+
+#: Controller/HelpsController.php:80
+msgid "Help not found"
+msgstr "Pietu Halonen h n f"
+
+#: Controller/HelpsController.php:80
+msgid "Sort failed"
+msgstr "Pietu Halonen s f"
+
+#: Model/Help.php:validation for field title
+msgid "Title is required"
+msgstr "Pietu Halonen t r"
+
+#: Model/Help.php:validation for field parent_id
+msgid "Main title is required"
+msgstr "Pietu Halonen m t r"
+
+#: Model/Help.php:validation for field url notempty
+msgid "Youtube video url is required"
+msgstr "Pietu Halonen y v u r"
+
+#: Model/Help.php:validation for field url website
+msgid "Valid youtube video url is required"
+msgstr "Pietu Halonen v y v u r"
+
+#: Controller/QuizController.php:196
+msgid "Internet connection has been lost, please try again later."
+msgstr "Pietu Halonen Internet Connection Lost"
+
+#: Controller/QuizController.php:197
+msgid "All questions answered. Turn in your quiz?"
+msgstr "Pietu Halonen A q a. Turn i y q?"
+
+#: Controller/QuizController.php:198
+msgid "Questions "
+msgstr "Pietu Halonen Questions "
+
+#: Controller/QuizController.php:199
+msgid " unanswered."
+msgstr "  unanswered. Pietu Halonen"
+
+#: Controller/QuizController.php:200
+msgid " Turn in your quiz?"
+msgstr " Turn in your quiz? Pietu Halonen"
+
+#: Controller/QuizController.php:201
+msgid "First Name is Required"
+msgstr "Pietu Halonen F N R"
+
+#: Controller/QuizController.php:202
+msgid "Last Name is Required"
+msgstr "Pietu Halonen L N R"
+
+#: Controller/QuizController.php:203
+msgid "Class is Required"
+msgstr "Pietu Halonen C R"
+
+#: Controller/QuizController.php:204
+msgid "Invalid Last Name"
+msgstr "Pietu Halonen I L N"
+
+#: Controller/QuizController.php:205
+msgid "Invalid First Name"
+msgstr "Pietu Halonen I F N"
+
+#: Controller/QuizController.php:206
+msgid "Invalid Class"
+msgstr "Pietu Halonen I C"

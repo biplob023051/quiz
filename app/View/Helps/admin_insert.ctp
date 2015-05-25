@@ -31,7 +31,7 @@
                 echo $this->Form->input('parent_id', array('label'=>array('text'=>__('Main Title')),'options' => $parentsOptions, 'empty' => __('Select One') ));
                 echo $this->Form->input('title', array('label'=>array('text'=>__('Title')), 'placeholder' => __('Please insert help title')));
                 echo $this->Form->input('sub_title', array('label'=>array('text'=>__('Sub Title')), 'placeholder' => __('Please insert help sub title')));
-                echo $this->Form->input('url', array('label'=>array('text'=>__('Video Url')), 'placeholder' => __('Video url here')));
+                echo $this->Form->input('url', array('label'=>array('text'=>__('Youtube Video Url')), 'placeholder' => __('Please insert youtube video url here')));
                 
             ?>
             <div class="form-group">

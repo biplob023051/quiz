@@ -88,13 +88,13 @@ echo $this->Form->create('Quiz', array(
 </div>
 
 <div class="row">
-    <div class="col-xs-12 col-md-3 col-md-offset-7">
+    <div class="col-xs-12 col-md-3 col-md-offset-6">
         <div class="form-group">
             <button type="button" class="btn btn-primary btn-lg btn-block" id="add-question"><?php echo __('Add New Question') ?></button>
 
         </div>
     </div>
-    <div class="col-xs-12 col-md-2">
+    <div class="col-xs-12 col-md-3">
         <div class="form-group">
             <input type="submit" class="btn btn-default btn-lg btn-block" id="submit-quiz" value="<?php echo __('Finish'); ?>" />
         </div>

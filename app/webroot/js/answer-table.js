@@ -54,6 +54,9 @@ function checkRow(row) {
     });
 
     $('#details input').donetyping(function(){
+        if ($(this).val() == '' || $(this).val() == null) {
+            return false;    
+        }
         var marks = parseInt($(this).val());
         var max = parseInt($(this).attr("max"));
         var current_score = parseInt($(this).attr("current-score")); 
@@ -63,7 +66,7 @@ function checkRow(row) {
             $("#ajax-message").removeClass('alert-success');
             $("#ajax-message").addClass('alert-danger');
             $("#ajax-message").show();
-            $("#ajax-message").html('Please Give a postive number!');
+            $("#ajax-message").html(lang_strings['positive_number']);
             $('html, body').animate({
                 scrollTop: $(".page-header").offset().top
             }, 500);
@@ -72,7 +75,7 @@ function checkRow(row) {
             $("#ajax-message").removeClass('alert-success');
             $("#ajax-message").addClass('alert-danger');
             $("#ajax-message").show();
-            $("#ajax-message").html('You have not updated score yet!');
+            $("#ajax-message").html(lang_strings['update_require']);
             $('html, body').animate({
                 scrollTop: $(".page-header").offset().top
             }, 500);
@@ -81,7 +84,7 @@ function checkRow(row) {
             $("#ajax-message").removeClass('alert-success');
             $("#ajax-message").addClass('alert-danger');
             $("#ajax-message").show();
-            $("#ajax-message").html('Points not allowed more than ' + max + ' value');
+            $("#ajax-message").html(lang_strings['more_point_1'] + max + lang_strings['more_point_2']);
             $('html, body').animate({
                 scrollTop: $(".page-header").offset().top
             }, 500);
@@ -123,81 +126,6 @@ function checkRow(row) {
             }
         });
     });
-
-    // var $el = $("#my-element"),
-    //     x = 5000,
-    //     originalColor = $el.css("background");
-
-    // $el.css("background", "red");
-    // setTimeout(function(){
-    //   $el.css("background", originalColor);
-    // }, x);
-
-    
-    // update essay score
-    // $('#details input').blur(function() {
-    //     var marks = $(this).val();
-    //     var max = $(this).attr("max");
-    //     var current_score = $(this).attr("current-score"); 
-    //     $("#ajax-message").hide();
-        
-    //     if (marks < 0) {
-    //         $("#ajax-message").removeClass('alert-success');
-    //         $("#ajax-message").addClass('alert-danger');
-    //         $("#ajax-message").show();
-    //         $("#ajax-message").html('Please Give a postive number!');
-    //         $('html, body').animate({
-    //             scrollTop: $(".page-header").offset().top
-    //         }, 500);
-    //         return false;
-    //     } else if (marks == current_score) {
-    //         $("#ajax-message").removeClass('alert-success');
-    //         $("#ajax-message").addClass('alert-danger');
-    //         $("#ajax-message").show();
-    //         $("#ajax-message").html('You have not updated score yet!');
-    //         $('html, body').animate({
-    //             scrollTop: $(".page-header").offset().top
-    //         }, 500);
-    //         return false;
-    //     } else if (marks > max) {
-    //         $("#ajax-message").removeClass('alert-success');
-    //         $("#ajax-message").addClass('alert-danger');
-    //         $("#ajax-message").show();
-    //         $("#ajax-message").html('Points not allowed more than ' + max + ' value');
-    //         $('html, body').animate({
-    //             scrollTop: $(".page-header").offset().top
-    //         }, 500);
-    //         return false;
-    //     } 
-
-    //     $(this).attr("current-score", marks);
-
-    //     var std_id = $(this).attr("name");
-    //     var q_id = $(this).attr("question");
-
-
-    //     $.ajax({
-    //         dataType: 'json',
-    //         url: appData.baseUrl + 'score/update',
-    //         type: 'post',
-    //         data: {'id': q_id, 'student_id': std_id, 'score': marks, 'current_score' : current_score, 'max' : max},
-    //         success: function (response)
-    //         {
-    //             console.log(response);
-    //             if (response.success || response.success === "true")
-    //             {
-    //                 $("#studentscr2-" + std_id).text(response.score);
-    //                 $("#studentscr1-" + std_id).text(response.score);
-    //                 $("#ajax-message").removeClass('alert-danger');
-    //                 $("#ajax-message").addClass('alert-success');
-    //                 $("#ajax-message").show();
-    //                 $("#ajax-message").html('Points updated successfully');
-    //             } else {
-    //                 alert('Something went wrong, try again later');
-    //             }
-    //         }
-    //     });
-    // });
 
     var appData = $.parseJSON($("#app-data").text());
 
@@ -259,7 +187,7 @@ function checkRow(row) {
             {
                 if (response.success || response.success === "true")
                 {
-                    var str = lang_strings[0] + response.student_full_name + ' (' + response.student_class + lang_strings[1] + response.student_score + '?';
+                    var str = lang_strings['remove_question'] + response.student_full_name + ' (' + response.student_class + lang_strings['with_points'] + response.student_score + '?';
                     infoModal.find('.modal-body').html(str);
                     infoModal.find('.modal-footer button#confirmed').attr('value', response.student_id);
                     infoModal.modal('show');
