@@ -91,7 +91,7 @@ class StudentController extends AppController {
                         }
                     } elseif ($value2['Question']['question_type_id'] == 2) {
                         // short automatic point
-                        $words = explode(',', $value1['text']);
+                        $words = explode(';', $value1['text']);
                         if (count($words) == 1) {
                             $words = explode(' ', $value1['text']);
                         }

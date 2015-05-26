@@ -9,7 +9,7 @@
                         'div' => array('class' => 'form-group'),
                         'class' => 'form-control c-text',
                         'label' => false,
-                        'placeholder' => __('Corect answers separated by comma')
+                        'placeholder' => __('Corect answers separated by semicolon')
                     ));
                     ?>
                 </div>
