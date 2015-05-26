@@ -28,15 +28,15 @@ echo $this->Form->create('Student', array(
         <div class="row">
             <div class="col-xs-12 col-md-4">
                 <?php
-                echo $this->Form->input('lname', array(
-                    'placeholder' => __('Last Name')
+                echo $this->Form->input('fname', array(
+                    'placeholder' => __('First Name')
                 ));
                 ?>
             </div>
             <div class="col-xs-12 col-md-4">
                 <?php
-                echo $this->Form->input('fname', array(
-                    'placeholder' => __('First Name')
+                echo $this->Form->input('lname', array(
+                    'placeholder' => __('Last Name')
                 ));
                 ?>
             </div>

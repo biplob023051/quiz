@@ -21,8 +21,8 @@
                         </td>
                         <td><?php echo $value1['submitted'] ?></td>
                         <td>
-                            <?php echo $value1['fname']; ?> 
                             <?php echo $value1['lname']; ?>
+                            <?php echo $value1['fname']; ?> 
                         </td>
                         <td><?php echo $value1['class']; ?></td>
                         <?php foreach ($quizDetails['Ranking'] as $key2 => $value2) : ?>
@@ -72,8 +72,8 @@
                         </td>
                         <td><?php echo $value1['submitted'] ?></td>
                         <td>
-                            <?php echo $value1['fname']; ?> 
                             <?php echo $value1['lname']; ?>
+                            <?php echo $value1['fname']; ?> 
                         </td>
                         <td><?php echo $value1['class']; ?></td>
                         <?php foreach ($quizDetails['Ranking'] as $key2 => $value2) : ?>

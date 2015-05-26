@@ -41,11 +41,7 @@ class MathCaptchaComponent extends Component {
   * @var array
   */
   private $choices = array(
-    "Mikä on lukujen .:addition-problem:.?", 
-    "Kuinka paljon on .:word-problem:.?", 
     "Paljonko on .:problem:.?", 
-    "Paljonko saadaan, .:word-problem:.?", 
-    "Mitä saat, kun .:word2-problem:.?" 
   ); 
 
   /**
@@ -91,19 +87,19 @@ class MathCaptchaComponent extends Component {
 
     ".:operator:." => array(
       "+" => "+",
-      "summa" => "+",
+      "plus" => "+",
       "lisättynä luvulla" => "+",
       "kertaa" => "*",
-      "kerrottuna" => "*"),
+      "kertaa" => "*"),
     
     ".:add:." => array(
       "ja" => "+",
-      "summa" => "+",
+      "plus" => "+",
       "+" => "+"),
 
     ".:operatorword:." => array( 
       "add .:number:. to" => "+",
-      "kerrottuna .:number:." => "*"),
+      "kertaa .:number:." => "*"),
 
     ".:operatorword-ing:." => array(
       "lisätään .:number:. että" => "+",

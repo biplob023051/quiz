@@ -109,15 +109,15 @@
 
 	function checkValidation() {
 
-		if ($("#StudentLname").val() == '') {
-			$("#error-message").show();
-			$("#error-message").html(lang_strings[6]);
-			return true;
-		}
-
 		if ($("#StudentFname").val() == '') {
 			$("#error-message").show();
 			$("#error-message").html(lang_strings[5]);
+			return true;
+		}
+
+		if ($("#StudentLname").val() == '') {
+			$("#error-message").show();
+			$("#error-message").html(lang_strings[6]);
 			return true;
 		}
 
@@ -131,15 +131,16 @@
 
 	function checkAlphaNumeric () {
 	    var pattern = /[a-zA-Z0-9]+/;
-	    if (pattern.test($("#StudentLname").val()) == false) {
-	    	$("#error-message").show();
-			$("#error-message").html(lang_strings['last_name_invalid']);
-	        return true;
-	    }
 
 	    if (pattern.test($("#StudentFname").val()) == false) {
 	    	$("#error-message").show();
 			$("#error-message").html(lang_strings['first_name_invalid']);
+	        return true;
+	    }
+	    
+	    if (pattern.test($("#StudentLname").val()) == false) {
+	    	$("#error-message").show();
+			$("#error-message").html(lang_strings['last_name_invalid']);
 	        return true;
 	    }
 

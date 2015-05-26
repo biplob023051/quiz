@@ -71,7 +71,7 @@ msgstr "Kiitos tilauksesta! Lasku lähetetään sähköpostiisi mahdollisimman p
 
 #: View/Elements/Quiz/edit/Handlebars/choice.short_auto.edit.ctp:12
 msgid "Corect answers separated by comma"
-msgstr "Oikeat vastaukset pilkulla erotettuna"
+msgstr "Oikeat vastausvaihtoehdot pilkulla erotettuna"
 
 #: View/Elements/Quiz/edit/Handlebars/choice.short_auto.edit.ctp:26
 msgid "Points"
@@ -119,7 +119,7 @@ msgstr "Lisää kysymys"
 
 #: View/Quiz/edit.ctp:92
 msgid "Finish"
-msgstr "Tallenna ja sulje"
+msgstr "Tallenna"
 
 #: View/Quiz/finish.ctp:1
 msgid "Thank you"
@@ -175,7 +175,7 @@ msgstr "Luokka"
 
 #: View/Quiz/live.ctp:76
 msgid "Turn in your quiz"
-msgstr "Palauta testi"
+msgstr "Lähetä vastauksesi"
 
 #: View/Quiz/present.ctp:5
 msgid "Read the QR code with your mobile service"
@@ -195,11 +195,11 @@ msgstr "Onnistui!"
 
 #: View/Student/success.ctp:3
 msgid "Thank You!"
-msgstr "Thank You!"
+msgstr "Kiitos!"
 
 #: View/Student/success.ctp:4
 msgid "Your answer(s) has been submitted successfully."
-msgstr "Vastauksesi (t) on lähetetty."
+msgstr "Vastauksesi on lähetetty."
 
 #: View/User/create.ctp:5
 msgid "Create Account"
@@ -458,35 +458,35 @@ msgstr "Valitse vielä toinen vastausvaihtoehto, jonka pisteytys on suurempi kui
 
 #: Controller/QuizController.php:251
 msgid "Are you sure you want to remove "
-msgstr "Pietu Halonen rem "
+msgstr "Haluatko varmasti poistaa "
 
 #: Controller/QuizController.php:252
 msgid ") answer with points "
-msgstr ") Pietu Halonen poin "
+msgstr ") vastaus pisteillä "
 
 #: Controller/QuizController.php:253
 msgid "Please Give a postive number!"
-msgstr "Pietu Halonen posi num"
+msgstr "Anna luku joka on suurempi kuin nolla."
 
 #: Controller/QuizController.php:254
 msgid "You have not updated score yet!"
-msgstr "Pietu Halonen not up sc"
+msgstr "Et päivittänyt pisteitä."
 
 #: Controller/QuizController.php:255
 msgid "Points not allowed more than "
-msgstr "Pietu Halonen not all mo th "
+msgstr "Pistemäärä ei voi olla suurempi kuin "
 
 #: Controller/QuizController.php:256
 msgid " value"
-msgstr " val Pietu Halonen"
+msgstr " pistemäärä"
 
 #: View/Elements/Answer/confirm_delete.ctp:5
 msgid "Remove answer?"
-msgstr "Pietu Halonen re?"
+msgstr "Poista vastaus?"
 
 #: View/Elements/Answer/confirm_delete.ctp:12
 msgid "Confirm"
-msgstr "Pietu Halonen con"
+msgstr "Vahvista"
 
 #: Menu item Help
 msgid "Help"
@@ -494,7 +494,7 @@ msgstr "Apua"
 
 #: Menu item Help
 msgid "Create Help"
-msgstr "Pietu Halonen cre"
+msgstr "Luo apua"
 
 #: Menu item Help
 msgid "If you don’t have account?"
@@ -502,47 +502,47 @@ msgstr "Ei vielä tunnuksia?"
 
 #: View/Helps/index.ctp:13
 msgid "Getting started"
-msgstr "Pietu Halonen Get"
+msgstr "Aloittaminen"
 
 #: View/Helps/index.ctp:16
 msgid "Use scenarios"
-msgstr "Pietu Halonen scena"
+msgstr "Käyttötapoja"
 
 #: View/Helps/admin_titles.ctp:5
 msgid "Main Title List"
-msgstr "Pietu Halonen M L"
+msgstr "Pääotsikkolista"
 
 #: View/Helps/admin_titles.ctp:6
 msgid "New Main Title"
-msgstr "Pietu Halonen N M T"
+msgstr "Uusi pääotsikko"
 
 #: View/Helps/admin_titles.ctp:7
 msgid "Helps List"
-msgstr "Pietu Halonen H L"
+msgstr "Videolista"
 
 #: View/Helps/admin_titles.ctp:8
 msgid "New Help"
-msgstr "Pietu Halonen N H"
+msgstr "Luo uusi video"
 
 #: View/Helps/admin_titles.ctp:21
 msgid "id"
-msgstr "Pietu Halonen id"
+msgstr "id"
 
 #: View/Helps/admin_titles.ctp:22
 msgid "Main Title"
-msgstr "Pietu Halonen M T"
+msgstr "Pääotsikko"
 
 #: View/Helps/admin_titles.ctp:23
 msgid "Created"
-msgstr "Pietu Halonen Crea"
+msgstr "Luotu"
 
 #: View/Helps/admin_titles.ctp:24
 msgid "Sort"
-msgstr "Pietu Halonen Sor"
+msgstr "Järjestä"
 
 #: View/Helps/admin_titles.ctp:25
 msgid "Status"
-msgstr "Pietu Halonen Stat"
+msgstr "Status"
 
 #: View/Helps/admin_titles.ctp:26
 msgid "Action"
@@ -550,164 +550,180 @@ msgstr "Pietu Halonen Ac"
 
 #: View/Helps/admin_titles.ctp:41
 msgid "On"
-msgstr "Pietu Halonen On"
+msgstr "On"
 
 #: View/Helps/admin_titles.ctp:41
 msgid "Confirm inactive title %s?"
-msgstr "Pietu Halonen i t %s?"
+msgstr "Vahvista otsikon arkistointi: %s?"
 
 #: View/Helps/admin_titles.ctp:43
 msgid "Off"
-msgstr "Pietu Halonen Off"
+msgstr "Off"
 
 #: View/Helps/admin_titles.ctp:43
 msgid "Confirm active title %s?"
-msgstr "Pietu Halonen a t %s?"
+msgstr "Vahvista otsikon aktivointi: %s?"
 
 #: View/Helps/admin_titles.ctp:47
 msgid "Edit"
-msgstr "Pietu Halonen Edit"
+msgstr "Muokkaa"
 
 #: View/Helps/admin_index.ctp:27
 msgid "Title"
-msgstr "Pietu Halonen Tit"
+msgstr "Otsikko"
 
 #: View/Helps/admin_index.ctp:28
 msgid "Sub Title"
-msgstr "Pietu Halonen S Tit"
+msgstr "Alaotsikko"
 
 #: View/Helps/admin_index.ctp:30
 msgid "Url"
-msgstr "Pietu Halonen U"
+msgstr "Url"
 
 #: View/Helps/admin_add.ctp:31
 msgid "Please insert main title"
-msgstr "Pietu Halonen i m t"
+msgstr "Kirjoita pääotsikko"
 
 #: View/Helps/admin_add.ctp:37
 msgid "BACK"
-msgstr "Pietu Halonen B"
+msgstr "Takaisin"
 
 #: View/Helps/admin_add.ctp:41
 msgid "SAVE"
-msgstr "Pietu Halonen S"
+msgstr "Tallenna"
 
 #: View/Helps/admin_insert.ctp:31
 msgid "Select One"
-msgstr "Pietu Halonen S O"
+msgstr "Valitse yksi"
 
 #: View/Helps/admin_insert.ctp:32
 msgid "Please insert help title"
-msgstr "Pietu Halonen i h t"
+msgstr "Kirjoita videon otsikko"
 
 #: View/Helps/admin_insert.ctp:33
 msgid "Please insert help sub title"
-msgstr "Pietu Halonen i h s t"
+msgstr "Kirjoita videon alaotsikko"
 
 #: View/Helps/admin_insert.ctp:34
 msgid "Youtube Video Url"
-msgstr "Pietu Halonen Y V U"
+msgstr "Youtube url"
 
 #: View/Helps/admin_insert.ctp:34
 msgid "Please insert youtube video url here"
-msgstr "Pietu Halonen i y v u h"
+msgstr "Kirjoita videon Youtube url"
 
 #: Controller/HelpsController.php:117
 msgid "Edit Main Title"
-msgstr "Pietu Halonen e m t"
+msgstr "Muokkaa pääotsikkoa"
 
 #: Controller/HelpsController.php:125
 msgid "Title saved successfully"
-msgstr "Pietu Halonen t s s"
+msgstr "Otsikko tallennettu"
 
 #: Controller/HelpsController.php:132
 msgid "Title saved failed"
-msgstr "Pietu Halonen t s f"
+msgstr "Otsikon tallentaminen epäonnistui!"
 
 #: Controller/HelpsController.php:146
 msgid "Title not found"
-msgstr "Pietu Halonen t n f"
+msgstr "Otsikkoa ei löytynyt"
 
 #: Controller/HelpsController.php:170
 msgid "Can not delete"
-msgstr "Pietu Halonen c n d"
+msgstr "Ei voida poistaa"
 
 #: Controller/HelpsController.php:38
 msgid "Edit Help"
-msgstr "Pietu Halonen e h"
+msgstr "Muokkaa videota"
 
 #: Controller/HelpsController.php:59
 msgid "Help saved successfully"
-msgstr "Pietu Halonen h s s"
+msgstr "Video tallennettu"
 
 #: Controller/HelpsController.php:66
 msgid "Help saved failed"
-msgstr "Pietu Halonen h s f"
+msgstr "Videon tallentaminen epäonnistui!"
 
 #: Controller/HelpsController.php:80
 msgid "Help not found"
-msgstr "Pietu Halonen h n f"
+msgstr "Videota ei löytynyt!"
 
 #: Controller/HelpsController.php:80
 msgid "Sort failed"
-msgstr "Pietu Halonen s f"
+msgstr "Lajittelu epäonnistui!"
 
 #: Model/Help.php:validation for field title
 msgid "Title is required"
-msgstr "Pietu Halonen t r"
+msgstr "Otsikko on pakollinen"
 
 #: Model/Help.php:validation for field parent_id
 msgid "Main title is required"
-msgstr "Pietu Halonen m t r"
+msgstr "Pääotsikko on pakollinen"
 
 #: Model/Help.php:validation for field url notempty
 msgid "Youtube video url is required"
-msgstr "Pietu Halonen y v u r"
+msgstr "Youtube url on pakollinen"
 
 #: Model/Help.php:validation for field url website
 msgid "Valid youtube video url is required"
-msgstr "Pietu Halonen v y v u r"
+msgstr "Validi Youtube url on pakollinen"
 
 #: Controller/QuizController.php:196
 msgid "Internet connection has been lost, please try again later."
-msgstr "Pietu Halonen Internet Connection Lost"
+msgstr "Verkkoyhteytesi on katkennut. Yritä uudelleen."
 
 #: Controller/QuizController.php:197
 msgid "All questions answered. Turn in your quiz?"
-msgstr "Pietu Halonen A q a. Turn i y q?"
+msgstr "Vastasit kaikkiin kysymyksiin. Lähetä vastauksesi?"
 
 #: Controller/QuizController.php:198
 msgid "Questions "
-msgstr "Pietu Halonen Questions "
+msgstr "Kysymykset "
 
 #: Controller/QuizController.php:199
 msgid " unanswered."
-msgstr "  unanswered. Pietu Halonen"
+msgstr "  vastaamatta."
 
 #: Controller/QuizController.php:200
 msgid " Turn in your quiz?"
-msgstr " Turn in your quiz? Pietu Halonen"
+msgstr " Lähetä vastauksesi?"
 
 #: Controller/QuizController.php:201
 msgid "First Name is Required"
-msgstr "Pietu Halonen F N R"
+msgstr "Etunimi on pakollinen"
 
 #: Controller/QuizController.php:202
 msgid "Last Name is Required"
-msgstr "Pietu Halonen L N R"
+msgstr "Sukunimi on pakollinen"
 
 #: Controller/QuizController.php:203
 msgid "Class is Required"
-msgstr "Pietu Halonen C R"
+msgstr "Luokka on pakollinen"
 
 #: Controller/QuizController.php:204
 msgid "Invalid Last Name"
-msgstr "Pietu Halonen I L N"
+msgstr "Virheellinen sukunimi"
 
 #: Controller/QuizController.php:205
 msgid "Invalid First Name"
-msgstr "Pietu Halonen I F N"
+msgstr "Virheellinen etunimi"
 
 #: Controller/QuizController.php:206
 msgid "Invalid Class"
-msgstr "Pietu Halonen I C"
+msgstr "Virheellinen luokka"
+
+#: Pietu added - 
+msgid "Turn in your quiz?"
+msgstr "Lähetä vastauksesi?"
+
+#: Pietu added - 
+msgid "You have logged out"
+msgstr "Olet kirjautunut ulos"
+
+#: Pietu added - 
+msgid "All Time"
+msgstr "Kaikki ajat"
+
+#: Pietu added - 
+msgid "All Classes"
+msgstr "Kaikki luokat"
