@@ -1,5 +1,5 @@
 <?php
-$this->Html->script('answer-table', array(
+$this->Html->script(array('answer-table', 'jquery.tablesorter.min'), array(
     'inline' => false
 ));
 
@@ -53,14 +53,14 @@ $this->assign('title', __('Answer Table'));
 
 <div id="my-tab-content" class="tab-content">
     <div id="overview">
-        <table class="table table-hover table-responsive table-striped">
+        <table class="table table-hover table-responsive table-striped" id="overviewTable">
             <thead>
                 <tr>
                     <th class="serial"><?php echo __('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'); ?></th>
-                    <th><?php echo __('Timestamp'); ?></th>
-                    <th><?php echo __('Name'); ?></th>
-                    <th><?php echo __('Class'); ?></th>
-                    <th><?php echo __('Total Points'); ?></th>
+                    <th class="sortable"><?php echo __('Timestamp'); ?></th>
+                    <th class="sortable"><?php echo __('Name'); ?></th>
+                    <th class="sortable"><?php echo __('Class'); ?></th>
+                    <th class="sortable"><?php echo __('Total Points'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -97,14 +97,14 @@ $this->assign('title', __('Answer Table'));
         </table>
     </div>
     <div id="details">
-        <table class="table table-hover table-responsive table-striped">
+        <table class="table table-hover table-responsive table-striped" id="detailsTable">
             <thead>
                 <tr>
                     <th class="serial"><?php echo __('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'); ?></th>
-                    <th><?php echo __('Timestamp'); ?></th>
-                    <th><?php echo __('Name'); ?></th>
-                    <th><?php echo __('Class'); ?></th>
-                    <th><?php echo __('Total Points'); ?></th>
+                    <th class="sortable"><?php echo __('Timestamp'); ?></th>
+                    <th class="sortable"><?php echo __('Name'); ?></th>
+                    <th class="sortable"><?php echo __('Class'); ?></th>
+                    <th class="sortable"><?php echo __('Total Points'); ?></th>
                     <?php $i = 1; foreach ($quizDetails['Question'] as $question): ?>
                         <th>
                             <?php echo $i; ?>

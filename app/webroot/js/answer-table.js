@@ -13,6 +13,13 @@ function checkRow(row) {
     }
 }
 
+$(document).ready(function() 
+    { 
+        $("#overviewTable").tablesorter({ selectorHeaders: 'thead th.sortable' });
+        $("#detailsTable").tablesorter({ selectorHeaders: 'thead th.sortable' }); 
+    } 
+); 
+
 (function ($) {
 
     $('#overview').show();

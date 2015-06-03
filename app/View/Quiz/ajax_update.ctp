@@ -1,12 +1,12 @@
 <div id="overview" <?php if ($currentTab != 'answer-table-overview'): ?> style="display: none;" <?php endif; ?>>
-    <table class="table table-hover table-responsive table-striped">
+    <table class="table table-hover table-responsive table-striped" id="overviewTable">
         <thead>
             <tr>
                 <th class="serial"><?php echo __('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'); ?></th>
-                <th><?php echo __('Timestamp'); ?></th>
-                <th><?php echo __('Name'); ?></th>
-                <th><?php echo __('Class'); ?></th>
-                <th><?php echo __('Total Points'); ?></th>
+                <th class="sortable"><?php echo __('Timestamp'); ?></th>
+                <th class="sortable"><?php echo __('Name'); ?></th>
+                <th class="sortable"><?php echo __('Class'); ?></th>
+                <th class="sortable"><?php echo __('Total Points'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -43,14 +43,14 @@
     </table>
 </div>
 <div id="details" <?php if($currentTab != 'answer-table-show'): ?> style="display: none;" <?php endif; ?>>
-    <table class="table table-hover table-responsive table-striped">
+    <table class="table table-hover table-responsive table-striped" id="detailsTable">
         <thead>
             <tr>
                 <th class="serial"><?php echo __('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'); ?></th>
-                <th><?php echo __('Timestamp'); ?></th>
-                <th><?php echo __('Name'); ?></th>
-                <th><?php echo __('Class'); ?></th>
-                <th><?php echo __('Total Points'); ?></th>
+                <th class="sortable"><?php echo __('Timestamp'); ?></th>
+                <th class="sortable"><?php echo __('Name'); ?></th>
+                <th class="sortable"><?php echo __('Class'); ?></th>
+                <th class="sortable"><?php echo __('Total Points'); ?></th>
                 <?php $i = 1; foreach ($quizDetails['Question'] as $question): ?>
                     <th>
                         <?php echo $i; ?>
