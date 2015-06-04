@@ -1,5 +1,5 @@
 <?php 
-    $url = $this->Html->url(array('controller' => $id), true); 
+    $url = $this->Html->url(array('controller' => $quiz['Quiz']['random_id']), true); 
     $this->assign('title', $quiz['Quiz']['name']);
 ?>
 <div class="row">

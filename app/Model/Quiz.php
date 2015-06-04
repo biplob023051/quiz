@@ -213,4 +213,15 @@ class Quiz extends AppModel {
         return $result;
     }
 
+    //random text generator
+    public function randText($length=40){
+        $random= "";
+        srand((double)microtime()*1000000);
+        $strset = "1234567890";
+        for($i = 0; $i < $length; $i++) {
+            $random.= substr($strset,(rand()%(strlen($strset))), 1);
+        }
+        return $random;
+    }
+
 }

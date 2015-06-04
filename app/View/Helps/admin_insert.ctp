@@ -1,3 +1,8 @@
+<?php
+$this->Html->script(array('tinymce/tinymce.min', 'admin-insert-help'), array(
+    'inline' => false
+));
+?>
 <div class="row">
     <div class="col-sm-12">
         <ul class="nav nav-pills">
@@ -32,6 +37,7 @@
                 echo $this->Form->input('title', array('label'=>array('text'=>__('Title')), 'placeholder' => __('Please insert help title')));
                 echo $this->Form->input('sub_title', array('label'=>array('text'=>__('Sub Title')), 'placeholder' => __('Please insert help sub title')));
                 echo $this->Form->input('url', array('label'=>array('text'=>__('Youtube Video Url')), 'placeholder' => __('Please insert youtube video url here')));
+                echo $this->Form->input('body', array('label'=>array('text'=>__('Description')), 'placeholder' => __('Description here'), 'type' => 'textarea'));
                 
             ?>
             <div class="form-group">

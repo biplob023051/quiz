@@ -15,15 +15,11 @@ function checkRow(row) {
 
 $(document).ready(function() 
     { 
-        $("#overviewTable").tablesorter({ selectorHeaders: 'thead th.sortable' });
-        $("#detailsTable").tablesorter({ selectorHeaders: 'thead th.sortable' }); 
+        $(".table").tablesorter({ selectorHeaders: 'thead th.sortable' }); 
     } 
 ); 
 
 (function ($) {
-
-    $('#overview').show();
-    $('#details').hide();
 
     $.fn.extend({
         donetyping: function(callback,timeout){
@@ -60,7 +56,7 @@ $(document).ready(function()
         }
     });
 
-    $('#details input').donetyping(function(){
+    $('#answer-table input').donetyping(function(){
         if ($(this).val() == '' || $(this).val() == null) {
             return false;    
         }
@@ -144,8 +140,7 @@ $(document).ready(function()
             return;
         $(this).addClass('active');
         $('#answer-table-show').removeClass('active');
-        $('#overview').show();
-        $('#details').hide();
+        $('.question-collapse').hide();
     });
 
     $(document).on('click', '#answer-table-show', function () {
@@ -156,8 +151,7 @@ $(document).ready(function()
             return;
         $(this).addClass('active');
         $('#answer-table-overview').removeClass('active');
-        $('#overview').hide();
-        $('#details').show();
+        $('.question-collapse').show();
     });
 
     $(document).on('change', '#answer-table-filter select', function () {
@@ -170,10 +164,10 @@ $(document).ready(function()
     
     // get tab information
     var currentTab = getCookie("tabInfo");
-    if (currentTab == 'answer-table-overview') {
-        $('#answer-table-overview').trigger('click');
-    } else {
+    if (currentTab == 'answer-table-show') {
         $('#answer-table-show').trigger('click');
+    } else {
+        $('#answer-table-overview').trigger('click');
     }
 
     // essay pop up modal
@@ -215,7 +209,6 @@ $(document).ready(function()
             data: {'student_id': std_id},
             success: function (response)
             {
-                console.log(response);
                 infoModal.modal('hide');
                 if (response.success || response.success === "true")
                 {
@@ -255,7 +248,7 @@ $(document).ready(function()
                         data: {quizId:quizId, currentTab:openTab},
                         async: true,
                         success: function(data) {
-                            $("#my-tab-content").html(data);
+                            $(".panel").html(data);
                             interval = setInterval(getUpdated, 10000);
                         }
                     });

@@ -148,6 +148,9 @@ class QuizController extends AppController {
                 'user_id' => $userId
             )
         ));
+        // save random number as random_id
+        $random_id = $this->Quiz->id . $this->Quiz->randText(2);
+        $this->Quiz->saveField('random_id', $random_id);
         // save statistics data
         $this->loadModel('Statistic');
         $arrayToSave['Statistic']['logged_user_id'] = $this->Auth->user('id');
