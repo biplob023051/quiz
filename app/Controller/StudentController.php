@@ -11,7 +11,7 @@ class StudentController extends AppController {
         $this->Auth->allow('submit', 'success');
     }
 
-    public function submit($quizId) {
+    public function submit($quizRandomId) {
 
         $data = $this->request->data;
         
@@ -29,7 +29,7 @@ class StudentController extends AppController {
             return $this->redirect(array(
                         'controller' => 'Quiz',
                         'action' => 'live',
-                        $quizId
+                        $quizRandomId
             ));
         }
 
@@ -59,13 +59,12 @@ class StudentController extends AppController {
             }
         }
         
+        $this->loadModel('Quiz');
+        $quiz = $this->Quiz->findByRandomId($quizRandomId);
+
         $data['Answer'] = $answers;
         $data['Student']['submitted'] = date('Y-m-d H:i:s');
-        $data['Student']['quiz_id'] = $quizId;
-
-        $this->loadModel('Quiz');
-
-        $quiz = $this->Quiz->findById($quizId);
+        $data['Student']['quiz_id'] = $quiz['Quiz']['id'];
 
         $questions = Hash::combine($quiz['Question'], '{n}.id', '{n}.id');
 
@@ -162,7 +161,7 @@ class StudentController extends AppController {
         $correct_answer = $correct_answer < 0 ? 0 : $correct_answer;
 
         // save data in ranking table
-        $data['Ranking']['quiz_id'] = $quizId;
+        $data['Ranking']['quiz_id'] = $quiz['Quiz']['id'];
         $data['Ranking']['total'] = $total;
         $data['Ranking']['score'] = $correct_answer;
         

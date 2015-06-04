@@ -18,7 +18,7 @@ echo $this->Form->create('Student', array(
         'class' => 'form-control input-lg',
     ),
     'novalidate' => true,
-    'url' => array('controller' => 'student', 'action' => 'submit', $data['Quiz']['id'])
+    'url' => array('controller' => 'student', 'action' => 'submit', $data['Quiz']['random_id'])
 ));
 ?>
 

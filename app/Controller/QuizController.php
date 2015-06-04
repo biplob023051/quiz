@@ -175,12 +175,12 @@ class QuizController extends AppController {
         $this->set(compact('quiz', 'id'));
     }
 
-    public function live($quizId) {
+    public function live($quizRandomId) {
 
         $this->Quiz->Behaviors->load('Containable');
         $data = $this->Quiz->find('first', array(
             'conditions' => array(
-                'id = ' => $quizId,
+                'random_id = ' => $quizRandomId,
                 'Quiz.status' => 1
             ),
             'contain' => array(
