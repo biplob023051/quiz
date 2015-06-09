@@ -9,14 +9,16 @@ class User extends AppModel {
         'name' => array(
             'alphaNumericWithSpace' => array(
                 'rule' => array('custom', "/[a-zA-Z0-9]+/"),
-                'required' => true,
+                'required' =>  false,
+                'allowEmpty'=> false,
                 'message' => 'Name contains invalid character'
             )
         ),
         'email' => array(
             'email' => array(
                 'rule' => 'email',
-                'required' => true,
+                'required' =>  false,
+                'allowEmpty'=> false,
                 'message' => 'Invalid email'
             ),
             'isUnique' => array(
@@ -27,7 +29,8 @@ class User extends AppModel {
         'password' => array(
             'alphaNumeric' => array(
                 'rule' => array('minLength', 8),
-                'required' => true,
+                'required' =>  false,
+                'allowEmpty'=> false,
                 'message' => 'Password must be 8 characters long'
             )
         ),
@@ -94,6 +97,23 @@ class User extends AppModel {
             'recursive' => -1
         ));
         return $user;
+    }
+
+    /*
+    * Genrate random text
+    */
+    public function randText($length=40){
+        $random= "";
+        srand((double)microtime()*1000000);
+        $strset  = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
+        $strset.= "abcdefghijklmnpqrstuvwxyz";
+        $strset.= "123456789";
+        // Add the special characters to $strset if needed
+        
+        for($i = 0; $i < $length; $i++) {
+            $random.= substr($strset,(rand()%(strlen($strset))), 1);
+        }
+        return $random;
     }
 
 }

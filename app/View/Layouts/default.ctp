@@ -31,16 +31,24 @@
         <![endif]-->
 
     </head>
-    <body>
-        <div class="container">
-            <?php echo $this->element('navbar');?>
-            <div class="page-header">
-                <h1><?php echo $this->fetch('title'); ?></h1>
+    <body <?php if ($this->request->action == 'login') : ?>style="padding-top:50px;" class="bg-cover"<?php else : ?>style="background:#ffffff; padding-top:50px;"<?php endif; ?>>
+        <?php if ($this->request->controller != 'pages') : ?>
+            <div class="container">
+                <?php if ($this->Session->check('Auth.User.name')): ?>
+                    <?php echo $this->element('navbar');?>
+                <?php else : ?>
+                    <?php echo $this->element('page-navbar');?>
+                <?php endif; ?>
+                <div class="page-header">
+                    <h1><?php echo $this->fetch('title'); ?></h1>
+                </div>
+                <?php echo $this->fetch('content'); ?>
             </div>
+            <!-- /container -->
+        <?php else : ?>
+            <?php echo $this->element('page-navbar');?>
             <?php echo $this->fetch('content'); ?>
-        </div>
-        <!-- /container -->
-
+        <?php endif; ?>
         <div id="footer">
             <div class="container"></div>
         </div>

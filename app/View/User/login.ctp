@@ -58,6 +58,10 @@ $this->assign('title', __('Login'));
     <?php echo __('If you don’t have account?'); ?> 
     <?php echo $this->Html->link(__('Register Now!'), '/user/create'); ?>
 </p>
+<p class="text-center text-muted">
+    <?php echo __('If you forgot password?'); ?> 
+    <?php echo $this->Html->link(__('Password Recover'), '/user/password_recover'); ?>
+</p>
 
 
 

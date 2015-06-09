@@ -44,6 +44,11 @@ class PagesController extends AppController {
  * @throws NotFoundException When the view file could not be found
  *	or MissingViewException in debug mode.
  */
+	public function beforeFilter() {
+        parent::beforeFilter();
+		$this->Auth->allow('display', 'index', 'contact');
+    }
+
 	public function display() {
 		$path = func_get_args();
 
@@ -62,6 +67,27 @@ class PagesController extends AppController {
 		if (!empty($path[$count - 1])) {
 			$title_for_layout = Inflector::humanize($path[$count - 1]);
 		}
+
+		if ($this->request->params['pass'][0] == 'contact') {
+			$lang_strings['empty_email'] = __('Require Email Address');
+			$lang_strings['invalid_email'] = __('Invalid email');
+        	$lang_strings['empty_message'] = __('Require Message');
+        	$this->set(compact('lang_strings'));
+		}
+
+		if ($this->request->params['pass'][0] == 'prices') {
+			$lang_strings['empty_name'] = __('Require Name');
+			$lang_strings['invalid_characters'] = __('Name contains invalid character');
+			$lang_strings['empty_email'] = __('Require Email Address');
+			$lang_strings['invalid_email'] = __('Invalid email');
+        	$lang_strings['unique_email'] = __('Email already registered');
+        	$lang_strings['empty_password'] = __('Require Password');
+            $lang_strings['varify_password'] = __('Password did not match, please try again');
+            $lang_strings['character_count'] = __('Password must be 8 characters long');
+        	$this->set(compact('lang_strings'));
+		}
+
+		$this->set('current_page', $this->request->params['pass'][0]);
 		$this->set(compact('page', 'subpage', 'title_for_layout'));
 
 		try {
@@ -72,5 +98,9 @@ class PagesController extends AppController {
 			}
 			throw new NotFoundException();
 		}
+	}
+
+	public function index() {
+		$this->set('title_for_layout', __('Welcome to Verkkotesti'));
 	}
 }

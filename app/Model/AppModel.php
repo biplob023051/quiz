@@ -78,4 +78,23 @@ class AppModel extends Model {
 		}
 		return $slug;
 	}
+
+	/* this function will unbind each model except those are given as inputs*/
+	public function unbindModelAll($params=array()) {
+        foreach(array(
+                'hasOne' => array_keys($this->hasOne),
+                'hasMany' => array_keys($this->hasMany),
+                'belongsTo' => array_keys($this->belongsTo),
+                'hasAndBelongsToMany' => array_keys($this->hasAndBelongsToMany)
+        ) as $relation => $model) {
+        		$model=array_diff($model, $params);
+        		$this->unbindModel(array($relation => $model));
+        }
+    }
+
+    //get current date time
+	public function getCurrentDateTime(){
+		App::uses('CakeTime', 'Utility');
+		return CakeTime::format('Y-m-d H:i:s',CakeTime::convert(time(),CakeTime::timezone()));
+	}
 }

@@ -28,7 +28,7 @@ msgstr "Uusi kysymys"
 
 #: Controller/UserController.php:37
 msgid "Registration success"
-msgstr "Rekisteröinti valmis"
+msgstr "Uusi käyttäjätili on luotu."
 
 #: Controller/QuizController.php:104
 #: View/Quiz/edit.ctp:41
@@ -203,11 +203,11 @@ msgstr "Vastauksesi on lähetetty."
 
 #: View/User/create.ctp:5
 msgid "Create Account"
-msgstr "Luo käyttäjätili"
+msgstr "Luo ilmainen käyttäjätili"
 
 #: View/User/create.ctp:45
 msgid "Create Account & Log In"
-msgstr "Luo käyttäjätili ja kirjaudu sisään"
+msgstr "Luo tili ja kirjaudu sisään"
 
 #: View/User/login.ctp:2;40
 msgid "Login"
@@ -225,11 +225,11 @@ msgstr "Salasana"
 
 #: View/User/login.ctp:46
 msgid "Register"
-msgstr "Rekisteröidy"
+msgstr "Luo ilmainen käyttäjätili"
 
 #: View/User/login.ctp:59
 msgid "Register Now!"
-msgstr "Rekisteröidy nyt!"
+msgstr "Luo ilmainen käyttäjätili!"
 
 #: View/User/settings.ctp:26
 msgid "Name"
@@ -390,19 +390,19 @@ msgstr "kaikki"
 
 #: Answer table - Back
 msgid "Today"
-msgstr "tänään"
+msgstr "Tänään"
 
 #: Answer table - Back
 msgid "This Year"
-msgstr "Tämä vuosi"
+msgstr "Tänä vuonna"
 
 #: Answer table - Back
 msgid "This Month"
-msgstr "tässä kuussa"
+msgstr "Tässä kuussa"
 
 #: Answer table - Back
 msgid "This Week"
-msgstr "tällä viikolla"
+msgstr "Tällä viikolla"
 
 #: Answer table - Back
 msgid "Rate!"
@@ -546,7 +546,7 @@ msgstr "Status"
 
 #: View/Helps/admin_titles.ctp:26
 msgid "Action"
-msgstr "Pietu Halonen Ac"
+msgstr "Suorita"
 
 #: View/Helps/admin_titles.ctp:41
 msgid "On"
@@ -727,3 +727,194 @@ msgstr "Kaikki ajat"
 #: Pietu added - 
 msgid "All Classes"
 msgstr "Kaikki luokat"
+
+#: View/Elements/page-navbar.ctp:9
+msgid "Navigation"
+msgstr "Valikko"
+
+#: View/Elements/page-navbar.ctp:19
+#: View/Pages/prices.ctp:6
+msgid "Prices"
+msgstr "Hinnat"
+
+#: View/Elements/page-navbar.ctp:20
+#: View/Pages/contact.ctp:6
+msgid "Contact"
+msgstr "Ota yhteyttä"
+
+#: View/Pages/contact.ctp:12
+msgid "Get in Touch"
+msgstr "Ota yhteyttä"
+
+#: View/Pages/contact.ctp:16
+msgid "Your Email"
+msgstr "Email-osoitteesi"
+
+#: View/Pages/contact.ctp:22
+#: View/Emails/html/inquary.ctp:3
+msgid "Message"
+msgstr "Viesti"
+
+#: View/Pages/contact.ctp:29
+msgid "Send Message"
+msgstr "Lähetä viesti"
+
+#: Controller/PagesController.php:104
+msgid "Welcome to Verkkotesti"
+msgstr "Sähköinen koe oppilaiden omilla kännyköillä, läppäreillä ja tableteilla | Verkkotesti.fi"
+
+#: Controller/PagesController.php:72
+#: Controller/PagesController.php:81
+#: Controller/UserController.php:160
+msgid "Require Email Address"
+msgstr "Email-osoite vaaditaan"
+
+#: Controller/PagesController.php:74
+msgid "Require Message"
+msgstr "Viesti vaaditaan"
+
+#: View/Pages/prices.ctp:7
+msgid "Select your favorite package to continue."
+msgstr "Valitse sopiva paketti."
+
+#: View/Pages/prices.ctp:14
+msgid "FREE"
+msgstr "Ilmainen <br />kokeilutili"
+
+#: View/Pages/prices.ctp:15
+msgid "19 E/Y"
+msgstr "19 €/v"
+
+#: View/Pages/prices.ctp:20
+msgid "Users"
+msgstr "Käyttäjät"
+
+#: View/Pages/prices.ctp:25
+msgid "Tests"
+msgstr "Testit"
+
+#: View/Pages/prices.ctp:27
+msgid "Unlimited"
+msgstr "Rajoittamaton"
+
+#: View/Pages/prices.ctp:30
+msgid "Students/Test"
+msgstr "Oppilaita/testi"
+
+#: View/Pages/prices.ctp:37
+msgid "Buy"
+msgstr "Osta nyt"
+
+#: View/Elements/Page/buy_modal.ctp:5
+msgid "Create Account And Buy"
+msgstr "Luo tili ja osta (saat laskun sähköpostiisi)"
+
+#: View/Elements/Page/buy_modal.ctp:10
+msgid "Already Registered?"
+msgstr "Oletko jo luonut tilin?"
+
+#: View/Elements/Page/buy_modal.ctp:12
+msgid "Login and Buy"
+msgstr "Kirjaudu sisään ja osta"
+
+#: View/Elements/Page/buy_modal.ctp:15
+#: View/User/login.ctp:63
+msgid "Password Recover"
+msgstr "Nollaa salasana"
+
+#: View/Elements/Page/buy_modal.ctp:34
+msgid "Enter Your Name"
+msgstr "Kirjoita nimesi (Etunimi Sukunimi)"
+
+#: View/Elements/Page/buy_modal.ctp:38
+msgid "Enter Valid Email"
+msgstr "Kirjoita email-osoitteesi"
+
+#: View/Elements/Page/buy_modal.ctp:43
+msgid "Enter Password"
+msgstr "Kirjoita salasana"
+
+#: View/Elements/Page/buy_modal.ctp:51
+#: View/User/create.ctp:43
+msgid "Password Verify"
+msgstr "Salasana uudestaan"
+
+#: View/Elements/Page/buy_modal.ctp:59
+msgid "Submit"
+msgstr "Lähetä"
+
+#: Controller/PagesController.php:79
+msgid "Require Name"
+msgstr "Nimi vaaditaan"
+
+#: Controller/PagesController.php:84
+msgid "Require Password"
+msgstr "Salasana vaaditaan"
+
+#: Controller/PagesController.php:83
+msgid "Email already registered"
+msgstr "Email-osoite on jo rekisteröity"
+
+#: Controller/PagesController.php:85
+msgid "Password did not match, please try again"
+msgstr "Salasanat olivat erilaiset. Kirjoita uudestaan."
+
+#: Controller/UserController.php:250
+msgid "Registration success and we will contact you soon to upgrade your account"
+msgstr "Rekisteröinti onnistui. Saat lähiaikoina laskun sähköpostiisi, jonka maksamalla tili päivittyy."
+
+#: View/User/login.ctp:62
+msgid "If you forgot password?"
+msgstr "Unohditko salasanasi?"
+
+#: View/User/password_recover.ctp:23
+msgid "Enter your email"
+msgstr "Kirjoita email-osoitteesi"
+
+#: View/User/password_recover.ctp:27
+msgid "Send Request"
+msgstr "Lähetä"
+
+#: Controller/UserController.php:162
+msgid "This email has not registered yet!"
+msgstr "Email-osoitetta ei ole rekisteröity"
+
+#: Controller/UserController.php:148
+msgid "Reset password for your account on Verkkotesti"
+msgstr "Nollaa Verkkotesti-tilin salasanasi"
+
+#: Controller/UserController.php:150
+msgid "Your request has been received, please check you email."
+msgstr "Pyyntösi on vastaanotettu. Tarkista sähköpostisi."
+
+#: Controller/UserController.php:152
+msgid "Something went wrong, please try again later"
+msgstr "Auts, jokin meni vikaan.. Yritä myöhemmin uudelleen."
+
+#: View/Emails/html/inquary.ctp:1
+msgid "General Inquary"
+msgstr "Tiedustelu"
+
+#: View/Emails/html/inquary.ctp:2
+msgid "Sender email address:"
+msgstr "Lähettäjän email-osoite"
+
+#: Controller/UserController.php:120
+msgid "Your email sent successfully"
+msgstr "Viestisi on lähetetty."
+
+#: View/Emails/html/invoice.ctp:1
+msgid "Invoice"
+msgstr "Lasku"
+
+#: View/Emails/html/reset_password.ctp:1
+msgid "Password Reset"
+msgstr "Salasanan nollaaminen."
+
+#: View/Emails/html/reset_password.ctp:2
+msgid "To reset your password click on the bellow link or paste on your browser."
+msgstr "Salasanan nollaamiseksi klikkaa alla olevaa linkkiä tai liitä linkki selaimesi osoiteriville."
+
+#: View/Emails/html/reset_password.ctp:4
+msgid "If you have not sent this request, just ignore this mail."
+msgstr "Jos et halua vaihtaa salasanaasi, voit poistaa tämän viestin."

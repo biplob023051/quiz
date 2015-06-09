@@ -110,3 +110,16 @@ CakeLog::config('error', array(
 Configure::write('Recaptcha.publicKey', '6LesIP8SAAAAAGzvrSMDAV2H_U2DHa-q0DIXJ103');
 Configure::write('Recaptcha.privateKey', '6LesIP8SAAAAAIAD599r_Jrn24Zq9TuuzrgQ8-ni');
 CakePlugin::load('Recaptcha');
+
+// include the Session Component to our application
+App::uses('SessionComponent', 'Controller/Component');
+ 
+// now create new SessionComponent instance
+$Session = new SessionComponent(new ComponentCollection());
+ 
+// check if the user logged in
+if ($Session->read('Auth.User.name')) {
+	Configure::write('Route.default', array('controller' => 'quiz', 'action' => 'index', 'index'));
+} else {
+    Configure::write('Route.default', array('controller' => 'pages', 'action' => 'index', 'index'));
+}
