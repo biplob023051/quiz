@@ -40,9 +40,9 @@
             dataType: 'json',
             success: function (response)
             {
-                var bodyData = 'There are ' + response.no_of_answers + ' answers, ' + response.no_of_students +
-                ' students, and ' + response.no_of_questions + ' number of questions. This can not be undone. Are you sure want to delete?' ;
-                var headerData = 'Delete quiz ' + response.quiz_name + '?';
+                var bodyData = lang_strings['delete_quiz_1'] + response.no_of_answers + lang_strings['delete_quiz_2'] + response.no_of_students +
+                lang_strings['delete_quiz_3'] + response.no_of_questions + lang_strings['delete_quiz_4'];
+                var headerData = lang_strings['delete_quiz_5'] + response.quiz_name + '?';
                 var link = appData.baseUrl + 'quiz/quizDelete/' + response.id;
                 infoModal.find('.modal-body').html(bodyData);
                 infoModal.find('.modal-header').html(headerData);

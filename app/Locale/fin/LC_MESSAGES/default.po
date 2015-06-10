@@ -857,7 +857,7 @@ msgstr "Email-osoite on jo rekisteröity"
 
 #: Controller/PagesController.php:85
 msgid "Password did not match, please try again"
-msgstr "Salasanat olivat erilaiset. Kirjoita uudestaan."
+msgstr "Salasanat ovat erilaiset. Kirjoita uudestaan, kiitos!"
 
 #: Controller/UserController.php:250
 msgid "Registration success and we will contact you soon to upgrade your account"
@@ -918,3 +918,83 @@ msgstr "Salasanan nollaamiseksi klikkaa alla olevaa linkkiä tai liitä linkki s
 #: View/Emails/html/reset_password.ctp:4
 msgid "If you have not sent this request, just ignore this mail."
 msgstr "Jos et halua vaihtaa salasanaasi, voit poistaa tämän viestin."
+
+#: View/Pages/index.ctp:3
+msgid "Web test enables a teacher"
+msgstr "Verkkotestillä opettaja voi"
+
+#: View/Pages/index.ctp:4
+msgid "to give a quiz to students quickly and easily"
+msgstr "pitää testin oppilaille nopeasti ja helposti"
+
+#: View/Pages/index.ctp:4
+msgid "with their "
+msgstr "heidän "
+
+#: View/Pages/index.ctp:4
+msgid "mobile phones"
+msgstr "omilla kännyköillään."
+
+#: View/Pages/index.ctp:12
+msgid "This is how it works!"
+msgstr "Näin se toimii:"
+
+#: View/Pages/index.ctp:16
+msgid "Create a Test"
+msgstr "1) Luo testi"
+
+#: View/Pages/index.ctp:17
+msgid "Create a test with one or more questions."
+msgstr "Luo testi, jossa on yksi tai useampia kysymyksiä."
+
+#: View/Pages/index.ctp:20
+msgid "Give a Test"
+msgstr "2) Pidä testi"
+
+#: View/Pages/index.ctp:21
+msgid "Let the students attend the test in the classroom or at home."
+msgstr "Pyydä oppilaita osallistumaan testiin luokassa tai kotona."
+
+#: View/Pages/index.ctp:24
+msgid "Check the Result"
+msgstr "3) Katso tulokset"
+
+#: View/Pages/index.ctp:24
+msgid "Check the results as soon as the stundents have attended."
+msgstr "Katso oppilaiden vastaukset heti palauttamisen jälkeen."
+
+#: Controller/QuizController.php:392
+msgid "You have Successfuly deleted quiz"
+msgstr "Testi on poistettu."
+
+#: Controller/UserController.php:67
+msgid "Require Captcha"
+msgstr "Captcha vaaditaan"
+
+#: Controller/QuizController.php:59
+msgid "There are "
+msgstr "Testiin on saapunut"
+
+#: Controller/QuizController.php:60
+msgid " answers, "
+msgstr " vastausta, "
+
+#: Controller/QuizController.php:61
+msgid " students, and "
+msgstr " oppilasta ja "
+
+#: Controller/QuizController.php:62
+msgid " number of questions. This can not be undone. Are you sure want to delete?"
+msgstr " kysymystä. Tätä ei voi peruuttaa. Haluatko varmasti poistaa kyselyn?"
+
+#: Controller/QuizController.php:63
+msgid "Delete quiz "
+msgstr "Poista kysely "
+
+#: View/User/create.ctp:69
+msgid "Enter result"
+msgstr "Pietu Enter result"
+
+#: Controller/UserController.php:51
+msgid "The result of the calculation was incorrect. Please try again."
+msgstr "Pietu The result of the calculation was incorrect. Please try again."

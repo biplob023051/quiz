@@ -87,3 +87,7 @@ $this->assign('title', __('My Quizzes'));
     ));
     ?>
 </script>
+
+<script type="text/javascript">
+    var lang_strings = <?php echo json_encode($lang_strings) ?>;
+</script>

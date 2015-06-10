@@ -13,6 +13,16 @@ echo $this->Session->flash('error');
 ?>
 <div class="row">
     <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12">
+        <div class="alert alert-danger" id="error-message" style="display : none;"></div>
+        <div id="email-exist" style="display : none;">
+            <div class="col-sm-4 col-xs-12"><?php echo __('Already Registered?'); ?></div>
+            <div class="col-md-4 col-xs-12">
+                <?php echo $this->Html->link(__('Login'), '/user/login'); ?>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <?php echo $this->Html->link(__('Password Recover'), '/user/password_recover'); ?>
+            </div>
+        </div>
         <?php
         echo $this->Form->create('User', array(
             'class' => 'form-horizontal',
@@ -23,32 +33,42 @@ echo $this->Session->flash('error');
                 'between' => '<div class="col-md-7 col-xs-12">',
                 'after' => '</div>'
             ),
+            'novalidate' => 'novalidate'
         ));
 
         echo $this->Form->input('name', array(
-            'default' => $form_data['User']['name']
+            'default' => $form_data['User']['name'],
+            'placeholder' => __('Enter Your Name')
         ));
 
         echo $this->Form->input('email', array(
-            'default' => $form_data['User']['email']
+            'default' => $form_data['User']['email'],
+            'placeholder' => __('Enter Valid Email')
         ));
 
         echo $this->Form->input('password', array(
             'type' => 'password',
+            'placeholder' => __('Enter Password'),
             'data-toggle' => 'tooltip',
             'data-placement' => 'bottom',
             'data-original-title' => __('Password must be 8 characters long')
         ));
 
         echo $this->Form->input('passwordVerify', array(
-            'type' => 'password'
+            'type' => 'password',
+            'placeholder' => __('Password Verify')
         ));
         ?>
 
         <div class="form-group required">
             <label for="UserCaptcha" class="col-sm-4 control-label"><?php echo $captcha; ?></label>
             <div class="col-md-7 col-xs-12">
-                <?php echo $this->Form->input('captcha', array('label' => false)); ?>
+                <?php 
+                    echo $this->Form->input('captcha', array(
+                        'label' => false,
+                        'placeholder' => __('Enter result')
+                    )); 
+                ?>
             </div>
         </div>
        
@@ -68,3 +88,14 @@ echo $this->Session->flash('error');
         </div>
     </div>
 </div>
+
+<script id="app-data" type="application/json">
+    <?php
+    echo json_encode(array(
+        'baseUrl' => $this->Html->url('/', true)
+    ));
+    ?>
+</script>
+<script type="text/javascript">
+    var lang_strings = <?php echo json_encode($lang_strings) ?>;
+</script>

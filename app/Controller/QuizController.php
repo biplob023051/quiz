@@ -55,8 +55,14 @@ class QuizController extends AppController {
             'quizzes' => $quizzes,
             'canCreateQuiz' => $this->User->canCreateQuiz()
         );
+
+        $lang_strings['delete_quiz_1'] = __('There are ');
+        $lang_strings['delete_quiz_2'] = __(' answers, ');
+        $lang_strings['delete_quiz_3'] = __(' students, and ');
+        $lang_strings['delete_quiz_4'] = __(' number of questions. This can not be undone. Are you sure want to delete?');
+        $lang_strings['delete_quiz_5'] = __('Delete quiz ');
         
-        $this->set(compact('data', 'quizTypes', 'filter'));
+        $this->set(compact('data', 'quizTypes', 'filter', 'lang_strings'));
     }
 
     public function edit($quizId, $initial = '') {

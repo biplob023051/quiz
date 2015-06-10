@@ -55,6 +55,17 @@ class UserController extends AppController {
         } else {
             $this->set('captcha', $this->MathCaptcha->getCaptcha());
         }
+        // language strings
+        $lang_strings['empty_name'] = __('Require Name');
+        $lang_strings['invalid_characters'] = __('Name contains invalid character');
+        $lang_strings['empty_email'] = __('Require Email Address');
+        $lang_strings['invalid_email'] = __('Invalid email');
+        $lang_strings['unique_email'] = __('Email already registered');
+        $lang_strings['empty_password'] = __('Require Password');
+        $lang_strings['varify_password'] = __('Password did not match, please try again');
+        $lang_strings['character_count'] = __('Password must be 8 characters long');
+        $lang_strings['empty_captcha'] = __('Require Captcha');
+        $this->set(compact('lang_strings'));
     }
 
     public function login() {
