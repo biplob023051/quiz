@@ -2,6 +2,8 @@
 
 class HelpsController extends AppController {
 
+	public $helpers = array('Quiz');
+
 	public function admin_index($parent_id = null) {
 		if ($this->Auth->user('account_level') != 51)
             throw new ForbiddenException;
@@ -9,9 +11,9 @@ class HelpsController extends AppController {
 		// find the main tile
 		$this->set('parentsOptions', $this->Help->parentsOptions());
 		if ($parent_id) {
-			$conditions = array('Help.parent_id' => $parent_id);
+			$conditions = array('Help.parent_id' => $parent_id, 'Help.type' => 'help');
 		} else {
-			$conditions = array('Help.parent_id != ' => null);
+			$conditions = array('Help.parent_id != ' => null, 'Help.type' => 'help');
 		}
 		$options = array(
 			'conditions' => $conditions,
@@ -45,7 +47,7 @@ class HelpsController extends AppController {
 				$this->request->data['Help']['slug']=$this->request->data['Help']['title'];
 			}
 			
-			$this->request->data['Help']['slug']=$this->Help->makeSlug($this->request->data['Help']['slug'], $this->request->data['Help']['id']);
+			$this->request->data['Help']['slug'] = $this->Help->makeSlug($this->request->data['Help']['slug'], $this->request->data['Help']['id']);
 	
 			$this->request->data['Help']['user_id'] = $this->Auth->user('id');
 			if (!empty($this->request->data['Help']['url'])) {
@@ -68,7 +70,8 @@ class HelpsController extends AppController {
 		} elseif(!empty($help_id)) {
 			$conditions = array(
 				'Help.id' => $help_id,
-				'Help.status'=> 1
+				'Help.status'=> 1,
+				'Help.type'=> 'help'
 			);
 			
 			if ($this->Help->hasAny($conditions)){				
@@ -92,7 +95,8 @@ class HelpsController extends AppController {
 		
 		$options = array(
 			'conditions' => array(
-				'Help.parent_id' => null
+				'Help.parent_id' => null,
+				'Help.type' => 'help'
 			),
 			'order' => array(
 				'Help.lft'=>' DESC',
@@ -149,6 +153,101 @@ class HelpsController extends AppController {
 
 		}
 
+	}
+
+	public function admin_create($help_id = null) {
+		if ($this->Auth->user('account_level') != 51)
+            throw new ForbiddenException;
+		if(empty($help_id)){
+			$this->set('title_for_layout', __('New Site Video'));
+		} else {
+			$this->set('title_for_layout', __('Edit Site Video'));
+		}
+
+		$this->set('siteOptions', $this->Help->siteOptions);
+		
+		if ($this->request->is(array('post','put'))) {
+			if(empty($this->request->data['Help']['slug'])) {
+				$this->request->data['Help']['slug']=$this->request->data['Help']['title'];
+			}
+			
+			$this->request->data['Help']['slug'] = $this->Help->makeSlug($this->request->data['Help']['slug'], $this->request->data['Help']['id']);
+	
+			$this->request->data['Help']['user_id'] = $this->Auth->user('id');
+			if (!empty($this->request->data['Help']['url'])) {
+				$youtube = explode('?', $this->request->data['Help']['url']);
+				$youtube = explode('=', $youtube[1]);
+				$youtube = explode('&', $youtube[1]);	
+				$this->request->data['Help']['url_src'] = $youtube[0];
+			}
+
+			if (empty($this->request->data['Help']['id']) && !empty($this->request->data['Help']['photo'])) {
+                $newpath = WWW_ROOT . 'uploads' . DS . 'videos';
+                if (!file_exists($newpath)) {
+                    mkdir($newpath, 0777, true);
+                }
+                copy(WWW_ROOT . 'uploads' . DS . 'tmp' . DS . $this->request->data['Help']['photo'], $newpath . DS . $this->request->data['Help']['photo']);
+                copy(WWW_ROOT . 'uploads' . DS . 'tmp' . DS . 't_' . $this->request->data['Help']['photo'], $newpath . DS . 't_' . $this->request->data['Help']['photo']);
+
+                unlink(WWW_ROOT . 'uploads' . DS . 'tmp' . DS . $this->request->data['Help']['photo']);
+                unlink(WWW_ROOT . 'uploads' . DS . 'tmp' . DS . 't_' . $this->request->data['Help']['photo']);
+            }
+			
+			if ($this->Help->saveAll($this->request->data)) {
+				$this->Session->setFlash(__('Site videos saved successfully'), 'notification_form', array(), 'notification');
+				if(isset($this->params['url']['redirect_url'])){			
+					return $this->redirect(urldecode($this->params['url']['redirect_url']));
+				} else {
+					return $this->redirect(array('controller' => 'helps', 'action' => 'videos', 'admin' => true));
+				}
+			} else {
+				$this->Session->setFlash(__('Site videos saved failed'), 'error_form', array(), 'error');
+			}
+		} elseif(!empty($help_id)) {
+			$conditions = array(
+				'Help.id' => $help_id,
+				'Help.status' => 1,
+				'Help.type !=' => 'help'
+			);
+			
+			if ($this->Help->hasAny($conditions)){				
+				$options = array(
+					'conditions'=>$conditions
+				);
+				$this->request->data=$this->Help->find('first',$options);
+			} else {
+				$this->Session->setFlash(__('Site videos not found'), 'error_form', array(), 'error');
+				$this->redirect($this->referer());
+			}
+
+		}
+		$lang_strings['upload_button'] = __('Upload a Picture');
+		$this->set(compact('lang_strings'));
+	}
+
+	public function admin_videos() {
+		if ($this->Auth->user('account_level') != 51)
+            throw new ForbiddenException;
+		$this->set('title_for_layout',__('Site Videos List'));
+		// find the siteOptions
+		$this->set('siteOptions', $this->Help->siteOptions);
+		
+		$conditions = array('Help.parent_id = ' => null, 'Help.type !=' => 'help');
+		
+		$options = array(
+			'conditions' => $conditions,
+			'order' => array(
+				'Help.lft'=>' DESC',
+				'Help.rght'=>' ASC',
+			)
+		);
+		
+		try {
+			$this->set('helps', $this->Help->find('all', $options));
+		} catch (NotFoundException $e) { 
+			// when pagination error found redirect to first page e.g. paging page not found
+			return $this->redirect(array('controller' => 'helps', 'action' => 'videos', 'admin' => true));
+		}
 	}
 
 	/**
@@ -274,8 +373,10 @@ class HelpsController extends AppController {
 		foreach ($helps as $parent_id => $value) {
 			$helps[$value] = $this->Help->find('all', array(
 				'conditions' => array(
-					'Help.status' => 1, 'Help.parent_id' => $parent_id
-					),
+					'Help.status' => 1, 
+					'Help.parent_id' => $parent_id,
+					'Help.type' => 'help'
+				),
 				'order' => array(
 						'Help.lft'=>' DESC',
 						'Help.rght'=>' ASC',

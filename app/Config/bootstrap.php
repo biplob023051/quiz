@@ -123,3 +123,9 @@ if ($Session->read('Auth.User.name')) {
 } else {
     Configure::write('Route.default', array('controller' => 'pages', 'action' => 'index', 'index'));
 }
+
+// define constant values
+define('VIDEO_AVATAR_WIDTH', 817);
+define('VIDEO_AVATAR_HEIGHT', 399);
+define('THUMB_WIDTH', 170);
+define('THUMB_HEIGHT', 170);

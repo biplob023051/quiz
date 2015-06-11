@@ -84,7 +84,12 @@ echo $this->Session->flash('error');
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="text-center">
-            <?php echo $this->Html->image('bg-moniter.png', array('class' => 'img-responsive')); ?>
+            <?php if (!empty($create_video)) : ?>
+                <a href="javascript:void(0)" id="play_video"><img src="<?php echo $this->Quiz->getHelpPicture($create_video, 'videos'); ?>" class="img-responsive"></a>
+                <?php echo $this->element('User/video_modal', array('create_video' => $create_video)); ?>
+            <?php else: ?>
+                <?php echo $this->Html->image('bg-moniter.png', array('class' => 'img-responsive')); ?>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -98,4 +103,10 @@ echo $this->Session->flash('error');
 </script>
 <script type="text/javascript">
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
+    <?php if (!empty($create_video)) : ?>
+        var url_src = <?php echo json_encode($create_video['Help']['url_src']) ?>;
+    <?php else: ?>
+        var url_src = '';
+    <?php endif; ?>
+
 </script>

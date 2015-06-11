@@ -21,6 +21,10 @@
                         <?php $admin_actions = array('admin_titles', 'admin_add', 'admin_insert', 'admin_index'); ?>
                         <li <?php if (in_array($c_action, $admin_actions)) : ?>class="active"<?php endif; ?>><?php echo $this->Html->link(__('Create Help'), array('controller' => 'helps', 'action' => 'titles', 'admin' => true)); ?></li>
                     <?php endif ?>
+                    <?php if ($this->Session->read('Auth.User.account_level') == 51): ?>
+                        <?php $admin_actions = array('admin_videos', 'admin_create'); ?>
+                        <li <?php if (in_array($c_action, $admin_actions)) : ?>class="active"<?php endif; ?>><?php echo $this->Html->link(__('Site Videos'), array('controller' => 'helps', 'action' => 'videos', 'admin' => true)); ?></li>
+                    <?php endif ?>
                     <li <?php if ($c_controller == 'helps' && $c_action == 'index') : ?>class="active"<?php endif; ?>><?php echo $this->Html->link(__('Help'), '/helps'); ?></li>
                     <li>
                         <div class="user-image"></div>

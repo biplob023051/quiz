@@ -101,6 +101,15 @@ class PagesController extends AppController {
 	}
 
 	public function index() {
+		$this->loadModel('Help');
+		$home_video = $this->Help->find('first', array(
+			'conditions' => array(
+				'Help.type' => 'home',
+				'Help.status' => 1
+			),
+			'order' => array('Help.id desc')
+		));
+		$this->set(compact('home_video'));
 		$this->set('title_for_layout', __('Welcome to Verkkotesti'));
 	}
 }

@@ -1,6 +1,13 @@
 <?php
 
 class Help extends AppModel {
+
+    public $siteOptions;
+    public function __construct($id = false , $table = null , $ds = null ){
+        parent::__construct($id,$table,$ds);
+        // initialize siteOptions constant
+        $this->siteOptions = array('home' => __('Home Page'), 'create' => __('User Create Page'));
+    }
     
     public $actsAs = array(
         'Tree'
@@ -32,6 +39,14 @@ class Help extends AppModel {
                  'rule'      => 'url',
                  'message'   => 'Valid youtube video url is required',
             )
+        ),
+        'type' => array(
+            'notempty' => array(
+                'rule'       => 'notEmpty',
+                'message'    => 'Display page is required',
+                'allowEmpty' => false,
+                'required'   => false,
+            )
         )
     );
 
@@ -40,6 +55,7 @@ class Help extends AppModel {
         $options = $this->find('list', array(
                             'conditions' => array(
                                 $this->alias.'.status' => 1,
+                                $this->alias.'.type' => 'help',
                                 $this->alias.'.parent_id' => null
                             ),
                             'order' => array(

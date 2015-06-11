@@ -1,3 +1,6 @@
+<?php
+    $this->Html->script('index', array('inline' => false));
+?>
 <div id="hero-unit">
     <div class="container">
         <h2 class="text-center"><?php echo __('Web test enables a teacher'); ?></h2>
@@ -38,4 +41,19 @@
 </div>
 
 <!-- Video -->
-<div id="bg-video"></div>
+<?php if (!empty($home_video)) : ?>
+    <div id="home-video">
+        <a href="javascript:void(0)" id="play_video"><img src="<?php echo $this->Quiz->getHelpPicture($home_video, 'videos'); ?>" class="img-responsive"></a>
+    </div>
+    <?php echo $this->element('Page/video_modal', array('home_video' => $home_video)); ?>
+<?php else: ?>
+    <div id="bg-video"></div>
+<?php endif; ?>
+
+<script type="text/javascript">
+<?php if (!empty($home_video)) : ?>
+    var url_src = <?php echo json_encode($home_video['Help']['url_src']) ?>;
+<?php else: ?>
+    var url_src = '';
+<?php endif; ?>
+</script>

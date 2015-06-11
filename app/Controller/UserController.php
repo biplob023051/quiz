@@ -66,6 +66,17 @@ class UserController extends AppController {
         $lang_strings['character_count'] = __('Password must be 8 characters long');
         $lang_strings['empty_captcha'] = __('Require Captcha');
         $this->set(compact('lang_strings'));
+
+        // load video
+        $this->loadModel('Help');
+        $create_video = $this->Help->find('first', array(
+            'conditions' => array(
+                'Help.type' => 'create',
+                'Help.status' => 1
+            ),
+            'order' => array('Help.id desc')
+        ));
+        $this->set(compact('create_video'));
     }
 
     public function login() {

@@ -998,3 +998,36 @@ msgstr "Pietu Enter result"
 #: Controller/UserController.php:51
 msgid "The result of the calculation was incorrect. Please try again."
 msgstr "Pietu The result of the calculation was incorrect. Please try again."
+
+#: Controller/HelpsController.php:160
+msgid "New Site Video"
+msgstr "Pietu New Site Video"
+
+#: Controller/HelpsController.php:162
+msgid "Edit Site Video"
+msgstr "Pietu Edit Site Video"
+
+#: Controller/HelpsController.php:162
+msgid "Edit Site Video"
+msgstr "Pietu Edit Site Video"
+
+#: Controller/HelpsController.php:183
+msgid "Site videos saved successfully"
+msgstr "Pietu Site videos saved successfully"
+
+#: Controller/HelpsController.php:183
+msgid "Site videos saved failed"
+msgstr "Pietu Site videos saved failed"
+
+#: Model/Help.php:validation for field type
+msgid "Display page is required"
+msgstr "Pietu Display page is required"
+
+#: Model/Help.php:9
+msgid "Home Page"
+msgstr "Pietu Home Page"
+
+#: Model/Help.php:9
+msgid "User Create Page"
+msgstr "Pietu User Create Page"
+
