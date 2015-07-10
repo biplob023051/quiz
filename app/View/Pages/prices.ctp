@@ -28,7 +28,7 @@
                     </tr>
                     <tr>
                         <td><?php echo __('Students/Test'); ?></td>
-                        <td><?php echo __('Unlimited'); ?></td>
+                        <td><?php echo __('40'); ?></td>
                         <td><?php echo __('Unlimited'); ?></td>
                     </tr>
                     <tr>

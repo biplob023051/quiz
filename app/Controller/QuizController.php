@@ -7,7 +7,7 @@ class QuizController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('present', 'live');
+        $this->Auth->allow('present', 'live', 'no_permission');
     }
 
     public function index() {
@@ -184,6 +184,16 @@ class QuizController extends AppController {
     public function live($quizRandomId) {
 
         $this->Quiz->Behaviors->load('Containable');
+        $this->Quiz->bindModel(
+               array(
+                 'belongsTo'=>array(
+                     'User'=>array(
+                       'className'  =>  'User',
+                       'foreignKey' => 'user_id'
+                   )          
+               )
+            ), false // Note the false here!
+        );
         $data = $this->Quiz->find('first', array(
             'conditions' => array(
                 'random_id = ' => $quizRandomId,
@@ -195,12 +205,21 @@ class QuizController extends AppController {
                     'QuestionType' => array(
                         'fields' => array('template_name', 'id', 'multiple_choices')
                     )
-                )
+                ),
+                'User'
             )
         ));
 
         if (empty($data))
             throw new NotFoundException;
+
+        // check user access level
+        if ((($data['User']['account_level'] == 0) || 
+            (($data['User']['account_level'] == 1) && (strtotime($data['User']['expired']) < time()))) 
+            && ($data['Quiz']['student_count'] >= 40)) {
+            $this->Session->setFlash(__('Sorry, only allow 40 students to take this quiz.'), 'error_form', array(), 'error');
+            return $this->redirect(array('controller' => 'quiz', 'action' => 'no_permission'));
+        }
 
         $lang_strings[0] = __('Internet connection has been lost, please try again later.');
         $lang_strings[1] = __('All questions answered. Turn in your quiz?');
@@ -398,6 +417,10 @@ class QuizController extends AppController {
             $this->Session->setFlash(__('You have Successfuly deleted quiz'), 'notification_form', array(), 'notification');
             return $this->redirect('/');
         }
+    }
+
+    public function no_permission() {
+        $this->set('title_for_layout', __('No permission'));
     }
 
 }

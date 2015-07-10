@@ -921,15 +921,15 @@ msgstr "Jos et halua vaihtaa salasanaasi, voit poistaa tämän viestin."
 
 #: View/Pages/index.ctp:3
 msgid "Web test enables a teacher"
-msgstr "Verkkotestillä opettaja voi"
+msgstr "Pidä testit oppilaillesi"
 
 #: View/Pages/index.ctp:4
 msgid "to give a quiz to students quickly and easily"
-msgstr "pitää testin oppilaille nopeasti ja helposti"
+msgstr "nopeasti ja helposti heidän"
 
 #: View/Pages/index.ctp:4
 msgid "with their "
-msgstr "heidän "
+msgstr " "
 
 #: View/Pages/index.ctp:4
 msgid "mobile phones"
@@ -945,7 +945,7 @@ msgstr "1) Luo testi"
 
 #: View/Pages/index.ctp:17
 msgid "Create a test with one or more questions."
-msgstr "Luo testi, jossa on yksi tai useampia kysymyksiä."
+msgstr "Testissä voi käyttää eri kysymystyyppejä<br/>kuten monivalinta, avoin kysymys tai essee."
 
 #: View/Pages/index.ctp:20
 msgid "Give a Test"
@@ -953,7 +953,7 @@ msgstr "2) Pidä testi"
 
 #: View/Pages/index.ctp:21
 msgid "Let the students attend the test in the classroom or at home."
-msgstr "Pyydä oppilaita osallistumaan testiin luokassa tai kotona."
+msgstr "Oppilaat voivat osallistua kännykällä, <br /> tabletilla, läppärillä tai pöytäkoneella."
 
 #: View/Pages/index.ctp:24
 msgid "Check the Result"
@@ -961,7 +961,7 @@ msgstr "3) Katso tulokset"
 
 #: View/Pages/index.ctp:24
 msgid "Check the results as soon as the stundents have attended."
-msgstr "Katso oppilaiden vastaukset heti palauttamisen jälkeen."
+msgstr "Ohjelma korjaa soveltuvat <br /> tehtävät automaattisesti."
 
 #: Controller/QuizController.php:392
 msgid "You have Successfuly deleted quiz"
@@ -991,43 +991,95 @@ msgstr " kysymystä. Tätä ei voi peruuttaa. Haluatko varmasti poistaa kyselyn?
 msgid "Delete quiz "
 msgstr "Poista kysely "
 
+#: Menu item Site Videos
+msgid "Site Videos"
+msgstr "Esittelysivuston videot"
+
 #: View/User/create.ctp:69
 msgid "Enter result"
-msgstr "Pietu Enter result"
+msgstr "Kirjoita lukujen summa"
 
 #: Controller/UserController.php:51
 msgid "The result of the calculation was incorrect. Please try again."
-msgstr "Pietu The result of the calculation was incorrect. Please try again."
+msgstr "Hups! Yhteenlaskun tulos oli väärin - yritä uudelleen. (Tällä varmistetaan, että et ole robotti.)"
 
 #: Controller/HelpsController.php:160
 msgid "New Site Video"
-msgstr "Pietu New Site Video"
+msgstr "Luo uusi video"
 
 #: Controller/HelpsController.php:162
 msgid "Edit Site Video"
-msgstr "Pietu Edit Site Video"
+msgstr "Muokkaa videota"
 
 #: Controller/HelpsController.php:162
 msgid "Edit Site Video"
-msgstr "Pietu Edit Site Video"
+msgstr "Muokkaa videota"
 
 #: Controller/HelpsController.php:183
 msgid "Site videos saved successfully"
-msgstr "Pietu Site videos saved successfully"
+msgstr "Videon tiedot tallennettu."
 
 #: Controller/HelpsController.php:183
 msgid "Site videos saved failed"
-msgstr "Pietu Site videos saved failed"
+msgstr "Videon tallennus epäonnistui!"
 
 #: Model/Help.php:validation for field type
 msgid "Display page is required"
-msgstr "Pietu Display page is required"
+msgstr "Sivun valinta vaaditaan"
 
 #: Model/Help.php:9
 msgid "Home Page"
-msgstr "Pietu Home Page"
+msgstr "Etusivu"
 
 #: Model/Help.php:9
 msgid "User Create Page"
-msgstr "Pietu User Create Page"
+msgstr "Tunnuksen luontisivu"
 
+#: Controller/HelpsController.php:231
+msgid "Site Videos List"
+msgstr "Videolista"
+
+#: View/Helps/admin_create.ctp:13
+#: View/Helps/admin_videos.ctp:11
+msgid "Create Videos"
+msgstr "Luo videoita"
+
+#: View/Helps/admin_videos.ctp:27
+msgid "Display Page"
+msgstr "Sivu"
+
+#: View/Helps/admin_create.ctp:39
+msgid "Please insert video title"
+msgstr "Kirjoita videon nimi"
+
+#: View/Helps/admin_create.ctp:40
+msgid "Please insert video sub title"
+msgstr "Kirjoita videon alaotsikko"
+
+#: View/Helps/admin_create.ctp:42
+msgid "Description"
+msgstr "Kuvaus"
+
+#: View/Helps/admin_create.ctp:42
+msgid "Photo"
+msgstr "Kuva"
+
+#: Controller/HelpsController.php:224
+msgid "Upload a Picture"
+msgstr "Lataa kuva"
+
+#: Controller/QuizController.php:210
+msgid "Sorry, only allow 40 students to take this quiz."
+msgstr "Kyselyyn voidaan vastata 40 kertaa tällä käyttäjätasolla."
+
+#: Controller/PagesController.php:70
+msgid "No permission"
+msgstr "Kiintiö täynnä"
+
+#: View/Pages/no-permission.ctp:2
+msgid "Limit exceeds"
+msgstr "Kiintiö täyttynyt"
+
+#: View/Pages/no-permission.ctp:7
+msgid "This quiz has reached maximum allowed of students to take test."
+msgstr "Tällä käyttäjätasolla kyselyyn voidaan vastata 40 kertaa."

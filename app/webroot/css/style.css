@@ -133,6 +133,12 @@ h1 {
     margin: 0 auto;
     color: #808080;
 }
+.nav-tabs li p {
+    font-family: Arial;
+    width: 80%;
+    margin: 0 auto;
+    color: #9d9d9d;
+}
 .navbar-right li a:hover .text-primary {
     color: #ffffff;
 }
