@@ -12,7 +12,7 @@
                     <tr>
                         <th>&nbsp;</th>
                         <th><?php echo __('FREE'); ?></th>
-                        <th><?php echo __('19 E/Y'); ?></th>
+                        <th><?php echo __('59 E/Y'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +46,7 @@
         </div>
     </div>
 </div>
-<?php echo $this->element('Page/buy_modal'); ?>
+<?php echo $this->element('Page/buy_modal', array('package' => __('59 E/Y'))); ?>
 <script id="app-data" type="application/json">
     <?php
     echo json_encode(array(

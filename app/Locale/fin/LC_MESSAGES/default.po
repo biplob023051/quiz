@@ -781,9 +781,21 @@ msgstr "Valitse sopiva paketti."
 msgid "FREE"
 msgstr "Ilmainen <br />kokeilutili"
 
-#: View/Pages/prices.ctp:15
+#: View/Pages/1bgfg9sq.ctp:15
 msgid "19 E/Y"
 msgstr "19 €/v"
+
+#: View/Pages/4bgfg9sq.ctp:15
+msgid "49 E/Y"
+msgstr "49 €/v"
+
+#: View/Pages/5bgfg9sq.ctp:15
+msgid "59 E/Y"
+msgstr "59 €/v"
+
+#: View/Pages/9bgfg9sq.ctp:15
+msgid "99 E/Y"
+msgstr "99 €/v"
 
 #: View/Pages/prices.ctp:20
 msgid "Users"

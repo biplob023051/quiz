@@ -50,6 +50,8 @@
                         'type' => 'password',
                         'placeholder' => __('Password Verify')
                     ));
+
+                    echo $this->Form->hidden('package', array('value' => $package));
                 ?>
             </div>
             <div class="modal-footer">

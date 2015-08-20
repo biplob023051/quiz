@@ -261,7 +261,7 @@ class UserController extends AppController {
                 $this->User->saveField('expired', $date);
 
                 $Email = new CakeEmail();
-                $Email->viewVars($user);
+                $Email->viewVars(array('User' => $user['User'], 'package' => $this->request->data['User']['package']));
                 $Email->from(array('admin@webquiz.fi' => 'WebQuiz.fi'));
                 $Email->template('invoice');
                 $Email->emailFormat('html');
