@@ -206,6 +206,10 @@ var webQuiz = {
                     webQuiz.questionData[question.index] = tmp;
                     console.log("setToPreviewSuccess:", tmp);
 
+                    if($("#q-1").hasClass('warn')) {
+                        tmp.warn_message = true;
+                    }
+
                     // remove last question if not save
                     if(typeof(response.dummy) != "undefined" && response.dummy !== null) {
                         if($("#q-1").length >= 0) {
@@ -396,10 +400,10 @@ var webQuiz = {
         choiceContainer.find(':input[type="text"]').each(function(){
             if ($(this).val() == '') {
                 if ($('.alert-danger').length){
-                        $('.alert-danger').remove();
+                    $('.alert-danger').remove();
                 }
-                validationError = true;
-                choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['point_greater'] + '</div>');
+                var currentEditQid = $("#q" + webQuiz.currentEditQid);
+                $(currentEditQid.selector).addClass('warn');
             }
             
         });
@@ -417,10 +421,12 @@ var webQuiz = {
             }
         });
         if (validationError == true) {
+            validationError = false;
             if ($('.alert-danger').length){
                 $('.alert-danger').remove();
             }
-            choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['point_greater'] + '</div>');
+            var currentEditQid = $("#q" + webQuiz.currentEditQid);
+            $(currentEditQid.selector).addClass('warn');
         }
         return validationError;
     },
@@ -455,10 +461,12 @@ var webQuiz = {
             }
         });
         if (validationError == true) {
+            validationError = false;
             if ($('.alert-danger').length){
                 $('.alert-danger').remove();
             }
-            choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['single_greater'] + '</div>');
+            var currentEditQid = $("#q" + webQuiz.currentEditQid);
+            $(currentEditQid.selector).addClass('warn');
         }
         return validationError;
     },
@@ -475,16 +483,8 @@ var webQuiz = {
             if ($('.alert-danger').length){
                 $('.alert-danger').remove();
             }
-            choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['two_greater'] + '</div>');
-            validationError = true;   
-        } else if(count == 1) {
-            if ($('.alert-danger').length){
-                $('.alert-danger').remove();
-            }
-            choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['insert_another'] + '</div>');
-            validationError = true;
-        } else {
-            validationError = false;
+            var currentEditQid = $("#q" + webQuiz.currentEditQid);
+            $(currentEditQid.selector).addClass('warn');
         }
 
         return validationError;

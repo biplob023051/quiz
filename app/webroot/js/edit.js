@@ -122,6 +122,9 @@ var debugVar;
         if ($('#QuestionText').val() == '') {
             var currentEditQid = $("#q" + webQuiz.currentEditQid),
             choiceContainer = currentEditQid.find("div.choices");
+            if ($('.alert-danger').length){
+                $('.alert-danger').remove();
+            }
             choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['empty_question'] + '</div>');
             return;
         }
@@ -131,6 +134,7 @@ var debugVar;
         );
 
         if (validationError == false) {
+
             webQuiz.addNewQuestion();
             // delete new empty question for add new question
             if ($('#QuestionText').val() == '') {
