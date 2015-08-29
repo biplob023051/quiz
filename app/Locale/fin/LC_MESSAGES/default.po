@@ -1095,3 +1095,19 @@ msgstr "Kiintiö täyttynyt"
 #: View/Pages/no-permission.ctp:7
 msgid "This quiz has reached maximum allowed of students to take test."
 msgstr "Tällä käyttäjätasolla kyselyyn voidaan vastata 40 kertaa."
+
+#: View/Pages/no-permission.ctp:7
+msgid "Corect answers separated by semicolon"
+msgstr "Oikeat vastaukset puolipisteellä erotettuna (;)"
+
+#: View/User/settings.ctp:55
+msgid "Upgrade Account"
+msgstr "Päivitä käyttäjätili"
+
+#: View/Elements/Quiz/edit/Handlebars/question.preview.ctp:12
+msgid "Notice: "
+msgstr "Pietu Notice: "
+
+#: View/Elements/Quiz/edit/Handlebars/question.preview.ctp:12
+msgid "you inserted 0 points in all of the choices."
+msgstr "Pietu you inserted 0 points in all of the choices."

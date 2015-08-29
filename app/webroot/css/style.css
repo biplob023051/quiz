@@ -54,6 +54,13 @@ h1 {
     display: inline-block;
     margin-top:7px;
 }
+.navbar-logo {
+    background:url(../img/logo.png) no-repeat top left;
+    height: 31px;
+    width: 155px;
+    display: inline-block;
+    margin-top:7px;
+}
 #footer {
     margin-top: 60px;
     margin-bottom: 30px;
@@ -200,6 +207,9 @@ h1 {
 
 @media (max-width: 460px) {
     .navbar-brand {
+        margin-left: 15px;
+    }
+    .navbar-logo {
         margin-left: 15px;
     }
     .navbar-nav {

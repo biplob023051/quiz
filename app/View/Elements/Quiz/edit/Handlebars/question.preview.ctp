@@ -9,7 +9,7 @@
                 {{#if warn_message}}
                     <p class="alert alert-warning" style="margin-bottom: 0px;">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>
-                        <strong><?php echo __('Warning!'); ?></strong> <?php echo __("You didn't put any point"); ?>
+                        <strong><?php echo __('Notice: '); ?></strong> <?php echo __("you inserted 0 points in all of the choices."); ?>
                     </p>
                 {{/if}}
             </div>
