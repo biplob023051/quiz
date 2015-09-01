@@ -7,6 +7,8 @@
                 <!-- check correct and incorrect -->
                 <?php if ($value4['score'] > 0) : ?>
                     <p class="text-success"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
+                <?php elseif ($value4['score'] == 0) : ?>
+                    <p class="text-warning"><?php echo $value4['text'] . '<br/>'; ?></div>
                 <?php else : ?>
                     <p class="text-danger"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
                 <?php endif; ?>     
@@ -17,16 +19,18 @@
                 <p class="text-danger"><span class="label"><?php echo __('Not Answered'); ?></span></p>
             <?php else : ?>
                 <?php echo $value4['text'] . '<br />'; ?>
-                <input 
-            placeholder="<?php echo __('Rate!'); ?>" 
-            type="number" 
-            class="form-control update-score" 
-            name="<?php echo $value1['id'] ?>"
-            question="<?php echo $value3['id'] ?>"
-            value="<?php echo $value4['score']; ?>"
-            current-score="<?php echo empty($value4['score']) ? '' : $value4['score']; ?>"
-            max="<?php echo empty($value3['Choice'][0]['points']) ? $value3['QuestionType']['manual_scoring'] : $value3['Choice'][0]['points']; ?>"
-            /> / <?php echo empty($value3['Choice'][0]['points']) ? $value3['QuestionType']['manual_scoring'] : $value3['Choice'][0]['points']; ?>
+                <?php if (!empty($value3['Choice'][0]['points'])) : ?>
+                    <input 
+                placeholder="<?php echo __('Rate!'); ?>" 
+                type="number" 
+                class="form-control update-score" 
+                name="<?php echo $value1['id'] ?>"
+                question="<?php echo $value3['id'] ?>"
+                value="<?php echo $value4['score']; ?>"
+                current-score="<?php echo empty($value4['score']) ? '' : $value4['score']; ?>"
+                max="<?php echo empty($value3['Choice'][0]['points']) ? $value3['QuestionType']['manual_scoring'] : $value3['Choice'][0]['points']; ?>"
+                /> / <?php echo empty($value3['Choice'][0]['points']) ? $value3['QuestionType']['manual_scoring'] : $value3['Choice'][0]['points']; ?>
+                <?php endif; ?>
             <?php endif; ?>
         <?php else: ?>
             <!-- essay type -->

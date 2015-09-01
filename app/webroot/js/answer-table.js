@@ -256,6 +256,26 @@ $(document).ready(function()
             }
         });
     }
+
+    $(document).on('click', 'button#print', function (e) {
+        e.preventDefault();
+        var quizId = parseInt($("#quizId").text());
+        $.ajax({
+            dataType: 'html',
+            type: "POST",
+            url: appData.baseUrl + 'quiz/ajax_print_answer',
+            data: {quizId:quizId},
+            async: true,
+            success: function(data) {
+                var WindowObject = window.open("", "PrintWindow", "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
+                WindowObject.document.writeln(data);
+                WindowObject.document.close();
+                WindowObject.focus();
+                WindowObject.print();
+                WindowObject.close();
+            }
+        });
+    });
     
 })(jQuery);
 

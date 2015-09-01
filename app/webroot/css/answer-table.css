@@ -1,5 +1,7 @@
 #answer-table {
     overflow-x: auto;
+    max-width: 2500px;
+    width: 100%;
 }
 
 #answer-table table tr td {
@@ -149,3 +151,10 @@ span.score {
 .table>thead>tr>th.headerSortDown {
     background: url(../img/sort-down.gif) right center no-repeat;
 }
+
+/*XXLarge screens*/
+@media only screen and (min-width: 120.063em) { 
+  .container {
+    width: 1890px;
+  }
+} /* min-width 1921px, xxlarge screens */

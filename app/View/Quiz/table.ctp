@@ -113,7 +113,10 @@ $this->assign('title', __('Answer Table'));
 <div id="prev_data" style="display : none;"><?php echo $studentIds; ?></div>
 <div id="quizId" style="display : none;"><?php echo $quizId; ?></div>
 <div class="row">
-    <div class="col-xs-12 col-md-2 col-md-offset-10">
+    <div class="col-xs-12 col-md-2 col-md-offset-8">
+        <button type="button" class="btn btn-primary btn-block" id="print"><?php echo __('Print'); ?></button>
+    </div>
+    <div class="col-xs-12 col-md-2">
         <?php
         echo $this->Html->link(__('Back'), '/', array('class' => 'btn btn-primary btn-block'));
         ?>

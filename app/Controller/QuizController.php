@@ -423,4 +423,18 @@ class QuizController extends AppController {
         $this->set('title_for_layout', __('No permission'));
     }
 
+    // print quiz answer
+    public function ajax_print_answer() {
+        $this->layout = "ajax";
+        $quizId = $this->request->data['quizId'];
+        // authenticate or not
+        $checkPermission = $this->Quiz->checkPermission($quizId, $this->Auth->user('id'));
+        if (empty($checkPermission)) {
+            throw new ForbiddenException;
+        }
+        $filter = $this->Session->read('Filter');
+        $quizDetails = $this->Quiz->quizDetails($quizId, $filter);
+        $this->set(compact('quizDetails', 'quizId'));
+    }
+
 }

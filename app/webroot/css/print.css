@@ -1,0 +1,26 @@
+@media print {
+    .make-grid(sm);
+
+    .visible-xs {
+        .responsive-invisibility();
+    }
+
+    .hidden-xs {
+        .responsive-visibility();
+    }
+
+    .hidden-xs.hidden-print {
+        .responsive-invisibility();
+    }
+
+    .hidden-sm {
+        .responsive-invisibility();
+    }
+
+    .visible-sm {
+        .responsive-visibility();
+    }
+    .text-danger {
+	    color: #a94442;
+	}
+}

@@ -210,4 +210,28 @@ var debugVar;
                 );
     });
 
+    $(document).on('click', '#questions button.edit-done', function (e) {
+        e.preventDefault();
+        
+        if ($('#QuestionText').val() == '') {
+            var currentEditQid = $("#q" + webQuiz.currentEditQid),
+            choiceContainer = currentEditQid.find("div.choices");
+            if ($('.alert-danger').length){
+                $('.alert-danger').remove();
+            }
+            choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['empty_question'] + '</div>');
+            return;
+        }
+        var questionTypeId = $('#questions select.choice-type-selector').val();
+        var validationError = webQuiz.dataValidation(
+            questionTypeId
+        );
+
+        if (validationError == false) {
+            webQuiz.addNewQuestion();
+            var response = webQuiz.setToPreview(webQuiz.lastEditQid, $("#q" + webQuiz.lastEditQid), 'test');    
+        }
+        
+    });
+
 })(jQuery);
