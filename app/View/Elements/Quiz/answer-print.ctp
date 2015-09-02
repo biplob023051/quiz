@@ -5,13 +5,23 @@
                 <div class="text-danger"><?php echo __('Not Answered'); ?></div>
             <?php else : ?>
                 <!-- check correct and incorrect -->
-                <?php if ($value4['score'] > 0) : ?>
-                    <div class="text-success"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
-                <?php elseif ($value4['score'] == 0) : ?>
-                    <div class="text-warning"><?php echo $value4['text'] . '<br/>'; ?></div>
-                <?php else : ?>
-                    <div class="text-danger"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
-                <?php endif; ?>     
+                <?php if (isset($inline)) : ?>
+                    <?php if ($value4['score'] > 0) : ?>
+                        <span class="text-success"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span>'; ?></span>
+                    <?php elseif ($value4['score'] == 0) : ?>
+                        <span class="text-warning"><?php echo $value4['text']; ?></span>
+                    <?php else : ?>
+                        <span class="text-danger"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span>'; ?></span>
+                    <?php endif; ?>
+                <?php else : ?>  
+                    <?php if ($value4['score'] > 0) : ?>
+                        <div class="text-success"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
+                    <?php elseif ($value4['score'] == 0) : ?>
+                        <div class="text-warning"><?php echo $value4['text'] . '<br/>'; ?></div>
+                    <?php else : ?>
+                        <div class="text-danger"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
+                    <?php endif; ?>
+                <?php endif; ?>   
             <?php endif; ?> 
         <!-- short manual scoring -->
         <?php elseif ($value3['QuestionType']['id'] == 4) : ?>
