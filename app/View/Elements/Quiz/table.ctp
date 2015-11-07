@@ -8,7 +8,7 @@
                 <?php if ($value4['score'] > 0) : ?>
                     <p class="text-success"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
                 <?php elseif ($value4['score'] == 0) : ?>
-                    <p class="text-warning"><?php echo $value4['text'] . '<br/>'; ?></div>
+                    <p class="text-warning"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
                 <?php else : ?>
                     <p class="text-danger"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
                 <?php endif; ?>     
@@ -40,7 +40,9 @@
                 <button type="button" class="btn btn-danger btn-sm read-essay" quiz-id="">
                     <?php echo __('READ'); ?>
                 </button>
-                <span class="essay-points"><?php echo empty($value4['score']) ? ' <span class="score">' . 0 . '</span>' : ' <span class="score">' . $value4['score'] . '</span>'; ?></span>
+                <span class="essay-points">
+                    <?php echo ($value4['score'] == '') ? ' <span style="display: none;" class="score"></span>' : ' <span class="score">' . $value4['score'] . '</span>'; ?>
+                </span>
                 <?php echo $this->element('Quiz/read-essay', array('value1' => $value1, 'value3' => $value3, 'value4' => $value4)); ?>
             <?php endif; ?>
         <?php endif; ?>

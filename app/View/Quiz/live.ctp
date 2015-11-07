@@ -96,4 +96,49 @@ echo $this->Form->create('Student', array(
 
 <script type="text/javascript">
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
+    
+    // document.onmousedown=disableclick;
+    // function disableclick(event)
+    // {
+    //   if(event.button==2)
+    //    {
+    //      alert(lang_strings['right_click_disabled']);
+    //      return false;    
+    //    }
+    // }
+
+    var vis = (function(){
+        var stateKey, eventKey, keys = {
+            hidden: "visibilitychange",
+            webkitHidden: "webkitvisibilitychange",
+            mozHidden: "mozvisibilitychange",
+            msHidden: "msvisibilitychange"
+        };
+        for (stateKey in keys) {
+            if (stateKey in document) {
+                eventKey = keys[stateKey];
+                break;
+            }
+        }
+        return function(c) {
+            if (c) document.addEventListener(eventKey, c);
+            return !document[stateKey];
+        }
+    })();
+
+    vis(function(){
+      if (!vis()) {
+        alert(lang_strings['browser_switch']);
+        // return;
+      } else {
+        window.btn_clicked = true;
+        window.location.reload();
+      }
+    });
+
+    window.onbeforeunload = function(){
+        if(!window.btn_clicked){
+            return lang_strings['leave_quiz'];
+        }
+    };
 </script>

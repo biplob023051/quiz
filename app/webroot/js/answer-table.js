@@ -57,12 +57,18 @@ $(document).ready(function()
     });
 
     $('#answer-table input').donetyping(function(){
-        if ($(this).val() == '' || $(this).val() == null) {
-            return false;    
-        }
+        
+        var current_score = parseInt($(this).attr("current-score"));
+        // if (($(this).val() == '' || $(this).val() == null) && isNaN(current_score)) {
+        //     return false;    
+        // }
+
         var marks = parseInt($(this).val());
-        var max = parseInt($(this).attr("max"));
-        var current_score = parseInt($(this).attr("current-score")); 
+        if(isNaN(marks)) {
+            marks = 'null';
+        }
+
+        var max = parseInt($(this).attr("max")); 
         $("#ajax-message").hide();
 
         if (marks < 0) {
@@ -120,6 +126,11 @@ $(document).ready(function()
                       inputField.css({ 'background-color' : originalBackgroundColor, 'color' : originalColor });
                     }, 1000);
                     if (inputField.parents('.read-essay').first().length > 0) {
+                        if (marks == 'null') {
+                            inputField.parents('.read-essay').first().prev().children().hide();
+                        } else {
+                            inputField.parents('.read-essay').first().prev().children().show();
+                        }
                         inputField.parents('.read-essay').first().prev().children().text(marks);
                     }
                     //console.log(inputField.parents('.read-essay').first());
@@ -260,6 +271,8 @@ $(document).ready(function()
     $(document).on('click', 'button#print', function (e) {
         e.preventDefault();
         var quizId = parseInt($("#quizId").text());
+        $('#print_div').html('');
+        window.frames["print_frame"].document.body.innerHTML='';
         $.ajax({
             dataType: 'html',
             type: "POST",
@@ -267,15 +280,30 @@ $(document).ready(function()
             data: {quizId:quizId},
             async: true,
             success: function(data) {
-                var WindowObject = window.open("", "PrintWindow", "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
-                WindowObject.document.writeln(data);
-                WindowObject.document.close();
-                WindowObject.focus();
-                WindowObject.print();
-                WindowObject.close();
+                $('#print_div').html(data);
+                //alert(print_div);
+                printDiv();
+                // var WindowObject = window.open('about:blank');
+                // WindowObject.document.writeln(data);
+                // WindowObject.document.close();
+                // WindowObject.focus();
+                // WindowObject.print();
+                // WindowObject.close();
+                // var WindowObject = window.open("", "PrintWindow", "width=750,height=650,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes");
+                // WindowObject.document.writeln(data);
+                // WindowObject.document.close();
+                // WindowObject.focus();
+                // WindowObject.print();
+                // WindowObject.close();
             }
         });
     });
+    printDivCSS = new String ('<link href="'+appData.baseUrl+'/css/print.css" rel="stylesheet" media="print" type="text/css">');
+    function printDiv() {
+        window.frames["print_frame"].document.body.innerHTML=printDivCSS+$('#print_div').html();
+        window.frames["print_frame"].window.focus();
+        window.frames["print_frame"].window.print();
+    }
     
 })(jQuery);
 

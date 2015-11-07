@@ -1,3 +1,11 @@
+jQuery(window).bind("load", function() {
+  if (click_video) {
+      $( "a#play_video" ).trigger( "click" );
+  } else {
+    // do nothing
+  }
+});
+
 (function ($) {
   $(document).on('click', 'a#play_video', function (e) {
     var src = 'https://www.youtube.com/embed/' + url_src + '?autoplay=1';

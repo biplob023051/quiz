@@ -1,7 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
-
+App::uses('CakeEmail', 'Network/Email');
 class StudentController extends AppController {
 
     public $helpers = array('Html');
@@ -61,7 +61,7 @@ class StudentController extends AppController {
         
         $this->loadModel('Quiz');
         $quiz = $this->Quiz->findByRandomId($quizRandomId);
-
+    
         $data['Answer'] = $answers;
         $data['Student']['submitted'] = date('Y-m-d H:i:s');
         $data['Student']['quiz_id'] = $quiz['Quiz']['id'];
@@ -166,6 +166,21 @@ class StudentController extends AppController {
         $data['Ranking']['score'] = $correct_answer;
         
         if ($this->Student->saveAssociated($data)) {
+            // send email to the admin
+            // first 3 students answer taken for any first quiz
+            // access level should be free user
+            if (empty($quiz['User']['account_level']) && ($quiz['Quiz']['student_count'] == 2)) {
+                $user = $quiz['User'];
+                $Email = new CakeEmail();
+                $Email->viewVars(array('user' => $user));
+                $Email->from(array('pietu.halonen@verkkotesti.fi' => 'WebQuiz.fi'));
+                $Email->template('quiz_taken_started');
+                $Email->emailFormat('html');
+                $Email->to(Configure::read('AdminEmail'));
+                $Email->subject(__('[Verkkotesti] Quiz given to students'));
+                $Email->send();
+            }
+
             return $this->redirect(array('action' => 'success'));
         } else {
             return $this->redirect(array('action' => 'failed'));

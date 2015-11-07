@@ -27,14 +27,25 @@ class UserController extends AppController {
             if ($this->MathCaptcha->validate($this->request->data['User']['captcha'])) {
                 $this->User->set($this->request->data);
                 if ($this->User->validates()) {
-                    $this->User->save();
+                    $user = $this->User->save();
                     $this->Session->delete('UserCreateFormData');
                     // auto login of the newly registered user to the site
                     if ($this->Auth->login()) {
                         // save statistics data
-                        $arrayToSave['Statistic']['logged_user_id'] = $this->Auth->user('id');
+                        $arrayToSave['Statistic']['user_id'] = $this->Auth->user('id');
                         $arrayToSave['Statistic']['type'] = 'user_login';
                         $this->User->Statistic->save($arrayToSave);
+                        
+                        // send email to the admin
+                        $Email = new CakeEmail();
+                        $Email->viewVars(array('user' => $user));
+                        $Email->from(array('pietu.halonen@verkkotesti.fi' => 'WebQuiz.fi'));
+                        $Email->template('user_create');
+                        $Email->emailFormat('html');
+                        $Email->to(Configure::read('AdminEmail'));
+                        $Email->subject(__('[Verkkotesti] New User'));
+                        $Email->send();
+
                         $this->Session->setFlash(__('Registration success'), 'notification_form', array(), 'notification');
                         return $this->redirect($this->Auth->redirectUrl());
                     } else {
@@ -83,7 +94,7 @@ class UserController extends AppController {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 // save statistics data
-                $arrayToSave['Statistic']['logged_user_id'] = $this->Auth->user('id');
+                $arrayToSave['Statistic']['user_id'] = $this->Auth->user('id');
                 $arrayToSave['Statistic']['type'] = 'user_login';
                 $this->User->Statistic->save($arrayToSave);
                 return $this->redirect($this->Auth->redirectUrl());
@@ -244,7 +255,7 @@ class UserController extends AppController {
             // auto login of the newly registered user to the site
             if ($this->Auth->login()) {
                 // save statistics data
-                $arrayToSave['Statistic']['logged_user_id'] = $this->Auth->user('id');
+                $arrayToSave['Statistic']['user_id'] = $this->Auth->user('id');
                 $arrayToSave['Statistic']['type'] = 'user_login';
                 $this->User->Statistic->save($arrayToSave);
 

@@ -12,7 +12,7 @@
                     <tr>
                         <th>&nbsp;</th>
                         <th><?php echo __('FREE'); ?></th>
-                        <th><?php echo __('9 &#8364;/kk (=108 &#8364;/v)</br> TAI 90 &#8364;/v'); ?></th>
+                        <th><?php echo __('19 E/Y'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,8 +38,7 @@
                     </tr>
                 </tbody>
             </table>
-            <p><?php echo __('Lorem ipsum dummy text here. Lorem ipsum dummy text here Lorem ipsum dummy text here. Lorem ipsum dummy text here'); ?></p>
-        </div>            
+        </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="text-center">
                 <img src="<?php echo $this->request->webroot; ?>img/bg-girl.png" class="img-responsive" />
@@ -47,7 +46,7 @@
         </div>
     </div>
 </div>
-<?php echo $this->element('Page/buy_modal', array('package' => __('59 E/Y'))); ?>
+<?php echo $this->element('Page/buy_modal', array('package' => __('19 E/Y'))); ?>
 <script id="app-data" type="application/json">
     <?php
     echo json_encode(array(

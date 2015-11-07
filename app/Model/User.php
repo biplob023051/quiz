@@ -100,6 +100,24 @@ class User extends AppModel {
     }
 
     /*
+    * Upgrade user status
+    */
+    public function upgrade_status($id) {
+        $user = $this->find('first', array(
+            'conditions' => array(
+                'User.id' => $id
+            ),
+            'fields' => array('User.expired'),
+            'recursive' => -1
+        ));
+        if (empty($user['User']['expired'])) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /*
     * Genrate random text
     */
     public function randText($length=40){

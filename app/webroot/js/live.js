@@ -1,5 +1,10 @@
 (function($) {
 
+	$(document).on("contextmenu",function(e){
+        e.preventDefault();
+        alert(lang_strings['right_click_disabled']);
+     });
+
 	var appData = $.parseJSON($("#app-data").text());
 
 	function checkNetConnection(){
@@ -99,6 +104,7 @@
 		        infoModal.modal('show');
 		        
 		        $(document).on('click', 'button#confirmed', function () {
+		        	window.btn_clicked = true;
 		        	$('#StudentLiveForm').unbind('submit').submit();
 		        });
 			}
@@ -154,3 +160,4 @@
 	
     document.getElementById("StudentLiveForm").reset();
 })(jQuery);
+

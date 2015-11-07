@@ -7,6 +7,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="google" value="notranslate">
         <?php echo $this->fetch('meta'); ?>
 
         <title><?php echo $this->fetch('title'); ?></title>
@@ -63,6 +64,7 @@
         ));
         ?>
         <?php echo $this->fetch('script'); ?>
+        <?php echo $this->element('google-analytics'); ?>
     </body>
 </html>
 <?php else: ?>

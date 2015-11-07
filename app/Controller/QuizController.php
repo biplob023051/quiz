@@ -1,5 +1,5 @@
 <?php
-
+App::uses('CakeEmail', 'Network/Email');
 class QuizController extends AppController {
 
     public $helpers = array('Html', 'Session', 'Form', 'Cache');
@@ -61,8 +61,11 @@ class QuizController extends AppController {
         $lang_strings['delete_quiz_3'] = __(' students, and ');
         $lang_strings['delete_quiz_4'] = __(' number of questions. This can not be undone. Are you sure want to delete?');
         $lang_strings['delete_quiz_5'] = __('Delete quiz ');
-        
-        $this->set(compact('data', 'quizTypes', 'filter', 'lang_strings'));
+        $lang_strings['request_sent'] = __('Upgrade Pending');
+
+        // check upgrade status
+        $request_sent = $this->User->upgrade_status($this->Auth->user('id'));
+        $this->set(compact('data', 'quizTypes', 'filter', 'lang_strings', 'request_sent'));
     }
 
     public function edit($quizId, $initial = '') {
@@ -159,9 +162,22 @@ class QuizController extends AppController {
         $this->Quiz->saveField('random_id', $random_id);
         // save statistics data
         $this->loadModel('Statistic');
-        $arrayToSave['Statistic']['logged_user_id'] = $this->Auth->user('id');
+        $arrayToSave['Statistic']['user_id'] = $this->Auth->user('id');
         $arrayToSave['Statistic']['type'] = 'quiz_create';
         $this->Statistic->save($arrayToSave);
+
+        // check if free user creating first quiz send email notification to admin
+        $user = $this->Auth->user();
+        if (empty($user['account_level'])) { // if this is the free user
+            $Email = new CakeEmail();
+            $Email->viewVars(array('user' => $user));
+            $Email->from(array('pietu.halonen@verkkotesti.fi' => 'WebQuiz.fi'));
+            $Email->template('first_quiz_create');
+            $Email->emailFormat('html');
+            $Email->to(Configure::read('AdminEmail'));
+            $Email->subject(__('[Verkkotesti] First quiz created'));
+            $Email->send();
+        }
 
         return $this->redirect(array(
                     'action' => 'edit',
@@ -232,6 +248,9 @@ class QuizController extends AppController {
         $lang_strings['last_name_invalid'] = __('Invalid Last Name');
         $lang_strings['first_name_invalid'] = __('Invalid First Name');
         $lang_strings['class_invalid'] = __('Invalid Class');
+        $lang_strings['right_click_disabled'] = __('Sorry, right click disabled');
+        $lang_strings['browser_switch'] = __('Sorry, you are not allowed to switch browser tab');
+        $lang_strings['leave_quiz'] = __('Are you sure that you want to leave this quiz?');
 
         $this->disableCache();
         $this->set('data', $data);

@@ -57,4 +57,11 @@
 <?php else: ?>
     var url_src = '';
 <?php endif; ?>
+<?php if (!empty($this->request->query['play']) && ($this->request->query['play'] == 'video')) : ?>
+    var click_video = true;
+<?php else: ?>
+    var click_video = false;
+<?php endif; ?>
 </script>
+
+<!-- $this->request->query['play'] -->

@@ -6,7 +6,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="<?php echo $this->request->base; ?>"></a>
+            <?php echo $this->Html->link('', '/', array('class' => 'navbar-brand')); ?>
         </div>
         <div class="collapse navbar-collapse" id="main-nav">
             <ul class="nav navbar-nav navbar-left">

@@ -14,6 +14,8 @@
                 {
                     $('#invoice-dialog').modal('hide');
                     $('#invoice-success-dialog').modal('show');
+                    $('#upgrade_account').attr('disabled', true);
+                    $('span#btn_text').html(lang_strings['request_sent']);
                 }
             },
             error: function()

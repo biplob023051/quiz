@@ -392,4 +392,9 @@ Cache::config('_cake_model_', array(
  * Here you can change your email, where the invoice sent.
  * 
  */
-	Configure::write('AdminEmail', 'pietu.halonen@gmail.com');
+	Configure::write('AdminEmail', 'biplob.weblancer@gmail.com');
+
+// google analytical code
+
+	Configure::write('google-analytics.tracker-code', false); // disables Google Analytics
+	Configure::write('google-analytics.tracker-code', 'UA-3180550-5'); // enables Google Analytics

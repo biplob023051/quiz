@@ -17,7 +17,11 @@ $this->assign('title', __('My Quizzes'));
                 </a>
             <?php else: ?>
                 <?php
-                echo $this->element('Invoice/invoice_button', array('btn_text' => __('Upgrade to Create More Quiz')));
+                    if (empty($request_sent)) {
+                        echo $this->element('Invoice/invoice_button', array('btn_text' => __('Upgrade to Create More Quiz')));
+                    } else {
+                        echo '<button class="btn btn-primary btn-block" disabled="true"  id="upgrade_account"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>' . __('Upgrade Pending') . '</button>';
+                    }
                 ?>
             <?php endif ?>
         </div>

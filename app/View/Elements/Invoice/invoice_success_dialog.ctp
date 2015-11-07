@@ -10,7 +10,7 @@
                 <?php echo __('You will receive an invoice into your email shortly. By paying it you can upgrade your account.') ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary"  data-dismiss="modal">OK</button>
+                <button type="button" class="btn btn-primary"  data-dismiss="modal"><?php echo __('OK'); ?></button>
             </div>
         </div>
     </div>

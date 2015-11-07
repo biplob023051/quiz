@@ -10,8 +10,8 @@
                 <?php echo __('An invoice will be sent to upgrade your account. Proceed?') ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="send-invoice">OK</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __('Cancel'); ?></button>
+                <button type="button" class="btn btn-primary" id="send-invoice"><?php echo __('OK'); ?></button>
             </div>
         </div>
     </div>

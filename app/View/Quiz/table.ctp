@@ -122,7 +122,8 @@ $this->assign('title', __('Answer Table'));
         ?>
     </div>
 </div>
-
+<div id="print_div" style="display: none;"></div>
+<iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
 <script id="app-data" type="application/json">
     <?php
     echo json_encode(array(

@@ -5,13 +5,14 @@ class Quiz extends AppModel {
     // declaration of quizTypes constant
     public $quizTypes;
     
-    public function __construct($id = false , $table = null , $ds = null ){
+    public function __construct($id = false , $table = null , $ds = null ) {
         parent::__construct($id,$table,$ds);
         // initialize quizTypes constant
         $this->quizTypes = array('1' => __('Active Quizzes'), '0' => __('Archived Quizzes'), 'all' => __('All Quizzes'));
     }
 
     public $hasMany = array('Question', 'Student', 'Ranking');
+    public $belongsTo = array('User');
     public $validate = array(
         'name' => array(
             'notempty' => array(

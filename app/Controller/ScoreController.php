@@ -13,13 +13,21 @@ class ScoreController extends AJAXController {
         $response = array('success' => false);
 
         if (!empty($data['score']) || (int) $data['score'] == 0) {
+
+
             
             $choice = $this->Choice->findByQuestionId($data['id']);
             if(empty($choice))
                 return;
-            
-            if ($data['score'] > $choice['Choice']['points'])
+
+
+            if ($data['score'] == 'null') {
+                $data['score'] = 'NULL';
+            } else if ($data['score'] > $choice['Choice']['points']) {
                 $data['score'] = $choice['Choice']['points'];
+            } else {
+                // do nothing
+            }
             
             $response['data'] = $this->Answer->updateScore($data['id'], $data['student_id'], $data['score']);
             // update ranking score as well
