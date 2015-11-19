@@ -32,9 +32,10 @@ class UserController extends AppController {
                     // auto login of the newly registered user to the site
                     if ($this->Auth->login()) {
                         // save statistics data
+                        $this->loadModel('Statistic');
                         $arrayToSave['Statistic']['user_id'] = $this->Auth->user('id');
                         $arrayToSave['Statistic']['type'] = 'user_login';
-                        $this->User->Statistic->save($arrayToSave);
+                        $this->Statistic->save($arrayToSave);
                         
                         // send email to the admin
                         $Email = new CakeEmail();
@@ -94,9 +95,10 @@ class UserController extends AppController {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 // save statistics data
+                $this->loadModel('Statistic');
                 $arrayToSave['Statistic']['user_id'] = $this->Auth->user('id');
                 $arrayToSave['Statistic']['type'] = 'user_login';
-                $this->User->Statistic->save($arrayToSave);
+                $this->Statistic->save($arrayToSave);
                 return $this->redirect($this->Auth->redirectUrl());
             }
 
@@ -255,9 +257,10 @@ class UserController extends AppController {
             // auto login of the newly registered user to the site
             if ($this->Auth->login()) {
                 // save statistics data
+                $this->loadModel('Statistic');
                 $arrayToSave['Statistic']['user_id'] = $this->Auth->user('id');
                 $arrayToSave['Statistic']['type'] = 'user_login';
-                $this->User->Statistic->save($arrayToSave);
+                $this->Statistic->save($arrayToSave);
 
                 // send upgrade email request
                 $user = $this->User->getUser($this->Auth->user('id'));

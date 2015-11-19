@@ -77,7 +77,7 @@ class PagesController extends AppController {
         	$this->set(compact('lang_strings'));
 		}
 
-		if (($this->request->params['pass'][0] == '1bgfg9sq') || ($this->request->params['pass'][0] == '4bgfg9sq') || ($this->request->params['pass'][0] == '5bgfg9sq') || ($this->request->params['pass'][0] == '9bgfg9sq')) {
+		if (($this->request->params['pass'][0] == '1bgfg9sq') || ($this->request->params['pass'][0] == '4bgfg9sq') || ($this->request->params['pass'][0] == '5bgfg9sq') || ($this->request->params['pass'][0] == '9bgfg9sq') || ($this->request->params['pass'][0] == 'prices')) {
 			$lang_strings['empty_name'] = __('Require Name');
 			$lang_strings['invalid_characters'] = __('Name contains invalid character');
 			$lang_strings['empty_email'] = __('Require Email Address');
