@@ -30,7 +30,22 @@ echo $this->Form->create('Quiz', array(
 ?>
 <!--<div id="qunit"></div>
 <div id="qunit-fixture"></div>-->
-
+<div class="row" id="settings">
+    <div class="col-xs-12 col-md-12">
+        <a href="javascript:void(0)" class="btn btn-default btn-block" id="show-settings">
+            <b class="caret"></b>
+            <?php echo __('Quiz Settings'); ?>
+        </a>
+    </div>
+    <div class="col-xs-12 col-md-12" id="settings-options" style="display: none;">
+        <div class="form-group">
+            <?php 
+                echo $this->Form->checkbox('show_result', array('default' => $data['Quiz']['show_result'])); 
+                echo $this->Form->label('show_result', __('Show results to the student after finishing the quiz.'));
+            ?>
+        </div>
+    </div>
+</div>
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="row">
@@ -135,3 +150,22 @@ echo json_encode(array(
 <script type="text/javascript">
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
 </script>
+
+<style type="text/css">
+#settings {
+    margin: 5px 0px;
+}
+#show-settings {
+    text-align: left;
+}
+#settings .col-md-12 {
+    padding: 0;
+    margin: 0;
+} 
+#settings-options {
+    padding: 0px 25px !important;
+}
+#settings-options label {
+    padding: 0 5px !important;
+}
+</style>

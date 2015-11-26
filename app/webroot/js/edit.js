@@ -234,4 +234,9 @@ var debugVar;
         
     });
 
+    // settings show hide
+    $(document).on('click', '#show-settings', function () {
+        $('#settings-options').toggle();
+    });
+
 })(jQuery);

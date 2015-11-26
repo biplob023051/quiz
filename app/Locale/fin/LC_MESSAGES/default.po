@@ -1147,3 +1147,31 @@ msgstr "Selaimen välilehteä ei voi vaihtaa."
 #: Controller/QuizController.php:240
 msgid "Are you sure that you want to leave this quiz?"
 msgstr "Haluatko varmasti poistua kyselystä?"
+
+#: View/Quiz/edit.ctp:37
+msgid "Quiz Settings"
+msgstr "Testin asetukset"
+
+#: View/Quiz/edit.ctp:37
+msgid "Show results to the student after finishing the quiz."
+msgstr "Näytä tulokset vastaajalle testin jälkeen."
+
+#: View/Student/success.ctp:25
+msgid "On hold"
+msgstr "Odottaa arviointia"
+
+#: View/Student/success.ctp:39
+msgid "YOUR RESULTS"
+msgstr "TULOKSESI"
+
+#: View/Student/success.ctp:40
+msgid "Total"
+msgstr "Yhteispisteet"
+
+#: View/Student/success.ctp:40
+msgid "YOUR ANSWER waiting for rating"
+msgstr "Vastauksesi odottaa arviointia"
+
+#: View/Student/success.ctp:40
+msgid "Successfully removed"
+msgstr "Vastaus on poistettu"

@@ -181,13 +181,30 @@ class StudentController extends AppController {
                 $Email->send();
             }
 
-            return $this->redirect(array('action' => 'success'));
+            // save std id
+            if (!empty($quiz['Quiz']['show_result'])) {
+                $this->Session->write('show_result', true);
+                return $this->redirect(array('action' => 'success', $this->Student->id));
+            } else {
+                return $this->redirect(array('action' => 'success'));
+            }
+
         } else {
             return $this->redirect(array('action' => 'failed'));
         }
     }
     
-    public function success() {}
+    public function success($std_id = null) {
+        if ($this->Session->check('show_result')) { // show result true
+            $student_result = $this->Student->find('first', array(
+                'conditions' => array('Student.id' => $std_id)
+            ));
+            $this->Student->Quiz->unbindModelAll(array('Question'));
+            $quiz = $this->Student->Quiz->findById($student_result['Quiz']['id']);
+            $this->set(compact('student_result', 'quiz'));
+            $this->Session->delete('show_result');
+        }
+    }
 
     public function deleteStudent() {
         $this->autoRender = false;
