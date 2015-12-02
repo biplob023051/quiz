@@ -48,7 +48,6 @@ var debugVar;
 
     $(document).on('click', '#questions tr td div.preview-btn button.edit-question', function () {
         //console.profile("Editing question");
-
         var blank_question = false;
         if ($('#QuestionText').val() == '') {
             blank_question = true;
@@ -118,7 +117,8 @@ var debugVar;
     });
     
     $("#add-question").on('click', function () {
-
+        var question_number = $('#questions tbody').children('tr').length;
+    
         if ($('#QuestionText').val() == '') {
             var currentEditQid = $("#q" + webQuiz.currentEditQid),
             choiceContainer = currentEditQid.find("div.choices");
@@ -143,7 +143,7 @@ var debugVar;
                 $('#questions button.add-choice').trigger('click');
                 return;
             }
-            var response = webQuiz.setToPreview(webQuiz.lastEditQid, $("#q" + webQuiz.lastEditQid), 'test');    
+            var response = webQuiz.setToPreview(webQuiz.lastEditQid, $("#q" + webQuiz.lastEditQid), 'test', 'question/save/', question_number);    
         }
         
     });
@@ -227,9 +227,11 @@ var debugVar;
             questionTypeId
         );
 
+        var question_number = $(this).closest('tr').index()+1;
+
         if (validationError == false) {
             webQuiz.addNewQuestion();
-            var response = webQuiz.setToPreview(webQuiz.lastEditQid, $("#q" + webQuiz.lastEditQid), 'test');    
+            var response = webQuiz.setToPreview(webQuiz.lastEditQid, $("#q" + webQuiz.lastEditQid), 'test', 'question/save/', question_number);    
         }
         
     });

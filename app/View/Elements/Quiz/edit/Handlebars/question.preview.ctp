@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-xs-12 col-md-6">         
                 <p>
-                    <span class="h4">{{text}}</span><br />
+                    <span class="h4"><span class="question_number">{{question_number}}</span>. {{text}}</span><br />
                     <span class="text-muted">{{explanation}}</span>
                 </p>
                 {{#if warn_message}}

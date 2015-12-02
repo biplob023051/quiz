@@ -14,7 +14,7 @@ echo json_encode(array(
     <div class="row">
         <div class="col-xs-12 col-md-6">            
             <p>
-                <span class="h4"><?php echo $text ?></span><br />
+                <span class="h4"><?php echo '<span class="question_number">' . $number . '</span>. ' .  $text ?></span><br />
                 <span class="text-muted"><?php echo $explanation ?></span>
             </p>
         </div>

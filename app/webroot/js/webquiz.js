@@ -122,6 +122,14 @@ var webQuiz = {
 //                    if (question !== null)
 //                        delete webQuiz.questionData[question.index];
                     questionContainer.remove();
+
+                    // change all the question number as well
+                    //var current_question_number = questionContainer.closest('tr').index()+1;
+                    var re_index = 1;
+                    $('#questions > tbody  > tr').each(function() {
+                        $(this).find('.question_number').html(re_index);
+                        re_index++;
+                    });
                 }
                 else
                 {
@@ -163,7 +171,7 @@ var webQuiz = {
 
         return questionType;
     },
-    setToPreview: function (questionId, questionContainer, onSuccessCallback, ajax_url)
+    setToPreview: function (questionId, questionContainer, onSuccessCallback, ajax_url, question_number)
     {
         questionId = parseInt(questionId);
 
@@ -184,6 +192,7 @@ var webQuiz = {
             delete _questionData['question_id'];
 
         ajax_url = typeof ajax_url !== 'undefined' ? ajax_url : 'question/save/';
+        question_number = typeof question_number !== 'undefined' ? question_number : 1;
 
         $.ajax({
             data: _questionData.data,
@@ -209,6 +218,8 @@ var webQuiz = {
                     if($("#q-1").hasClass('warn')) {
                         tmp.warn_message = true;
                     }
+
+                    tmp.question_number = question_number;
 
                     // remove last question if not save
                     if(typeof(response.dummy) != "undefined" && response.dummy !== null) {
