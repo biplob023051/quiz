@@ -63,7 +63,7 @@ $(document).ready(function()
         //     return false;    
         // }
 
-        var marks = parseInt($(this).val());
+        var marks = $(this).val();
         if(isNaN(marks)) {
             marks = 'null';
         }
@@ -119,12 +119,17 @@ $(document).ready(function()
                 {
                     $("#studentscr2-" + std_id).text(response.score);
                     $("#studentscr1-" + std_id).text(response.score);
-                    var originalBackgroundColor = inputField.css('background-color'),
+                    if (inputField.hasClass('automatic_rating')) { // if automatic question update
+                        inputField.hide();
+                        inputField.prev().html(marks).show();
+                    } else {
+                        var originalBackgroundColor = inputField.css('background-color'),
                         originalColor = inputField.css('color');
-                    inputField.css({ 'background-color' : 'green', 'color' : 'white' });
-                    setTimeout(function(){
-                      inputField.css({ 'background-color' : originalBackgroundColor, 'color' : originalColor });
-                    }, 1000);
+                        inputField.css({ 'background-color' : 'green', 'color' : 'white' });
+                        setTimeout(function(){
+                          inputField.css({ 'background-color' : originalBackgroundColor, 'color' : originalColor });
+                        }, 1000);
+                    }
                     if (inputField.parents('.read-essay').first().length > 0) {
                         if (marks == 'null') {
                             inputField.parents('.read-essay').first().prev().children().hide();
@@ -304,6 +309,11 @@ $(document).ready(function()
         window.frames["print_frame"].window.focus();
         window.frames["print_frame"].window.print();
     }
+
+    $(document).on('click', '.automatic', function () {
+        $(this).hide();
+        $(this).next().show();
+    });
     
 })(jQuery);
 

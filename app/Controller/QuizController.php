@@ -227,7 +227,7 @@ class QuizController extends AppController {
         ));
 
         if (empty($data))
-            throw new NotFoundException;
+            throw new NotFoundException(__('The quiz is closed at this time.'));
 
         // check user access level
         if ((($data['User']['account_level'] == 0) || 
@@ -297,6 +297,8 @@ class QuizController extends AppController {
         $classes = Hash::combine($checkPermission['Student'], '{n}.class', '{n}.class');
         // classes merge with all class
         $classes = Hash::merge(array('all' => __('All Classes')), $classes);
+
+        sort($classes);
 
         $lang_strings['remove_question'] = __('Are you sure you want to remove ');
         $lang_strings['with_points'] = __(') answer with points ');

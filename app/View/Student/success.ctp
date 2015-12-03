@@ -19,14 +19,14 @@
 				                $result_html = $result_html . '<p class="text-danger">' . __('Not Answered') .'</p>';
 				            } else { 
 				                if ($answer['score'] > 0) {
-				                    $result_html = $result_html . '<p class="text-success">' . $answer['text'] . '<span class="score">' . $answer['score'] . '</span><br/>';
+				                    $result_html = $result_html . '<p class="text-success">' . $answer['text'] . ' <span class="score">' . ($answer['score']+0) . '</span><br/>';
 				                } elseif ($answer['score'] == '') {
 				                	$pending++;
-				                    $result_html = $result_html . '<p>' . $answer['text'] . '<span class="score">' . __('On hold') . '</span><br/>';
+				                    $result_html = $result_html . '<p>' . $answer['text'] . ' <span class="score">' . __('On hold') . '</span><br/>';
 				                } elseif ($answer['score'] == 0) {
-				                    $result_html = $result_html . '<p class="text-warning">' . $answer['text'] . '<span class="score">' . $answer['score'] . '</span><br/>';
+				                    $result_html = $result_html . '<p class="text-warning">' . $answer['text'] . ' <span class="score">' . ($answer['score']+0) . '</span><br/>';
 				                } else {
-				                    $result_html = $result_html . '<p class="text-danger">' . $answer['text'] . '<span class="score">' . $answer['score'] . '</span><br/>';
+				                    $result_html = $result_html . '<p class="text-danger">' . $answer['text'] . ' <span class="score">' . ($answer['score']+0) . '</span><br/>';
 				                }    
 				            } 
 				        } 
@@ -37,7 +37,7 @@
 		?>
 		<div class="col-md-12">
 			<h3><?php echo __('YOUR RESULTS'); ?></h3>
-			<h2><?php echo __('Total') . ': ' . $student_result['Ranking']['score'].'/'.$student_result['Ranking']['total']; ?><?php echo !empty($pending) ? ' (' . $pending . ' ' . __('YOUR ANSWER waiting for rating') . ')' : ''; ?></h2>
+			<h2><?php echo __('Total') . ': ' . ($student_result['Ranking']['score']+0) . '/' . ($student_result['Ranking']['total']+0); ?><?php echo !empty($pending) ? ' (' . $pending . ' ' . __('YOUR ANSWER waiting for rating') . ')' : ''; ?></h2>
 		</div>
 		<?php echo $result_html; ?>
 	</div>

@@ -34,7 +34,7 @@
             max="<?php echo empty($value3['Choice'][0]['points']) ? $value3['QuestionType']['manual_scoring'] : $value3['Choice'][0]['points']; ?>"
             /> / 
                     <?php endif; ?>
-                    <?php echo empty($value3['Choice'][0]['points']) ? $value3['QuestionType']['manual_scoring'] : $value3['Choice'][0]['points']; ?>
+                    <?php echo empty($value3['Choice'][0]['points']) ? ($value3['QuestionType']['manual_scoring']+0) : ($value3['Choice'][0]['points']+0); ?>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __('Close'); ?></button>
                 </span>
             </div>

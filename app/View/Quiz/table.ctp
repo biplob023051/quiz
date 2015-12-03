@@ -56,7 +56,7 @@ $this->assign('title', __('Answer Table'));
         <table class="table table-hover table-responsive table-striped">
             <thead>
                 <tr>
-                    <th class="serial"><?php echo __('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'); ?></th>
+                    <th class="serial sortable"><?php echo __('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'); ?></th>
                     <th class="sortable"><?php echo __('Timestamp'); ?></th>
                     <th class="sortable"><?php echo __('Name'); ?></th>
                     <th class="sortable"><?php echo __('Class'); ?></th>
@@ -89,7 +89,7 @@ $this->assign('title', __('Answer Table'));
                             <?php foreach ($quizDetails['Ranking'] as $key2 => $value2) : ?>
                                 <?php if ($value1['id'] == $value2['student_id']) : ?>
                                     <td>
-                                        <span id="studentscr1-<?php echo $value1['id']; ?>"><?php echo $value2['score']; ?></span>/<?php echo $value2['total']; ?>
+                                        <span id="studentscr1-<?php echo $value1['id']; ?>"><?php echo ($value2['score']+0); ?></span>/<?php echo ($value2['total']+0); ?>
                                     </td>
                                 <?php endif; ?>
                             <?php endforeach; ?>

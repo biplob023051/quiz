@@ -366,3 +366,16 @@ i.close {
 .error-message {
     color: red;
 }
+
+.hide-error {
+    display: none;
+}
+
+.automatic_rating {
+    display: none;
+    width: 70px;
+}
+
+.automatic {
+    cursor: pointer;
+}
