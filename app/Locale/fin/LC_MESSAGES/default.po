@@ -1175,3 +1175,7 @@ msgstr "Vastauksesi odottaa arviointia"
 #: View/Student/success.ctp:40
 msgid "Successfully removed"
 msgstr "Vastaus on poistettu"
+
+#: Controller/QuizController.php:230
+msgid "The quiz is closed at this time."
+msgstr "Testi on suljettu tällä hetkellä."

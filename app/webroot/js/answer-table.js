@@ -311,8 +311,17 @@ $(document).ready(function()
     }
 
     $(document).on('click', '.automatic', function () {
+        $('.automatic_rating').each(function(){
+            $(this).hide();
+            $(this).prev().show();
+        });
         $(this).hide();
         $(this).next().show();
+        var elem = $(this);
+        setTimeout(function(){
+            elem.next().hide();
+            elem.show();
+        }, 7000);
     });
     
 })(jQuery);

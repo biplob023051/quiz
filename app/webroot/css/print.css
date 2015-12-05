@@ -422,4 +422,8 @@ i.close {
             border-bottom: 2px solid #eee !important;
         }
 
+        #name_section {
+        	background-color: red !important;
+        }
+
         }

@@ -296,9 +296,8 @@ class QuizController extends AppController {
         // get student classes
         $classes = Hash::combine($checkPermission['Student'], '{n}.class', '{n}.class');
         // classes merge with all class
-        $classes = Hash::merge(array('all' => __('All Classes')), $classes);
-
         sort($classes);
+        $classes = Hash::merge(array('all' => __('All Classes')), $classes);
 
         $lang_strings['remove_question'] = __('Are you sure you want to remove ');
         $lang_strings['with_points'] = __(') answer with points ');

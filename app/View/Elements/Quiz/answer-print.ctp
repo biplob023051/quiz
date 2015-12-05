@@ -7,19 +7,19 @@
                 <!-- check correct and incorrect -->
                 <?php if (isset($inline)) : ?>
                     <?php if ($value4['score'] > 0) : ?>
-                        <span class="text-success"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span>'; ?></span>
+                        <span class="text-success"><?php echo $value4['text'] . ' <span class="score">' . ($value4['score']+0) . '</span>'; ?></span>
                     <?php elseif ($value4['score'] == 0) : ?>
                         <span class="text-warning"><?php echo $value4['text']; ?></span>
                     <?php else : ?>
-                        <span class="text-danger"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span>'; ?></span>
+                        <span class="text-danger"><?php echo $value4['text'] . ' <span class="score">' . ($value4['score']+0) . '</span>'; ?></span>
                     <?php endif; ?>
                 <?php else : ?>  
                     <?php if ($value4['score'] > 0) : ?>
-                        <div class="text-success"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
+                        <div class="text-success"><?php echo $value4['text'] . ' <span class="score">' . ($value4['score']+0) . '</span><br/>'; ?></div>
                     <?php elseif ($value4['score'] == 0) : ?>
                         <div class="text-warning"><?php echo $value4['text'] . '<br/>'; ?></div>
                     <?php else : ?>
-                        <div class="text-danger"><?php echo $value4['text'] . ' <span class="score">' . $value4['score'] . '</span><br/>'; ?></div>
+                        <div class="text-danger"><?php echo $value4['text'] . ' <span class="score">' . ($value4['score']+0) . '</span><br/>'; ?></div>
                     <?php endif; ?>
                 <?php endif; ?>   
             <?php endif; ?> 
@@ -29,9 +29,9 @@
                 <div class="text-danger"><?php echo __('Not Answered'); ?></div>
             <?php else : ?>
                 <?php echo $value4['text']; ?>
-                <?php echo empty($value4['score']) ? 0 : $value4['score']; ?>
+                <?php echo empty($value4['score']) ? 0 : ($value4['score']+0); ?>
                 <?php if (!empty($value3['Choice'][0]['points'])) : ?>
-                    <?php echo '/' . $value3['Choice'][0]['points']; ?>
+                    <?php echo '/' . ($value3['Choice'][0]['points']+0); ?>
                 <?php endif; ?>
             <?php endif; ?>
         <?php else: ?>
@@ -40,7 +40,7 @@
                 <div class="text-danger"><?php echo __('Not Answered'); ?></div>
             <?php else : ?>
                 <?php echo $value4['text']; ?>
-                <span class="essay-points"><?php echo empty($value4['score']) ? ' <span class="score">' . 0 . '</span>' : ' <span class="score">' . $value4['score'] . '</span>'; ?></span>
+                <span class="essay-points"><?php echo empty($value4['score']) ? ' <span class="score">' . 0 . '</span>' : ' <span class="score">' . ($value4['score']+0) . '</span>'; ?></span>
             <?php endif; ?>
         <?php endif; ?>
     <?php endif; ?>
