@@ -1,0 +1,1 @@
+<h2><?php echo __('The quiz is closed at this time.'); ?></h2>

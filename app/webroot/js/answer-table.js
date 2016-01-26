@@ -303,9 +303,9 @@ $(document).ready(function()
             }
         });
     });
-    printDivCSS = new String ('<link href="'+appData.baseUrl+'/css/print.css" rel="stylesheet" media="print" type="text/css">');
+    printDivCSS = new String ('<link rel="stylesheet" href="'+appData.baseUrl+'css/print_test.css" type="text/css" media="print">');
     function printDiv() {
-        window.frames["print_frame"].document.body.innerHTML=printDivCSS+$('#print_div').html();
+        window.frames["print_frame"].document.body.innerHTML=$('#print_div').html();
         window.frames["print_frame"].window.focus();
         window.frames["print_frame"].window.print();
     }

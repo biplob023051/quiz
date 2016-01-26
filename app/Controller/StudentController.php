@@ -91,12 +91,18 @@ class StudentController extends AppController {
                     } elseif ($value2['Question']['question_type_id'] == 2) {
                         // short automatic point
                         $words = explode(';', $value1['text']);
+
                         if (count($words) == 1) {
                             $words = explode(' ', $value1['text']);
                         }
+
+                        $ans_string = str_replace(' ', '', $value2['Choice']['text']);
+
+                        $matched_word = explode(';', $ans_string);
                         
                         foreach ($words as $key => $value) {
-                            if (!empty($value) && (strpos(strtolower($value2['Choice']['text']), strtolower($value)) !== false)) {
+                            //if (!empty($value) && (strpos(strtolower($value2['Choice']['text']), strtolower(trim($value))) !== false)) {
+                            if (!empty($value) && (in_array(trim($value), $matched_word))) {
                                 $data['Answer'][$key1]['score'] = $value2['Choice']['points'];
                                 $correct_answer = $correct_answer + $value2['Choice']['points'];
                                 break;

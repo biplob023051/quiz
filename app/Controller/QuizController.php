@@ -226,35 +226,37 @@ class QuizController extends AppController {
             )
         ));
 
-        if (empty($data))
-            throw new NotFoundException(__('The quiz is closed at this time.'));
+        if (empty($data)) {
+            $this->set('title_for_layout', __('Closed'));
+            $this->render('not_found');
+        } else {
+            // check user access level
+            if ((($data['User']['account_level'] == 0) || 
+                (($data['User']['account_level'] == 1) && (strtotime($data['User']['expired']) < time()))) 
+                && ($data['Quiz']['student_count'] >= 40)) {
+                $this->Session->setFlash(__('Sorry, only allow 40 students to take this quiz.'), 'error_form', array(), 'error');
+                return $this->redirect(array('controller' => 'quiz', 'action' => 'no_permission'));
+            }
 
-        // check user access level
-        if ((($data['User']['account_level'] == 0) || 
-            (($data['User']['account_level'] == 1) && (strtotime($data['User']['expired']) < time()))) 
-            && ($data['Quiz']['student_count'] >= 40)) {
-            $this->Session->setFlash(__('Sorry, only allow 40 students to take this quiz.'), 'error_form', array(), 'error');
-            return $this->redirect(array('controller' => 'quiz', 'action' => 'no_permission'));
+            $lang_strings[0] = __('Internet connection has been lost, please try again later.');
+            $lang_strings[1] = __('All questions answered. Turn in your quiz?');
+            $lang_strings[2] = __('Questions ');
+            $lang_strings[3] = __(' unanswered.');
+            $lang_strings[4] = __(' Turn in your quiz?');
+            $lang_strings[5] = __('First Name is Required');
+            $lang_strings[6] = __('Last Name is Required');
+            $lang_strings[7] = __('Class is Required');
+            $lang_strings['last_name_invalid'] = __('Invalid Last Name');
+            $lang_strings['first_name_invalid'] = __('Invalid First Name');
+            $lang_strings['class_invalid'] = __('Invalid Class');
+            $lang_strings['right_click_disabled'] = __('Sorry, right click disabled');
+            $lang_strings['browser_switch'] = __('Sorry, you are not allowed to switch browser tab');
+            $lang_strings['leave_quiz'] = __('Are you sure that you want to leave this quiz?');
+
+            $this->disableCache();
+            $this->set('data', $data);
+            $this->set(compact('lang_strings'));
         }
-
-        $lang_strings[0] = __('Internet connection has been lost, please try again later.');
-        $lang_strings[1] = __('All questions answered. Turn in your quiz?');
-        $lang_strings[2] = __('Questions ');
-        $lang_strings[3] = __(' unanswered.');
-        $lang_strings[4] = __(' Turn in your quiz?');
-        $lang_strings[5] = __('First Name is Required');
-        $lang_strings[6] = __('Last Name is Required');
-        $lang_strings[7] = __('Class is Required');
-        $lang_strings['last_name_invalid'] = __('Invalid Last Name');
-        $lang_strings['first_name_invalid'] = __('Invalid First Name');
-        $lang_strings['class_invalid'] = __('Invalid Class');
-        $lang_strings['right_click_disabled'] = __('Sorry, right click disabled');
-        $lang_strings['browser_switch'] = __('Sorry, you are not allowed to switch browser tab');
-        $lang_strings['leave_quiz'] = __('Are you sure that you want to leave this quiz?');
-
-        $this->disableCache();
-        $this->set('data', $data);
-        $this->set(compact('lang_strings'));
     }
 
     public function finish() {
