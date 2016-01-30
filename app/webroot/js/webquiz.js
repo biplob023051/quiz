@@ -97,6 +97,8 @@ var webQuiz = {
             isNew: true,
             preview: false
         });
+        // call sortable function
+        webQuiz.choiceSortable();
         return true;
     },
     addQuestion: function (question)
@@ -530,5 +532,26 @@ var webQuiz = {
             }
         });
 
+    },
+    choiceSortable: function ()
+    {
+        $(".choices").sortable({
+            tolerance: 'pointer',
+            revert: 'invalid',
+            placeholder: 'row well placeholder tile',
+            forceHelperSize: true,
+            stop: function( ) {
+                webQuiz.changeChoiceWeightValue();
+            }
+        });
+    },
+    changeChoiceWeightValue: function ()
+    {
+        var key = $(".number").length;
+        $(".number").each(function() {
+            var choice_no = $(this).children().attr('id').match(/\d+/);
+            $('#Choice' + choice_no + 'Weight').val(key);
+            key--;
+        });
     }
 };
