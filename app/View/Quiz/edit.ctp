@@ -1,5 +1,6 @@
 <?php
 $this->Html->script(array(
+    'jquery-ui',
     /* production */
     //'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js',
     'handlebars.min',
@@ -10,10 +11,11 @@ $this->Html->script(array(
     //'tests/edit'
         ), array('inline' => false)
 );
-// $this->Html->css(array(
-//     'qunit-1.17.1'
-//         ), array('inline' => false)
-// );
+$this->Html->css(array(
+    //'qunit-1.17.1'
+    'jquery-ui'
+        ), array('inline' => false)
+);
 $this->assign('title', __('Edit Quiz'));
 ?>
 
@@ -152,6 +154,20 @@ echo json_encode(array(
 </script>
 
 <style type="text/css">
+.placeholder {
+    border: 1px solid green;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 10px #888;
+    -moz-box-shadow: 0px 0px 10px #888;
+    box-shadow: 0px 0px 10px #888;
+    width: 50%;
+}
+.tile {
+    height: 70px;
+}
+.grid {
+    margin-top: 1em;
+}
 #settings {
     margin: 5px 0px;
 }
@@ -163,7 +179,7 @@ echo json_encode(array(
     margin: 0;
 } 
 #settings-options {
-    padding: 0px 25px !important;
+    padding: 0px 50px !important;
 }
 #settings-options label {
     padding: 0 5px !important;

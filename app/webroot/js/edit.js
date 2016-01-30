@@ -10,7 +10,7 @@ var debugVar;
     webQuiz.init(webQuizConfig);
     webQuiz.addNewQuestion();
 
-    
+    callSortable();
     
     $(document).on('click', '#questions button.add-choice', function () {
         //console.profile("Adding choice");
@@ -80,6 +80,7 @@ var debugVar;
                         $("#q" + questionId).addClass("EditQuestionBorder");
                         webQuiz.lastEditQid = question.question_id;
                         webQuiz.currentEditQid = questionId;
+                        callSortable();
                     },
                     'question/setPreview/'
             );    
@@ -108,10 +109,10 @@ var debugVar;
                         $("#q" + questionId).addClass("EditQuestionBorder");
                         webQuiz.lastEditQid = question.question_id;
                         webQuiz.currentEditQid = questionId;
+                        callSortable();
                     }
             );
-        }       
-        
+        }      
 
         //console.profileEnd();
     });
@@ -143,6 +144,8 @@ var debugVar;
                 $('#questions button.add-choice').trigger('click');
                 return;
             }
+            // call sortable function
+            callSortable();
             var response = webQuiz.setToPreview(webQuiz.lastEditQid, $("#q" + webQuiz.lastEditQid), 'test', 'question/save/', question_number);    
         }
         
@@ -231,6 +234,7 @@ var debugVar;
 
         if (validationError == false) {
             webQuiz.addNewQuestion();
+            callSortable();
             var response = webQuiz.setToPreview(webQuiz.lastEditQid, $("#q" + webQuiz.lastEditQid), 'test', 'question/save/', question_number);    
         }
         
@@ -242,3 +246,31 @@ var debugVar;
     });
 
 })(jQuery);
+
+function callSortable() {
+    $(".choices").sortable({
+        tolerance: 'pointer',
+        revert: 'invalid',
+        placeholder: 'row well placeholder tile',
+        forceHelperSize: true,
+        stop: function( ) {
+            // var order = $("#sortable").sortable("serialize", {key:'order[]'});
+            // $( "p" ).html( order );
+            //console.log($(this).find('.number').children().val());
+            appendInputData();
+        }
+    });
+}
+
+function appendInputData() {
+    var key = $(".number").length;
+    $(".number").each(function() {
+        var choice_no = $(this).children().attr('id').match(/\d+/);
+        $('#Choice' + choice_no + 'Weight').val(key);
+        //$(this).append('<input class="weight" id="Choice'+choice_no+'Weight" type="hidden" name="data[Choice]['+choice_no+'][weight]" value="'+key+'">');
+        key--;
+        //<input type="hidden" name="data[Choice]['+choice_no+'][points]"" value="'+key+'"'>
+        //alert(key);
+        //alert(choice_no);
+    });
+}

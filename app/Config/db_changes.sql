@@ -1,0 +1,1 @@
+ALTER TABLE `choices` ADD `weight` TINYINT(2) NULL AFTER `points`;

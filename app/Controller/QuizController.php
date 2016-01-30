@@ -112,7 +112,7 @@ class QuizController extends AppController {
             ),
             'contain' => array(
                 'Question' => array(
-                    'Choice',
+                    'Choice' => array('order' => array('Choice.weight DESC', 'Choice.id ASC')),
                     'QuestionType' => array(
                         'fields' => array('template_name', 'id', 'multiple_choices')
                     )

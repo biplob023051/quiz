@@ -28,6 +28,13 @@
                         ));
                         ?>
                     </div>
+                    <?php
+                    echo $this->Form->input('Choice.{{id}}.weight', array(
+                        'class' => 'c-weight',
+                        'type' => 'hidden',
+                        'default' => '{{weight}}'
+                    ));
+                    ?>
                     <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
                         <?php echo $this->Form->button('<i class="glyphicon close"></i>', array('type' => 'button', 'choice' => '{{id}}', 'class' => 'remove-choice', 'title' => __('Remove choice'))); ?>
                     </div>
@@ -65,6 +72,13 @@
                         ));
                         ?>
                     </div>
+                    <?php
+                    echo $this->Form->input('Choice.{{id}}.weight', array(
+                        'class' => 'c-weight',
+                        'type' => 'hidden',
+                        'default' => '{{weight}}'
+                    ));
+                    ?>
                     <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
                         <?php echo $this->Form->button('<i class="glyphicon close"></i>', array('type' => 'button', 'choice' => '{{id}}', 'class' => 'remove-choice', 'title' => __('Remove choice'))); ?>
                     </div>

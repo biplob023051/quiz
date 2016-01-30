@@ -29,7 +29,7 @@ echo json_encode(array(
             </div>
         </div>
     </div>
-    <div class="choices">
+    <div class="preview"> <!-- before it was choices -->
         <?php
         foreach ($Choice as $c) {
             echo $this->element("Quiz/edit/choice.{$QuestionType['template_name']}", $c);
