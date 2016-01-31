@@ -205,8 +205,17 @@ class StudentController extends AppController {
             $student_result = $this->Student->find('first', array(
                 'conditions' => array('Student.id' => $std_id)
             ));
-            $this->Student->Quiz->unbindModelAll(array('Question'));
-            $quiz = $this->Student->Quiz->findById($student_result['Quiz']['id']);
+            $this->Student->Quiz->Behaviors->load('Containable');
+            $quiz = $this->Student->Quiz->find('first', array(
+                'conditions' => array(
+                    'Quiz.id' => $student_result['Quiz']['id'],
+                ),
+                'contain' => array(
+                    'Question' => array(
+                        'order' => array('Question.weight DESC', 'Question.id ASC')
+                    ),
+                )
+            ));
             $this->set(compact('student_result', 'quiz'));
             $this->Session->delete('show_result');
         }
