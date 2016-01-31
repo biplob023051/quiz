@@ -151,12 +151,14 @@ class QuestionController extends AJAXController {
 
         if ($this->Question->saveAssociated($data)) {
             $data['Question']['id'] = $this->Question->id;
-            // sort by weight asc
-            usort($data['Choice'], function($a, $b) {
-                return $a['weight'] - $b['weight'];
-            });
-            // weight desc
-            $data['Choice'] = array_reverse($data['Choice']);
+            if (isset($this->request->data['is_sort'])) { // if choice sorting exist then rearrange array by weight
+                // sort by weight asc
+                usort($data['Choice'], function($a, $b) {
+                    return $a['weight'] - $b['weight'];
+                });
+                // weight desc
+                $data['Choice'] = array_reverse($data['Choice']);
+            }
 
             $this->set('data', array(
                 'success' => true,

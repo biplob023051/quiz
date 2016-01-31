@@ -540,13 +540,19 @@ var webQuiz = {
             revert: 'invalid',
             placeholder: 'row well placeholder tile',
             forceHelperSize: true,
-            stop: function( ) {
+            update: function( ) {
                 webQuiz.changeChoiceWeightValue();
             }
         }).disableSelection();
     },
     changeChoiceWeightValue: function ()
     {
+        if ( $( "#is_sort" ).length ) { // add a input type to the form that sorting is true
+            // do nothing
+        } else {
+            // add the input type
+            $("form#QuestionEditForm").append('<input type="hidden" id="is_sort" name="data[is_sort]" value="1" >');
+        }
         var key = $(".number").length;
         $(".number").each(function() {
             var choice_no = $(this).children().attr('id').match(/\d+/);
