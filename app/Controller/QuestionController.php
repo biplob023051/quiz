@@ -184,4 +184,18 @@ class QuestionController extends AJAXController {
         }
     }
 
+    // ajax sorting question on drag drop
+    public function ajax_sort() {
+        $question_ids = $this->request->data['question_ids'];
+        $max_weight = count($question_ids);
+        foreach ($question_ids as $key => $id) {
+            $this->Question->id = $id;
+            $this->Question->saveField('weight', $max_weight--);
+        }
+        $this->set('data', array(
+            'success' => true,
+            'no' => count($question_ids)
+        ));
+    }
+
 }

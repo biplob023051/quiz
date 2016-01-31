@@ -240,4 +240,24 @@ var debugVar;
         $('#settings-options').toggle();
     });
 
+    // Return a helper with preserved width of cells
+    var fixHelper = function(e, ui) {
+        ui.children().each(function() {
+            $(this).width($(this).width());
+        });
+        return ui;
+    };
+
+    $("#questions tbody").sortable({
+        items: 'tr:not(#q-1)',
+        tolerance: 'pointer',
+        revert: 'invalid',
+        placeholder: 'well tile',
+        forceHelperSize: true,
+        helper: fixHelper,
+        update: function( ) {
+            webQuiz.reArrangeQuestionNumber();
+        }
+    }).disableSelection();
+
 })(jQuery);

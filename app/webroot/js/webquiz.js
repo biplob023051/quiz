@@ -543,7 +543,7 @@ var webQuiz = {
             stop: function( ) {
                 webQuiz.changeChoiceWeightValue();
             }
-        });
+        }).disableSelection();
     },
     changeChoiceWeightValue: function ()
     {
@@ -552,6 +552,36 @@ var webQuiz = {
             var choice_no = $(this).children().attr('id').match(/\d+/);
             $('#Choice' + choice_no + 'Weight').val(key);
             key--;
+        });
+    },
+    reArrangeQuestionNumber: function ()
+    {
+        var re_index = 1;
+        var question_ids = [];
+        $('#questions > tbody  > tr').each(function() {
+            if ($(this).attr('id') != 'q-1') { // check if new question tr id
+                question_ids.push(parseInt($(this).attr('id').match(/\d+/)));
+                $(this).find('.question_number').html(re_index);
+                re_index++;
+            }
+        });
+        console.log(question_ids);
+        $.ajax({
+            data: {question_ids: question_ids},
+            url: this.baseUrl + 'question/ajax_sort',
+            dataType: 'json',
+            type: 'post',
+            success: function (response)
+            {
+                if (response.success === true)
+                {
+                    // do nothing
+                }
+                else
+                {
+                    alert('Something went wrong, please try again later\n\n');
+                }
+            }
         });
     }
 };
