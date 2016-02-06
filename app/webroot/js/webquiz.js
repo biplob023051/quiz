@@ -221,7 +221,22 @@ var webQuiz = {
                         tmp.warn_message = true;
                     }
 
+                    // question numbering
                     tmp.question_number = question_number;
+
+                    // for others type add related class with question title
+                    // this logic for question number
+                    // this logic for table#question tr class
+                    // if class exist then no question number
+                    if (tmp.question_type_id == 6) {
+                        tmp.relatedClass = 'header';
+                    } else if(tmp.question_type_id == 7) {
+                        tmp.relatedClass = 'youtube';
+                    } else if(tmp.question_type_id == 7) {
+                        tmp.relatedClass = 'image-url';
+                    } else { // if regular questions
+                        // do nothing right now
+                    }
 
                     // remove last question if not save
                     if(typeof(response.dummy) != "undefined" && response.dummy !== null) {

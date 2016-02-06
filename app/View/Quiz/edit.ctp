@@ -84,8 +84,9 @@ echo $this->Form->create('Quiz', array(
             <!--nocache-->
             <?php
             $i = 1;
+            $othersQuestionType = array(6, 7, 8); // this categories for others type questions
             foreach ($data['Question'] as $question) {
-
+                
                 $choices_number = count($question['Choice']);
                 if (!$question['QuestionType']['multiple_choices'] && $choices_number > 1) {
                     for ($i = 1; $i < $choices_number; ++$i) {
@@ -95,7 +96,11 @@ echo $this->Form->create('Quiz', array(
 
                 $question['number'] = $i;
                 echo $this->element('Quiz/edit/question', $question);
-                ++$i;
+                if (!in_array($question['question_type_id'], $othersQuestionType)) { 
+                    // only considered main question for numbering
+                    // not others type questions
+                    ++$i;
+                }
             }
             ?>
             <!--/nocache-->

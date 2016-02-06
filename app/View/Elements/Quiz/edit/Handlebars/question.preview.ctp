@@ -1,9 +1,18 @@
-<tr id="q{{id}}">
+{{#if relatedClass}}
+    <tr id="q{{id}}" class="others_type">
+{{else}}
+    <tr id="q{{id}}">
+{{/if}}
     <td>   
         <div class="row">
             <div class="col-xs-12 col-md-6">         
                 <p>
-                    <span class="h4"><span class="question_number">{{question_number}}</span>. {{text}}</span><br />
+                    {{#if relatedClass}}
+                        <span class="h4 {{relatedClass}}">{{text}}</span>
+                    {{else}}
+                        <span class="h4"><span class="question_number">{{question_number}}</span>. {{text}}</span>
+                    {{/if}}
+                    <br />
                     <span class="text-muted">{{explanation}}</span>
                 </p>
                 {{#if warn_message}}

@@ -116,7 +116,7 @@ var debugVar;
     });
     
     $("#add-question").on('click', function () {
-        var question_number = $('#questions tbody').children('tr').length;
+        var question_number = $('#questions tbody').children('tr:not(.others_type)').length;
     
         if ($('#QuestionText').val() == '') {
             var currentEditQid = $("#q" + webQuiz.currentEditQid),
@@ -226,7 +226,17 @@ var debugVar;
             questionTypeId
         );
 
-        var question_number = $(this).closest('tr').index()+1;
+        //var question_number = $(this).closest('tr').index()+1;
+        var currentTr = $(this).closest('tr');
+
+        var question_number = 1;
+        $('#questions > tbody  > tr:not(.others_type)').each(function() {
+            if ($(this).index() == currentTr.index()) {
+                return false;
+            } else {
+                question_number++;
+            }
+        });
 
         if (validationError == false) {
             webQuiz.addNewQuestion();

@@ -28,6 +28,9 @@ class QuestionController extends AJAXController {
     public function setPreview($questionId) {
         $this->Session->delete('Choice');
         $data = $this->request->data;
+        if (empty($data['Choice'])) {
+            $data['Choice'] = array();
+        }
         $data['Question']['id'] = $questionId;
         $this->set('data', array(
             'success' => true,
@@ -124,7 +127,7 @@ class QuestionController extends AJAXController {
             // short_manual
             $data['Choice'][0]['text'] = 'Short_manual';
             $data['Choice'][0]['points'] = !empty($data['Choice'][0]['points']) ? $data['Choice'][0]['points'] : 0;
-        } else {
+        } elseif($data['Question']['question_type_id'] == 5) { // essay type
             // essay
             if (!(isset($data['isNew']) && $data['isNew']) || $questionId != -1) {
                 $data['Choice'][0]['points'] = $data['Choice'][0]['text'];
@@ -133,6 +136,15 @@ class QuestionController extends AJAXController {
                 $data['Choice'][0]['points'] = !empty($data['Choice'][0]['text']) ? $data['Choice'][0]['text'] : 0;
                 $data['Choice'][0]['text'] = 'Essay';
             }
+        } elseif($data['Question']['question_type_id'] == 7) { // youtube type
+            if (empty($data['Choice'][0]['text'])) {   
+                echo json_encode(array('success' => false, 'message' => 'Enter youtube url'));
+                exit;
+            }
+            $youtube = explode('=', $data['Choice'][0]['text']);
+            if (count($youtube) > 1) { // if watch mode
+                $data['Choice'][0]['text'] = 'https://www.youtube.com/embed/' . $youtube[1];
+            } 
         }
 
         // If user leave form empty, set the default
@@ -163,7 +175,7 @@ class QuestionController extends AJAXController {
             $this->set('data', array(
                 'success' => true,
                 'Question' => $data['Question'],
-                'Choice' => $data['Choice']
+                'Choice' => empty($data['Choice']) ? array() : $data['Choice']
             ));
         }
     }

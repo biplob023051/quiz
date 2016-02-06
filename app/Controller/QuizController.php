@@ -127,7 +127,7 @@ class QuizController extends AppController {
         $this->QuestionType->Behaviors->load('Containable');
         $this->QuestionType->contain();
         $data['QuestionTypes'] = $this->QuestionType->find('all', array(
-            'fields' => array('name', 'template_name', 'multiple_choices', 'id')
+            'fields' => array('name', 'template_name', 'multiple_choices', 'id', 'type')
         ));
 
         if (!empty($initial)) {

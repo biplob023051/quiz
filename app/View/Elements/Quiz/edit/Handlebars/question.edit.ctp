@@ -19,17 +19,42 @@
                 <div class="form-group">
                     <?php
                     $_data = array();
+                    $_others = array();
                     foreach ($data['QuestionTypes'] as $qt) {
-                        $_data[$qt['QuestionType']['id']] = __($qt['QuestionType']['name']);
+                        if (empty($qt['QuestionType']['type'])) {
+                            $_data[$qt['QuestionType']['id']] = __($qt['QuestionType']['name']);
+                        } else {
+                            $_others[$qt['QuestionType']['id']] = __($qt['QuestionType']['name']);
+                        }
                     }
-                    echo $this->Form->input('Question.question_type_id', array(
-                        'options' => $_data,
-                        'default' => $data['QuestionTypes'][0]['QuestionType']['id'],
-                        'class' => 'form-control choice-type-selector',
-                        'label' => false,
-                        'id' => 'qs-{{id}}'
-                    ));
+                    //array_unshift($_data, __('Question types'));
+                    // echo $this->Form->input('Question.question_type_id', array(
+                    //     'options' => $_data,
+                    //     'default' => $data['QuestionTypes'][0]['QuestionType']['id'],
+                    //     'class' => 'form-control choice-type-selector',
+                    //     'label' => false,
+                    //     'id' => 'qs-{{id}}'
+                    // ));
                     ?>
+                    
+
+                    <div class="form-group">
+                        <div class="input select">
+                            <select name="data[Question][question_type_id]" class="form-control choice-type-selector" id="qs-{{id}}">
+                                <optgroup label="<?php echo __('Question types'); ?>">
+                                    <?php foreach ($_data as $key => $value) : ?>
+                                        <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                    <?php endforeach; ?>
+                                </optgroup>
+                                <optgroup label="<?php echo __('Others'); ?>">
+                                    <?php foreach ($_others as $key => $value) : ?>
+                                        <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                    <?php endforeach; ?>
+                                </optgroup>
+                            </select>
+                        </div>                
+                    </div>
+
                 </div>
             </div>
         </div>
