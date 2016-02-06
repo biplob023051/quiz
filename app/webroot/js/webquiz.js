@@ -128,7 +128,7 @@ var webQuiz = {
                     // change all the question number as well
                     //var current_question_number = questionContainer.closest('tr').index()+1;
                     var re_index = 1;
-                    $('#questions > tbody  > tr').each(function() {
+                    $("#questions > tbody  > tr:not('.others_type')").each(function() {
                         $(this).find('.question_number').html(re_index);
                         re_index++;
                     });
@@ -621,7 +621,7 @@ var webQuiz = {
     {
         var re_index = 1;
         var question_ids = [];
-        $('#questions > tbody  > tr').each(function() {
+        $("#questions > tbody  > tr:not('.others_type')").each(function() {
             if ($(this).attr('id') != 'q-1') { // check if new question tr id
                 question_ids.push(parseInt($(this).attr('id').match(/\d+/)));
                 $(this).find('.question_number').html(re_index);
