@@ -232,7 +232,7 @@ var webQuiz = {
                         tmp.relatedClass = 'header';
                     } else if(tmp.question_type_id == 7) {
                         tmp.relatedClass = 'youtube';
-                    } else if(tmp.question_type_id == 7) {
+                    } else if(tmp.question_type_id == 8) {
                         tmp.relatedClass = 'image-url';
                     } else { // if regular questions
                         // do nothing right now
@@ -379,12 +379,54 @@ var webQuiz = {
             validationError = webQuiz.essayValidation(
                 choiceContainer
             );
-        } else {
+        } else if (questionTypeId == 2) {
             validationError = webQuiz.automaticRatingValidation(
                 choiceContainer
             );
-        }
+        } else if (questionTypeId == 7) {
+            validationError = webQuiz.youtubeValidation(
+                choiceContainer
+            );
+        } else if (questionTypeId == 8) {
+            validationError = webQuiz.imageUrlValidation(
+                choiceContainer
+            );
+        } else { // header type
+            // do nothing
+        } 
 
+        return validationError;
+    },
+    youtubeValidation: function (choiceContainer) 
+    {
+        var validationError = false;
+        // Youtube url validation
+        choiceContainer.find(':input[type="text"]').each(function(){
+            if ($(this).val() == '') {
+                if ($('.alert-danger').length){
+                        $('.alert-danger').remove();
+                }
+                validationError = true;
+                choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['youtube_url'] + '</div>');
+            }
+            
+        });
+        return validationError;
+    },
+    imageUrlValidation: function (choiceContainer) 
+    {
+        var validationError = false;
+        // Youtube url validation
+        choiceContainer.find(':input[type="text"]').each(function(){
+            if ($(this).val() == '') {
+                if ($('.alert-danger').length){
+                        $('.alert-danger').remove();
+                }
+                validationError = true;
+                choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['image_url'] + '</div>');
+            }
+            
+        });
         return validationError;
     },
     automaticRatingValidation: function (choiceContainer) 

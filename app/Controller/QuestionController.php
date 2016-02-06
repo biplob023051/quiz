@@ -116,11 +116,11 @@ class QuestionController extends AJAXController {
         } elseif($data['Question']['question_type_id'] == 2) {
             // short_auto
             if (empty($data['Choice'][0]['text'])) {   
-                echo json_encode(array('success' => false, 'message' => 'Enter correct answers!'));
+                echo json_encode(array('success' => false, 'message' => __('Enter correct answers!')));
                 exit;
             }
             if (empty($data['Choice'][0]['points'])) {   
-                echo json_encode(array('success' => false, 'message' => 'Enter point!'));
+                echo json_encode(array('success' => false, 'message' => __('Enter point!')));
                 exit;
             }
         } elseif($data['Question']['question_type_id'] == 4) {
@@ -138,13 +138,19 @@ class QuestionController extends AJAXController {
             }
         } elseif($data['Question']['question_type_id'] == 7) { // youtube type
             if (empty($data['Choice'][0]['text'])) {   
-                echo json_encode(array('success' => false, 'message' => 'Enter youtube url'));
+                echo json_encode(array('success' => false, 'message' => __('Enter youtube url')));
                 exit;
             }
             $youtube = explode('=', $data['Choice'][0]['text']);
             if (count($youtube) > 1) { // if watch mode
                 $data['Choice'][0]['text'] = 'https://www.youtube.com/embed/' . $youtube[1];
             } 
+        } elseif($data['Question']['question_type_id'] == 8) { // image url type
+            // short_auto
+            if (empty($data['Choice'][0]['text'])) {   
+                echo json_encode(array('success' => false, 'message' => __('Enter image url')));
+                exit;
+            }
         }
 
         // If user leave form empty, set the default

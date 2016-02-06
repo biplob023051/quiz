@@ -141,6 +141,8 @@ class QuizController extends AppController {
         $lang_strings['point_greater'] = __('At least point should be greater than 0');
         $lang_strings['two_greater'] = __('At least 2 points should be greater than 0');
         $lang_strings['insert_another'] = __('You put only one correct answers, please choose another point greater than 0!!!');
+        $lang_strings['youtube_url'] = __('Please enter youtube url');
+        $lang_strings['image_url'] = __('Please enter image url');
 
         $this->set('data', $data);
         $this->set(compact('lang_strings'));
