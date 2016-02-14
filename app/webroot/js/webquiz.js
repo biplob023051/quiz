@@ -239,6 +239,7 @@ var webQuiz = {
                     }
 
                     // remove last question if not save
+                    // for question edit view
                     if(typeof(response.dummy) != "undefined" && response.dummy !== null) {
                         if($("#q-1").length >= 0) {
                             $("#q-1").remove();
@@ -313,20 +314,26 @@ var webQuiz = {
     addChoice: function (questionId, choicesContainer)
     {
         var question = this.getQuestion(questionId);
-
         if (question === null)
             return;
 
         var question_value = question.value;
 
-        if (question_value.QuestionType.multiple_choices === false)
-            return false;
+        if (question_value.QuestionType.multiple_choices === false) {
+            var temp_template = question_value.QuestionType.template_name;
+            question_value.QuestionType.template_name = 'multiple_one';
+        }
+        //return false;
 
         var html = this.choiceTpl[question_value.QuestionType.template_name]({
                 id : choicesContainer.children().length
             });
 
         choicesContainer.append(html);
+
+        if (question_value.QuestionType.multiple_choices === false) {
+            question_value.QuestionType.template_name = temp_template;
+        }
     },
     removeChoice: function (question_id, choice, containerDOM)
     {
@@ -619,15 +626,24 @@ var webQuiz = {
     },
     reArrangeQuestionNumber: function ()
     {
+        // for question numbering on front end
+        // skip others type question
         var re_index = 1;
-        var question_ids = [];
-        $("#questions > tbody  > tr:not('.others_type')").each(function() {
+        $("#questions > tbody  > tr:not('.others_type')").each(function() { 
             if ($(this).attr('id') != 'q-1') { // check if new question tr id
-                question_ids.push(parseInt($(this).attr('id').match(/\d+/)));
                 $(this).find('.question_number').html(re_index);
                 re_index++;
             }
         });
+
+        // for getting questions id array
+        var question_ids = [];
+        $("#questions > tbody  > tr").each(function() { 
+            if ($(this).attr('id') != 'q-1') { // check if new question tr id
+                question_ids.push(parseInt($(this).attr('id').match(/\d+/)));
+            }
+        });
+
         console.log(question_ids);
         $.ajax({
             data: {question_ids: question_ids},
