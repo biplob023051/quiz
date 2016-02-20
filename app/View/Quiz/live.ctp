@@ -59,6 +59,7 @@ echo $this->Form->create('Student', array(
             <tbody>
                 <?php
                 $i = 1;
+                $othersQuestionType = array(6, 7, 8); // this categories for others type questions
                 foreach ($data['Question'] as $question) {
 
                     $choices_number = count($question['Choice']);
@@ -70,7 +71,11 @@ echo $this->Form->create('Student', array(
 
                     $question['number'] = $i;
                     echo $this->element('Quiz/live/question', $question);
-                    ++$i;
+                    if (!in_array($question['question_type_id'], $othersQuestionType)) { 
+                        // only considered main question for numbering
+                        // not others type questions
+                        ++$i;
+                    }
                 }
                 ?>
             </tbody>
@@ -106,7 +111,7 @@ echo $this->Form->create('Student', array(
     //      return false;    
     //    }
     // }
-
+    //biplob
     var vis = (function(){
         var stateKey, eventKey, keys = {
             hidden: "visibilitychange",

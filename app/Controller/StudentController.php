@@ -14,6 +14,9 @@ class StudentController extends AppController {
     public function submit($quizRandomId) {
 
         $data = $this->request->data;
+
+        // pr($data);
+        // exit;
         
         // remove unwanted space and make uppercase for student class
         $data['Student']['class'] = strtolower(preg_replace('/\s+/', '', $data['Student']['class']));
@@ -212,12 +215,12 @@ class StudentController extends AppController {
                 ),
                 'contain' => array(
                     'Question' => array(
-                        'order' => array('Question.weight DESC', 'Question.id ASC')
+                        'order' => array('Question.weight DESC', 'Question.id ASC'),
                     ),
                 )
             ));
             $this->set(compact('student_result', 'quiz'));
-            $this->Session->delete('show_result');
+            //$this->Session->delete('show_result');
         }
     }
 

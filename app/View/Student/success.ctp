@@ -1,4 +1,7 @@
-<?php $this->assign('title', __('Success')); ?>
+<?php 
+	$otherQuestionType = array(6,7,8);
+	$this->assign('title', __('Success')); 
+?>
 <div class="jumbotron">
   <h1><?php echo __('Thank You!'); ?></h1>
   <p><?php echo __('Your answer(s) has been submitted successfully.'); ?></p>
@@ -12,7 +15,25 @@
 			$result_html = '';
 			foreach ($quiz['Question'] as $key => $question) { 
 				$result_html = $result_html . '<div class="col-md-12">';
-					$result_html = $result_html . '<h3>' . $i . ') ' . $question['text'] . '</h3>';
+					if ($question['question_type_id'] == 6) { // for header type
+						$result_html = $result_html . '<h3 class="header">' . $question['text'] . '</h3>';
+					} elseif ($question['question_type_id'] == 7) { // for youtube type
+						$result_html = $result_html . '<h3 class="youtube">' . $question['text'] . '</h3>';
+						$result_html = $result_html . '<div class="row">
+						    <div class="col-xs-12 col-md-6">
+						        <iframe width="100%" height="315" src="' . $this->Quiz->getImageUtubeChoice($question['id']) . '" frameborder="0" allowfullscreen></iframe>
+						    </div>
+						</div>';
+					} elseif ($question['question_type_id'] == 8) { // for image type
+						$result_html = $result_html . '<h3 class="image-url">' . $question['text'] . '</h3>';
+						$result_html = $result_html . '<div class="row">
+						    <div class="col-xs-12 col-md-6">
+						        <img class="img-responsive" src="' . $this->Quiz->getImageUtubeChoice($question['id']) . '" alt=""/>
+						    </div>
+						</div>';
+					} else { // for actual questions
+						$result_html = $result_html . '<h3>' . $i . ') ' . $question['text'] . '</h3>';
+					}
 					foreach ($student_result['Answer'] as $key => $answer) {
 						if ($question['id'] == $answer['question_id']) {
 							if (empty($answer['text'])) {
@@ -32,7 +53,9 @@
 				        } 
 				    }
 				$result_html = $result_html . '</div>';
-			 $i++; 
+			 	if (!in_array($question['question_type_id'], $otherQuestionType)) {
+					$i++; // increment only for actual question type questions		
+				} 
 			} 
 		?>
 		<div class="col-md-12">

@@ -383,3 +383,29 @@ i.close {
     border: 1px solid #6E889E !important;
 }
 
+.header {
+    border: 1px solid #337ab7;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    background-color: #3B3B7F;
+    color: white;
+}
+
+.youtube {
+    border: 1px solid #337ab7;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: white;
+    color: #31708f;
+}
+
+.image-url {
+    border: 1px solid #337ab7;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: white;
+    color: #31708f;    
+}
+

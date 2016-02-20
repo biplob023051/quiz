@@ -16,4 +16,11 @@ class QuizHelper extends AppHelper {
 		}
 	}
 
+	public function getImageUtubeChoice($question_id) {
+		App::import('Model', 'Choice');
+        $choice = new Choice();
+        $result = $choice->findByQuestionId($question_id, array('Choice.text'));
+        return empty($result) ? '' : $result['Choice']['text'];
+	}
+
 }
