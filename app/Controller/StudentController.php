@@ -220,7 +220,7 @@ class StudentController extends AppController {
                 )
             ));
             $this->set(compact('student_result', 'quiz'));
-            //$this->Session->delete('show_result');
+            $this->Session->delete('show_result');
         }
     }
 
