@@ -296,13 +296,24 @@ class QuizController extends AppController {
         }
 
         $quizDetails = $this->Quiz->quizDetails($quizId, $filter);
+
+        // pr($quizDetails);
+        // exit;
         // get student id's for ajax auto checking
         $studentIds = Hash::combine($quizDetails['Student'], '{n}.id', '{n}.id');
         $studentIds = json_encode($studentIds);
         // get student classes
         $classes = Hash::combine($checkPermission['Student'], '{n}.class', '{n}.class');
+        
+        function cmp($a, $b) {
+            if ($a == $b) {
+                return 0;
+            }
+            return ($a < $b) ? -1 : 1;
+        }
+        uasort($classes, 'cmp');
         // classes merge with all class
-        sort($classes);
+        
         $classes = Hash::merge(array('all' => __('All Classes')), $classes);
 
         $lang_strings['remove_question'] = __('Are you sure you want to remove ');
@@ -353,6 +364,13 @@ class QuizController extends AppController {
         // get student classes
         $classes = Hash::combine($checkPermission['Student'], '{n}.class', '{n}.class');
         // classes merge with all class
+        function cmp($a, $b) {
+            if ($a == $b) {
+                return 0;
+            }
+            return ($a < $b) ? -1 : 1;
+        }
+        uasort($classes, 'cmp');
         $classes = Hash::merge(array('all' => __('All Classes')), $classes);
 
         $this->set(compact('quizDetails', 'classes', 'filter', 'studentIds', 'quizId', 'currentTab'));

@@ -75,134 +75,81 @@ class Quiz extends AppModel {
     }
 
     public function quizDetails($quizId, $filter) {
+        $studentOptions = array();
         
         if (isset($filter['daterange']) && $filter['daterange'] !== 'all') {
-                $this->unbindModel(array(
-                    'hasMany' => array('Student')
-                ));
 
             switch ($filter['daterange']) {
                 case 'today':
                     if (isset($filter['class']) and $filter['class'] !== 'all') {
-                        $this->bindModel(array(
-                            'hasMany' => array(
-                                'Student' => array(
-                                    'conditions' => array(
-                                        "DAY(Student.submitted) = DAY(CURDATE())",
-                                        "Student.class" => $filter['class']
-                                    )
-                                )
-                            )
-                        ));
+                        $studentOptions = array(
+                            "DAY(Student.submitted) = DAY(CURDATE())",
+                            "Student.class" => $filter['class']
+                        );
+
                     } else {
-                        $this->bindModel(array(
-                            'hasMany' => array(
-                                'Student' => array(
-                                    'conditions' => array(
-                                        "DAY(Student.submitted) = DAY(CURDATE())",
-                                    )
-                                )
-                            )
-                        ));        
+                        $studentOptions = array(
+                            "DAY(Student.submitted) = DAY(CURDATE())"
+                        );       
                     }
                     break;
                 case 'this_week':
                     if (isset($filter['class']) and $filter['class'] !== 'all') {
-                        
-                        $this->bindModel(array(
-                            'hasMany' => array(
-                                'Student' => array(
-                                    'conditions' => array(
-                                        "WEEK(Student.submitted) = WEEK(CURDATE())",
-                                        "Student.class" => $filter['class']
-                                    )
-                                )
-                            )
-                        ));
+                        $studentOptions = array(
+                            "WEEK(Student.submitted) = WEEK(CURDATE())",
+                            "Student.class" => $filter['class']
+                        );
                     } else {
-            
-                        $this->bindModel(array(
-                            'hasMany' => array(
-                                'Student' => array(
-                                    'conditions' => array(
-                                        "WEEK(Student.submitted) = WEEK(CURDATE())",
-                                    )
-                                )
-                            )
-                        ));
+                        $studentOptions = array(
+                            "WEEK(Student.submitted) = WEEK(CURDATE())",
+                        );
                     }
                     break;
                 case 'this_month':
                     if (isset($filter['class']) and $filter['class'] !== 'all') {
-                        $this->bindModel(array(
-                            'hasMany' => array(
-                                'Student' => array(
-                                    'conditions' => array(
-                                        "MONTH(Student.submitted) = MONTH(CURDATE())",
-                                        "Student.class" => $filter['class']
-                                    )
-                                )
-                            )
-                        ));
+                        $studentOptions = array(
+                            "MONTH(Student.submitted) = MONTH(CURDATE())",
+                            "Student.class" => $filter['class']
+                        );
                     } else {
-                        $this->bindModel(array(
-                            'hasMany' => array(
-                                'Student' => array(
-                                    'conditions' => array(
-                                        "MONTH(Student.submitted) = MONTH(CURDATE())",
-                                    )
-                                )
-                            )
-                        ));
+                        $studentOptions = array(
+                            "MONTH(Student.submitted) = MONTH(CURDATE())",
+                        );
                     }
                     break;
                 case 'this_year':
                     if (isset($filter['class']) and $filter['class'] !== 'all') {
-                        $this->bindModel(array(
-                            'hasMany' => array(
-                                'Student' => array(
-                                    'conditions' => array(
-                                        "YEAR(Student.submitted) = YEAR(CURDATE())",
-                                        "Student.class" => $filter['class']
-                                    )
-                                )
-                            )
-                        ));
+                        $studentOptions = array(
+                            "YEAR(Student.submitted) = YEAR(CURDATE())",
+                            "Student.class" => $filter['class']
+                        );
                     } else {
-                        $this->bindModel(array(
-                            'hasMany' => array(
-                                'Student' => array(
-                                    'conditions' => array(
-                                        "YEAR(Student.submitted) = YEAR(CURDATE())",
-                                    )
-                                )
-                            )
-                        ));
+                        $studentOptions = array(
+                            "YEAR(Student.submitted) = YEAR(CURDATE())",
+                        );
                     }
                     break;
             }
         } else {
             if (isset($filter['class']) and $filter['class'] !== 'all') {
-                $this->unbindModel(array(
-                    'hasMany' => array('Student')
-                ));
-                $this->bindModel(array(
-                    'hasMany' => array(
-                        'Student' => array(
-                            'conditions' => array(
-                                "Student.class" => $filter['class']
-                            )
-                        )
-                    )
-                ));
+                $studentOptions = array(
+                    "Student.class" => $filter['class']
+                );
             }
         }
 
+        $this->Behaviors->load('Containable');
         $result = $this->find('first', array(
                 'conditions' => array(
                     'Quiz.id' => $quizId,
                 ),
-                'recursive' => 2
+                //'recursive' => 2
+                'contain' => array(
+                    'User', 
+                    'Question' => array('Answer', 'Choice', 'QuestionType', 'order' => array('Question.weight DESC', 'Question.id ASC')), 
+                    'Student' => array('conditions' => $studentOptions, 'Ranking', 'Answer'), 
+                    'Ranking'
+                )
             )
         );
         
