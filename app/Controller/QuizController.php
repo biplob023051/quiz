@@ -14,7 +14,9 @@ class QuizController extends AppController {
 
         $userId = $this->Auth->user('id');
         $quizTypes = $this->Quiz->quizTypes;
-        $this->User->canCreateQuiz($userId);
+
+        $userPermissions = $this->userPermissions();
+        $this->set(compact('userPermissions'));
 
         if ($this->request->is('post')) {
             $data = $this->request->data;
@@ -53,7 +55,6 @@ class QuizController extends AppController {
         $this->User->id = $userId;
         $data = array(
             'quizzes' => $quizzes,
-            'canCreateQuiz' => $this->User->canCreateQuiz()
         );
 
         $lang_strings['delete_quiz_1'] = __('There are ');
@@ -63,14 +64,12 @@ class QuizController extends AppController {
         $lang_strings['delete_quiz_5'] = __('Delete quiz ');
         $lang_strings['request_sent'] = __('Upgrade Pending');
 
-        // check upgrade status
-        $request_sent = $this->User->upgrade_status($this->Auth->user('id'));
-        $this->set(compact('data', 'quizTypes', 'filter', 'lang_strings', 'request_sent'));
+        $this->set(compact('data', 'quizTypes', 'filter', 'lang_strings'));
     }
 
     public function edit($quizId, $initial = '') {
 
-
+        $this->accountStatus();
         // Check permission
         $userId = $this->Auth->user('id');
         $result = $this->Quiz->find('count', array(
@@ -149,9 +148,11 @@ class QuizController extends AppController {
     }
 
     public function add() {
+        $this->accountStatus(); 
+
         $userId = $this->Auth->user('id');
         if (!$this->User->canCreateQuiz($userId))
-            return $this->redirect(array('action' => 'index'));
+            return $this->redirect(array('action' => 'index'));  
 
         $this->Quiz->create();
         $this->Quiz->save(array(
@@ -271,6 +272,7 @@ class QuizController extends AppController {
         if (empty($quizId)) {
             return $this->redirect('/');
         }
+        $this->accountStatus();
 
 
         // authenticate or not
@@ -380,6 +382,7 @@ class QuizController extends AppController {
     * active / deactive quiz
     */
     public function changeStatus() {
+        $this->accountStatus(); 
 
         $this->autoRender = false;
         $data = $this->request->data;
@@ -446,6 +449,7 @@ class QuizController extends AppController {
     }
 
     public function quizDelete($quizId) {
+        $this->accountStatus(); 
         // authenticate or not
         $checkPermission = $this->Quiz->checkPermission($quizId, $this->Auth->user('id'));
         if (empty($checkPermission)) {
@@ -469,6 +473,7 @@ class QuizController extends AppController {
 
     // print quiz answer
     public function ajax_print_answer() {
+        $this->accountStatus();
         $this->layout = "ajax";
         $quizId = $this->request->data['quizId'];
         // authenticate or not

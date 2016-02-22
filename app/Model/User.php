@@ -73,7 +73,7 @@ class User extends AppModel {
         $userCount = $this->find('count', array(
             'conditions' => array(
                 'User.id' => $userId,
-                'User.account_level' => 1,
+                'User.account_level' => array(1,22),
                 'User.expired > NOW()'
             )
         ));

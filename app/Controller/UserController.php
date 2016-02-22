@@ -25,6 +25,8 @@ class UserController extends AppController {
     
         if ($this->request->is('post')) {
             if ($this->MathCaptcha->validate($this->request->data['User']['captcha'])) {
+                $this->request->data['User']['account_level'] = 22;
+                $this->request->data['User']['expired'] = date('Y-m-d H:i:s', mktime(0, 0, 0, date('m'), date('d')+30, date('Y')));
                 $this->User->set($this->request->data);
                 if ($this->User->validates()) {
                     $user = $this->User->save();
