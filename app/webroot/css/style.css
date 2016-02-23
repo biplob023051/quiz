@@ -387,9 +387,8 @@ i.close {
     /*border: 1px solid #337ab7;
     border-radius: 5px;*/
     padding: 10px;
-    background-color: #d9edf7;
-    color: #337ab7;
-    font-size: 38px;
+    font-weight: bold;
+    font-size: 36px;
 }
 
 .youtube {
