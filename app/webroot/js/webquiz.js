@@ -230,6 +230,7 @@ var webQuiz = {
                     // if class exist then no question number
                     if (tmp.question_type_id == 6) {
                         tmp.relatedClass = 'header';
+                        tmp.showQuestionText = true; // Question text false for youtube and image url
                     } else if(tmp.question_type_id == 7) {
                         tmp.relatedClass = 'youtube';
                     } else if(tmp.question_type_id == 8) {

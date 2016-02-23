@@ -1,7 +1,8 @@
 <?php
 $this->Html->script(array(
+    'jquery.zoomooz.min',
     'webquiz',
-    'live'
+    'live',
         ), array('inline' => false)
 );
 
@@ -101,7 +102,6 @@ echo $this->Form->create('Student', array(
 
 <script type="text/javascript">
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
-    
     // document.onmousedown=disableclick;
     // function disableclick(event)
     // {

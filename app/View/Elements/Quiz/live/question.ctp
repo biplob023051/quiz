@@ -9,14 +9,15 @@
                 <p>
                     <?php if (($QuestionType['template_name'] == 'header')) : ?>
                         <span class="h4 header"><?php echo $text; ?></span>
+                        <br />
                     <?php elseif (($QuestionType['template_name'] == 'youtube_video')) : ?>
-                        <span class="h4 youtube"><?php echo $text; ?></span>
+                        
                     <?php elseif (($QuestionType['template_name'] == 'image_url')) : ?>
-                        <span class="h4 image-url"><?php echo $text; ?></span>
+                        
                     <?php else : ?>
                         <span class="h4"><?php echo '<span class="question_number">' . $number . '</span>. ' .  $text; ?></span>
+                        <br />
                     <?php endif; ?>
-                    <br />
                     <span class="text-muted"><?php echo $explanation ?></span>
                 </p>
             </div>

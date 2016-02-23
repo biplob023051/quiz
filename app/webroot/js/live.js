@@ -1,4 +1,6 @@
 (function($) {
+	
+	$(".img-responsive").zoomTarget();
 
 	$(document).on("contextmenu",function(e){
         e.preventDefault();

@@ -1183,3 +1183,40 @@ msgstr "Testi on suljettu tällä hetkellä."
 #: Controller/QuizController.php:230
 msgid "Closed"
 msgstr "Suljettu"
+
+#: View/Quiz/index.ctp:17
+msgid "Your account will be expired in"
+msgstr "Tilisi käyttöaika päättyy"
+
+#: View/Quiz/index.ctp:43
+msgid "days."
+msgstr "päivän kuluttua."
+
+#: View/Quiz/index.ctp:49
+msgid "Your account has expired."
+msgstr "Tilisi käyttöaika on päättynyt."
+
+#
+msgid "Question types"
+msgstr "Kysymystyypit"
+
+#
+msgid "Others"
+msgstr "Muut"
+
+#
+msgid "Header"
+msgstr "Otsikko"
+
+#
+msgid "Web image"
+msgstr "Kuva verkosta"
+
+#
+msgid "Enter Youtube Url"
+msgstr "Kirjoita videon www-osoite"
+
+#
+msgid "Enter Image Url"
+msgstr "Kirjoita kuvan www-osoite"
+

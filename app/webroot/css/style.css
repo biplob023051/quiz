@@ -384,13 +384,12 @@ i.close {
 }
 
 .header {
-    border: 1px solid #337ab7;
-    border-radius: 5px;
+    /*border: 1px solid #337ab7;
+    border-radius: 5px;*/
     padding: 10px;
-    font-weight: bold;
-    font-size: 15px;
-    background-color: #3B3B7F;
-    color: white;
+    background-color: #d9edf7;
+    color: #337ab7;
+    font-size: 38px;
 }
 
 .youtube {
@@ -409,3 +408,22 @@ i.close {
     color: #31708f;    
 }
 
+.notice {
+    background-color: #E6E10F;
+    width: 100%; 
+    margin-left: 0%;
+    margin-bottom: 5px;
+}
+
+.days_left {
+    font-size: 24px;
+}
+
+.notice .form-group {
+    margin-top: 15px; 
+}
+
+.expire-notice {
+    font-weight: bold;
+    color: black;
+}
