@@ -386,9 +386,8 @@ i.close {
 .header {
     /*border: 1px solid #337ab7;
     border-radius: 5px;*/
-    padding: 10px;
     font-weight: bold;
-    font-size: 36px;
+    font-size: 32px;
 }
 
 .youtube {
@@ -425,4 +424,18 @@ i.close {
 .expire-notice {
     font-weight: bold;
     color: black;
+}
+
+.table>tbody>tr>td {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.table>tbody>tr.header_type>td {
+    border-top: none;
+    border-bottom: none;
+}
+
+.panel>.table>tbody:last-child>tr:last-child td { 
+    border-bottom: 0;   
 }

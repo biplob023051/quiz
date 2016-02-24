@@ -1,7 +1,5 @@
 (function($) {
 	
-	$(".img-responsive").zoomTarget();
-
 	$(document).on("contextmenu",function(e){
         e.preventDefault();
         alert(lang_strings['right_click_disabled']);
@@ -159,7 +157,6 @@
 	    }
 	    return false;
 	}
-	
     document.getElementById("StudentLiveForm").reset();
 })(jQuery);
 

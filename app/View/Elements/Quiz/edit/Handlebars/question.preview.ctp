@@ -1,5 +1,9 @@
 {{#if relatedClass}}
-    <tr id="q{{id}}" class="others_type">
+    {{#if showQuestionText}}
+        <tr id="q{{id}}" class="others_type header_type">
+    {{else}}
+        <tr id="q{{id}}" class="others_type">
+    {{/if}}
 {{else}}
     <tr id="q{{id}}">
 {{/if}}

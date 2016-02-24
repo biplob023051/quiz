@@ -1,6 +1,5 @@
 <?php
 $this->Html->script(array(
-    'jquery.zoomooz.min',
     'webquiz',
     'live',
         ), array('inline' => false)

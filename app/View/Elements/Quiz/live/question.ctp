@@ -2,7 +2,7 @@
 <?php 
     $templateOptions = array('header', 'youtube_video', 'image_url');
 ?>
-<tr id="q<?php if (!in_array($QuestionType['template_name'], $templateOptions)) echo $number; ?>"<?php if (in_array($QuestionType['template_name'], $templateOptions)) : ?> class="others_type"<?php endif; ?>>
+<tr id="q<?php if (!in_array($QuestionType['template_name'], $templateOptions)) echo $number; ?>"<?php if (in_array($QuestionType['template_name'], $templateOptions)) : ?> class="others_type<?php if ($QuestionType['template_name'] == 'header') : ?> header_type<?php endif; ?>"<?php endif; ?>>
     <td>                    
         <div class="row">
             <div class="col-xs-12 col-md-6">

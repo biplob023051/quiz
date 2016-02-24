@@ -1220,3 +1220,22 @@ msgstr "Kirjoita videon www-osoite"
 msgid "Enter Image Url"
 msgstr "Kirjoita kuvan www-osoite"
 
+#: Controller/QuizController.php:145
+msgid "Enter the header"
+msgstr "Kirjoita otsikko"
+
+#: Controller/QuizController.php:148
+msgid "Video explanation text"
+msgstr "Videon selite (vapaaehtoinen)"
+
+#: Controller/QuizController.php:143
+msgid "Please enter Youtube url"
+msgstr "Lisää videon www-osoite"
+
+#: Controller/QuizController.php:144
+msgid "Please enter image url"
+msgstr "Lisää kuvan www-osoite"
+
+#: Controller/QuizController.php:144
+msgid "Please enter Header text"
+msgstr "Lisää otsikon teksti"
