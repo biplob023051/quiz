@@ -1,5 +1,5 @@
-<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width: 92%;">
+<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="confirm-submit" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="padding-top: 3px; padding-bottom: 3px;">
                 <?php echo __('Turn in your quiz?'); ?>

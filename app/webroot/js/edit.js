@@ -59,8 +59,12 @@ var debugVar;
             $('#QuestionExplanation').closest('.row').show();
         }
 
-        if ($(this).val() == 7) { // Change placeholder for explanation text
+        if ($(this).val() == 7) { 
+            // Change placeholder for explanation text if youtube
             $('#QuestionExplanation').attr('placeholder', lang_strings['youtube_exp_text']);
+        } else if ($(this).val() == 8) { 
+            // Change placeholder for explanation text if image
+            $('#QuestionExplanation').attr('placeholder', lang_strings['image_exp_text']);
         } else {
             $('#QuestionExplanation').attr('placeholder', lang_strings['other_exp_text']);
         }

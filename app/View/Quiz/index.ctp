@@ -8,56 +8,70 @@ $this->assign('title', __('My Quizzes'));
 <?php echo $this->Session->flash('notification'); ?>
 
 <div class="row notice">
-    <?php if (empty($userPermissions['upgraded'])) : ?>
-        <?php
-            if (empty($userPermissions['request_sent'])) {
-                if (!empty($userPermissions['canCreateQuiz'])) {
-                    echo '<div class="col-xa-12 col-md-8">';
-                    echo '<div class="form-group text-center">';
-                    echo '<span class="expire-notice">' . __('Your account will be expired in') . ' <span class="days_left">' . $userPermissions['days_left'] . '</span> ' . __('days.') . '</span>';
-                    echo '</div>';
-                    echo '</div>';
+<?php 
+    if (empty($userPermissions['upgraded'])) { 
+        if (empty($userPermissions['request_sent'])) {
+            if (!empty($userPermissions['canCreateQuiz'])) {
+                echo '<div class="col-xa-12 col-md-8">';
+                echo '<div class="form-group text-center">';
+                echo '<span class="expire-notice">' . __('Your account will be expired in') . ' <span class="days_left">' . $userPermissions['days_left'] . '</span> ' . __('days.') . '</span>';
+                echo '</div>';
+                echo '</div>';
 
-                    echo '<div class="col-xa-12 col-md-4">';
-                    echo '<div class="form-group">';
-                    echo $this->element('Invoice/invoice_button', array('btn_text' => __('Upgrade Account')));
-                    echo '</div>';
-                    echo '</div>';
-                } else {
-                    echo '<div class="col-xa-12 col-md-8">';
-                    echo '<div class="form-group text-center">';
-                    echo '<span class="expire-notice">' . __('Your account has expired.') . '</span>';
-                    echo '</div>';
-                    echo '</div>';
-
-                    echo '<div class="col-xa-12 col-md-4">';
-                    echo '<div class="form-group">';
-                    echo $this->element('Invoice/invoice_button', array('btn_text' => __('Upgrade to Create More Quiz')));
-                    echo '</div>';
-                    echo '</div>';
-                }
-            } else {
-                if (!empty($userPermissions['canCreateQuiz'])) {
-                    echo '<div class="col-xa-12 col-md-8">';
-                    echo '<div class="form-group text-center">';
-                    echo '<span class="expire-notice">' . __('Your account will be expired in') . ' <span class="days_left">' . $userPermissions['days_left'] . '</span> ' . __('days.') . '</span>';
-                    echo '</div>';
-                    echo '</div>';
-                } else {
-                    echo '<div class="col-xa-12 col-md-8">';
-                    echo '<div class="form-group text-center">';
-                    echo '<span class="expire-notice">' . __('Your account has expired.') . '</span>';
-                    echo '</div>';
-                    echo '</div>';
-                }
                 echo '<div class="col-xa-12 col-md-4">';
                 echo '<div class="form-group">';
-                echo '<button class="btn btn-primary btn-block" disabled="true"  id="upgrade_account"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>' . __('Upgrade Pending') . '</button>';
+                echo $this->element('Invoice/invoice_button', array('btn_text' => __('Upgrade Account')));
+                echo '</div>';
+                echo '</div>';
+            } else {
+                echo '<div class="col-xa-12 col-md-8">';
+                echo '<div class="form-group text-center">';
+                echo '<span class="expire-notice">' . __('Your account has expired.') . '</span>';
+                echo '</div>';
+                echo '</div>';
+
+                echo '<div class="col-xa-12 col-md-4">';
+                echo '<div class="form-group">';
+                echo $this->element('Invoice/invoice_button', array('btn_text' => __('Upgrade to Create More Quiz')));
                 echo '</div>';
                 echo '</div>';
             }
-        ?>
-    <?php endif; ?>
+        } else {
+            if (!empty($userPermissions['canCreateQuiz'])) {
+                echo '<div class="col-xa-12 col-md-8">';
+                echo '<div class="form-group text-center">';
+                echo '<span class="expire-notice">' . __('Your account will be expired in') . ' <span class="days_left">' . $userPermissions['days_left'] . '</span> ' . __('days.') . '</span>';
+                echo '</div>';
+                echo '</div>';
+            } else {
+                echo '<div class="col-xa-12 col-md-8">';
+                echo '<div class="form-group text-center">';
+                echo '<span class="expire-notice">' . __('Your account has expired.') . '</span>';
+                echo '</div>';
+                echo '</div>';
+            }
+            echo '<div class="col-xa-12 col-md-4">';
+            echo '<div class="form-group">';
+            echo '<button class="btn btn-primary btn-block" disabled="true"  id="upgrade_account"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>' . __('Upgrade Pending') . '</button>';
+            echo '</div>';
+            echo '</div>';
+        }
+    } else {
+        if (($userPermissions['days_left'] < '31') && (AuthComponent::user('account_level') == 1)) { // if expire date soon for previous paid users
+            echo '<div class="col-xa-12 col-md-8">';
+            echo '<div class="form-group text-center">';
+            echo '<span class="expire-notice">' . __('Your account will be expired in') . ' <span class="days_left">' . $userPermissions['days_left'] . '</span> ' . __('days.') . '</span>';
+            echo '</div>';
+            echo '</div>';
+
+            echo '<div class="col-xa-12 col-md-4">';
+            echo '<div class="form-group">';
+            echo $this->element('Invoice/invoice_button', array('btn_text' => __('Upgrade Account')));
+            echo '</div>';
+            echo '</div>';
+        }
+    }
+?>
 </div>
 
 <div class="row">

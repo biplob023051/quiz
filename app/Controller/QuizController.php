@@ -146,6 +146,7 @@ class QuizController extends AppController {
         $lang_strings['other_q_title'] = __('Enter the question');
 
         $lang_strings['youtube_exp_text'] = __('Video explanation text');
+        $lang_strings['image_exp_text'] = __('Image explanation text');
         $lang_strings['other_exp_text'] = __('Explanation text');
         $lang_strings['empty_header'] = __('Please enter Header text');
 

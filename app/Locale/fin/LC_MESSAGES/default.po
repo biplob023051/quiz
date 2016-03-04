@@ -1239,3 +1239,7 @@ msgstr "Lisää kuvan www-osoite"
 #: Controller/QuizController.php:144
 msgid "Please enter Header text"
 msgstr "Lisää otsikon teksti"
+
+#: Controller/QuizController.php:149
+msgid "Image explanation text"
+msgstr "Kuvan selite (vapaaehtoinen)"

@@ -18,14 +18,12 @@
 					if ($question['question_type_id'] == 6) { // for header type
 						$result_html = $result_html . '<h3 class="header">' . $question['text'] . '</h3>';
 					} elseif ($question['question_type_id'] == 7) { // for youtube type
-						$result_html = $result_html . '<h3 class="youtube">' . $question['text'] . '</h3>';
 						$result_html = $result_html . '<div class="row">
 						    <div class="col-xs-12 col-md-6">
 						        <iframe width="100%" height="315" src="' . $this->Quiz->getImageUtubeChoice($question['id']) . '" frameborder="0" allowfullscreen></iframe>
 						    </div>
 						</div>';
 					} elseif ($question['question_type_id'] == 8) { // for image type
-						$result_html = $result_html . '<h3 class="image-url">' . $question['text'] . '</h3>';
 						$result_html = $result_html . '<div class="row">
 						    <div class="col-xs-12 col-md-6">
 						        <img class="img-responsive" src="' . $this->Quiz->getImageUtubeChoice($question['id']) . '" alt=""/>
