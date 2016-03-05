@@ -21,6 +21,15 @@
                         <br />
                     {{/if}}
                     <span class="text-muted">{{explanation}}</span>
+                    {{#if max_allowed}}
+                        <br />
+                        <span class="text-muted">
+                            <strong>
+                                <?php echo __('Maximum checks'); ?>
+                            </strong>
+                            {{max_allowed}}
+                        </span>
+                    {{/if}}
                 </p>
                 {{#if warn_message}}
                     <p class="alert alert-warning" style="margin-bottom: 0px;">

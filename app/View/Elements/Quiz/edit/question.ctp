@@ -8,6 +8,7 @@ echo json_encode(array(
     'id' => $id,
     'text' => $text,
     'explanation' => $explanation,
+    'max_allowed' => $max_allowed,
     'QuestionType' => $QuestionType,
     'Choice' => $Choice
 ));
@@ -17,18 +18,27 @@ echo json_encode(array(
     <div class="row">
         <div class="col-xs-12 col-md-6">            
             <p>
-                <?php if (($QuestionType['template_name'] == 'header')) : ?>
+                <?php if ($QuestionType['template_name'] == 'header') : ?>
                     <span class="h4 header"><?php echo $text; ?></span>
                     <br />
-                <?php elseif (($QuestionType['template_name'] == 'youtube_video')) : ?>
+                <?php elseif ($QuestionType['template_name'] == 'youtube_video') : ?>
                     
-                <?php elseif (($QuestionType['template_name'] == 'image_url')) : ?>
+                <?php elseif ($QuestionType['template_name'] == 'image_url') : ?>
                     
                 <?php else : ?>
                     <span class="h4"><?php echo '<span class="question_number">' . $number . '</span>. ' .  $text; ?></span>
                     <br />
                 <?php endif; ?>
                 <span class="text-muted"><?php echo $explanation ?></span>
+                <?php if ($QuestionType['template_name'] == 'multiple_many') : ?>
+                    <br />
+                    <span class="text-muted">
+                        <strong>
+                            <?php echo __('Maximum checks'); ?>
+                        </strong>
+                        <?php echo $max_allowed; ?>
+                    </span>
+                <?php endif; ?>
             </p>
         </div>
         <div class="col-xs-12 col-md-3">
