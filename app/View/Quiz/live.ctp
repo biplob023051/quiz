@@ -101,16 +101,6 @@ echo $this->Form->create('Student', array(
 
 <script type="text/javascript">
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
-    // document.onmousedown=disableclick;
-    // function disableclick(event)
-    // {
-    //   if(event.button==2)
-    //    {
-    //      alert(lang_strings['right_click_disabled']);
-    //      return false;    
-    //    }
-    // }
-    //biplob
     var vis = (function(){
         var stateKey, eventKey, keys = {
             hidden: "visibilitychange",

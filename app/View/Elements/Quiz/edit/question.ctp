@@ -30,14 +30,15 @@ echo json_encode(array(
                     <br />
                 <?php endif; ?>
                 <span class="text-muted"><?php echo $explanation ?></span>
-                <?php if ($QuestionType['template_name'] == 'multiple_many') : ?>
-                    <br />
-                    <span class="text-muted">
-                        <strong>
-                            <?php echo __('Maximum checks'); ?>
-                        </strong>
-                        <?php echo $max_allowed; ?>
-                    </span>
+                <?php if (!empty($max_allowed)) : ?>
+                    <p>
+                        <span class="text-muted">
+                            <strong>
+                                <?php echo __('Maximum checks'); ?>
+                            </strong>
+                            <?php echo $max_allowed; ?>
+                        </span>
+                    </p>
                 <?php endif; ?>
             </p>
         </div>

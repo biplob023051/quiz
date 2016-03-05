@@ -19,6 +19,16 @@
                         <br />
                     <?php endif; ?>
                     <span class="text-muted"><?php echo $explanation ?></span>
+                    <?php if (!empty($max_allowed)) : ?>
+                        <p>
+                            <span class="text-muted">
+                                <strong>
+                                    <?php echo __('Maximum checks'); ?>
+                                </strong>
+                                <span class="max_allowed"><?php echo $max_allowed; ?></span>
+                            </span>
+                        </p>
+                    <?php endif; ?>
                 </p>
             </div>
         </div>

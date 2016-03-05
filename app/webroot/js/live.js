@@ -5,6 +5,22 @@
         alert(lang_strings['right_click_disabled']);
      });
 
+
+
+	// if many correct, then checkbox
+	$(".checkbox").change(function() {
+		var choiceContainer = $(this).closest('.choices');
+		var max_allowed = parseInt(choiceContainer.prev().find('.max_allowed').text());
+		if (!isNaN(max_allowed)) {
+			var currentlyChecked = choiceContainer.find('input[type="checkbox"]:checked').length;
+			if (currentlyChecked >= max_allowed) {
+				choiceContainer.find('input[type="checkbox"]:not(:checked)').attr('disabled', true);
+			} else {
+				choiceContainer.find('input[type="checkbox"]:not(:checked)').attr('disabled', false);
+			}
+		} 
+	});
+
 	var appData = $.parseJSON($("#app-data").text());
 
 	function checkNetConnection(){
