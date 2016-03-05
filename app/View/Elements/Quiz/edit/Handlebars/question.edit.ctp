@@ -73,6 +73,22 @@
                 </div>           
             </div>
         </div>
+        <div class="row" id="max_allowed" style="display: none;">
+            <div class="col-md-6 col-xs-12">
+                <div class="form-group">
+                    <?php
+                    echo $this->Form->input('max_allowed', array(
+                        'class' => 'form-control q-max_allowed',
+                        'placeholder' => __('Max allowed to check'),
+                        'value' => '{{max_allowed}}',
+                        'label' => false,
+                        'type' => 'number',
+                        'min' => 1
+                    ));
+                    ?>
+                </div>           
+            </div>
+        </div>
         <div class="choices">
             {{#choice Choice}}
             {{choice_tpl}}

@@ -1,14 +1,5 @@
 var debugVar;
 (function ($) {
-
-    // $("#questions > tbody  > tr").each(function() { // remove border from header type
-    //     // the logic is if tr prev has header type then remove top border from current tr td  
-    //     if ($(this).prev().hasClass('others_type')) {
-    //         $(this).find('td').css("border-top", "none");
-    //     }
-    // });
-
-
     var appData = $.parseJSON($("#app-data").text());
     var webQuizConfig = {
         "quizId": appData.quizId,
@@ -50,6 +41,8 @@ var debugVar;
         if (($(this).val() == 1) || ($(this).val() == 3)) {
            $('#questions button.add-choice').trigger('click'); 
         }
+
+        webQuiz.questionOptions($(this).val());
 
         if ($(this).val() == 6) { // hide explanation input for header type question
             $('#QuestionText').attr('placeholder', lang_strings['header_q_title']); // change placeholder
@@ -113,6 +106,8 @@ var debugVar;
                                     $('#QuestionText').parent().show(); 
                                 }
 
+                                webQuiz.questionOptions(question.value.QuestionType.id); // show hide max_allowed
+
                                 if (question.value.QuestionType.id == 6) { // if header type then hide explanation text
                                     $('#QuestionExplanation').closest('.row').hide();
                                 } else {
@@ -152,6 +147,8 @@ var debugVar;
                                 } else {
                                     $('#QuestionText').parent().show(); 
                                 }
+
+                                webQuiz.questionOptions(question.value.QuestionType.id); // show hide max_allowed
 
                                 if (question.value.QuestionType.id == 6) { // if header type then hide explanation text
                                     $('#QuestionExplanation').closest('.row').hide();
