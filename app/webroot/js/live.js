@@ -102,11 +102,11 @@
         });
 	});
 	
-	// // right click disabled
-	// $(document).on("contextmenu",function(e){
- //        e.preventDefault();
- //        alert(lang_strings['right_click_disabled']);
- //     });
+	// right click disabled
+	$(document).on("contextmenu",function(e){
+        e.preventDefault();
+        alert(lang_strings['right_click_disabled']);
+     });
 
 
 
