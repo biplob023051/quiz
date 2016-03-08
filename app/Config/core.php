@@ -218,7 +218,7 @@
 	Configure::write('Session', array(
 		'defaults' => 'database',
 	    'cookie' => 'VERKKOTESTI',
-	    'timeout' => 4320 //3 days
+	    'timeout' => 1440 //1 days
 	));
 
 /**

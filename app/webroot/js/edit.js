@@ -8,6 +8,11 @@ var debugVar;
     };
 
     webQuiz.init(webQuizConfig);
+    
+    // if (initial) { // Add New Question only if its quiz create 
+    //     webQuiz.addNewQuestion();
+    // }
+
     webQuiz.addNewQuestion();
     
     $(document).on('click', '#questions button.add-choice', function () {

@@ -1,9 +1,112 @@
 (function($) {
+
+	var appData = $.parseJSON($("#app-data").text());
+
+	//startRefresh();
+
+	$.fn.extend({
+        donetyping: function(callback,timeout){
+            timeout = timeout || 5e3; // 1 second default timeout
+            var timeoutReference,
+                doneTyping = function(el){
+                    if (!timeoutReference) return;
+                    timeoutReference = null;
+                    callback.call(el);
+                };
+            return this.each(function(i,el){
+                var $el = $(el);
+                // Chrome Fix (Use keyup over keypress to detect backspace)
+                // thank you @palerdot
+                $el.is(':input') && $el.on('keyup keypress mouseup',function(e){
+                    // This catches the backspace button in chrome, but also prevents
+                    // the event from triggering too premptively. Without this line,
+                    // using tab/shift+tab will make the focused element fire the callback.
+                    if (e.type=='keyup' && e.keyCode!=8) return;
+                    
+                    // Check if timeout has been set. If it has, "reset" the clock and
+                    // start over again.
+                    if (timeoutReference) clearTimeout(timeoutReference);
+                    timeoutReference = setTimeout(function(){
+                        // if we made it here, our timeout has elapsed. Fire the
+                        // callback
+                        doneTyping(el);
+                    }, timeout);
+                }).on('blur',function(){
+                    // If we can, fire the event since we're leaving the field
+                    doneTyping(el);
+                });
+            });
+        }
+    });
+
+	$('#StudentFname, #StudentLname, #StudentClass').donetyping(function(){
+		var std_id = $('#studentId').val();
+		var fname = $('#StudentFname').val();
+		var lname = $('#StudentLname').val();
+		var std_class = $('#StudentClass').val();
+		if ((fname != '') && (fname != '') && (std_class != '')) { // only save if 3 basic information exist
+			// Execute for student information save
+			$.ajax({
+	            dataType: 'json',
+	            url: appData.baseUrl + 'student/update_student',
+	            type: 'post',
+	            data: {'student_id': std_id, 'fname': fname, 'lname' : lname, 'class' : std_class, 'random_id' : random_id},
+	            success: function (response)
+	            {
+	                console.log(response);
+	                //var json = $.parseJSON(response);
+	                $('#studentId').attr('value', response.student_id);
+	            }
+	        });
+		}
+	});
+
+	$(".form-input").change(function() {
+		var std_id = $('#studentId').val();
+		var question_id = $(this).closest('tr').prev().val();
+		var answer_text = $(this).val();
+		var checkbox_record = [];
+		var checkBoxDelete = '';
+		var checkbox_record_delete = 1;
+		var checkBox = '';
+		if ($(this).is(':checkbox')) {
+			if ($(this).is(':checked')) {
+				checkbox_record_delete = ''; // New Record
+			} 
+			var checkBoxName = $(this).attr('name');
+			$("input[name='"+checkBoxName+"']").each( function (i) {
+				if ($(this).is(':checked')) {
+					checkbox_record[i] = $(this).val();
+				}
+			});
+			// Check if all unchecked
+			if (checkbox_record.length < 1) {
+				checkBoxDelete = 1;
+			}
+			checkBox = 1;
+		}
+
+		console.log(checkbox_record);
+
+		$.ajax({
+            dataType: 'json',
+            url: appData.baseUrl + 'student/update_answer',
+            type: 'post',
+            data: {'student_id': std_id, 'question_id': question_id, 'text' : answer_text, 'checkbox_record' : checkbox_record, 'checkBoxDelete' : checkBoxDelete, 'checkbox_record_delete' : checkbox_record_delete, 'checkBox' : checkBox},
+            success: function (response)
+            {
+                console.log(response);
+                //var json = $.parseJSON(response);
+                $('#studentId').attr('value', response.student_id);
+            }
+        });
+	});
 	
-	$(document).on("contextmenu",function(e){
-        e.preventDefault();
-        alert(lang_strings['right_click_disabled']);
-     });
+	// // right click disabled
+	// $(document).on("contextmenu",function(e){
+ //        e.preventDefault();
+ //        alert(lang_strings['right_click_disabled']);
+ //     });
 
 
 
@@ -20,8 +123,6 @@
 			}
 		} 
 	});
-
-	var appData = $.parseJSON($("#app-data").text());
 
 	function checkNetConnection(){
 		jQuery.ajaxSetup({async:false});
@@ -176,3 +277,8 @@
     document.getElementById("StudentLiveForm").reset();
 })(jQuery);
 
+
+function startRefresh() {
+    setTimeout(startRefresh,1000);
+    console.log('hi');
+}

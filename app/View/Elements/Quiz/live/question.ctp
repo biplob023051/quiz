@@ -1,6 +1,7 @@
-<?php echo $this->Form->hidden("Answer.{$number}.question_id", array("default" => $id)); ?>
 <?php 
     $templateOptions = array('header', 'youtube_video', 'image_url');
+    if (!in_array($QuestionType['template_name'], $templateOptions))
+    echo $this->Form->hidden("Answer.{$number}.question_id", array("value" => $id));
 ?>
 <tr id="q<?php if (!in_array($QuestionType['template_name'], $templateOptions)) echo $number; ?>"<?php if (in_array($QuestionType['template_name'], $templateOptions)) : ?> class="others_type<?php if ($QuestionType['template_name'] == 'header') : ?> header_type<?php endif; ?>"<?php endif; ?>>
     <td>                    
@@ -36,6 +37,7 @@
             <?php
             foreach ($Choice as $c) {
                 $c['number'] = $number;
+                $c['given_answer'] = $given_answer;
                 echo $this->element("Quiz/live/choice.{$QuestionType['template_name']}", $c);
             }
             ?>

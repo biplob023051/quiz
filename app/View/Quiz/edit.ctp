@@ -155,6 +155,11 @@ echo json_encode(array(
 <?php endforeach; ?>
 
 <script type="text/javascript">
+    <?php if (!empty($initial)) : ?>
+        var initial = true;
+    <?php else : ?>
+        var initial = false;
+    <?php endif; ?>
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
 </script>
 

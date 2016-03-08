@@ -210,6 +210,24 @@ class QuizController extends AppController {
     }
 
     public function live($quizRandomId) {
+        // start session for examination
+        if (!$this->Session->check('started')) {
+            $randomString = $this->randText(10);
+            $this->Session->write('started', $randomString);
+            $this->redirect(array('controller' => 'quiz', 'action' => 'live', $quizRandomId, '?' => array('runningFor' => $randomString)));
+        }
+
+        if (!empty($this->request->query['runningFor']) && ($this->request->query['runningFor'] == $this->Session->read('started'))) {
+            // Do nothing
+            //$this->Session->delete($this->request->query['runningFor']);
+        } else {
+            // remove session and start new
+            $this->Session->delete('started');
+            $this->Session->delete('student_id');
+            $randomString = $this->randText(10);
+            $this->Session->write('started', $randomString);
+            $this->redirect(array('controller' => 'quiz', 'action' => 'live', $quizRandomId, '?' => array('runningFor' => $randomString)));
+        }
 
         $this->Quiz->Behaviors->load('Containable');
         $this->Quiz->bindModel(
@@ -251,6 +269,19 @@ class QuizController extends AppController {
                 return $this->redirect(array('controller' => 'quiz', 'action' => 'no_permission'));
             }
 
+            // Check session if student page reloaded
+            if ($this->Session->check('student_id')) {
+                $student = $this->Quiz->Student->find('first', array(
+                    'conditions' => array(
+                        'Student.id' => (int) $this->Session->read('student_id')
+                    ),
+                    'contain' => array('Answer', 'Ranking')
+                ));
+                $this->request->data = $student;
+                // pr($this->request->data);
+                // exit;
+            }
+
             $lang_strings[0] = __('Internet connection has been lost, please try again later.');
             $lang_strings[1] = __('All questions answered. Turn in your quiz?');
             $lang_strings[2] = __('Questions ');
@@ -269,6 +300,8 @@ class QuizController extends AppController {
             $this->disableCache();
             $this->set('data', $data);
             $this->set(compact('lang_strings'));
+            $this->set(compact('quizRandomId'));
+
         }
     }
 

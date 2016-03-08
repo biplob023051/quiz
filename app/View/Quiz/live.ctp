@@ -60,7 +60,40 @@ echo $this->Form->create('Student', array(
                 <?php
                 $i = 1;
                 $othersQuestionType = array(6, 7, 8); // this categories for others type questions
+                // If value exist
+                if (!empty($this->request->data['Answer'])) { 
+                    // if answer found
+                    $temp = array();
+                    $question_count = array();
+                    foreach ($this->request->data['Answer'] as $key => $value) {
+                        $temp[] = $value['question_id'];
+                    }
+                    $question_count = array_count_values($temp);
+                    
+                    foreach ($this->request->data['Answer'] as $key => $value) {
+                        if ($question_count[$value['question_id']] < 2) { // Not multiple choice
+                            $answered[$value['question_id']] = $value['text'];
+                        } else {
+                            $answered[$value['question_id']][] = $value['text'];
+                        }
+                    }
+
+                } elseif ($this->Session->check($this->request->query['runningFor'])) { 
+                    // if session found
+                    $answered = $this->Session->read($this->request->query['runningFor']); 
+                } else {
+                    $answered = array();
+                }
+
+
                 foreach ($data['Question'] as $question) {
+                    //pr($question);
+                    // if answered previuosly and stored on session
+                    if (isset($answered[$question['id']])) {
+                        $question['given_answer'] = $answered[$question['id']];
+                    } else {
+                        $question['given_answer'] = '';
+                    }
 
                     $choices_number = count($question['Choice']);
                     if (!$question['QuestionType']['multiple_choices'] && $choices_number > 1) {
@@ -89,7 +122,11 @@ echo $this->Form->create('Student', array(
     </div>
 </div>
 
+<input type="hidden" name="data[Student][id]" id="studentId" value="<?php echo !empty($this->request->data['Student']['id']) ? $this->request->data['Student']['id'] : 0; ?>">
+
 <?php echo $this->Form->end(); ?>
+
+
 
 <script id="app-data" type="application/json">
     <?php
@@ -101,40 +138,42 @@ echo $this->Form->create('Student', array(
 
 <script type="text/javascript">
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
-    var vis = (function(){
-        var stateKey, eventKey, keys = {
-            hidden: "visibilitychange",
-            webkitHidden: "webkitvisibilitychange",
-            mozHidden: "mozvisibilitychange",
-            msHidden: "msvisibilitychange"
-        };
-        for (stateKey in keys) {
-            if (stateKey in document) {
-                eventKey = keys[stateKey];
-                break;
-            }
-        }
-        return function(c) {
-            if (c) document.addEventListener(eventKey, c);
-            return !document[stateKey];
-        }
-    })();
+    var random_id = <?php echo $quizRandomId ?>;
+    // // Browser tab navigation
+    // var vis = (function(){
+    //     var stateKey, eventKey, keys = {
+    //         hidden: "visibilitychange",
+    //         webkitHidden: "webkitvisibilitychange",
+    //         mozHidden: "mozvisibilitychange",
+    //         msHidden: "msvisibilitychange"
+    //     };
+    //     for (stateKey in keys) {
+    //         if (stateKey in document) {
+    //             eventKey = keys[stateKey];
+    //             break;
+    //         }
+    //     }
+    //     return function(c) {
+    //         if (c) document.addEventListener(eventKey, c);
+    //         return !document[stateKey];
+    //     }
+    // })();
 
-    vis(function(){
-      if (!vis()) {
-        alert(lang_strings['browser_switch']);
-        // return;
-      } else {
-        window.btn_clicked = true;
-        window.location.reload();
-      }
-    });
-
-    window.onbeforeunload = function(){
-        if(!window.btn_clicked){
-            return lang_strings['leave_quiz'];
-        }
-    };
+    // vis(function(){
+    //   if (!vis()) {
+    //     alert(lang_strings['browser_switch']);
+    //     // return;
+    //   } else {
+    //     window.btn_clicked = true;
+    //     window.location.reload();
+    //   }
+    // });
+    // // Leave page alert
+    // window.onbeforeunload = function(){
+    //     if(!window.btn_clicked){
+    //         return lang_strings['leave_quiz'];
+    //     }
+    // };
 </script>
 
 <style type="text/css">

@@ -2,8 +2,8 @@
     <div class="col-xs-12 col-md-6">
         <div class="radio">
             <label>
-                <input type="radio" value="<?php echo $text ?>" name="data[Answer][<?php echo $number ?>][text]" />
-                <?php echo $text ?>
+                <input type="radio" class="form-input" <?php if ($text == $given_answer) echo 'checked'; ?> value="<?php echo $text ?>" name="data[Answer][<?php echo $number ?>][text]" />
+                <?php echo $text; ?>
             </label>
         </div>
     </div>

@@ -96,9 +96,9 @@
         </div>
 
         <button type="button" class="btn btn-success add-choice" style="margin:16px 0 5px;"><?php echo __('Add Choice') ?></button>
-        {{#unless isNew}}
+        
             <button type="button" class="btn btn-primary pull-right edit-done" style="margin:16px 0 5px;"><?php echo __('Save Question') ?></button>
-        {{/unless}}
+        
         <?php echo $this->Form->end(); ?>
     </td>
 </tr>

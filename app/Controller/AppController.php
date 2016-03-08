@@ -182,5 +182,20 @@ class AppController extends Controller {
         $permissions['days_left'] = $days_left;
         return $permissions;
     }
+
+    // Method for random string generate
+    public function randText($length=40){
+        $random= "";
+        srand((double)microtime()*1000000);
+        $strset  = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
+        $strset.= "abcdefghijklmnpqrstuvwxyz";
+        $strset.= "123456789";
+        // Add the special characters to $strset if needed
+        
+        for($i = 0; $i < $length; $i++) {
+            $random.= substr($strset,(rand()%(strlen($strset))), 1);
+        }
+        return $random;
+    }
     
 }
