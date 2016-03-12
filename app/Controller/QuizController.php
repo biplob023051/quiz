@@ -343,7 +343,15 @@ class QuizController extends AppController {
         // pr($quizDetails);
         // exit;
         // get student id's for ajax auto checking
-        $studentIds = Hash::combine($quizDetails['Student'], '{n}.id', '{n}.id');
+        $studentIds = array();
+        foreach ($quizDetails['Student'] as $key1 => $value1) {
+            $basicInfo = array('fname' => $value1['fname'], 'lname' => $value1['lname'], 'class' => $value1['class']);
+            $answers = array();
+            foreach ($value1['Answer'] as $key2 => $value2) {
+                $answers[] = $value2['text'];
+            }
+            $studentIds[$value1['id']] = array($basicInfo, $answers);
+        }
         $studentIds = json_encode($studentIds);
         // get student classes
         $classes = Hash::combine($checkPermission['Student'], '{n}.class', '{n}.class');
@@ -378,9 +386,16 @@ class QuizController extends AppController {
             $filter = $this->Session->read('Filter');
         }
         $quizDetails = $this->Quiz->quizDetails((int) $this->request->data['quizId'], $filter);
-        // get student id's for ajax auto checking
-        $studentIds = Hash::combine($quizDetails['Student'], '{n}.id', '{n}.id');
-       
+        $studentIds = array();
+        foreach ($quizDetails['Student'] as $key1 => $value1) {
+            $basicInfo = array('fname' => $value1['fname'], 'lname' => $value1['lname'], 'class' => $value1['class']);
+            $answers = array();
+            foreach ($value1['Answer'] as $key2 => $value2) {
+                $answers[] = $value2['text'];
+            }
+            $studentIds[$value1['id']] = array($basicInfo, $answers);
+        }
+        
         echo json_encode($studentIds);
     }
 

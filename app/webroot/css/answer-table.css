@@ -152,6 +152,14 @@ span.score {
     background: url(../img/sort-down.gif) right center no-repeat;
 }
 
+.empty-progress-text {
+  color: black;
+}
+
+.progress span {
+  font-size: 7px;
+}
+
 /*XXLarge screens*/
 @media only screen and (min-width: 120.063em) { 
   .container {

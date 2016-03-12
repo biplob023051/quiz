@@ -8,6 +8,7 @@
                 <th class="sortable"><?php echo __('Name'); ?></th>
                 <th class="sortable"><?php echo __('Class'); ?></th>
                 <th class="sortable"><?php echo __('Total Points'); ?></th>
+                <th class="sortable"><?php echo __('Progress'); ?></th>
                 <?php $i = 1; foreach ($quizDetails['Question'] as $question): ?>
                     <?php if (!in_array($question['question_type_id'], $othersQuestionType)) : ?>
                         <th class="question-collapse">
@@ -21,7 +22,9 @@
         </thead>
         <tbody>
             <?php $sl = 0; if (!empty($quizDetails)) : ?>
+                <?php $question_count = count($quizDetails['Question']); ?>
                 <?php foreach ($quizDetails['Student'] as $key1 => $value1) : $sl++;  ?>
+                    <?php //pr($value1); ?>
                     <tr id="student-<?php echo $value1['id']; ?>">
                         <td class="serial">
                             <?php echo $sl; ?>
@@ -42,6 +45,24 @@
                                 </td>
                             <?php endif; ?>
                         <?php endforeach; ?>
+                        <td>
+                            <?php
+                                $answer_array = array();
+                                $answer_count = 0;
+                                foreach ($value1['Answer'] as $answer) {
+                                    if (!in_array($answer['question_id'], $answer_array)) {
+                                        $answer_array[] = $answer['question_id'];
+                                        $answer_count++;
+                                    }
+                                }
+                                $progress = ($answer_count/$question_count)*100; 
+                            ?>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $progress; ?>%">
+                                    <span<?php if (empty($progress)) : ?> class="empty-progress-text"<?php endif; ?>><?php echo $progress; ?>%</span>
+                                </div>
+                            </div>
+                        </td>
                         <?php foreach ($quizDetails['Question'] as $key3 => $value3): ?>
                             <?php if (!in_array($value3['question_type_id'], $othersQuestionType)) : ?>
                                 <td class="question-collapse">

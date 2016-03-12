@@ -4,6 +4,12 @@
 
 	//startRefresh();
 
+	// // right click disabled
+	// $(document).on("contextmenu",function(e){
+ //        e.preventDefault();
+ //        alert(lang_strings['right_click_disabled']);
+ //    });
+
 	$.fn.extend({
         donetyping: function(callback,timeout){
             timeout = timeout || 5e3; // 1 second default timeout
@@ -102,14 +108,6 @@
         });
 	});
 	
-	// right click disabled
-	$(document).on("contextmenu",function(e){
-        e.preventDefault();
-        alert(lang_strings['right_click_disabled']);
-     });
-
-
-
 	// if many correct, then checkbox
 	$(".checkbox").change(function() {
 		var choiceContainer = $(this).closest('.choices');
