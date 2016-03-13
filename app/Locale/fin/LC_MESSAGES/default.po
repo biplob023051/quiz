@@ -1243,3 +1243,7 @@ msgstr "Lisää otsikon teksti"
 #: Controller/QuizController.php:149
 msgid "Image explanation text"
 msgstr "Kuvan selite (vapaaehtoinen)"
+
+#: View/Elements/Quiz/table_extension.ctp:11
+msgid "Progress"
+msgstr "Edistyminen"
