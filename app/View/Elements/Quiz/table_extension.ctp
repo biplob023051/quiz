@@ -55,7 +55,7 @@
                                         $answer_count++;
                                     }
                                 }
-                                $progress = number_format((float)($answer_count/$question_count)*100, 2, '.', ''); 
+                                $progress = number_format((float)($answer_count/$question_count)*100, 2, '.', '')+0; 
                             ?>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $progress; ?>" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $progress; ?>%">

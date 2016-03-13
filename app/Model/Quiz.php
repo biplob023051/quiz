@@ -146,7 +146,13 @@ class Quiz extends AppModel {
                 //'recursive' => 2
                 'contain' => array(
                     'User', 
-                    'Question' => array('Answer', 'Choice', 'QuestionType', 'order' => array('Question.weight DESC', 'Question.id ASC')), 
+                    'Question' => array(
+                        'Answer', 
+                        'Choice', 
+                        'QuestionType', 
+                        'order' => array('Question.weight DESC', 'Question.id ASC'),
+                        'conditions' => array('Question.question_type_id' => array(1,2,3,4,5))
+                    ), 
                     'Student' => array('conditions' => $studentOptions, 'Ranking', 'Answer'), 
                     'Ranking'
                 )
