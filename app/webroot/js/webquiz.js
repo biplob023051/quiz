@@ -196,7 +196,7 @@ var webQuiz = {
 
         var question = webQuiz.getQuestion(questionId),
                 _questionData = questionContainer.find('form').serializeJSON();
-
+        
         if (question.value.preview === true)
             return;
 

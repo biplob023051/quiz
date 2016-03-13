@@ -87,6 +87,8 @@ var debugVar;
 
         var qidStr = $(this).attr('id'),
                 questionId = parseInt($(this).attr('id').substr(6, qidStr.length - 1));
+        // alert(qidStr);
+        // alert(blank_question);
         if (blank_question == true) {
             webQuiz.setToPreview(
                 webQuiz.currentEditQid,
@@ -123,6 +125,7 @@ var debugVar;
                             }
                     );
                     $("#q" + questionId).addClass("EditQuestionBorder");
+                    $("#q" + questionId).show();
                     webQuiz.lastEditQid = question.question_id;
                     webQuiz.currentEditQid = questionId;
                     webQuiz.choiceSortable();
@@ -165,6 +168,7 @@ var debugVar;
                             }
                     );
                     $("#q" + questionId).addClass("EditQuestionBorder");
+                    $("#q" + questionId).show();
                     webQuiz.lastEditQid = question.question_id;
                     webQuiz.currentEditQid = questionId;
                     webQuiz.choiceSortable();
