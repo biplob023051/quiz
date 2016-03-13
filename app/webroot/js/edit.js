@@ -124,7 +124,6 @@ var debugVar;
                                 }
                             }
                     );
-                    $("#q" + questionId).addClass("EditQuestionBorder");
                     $("#q" + questionId).show();
                     webQuiz.lastEditQid = question.question_id;
                     webQuiz.currentEditQid = questionId;
@@ -167,7 +166,6 @@ var debugVar;
                                 }
                             }
                     );
-                    $("#q" + questionId).addClass("EditQuestionBorder");
                     $("#q" + questionId).show();
                     webQuiz.lastEditQid = question.question_id;
                     webQuiz.currentEditQid = questionId;

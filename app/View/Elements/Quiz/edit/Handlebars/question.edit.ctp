@@ -1,7 +1,7 @@
 {{#if QDisplay}}
-    <tr id="q{{id}}">
+    <tr id="q{{id}}" class="EditQuestionBorder">
 {{else}}
-    <tr id="q{{id}}" style="display: none;">
+    <tr id="q{{id}}" class="EditQuestionBorder" style="display: none;">
 {{/if}}
     <td>      
         <?php echo $this->Form->create('Question'); ?>
