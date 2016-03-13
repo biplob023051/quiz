@@ -9,11 +9,13 @@ var debugVar;
 
     webQuiz.init(webQuizConfig);
     
-    // if (initial) { // Add New Question only if its quiz create 
-    //     webQuiz.addNewQuestion();
-    // }
-
-    webQuiz.addNewQuestion();
+    if (initial) { // Add New Question only if its quiz create 
+        webQuiz.addNewQuestion(true); // Show Question 
+    } else if(no_question) {
+        webQuiz.addNewQuestion(true); // Show Question 
+    } else {
+        webQuiz.addNewQuestion(); // Don't Show Question 
+    }
     
     $(document).on('click', '#questions button.add-choice', function () {
         //console.profile("Adding choice");
@@ -174,6 +176,12 @@ var debugVar;
     });
     
     $("#add-question").on('click', function () {
+
+        if(!$('#q-1').is(':visible')) {
+            $('#q-1').show();
+            return;
+        }
+
         var question_number = $('#questions tbody').children('tr:not(.others_type)').length;
     
         var questionTypeId = $('#questions select.choice-type-selector').val();
@@ -202,8 +210,7 @@ var debugVar;
         );
 
         if (validationError == false) {
-
-            webQuiz.addNewQuestion();
+            webQuiz.addNewQuestion(true); // Show Question 
             // delete new empty question for add new question
             if ((questionTypeId != 7) && (questionTypeId != 8)) { // don't validate empty question for youtube or image
                 if ($('#QuestionText').val() == '') {

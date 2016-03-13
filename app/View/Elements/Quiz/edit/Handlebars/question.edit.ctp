@@ -1,4 +1,8 @@
-<tr id="q{{id}}">
+{{#if QDisplay}}
+    <tr id="q{{id}}">
+{{else}}
+    <tr id="q{{id}}" style="display: none;">
+{{/if}}
     <td>      
         <?php echo $this->Form->create('Question'); ?>
         <div class="row">

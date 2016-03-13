@@ -160,6 +160,11 @@ echo json_encode(array(
     <?php else : ?>
         var initial = false;
     <?php endif; ?>
+    <?php if (!empty($no_question)) : ?>
+        var no_question = true;
+    <?php else : ?>
+        var no_question = false;
+    <?php endif; ?>
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
 </script>
 

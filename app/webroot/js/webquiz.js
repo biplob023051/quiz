@@ -82,21 +82,36 @@ var webQuiz = {
 
         this.containerDOM = $("#questions tbody");
     },
-    addNewQuestion: function ()
+    addNewQuestion: function (QDisplay)
     {
         this.lastEditQid = this.currentEditQid;
         this.currentEditQid = -1;
 
+        QDisplay = typeof QDisplay !== 'undefined' ? QDisplay : false;
+
         // @TODO: Find better way to set a default question
-        this.addQuestion({
-            id: -1,
-            text: '',
-            explanation: '',
-            Choice: [{}],
-            QuestionType: webQuiz.questionTypes[0].QuestionType,
-            isNew: true,
-            preview: false
-        });
+        if (QDisplay == true) {
+            this.addQuestion({
+                id: -1,
+                text: '',
+                explanation: '',
+                Choice: [{}],
+                QuestionType: webQuiz.questionTypes[0].QuestionType,
+                isNew: true,
+                preview: false,
+                QDisplay: QDisplay
+            });
+        } else {
+            this.addQuestion({
+                id: -1,
+                text: '',
+                explanation: '',
+                Choice: [{}],
+                QuestionType: webQuiz.questionTypes[0].QuestionType,
+                isNew: true,
+                preview: false
+            });
+        }
         // call sortable function
         webQuiz.choiceSortable();
         return true;

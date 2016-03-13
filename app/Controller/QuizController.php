@@ -131,6 +131,10 @@ class QuizController extends AppController {
 
         if (!empty($initial)) {
             $this->set(compact('initial'));
+        } 
+
+        if (empty($data['Question'])) {
+            $this->set('no_question', true);
         }
 
         $lang_strings['empty_question'] = __('Empty Question Is Not Permit');
