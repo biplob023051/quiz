@@ -3,73 +3,77 @@
     <div class="page-header">
         <h3><?php echo __('Quiz name: ') . $quizDetails['Quiz']['name']; ?></h3>
     </div>
+    <?php $page_no = 0; $student_count = count($quizDetails['Student']); ?>
     <?php foreach ($quizDetails['Student'] as $key1 => $value1) : ?>
-        <div class="row" id="name_portion">
-            <div class="col-md-3 col-xs-4">
-                <?php echo '<span class="gray-color">' . __('Student name: ') . '</span>' . $value1['lname'] . ' ' . $value1['fname']; ?>
-            </div>
-            <div class="col-md-3 col-xs-4">
-                <?php echo '<span class="gray-color">' . __('Quiz taken: ') . '</span>' . $value1['submitted']; ?>
-            </div>
-            <div class="col-md-3 col-xs-2">
-                <?php echo '<span class="gray-color">' . __('Class: ') . '</span>' . $value1['class']; ?>
-            </div>
-            <div class="col-md-3 col-xs-2">
-                <?php 
-                    foreach ($quizDetails['Ranking'] as $key2 => $value2) { 
-                        if ($value1['id'] == $value2['student_id']) {  
-                        echo '<span class="gray-color">' . __('Total: ') . '</span>' . ($value2['score']+0) . '/' . ($value2['total']+0);  break; 
-                        }  
-                    } 
-                ?>
-            </div>
-        </div>
-        <div class="row" id="result">
-            <?php $i = 1; foreach ($quizDetails['Question'] as $key3 => $value3): ?>
-                <?php if (!in_array($value3['question_type_id'], $othersQuestionType)) : ?>
+        <?php $page_no++; ?>
+        <div <?php if ($page_no < $student_count) : ?>class="page"<?php endif; ?>>
+            <div class="row" id="name_portion">
+                <div class="col-md-3 col-xs-4">
+                    <?php echo '<span class="gray-color">' . __('Student name: ') . '</span>' . $value1['lname'] . ' ' . $value1['fname']; ?>
+                </div>
+                <div class="col-md-3 col-xs-4">
+                    <?php echo '<span class="gray-color">' . __('Quiz taken: ') . '</span>' . $value1['submitted']; ?>
+                </div>
+                <div class="col-md-3 col-xs-2">
+                    <?php echo '<span class="gray-color">' . __('Class: ') . '</span>' . $value1['class']; ?>
+                </div>
+                <div class="col-md-3 col-xs-2">
                     <?php 
-                        $answer = '';
-                        foreach ($value3['Answer'] as $key4 => $value4) { 
-                            if ($value1['id'] == $value4['student_id']) {
-                                if (empty($value4['text'])) { 
-                                    $answer = 'Not Answered'; 
-                                } else { 
-                                    $answer = $answer . ' ' . $value4['text']; 
-                                }  
-                            } 
-                        }
+                        foreach ($quizDetails['Ranking'] as $key2 => $value2) { 
+                            if ($value1['id'] == $value2['student_id']) {  
+                            echo '<span class="gray-color">' . __('Total: ') . '</span>' . ($value2['score']+0) . '/' . ($value2['total']+0);  break; 
+                            }  
+                        } 
                     ?>
-                    <?php if (empty($answer)) : ?>
-                        <div class="col-md-12 col-xs-12">
-                            <?php echo $i . ') ' . $value3['text']; ?>
-                        </div>
-                        <hr>
-                        <div class="bottom-border"></div>
-                    <?php elseif (strlen($i . ') ' . $value3['text']) < 45 && strlen($answer) < 45) : ?>
-                        <div class="col-md-12 col-xs-9">
-                            <?php echo $i . ') ' . $value3['text']; ?>
-                        </div>
-                        <div class="col-md-12 col-xs-3" id="result-details">
-                            <?php echo $this->element('Quiz/answer-print', array('value3' => $value3, 'value1' => $value1, 'inline' => true)); ?>
-                        </div>
-                        
-                        <hr>
-                        <div class="bottom-border"></div>
-                    <?php else: ?>
-                        <div class="col-md-12 col-xs-12">
-                            <?php echo $i . ') ' . $value3['text']; ?>
-                        </div>
-                        <div class="col-md-12 col-xs-12" id="result-details">
-                            <?php echo $this->element('Quiz/answer-print', array('value3' => $value3, 'value1' => $value1)); ?>
-                        </div>
-                        
-                        <hr>
-                        <div class="bottom-border"></div>
-                    <?php endif; ?>
-                <?php ++$i; endif; ?>
-            <?php endforeach; ?>
+                </div>
+            </div>
+            <div class="row" id="result">
+                <?php $i = 1; foreach ($quizDetails['Question'] as $key3 => $value3): ?>
+                    <?php if (!in_array($value3['question_type_id'], $othersQuestionType)) : ?>
+                        <?php 
+                            $answer = '';
+                            foreach ($value3['Answer'] as $key4 => $value4) { 
+                                if ($value1['id'] == $value4['student_id']) {
+                                    if (empty($value4['text'])) { 
+                                        $answer = 'Not Answered'; 
+                                    } else { 
+                                        $answer = $answer . ' ' . $value4['text']; 
+                                    }  
+                                } 
+                            }
+                        ?>
+                        <?php if (empty($answer)) : ?>
+                            <div class="col-md-12 col-xs-12">
+                                <?php echo $i . ') ' . $value3['text']; ?>
+                            </div>
+                            <hr>
+                            <div class="bottom-border"></div>
+                        <?php elseif (strlen($i . ') ' . $value3['text']) < 45 && strlen($answer) < 45) : ?>
+                            <div class="col-md-12 col-xs-9">
+                                <?php echo $i . ') ' . $value3['text']; ?>
+                            </div>
+                            <div class="col-md-12 col-xs-3" id="result-details">
+                                <?php echo $this->element('Quiz/answer-print', array('value3' => $value3, 'value1' => $value1, 'inline' => true)); ?>
+                            </div>
+                            
+                            <hr>
+                            <div class="bottom-border"></div>
+                        <?php else: ?>
+                            <div class="col-md-12 col-xs-12">
+                                <?php echo $i . ') ' . $value3['text']; ?>
+                            </div>
+                            <div class="col-md-12 col-xs-12" id="result-details">
+                                <?php echo $this->element('Quiz/answer-print', array('value3' => $value3, 'value1' => $value1)); ?>
+                            </div>
+                            
+                            <hr>
+                            <div class="bottom-border"></div>
+                        <?php endif; ?>
+                    <?php ++$i; endif; ?>
+                <?php endforeach; ?>
+            </div>
+            <hr>
         </div>
-        <hr>
     <?php endforeach; ?>
 </div>
 
@@ -77,6 +81,9 @@
 @media print {
     body {
         -webkit-print-color-adjust:exact !important;
+    }
+    .page {
+        page-break-after: always;
     }
     .page-header {
         padding: 0 !important;

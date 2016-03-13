@@ -20,11 +20,11 @@
             <?php else : ?>
                 <!-- check correct and incorrect -->
                 <?php if ($value4['score'] > 0) : ?>
-                    <p class="text-success"><?php echo $value4['text'] . ' <span class="score automatic">' . ($value4['score']+0) . '</span><input type="text" class="form-control automatic_rating update-score" value="'. $value4['score'] .'" name="' . $value1['id'] . '" question="' . $value3['id'] . '" current-score="' . $value4['score'] . '" max="' . $value3['Choice'][0]['points'] . '"><br/>'; ?></div>
+                    <p class="text-success"><?php echo $value4['text'] . ' <span class="score automatic">' . ($value4['score']+0) . '</span><input type="number" class="form-control automatic_rating update-score" value="'. $value4['score'] .'" name="' . $value1['id'] . '" question="' . $value3['id'] . '" current-score="' . $value4['score'] . '" max="' . $value3['Choice'][0]['points'] . '"><br/>'; ?></div>
                 <?php elseif ($value4['score'] == 0) : ?>
-                    <p class="text-warning"><?php echo $value4['text'] . ' <span class="score automatic">' . ($value4['score']+0) . '</span><input type="text" class="form-control automatic_rating update-score" value="'. $value4['score'] .'" name="' . $value1['id'] . '" question="' . $value3['id'] . '" current-score="' . $value4['score'] . '" max="' . $value3['Choice'][0]['points'] . '"><br/>'; ?></div>
+                    <p class="text-warning"><?php echo $value4['text'] . ' <span class="score automatic">' . ($value4['score']+0) . '</span><input type="number" class="form-control automatic_rating update-score" value="'. $value4['score'] .'" name="' . $value1['id'] . '" question="' . $value3['id'] . '" current-score="' . $value4['score'] . '" max="' . $value3['Choice'][0]['points'] . '"><br/>'; ?></div>
                 <?php else : ?>
-                    <p class="text-danger"><?php echo $value4['text'] . ' <span class="score automatic">' . ($value4['score']+0) . '</span><input type="text" class="form-control automatic_rating update-score" value="'. $value4['score'] .'" name="' . $value1['id'] . '" question="' . $value3['id'] . '" current-score="' . $value4['score'] . '" max="' . $value3['Choice'][0]['points'] . '"><br/>'; ?></div>
+                    <p class="text-danger"><?php echo $value4['text'] . ' <span class="score automatic">' . ($value4['score']+0) . '</span><input type="number" class="form-control automatic_rating update-score" value="'. $value4['score'] .'" name="' . $value1['id'] . '" question="' . $value3['id'] . '" current-score="' . $value4['score'] . '" max="' . $value3['Choice'][0]['points'] . '"><br/>'; ?></div>
                 <?php endif; ?>     
             <?php endif; ?> 
         <!-- short manual scoring -->
