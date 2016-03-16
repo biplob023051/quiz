@@ -25,7 +25,7 @@
                         <p>
                             <span class="text-muted">
                                 <strong>
-                                    <?php echo __('Maximum checks'); ?>
+                                    <?php echo __('Choose at most'); ?>
                                 </strong>
                                 {{max_allowed}}
                             </span>

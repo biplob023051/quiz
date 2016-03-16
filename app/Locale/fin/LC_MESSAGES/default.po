@@ -1247,3 +1247,11 @@ msgstr "Kuvan selite (vapaaehtoinen)"
 #: View/Elements/Quiz/table_extension.ctp:11
 msgid "Progress"
 msgstr "Edistyminen"
+
+#
+msgid "Max allowed to check"
+msgstr "Suurin sallittu vastausten määrä"
+
+#
+msgid "Choose at most"
+msgstr "Valitse enintään"

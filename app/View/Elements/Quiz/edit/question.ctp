@@ -34,7 +34,7 @@ echo json_encode(array(
                     <p>
                         <span class="text-muted">
                             <strong>
-                                <?php echo __('Maximum checks'); ?>
+                                <?php echo __('Choose at most'); ?>
                             </strong>
                             <?php echo $max_allowed; ?>
                         </span>

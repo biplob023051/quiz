@@ -175,7 +175,11 @@ class StudentController extends AppController {
             $correct_answer = 0;
             $total = 0;
 
-            $answered = !empty($this->Session->check($runningFor)) ? $this->Session->read($runningFor) : array();
+            if ($this->Session->check($runningFor)) {
+                $answered = $this->Session->read($runningFor);
+            } else {
+                $answered = array();
+            } 
 
             $i = 0;
             $answers = array();
