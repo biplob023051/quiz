@@ -17,7 +17,8 @@ class StudentController extends AppController {
         // if student id exist then save answer in db
         // if student id not exist then save answer in session
         if (!empty($this->request->data['student_id'])) { // save in database
-            
+            // pr($this->request->data);
+            // exit;
             $student = $this->Student->findById($this->request->data['student_id']);
 
             $checkbox_record_delete = $this->request->data['checkbox_record_delete'];
@@ -38,7 +39,7 @@ class StudentController extends AppController {
                         $points = empty($answer['score']) ? 0 : $answer['score']; // Need to deduct from ranking point
                     }    
                 }
-                if ((empty($checkbox_record_delete) && !empty($checkBox)) || (!empty($checkbox_record_delete) && empty($checkBox))) { // Ne
+                if ((!empty($checkbox_record_delete) && empty($checkBox))) {
                     // Deduct point whatever it is
                     $ranking['Ranking']['score'] = $ranking['Ranking']['score']-$points;
                 } 
