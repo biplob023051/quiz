@@ -2,8 +2,6 @@
 
 	var appData = $.parseJSON($("#app-data").text());
 
-	//startRefresh();
-
 	// right click disabled
 	$(document).on("contextmenu",function(e){
         e.preventDefault();
@@ -12,7 +10,7 @@
 
 	$.fn.extend({
         donetyping: function(callback,timeout){
-            timeout = timeout || 5e3; // 1 second default timeout
+            timeout = timeout || 3e3; // 1 second default timeout
             var timeoutReference,
                 doneTyping = function(el){
                     if (!timeoutReference) return;
@@ -50,7 +48,7 @@
 		var fname = $('#StudentFname').val();
 		var lname = $('#StudentLname').val();
 		var std_class = $('#StudentClass').val();
-		if ((fname != '') && (fname != '') && (std_class != '')) { // only save if 3 basic information exist
+		if ((fname != '') || (fname != '') || (std_class != '')) { // only save if 3 basic information exist
 			// Execute for student information save
 			$.ajax({
 	            dataType: 'json',
@@ -98,7 +96,7 @@
             dataType: 'json',
             url: appData.baseUrl + 'student/update_answer',
             type: 'post',
-            data: {'student_id': std_id, 'question_id': question_id, 'text' : answer_text, 'checkbox_record' : checkbox_record, 'checkBoxDelete' : checkBoxDelete, 'checkbox_record_delete' : checkbox_record_delete, 'checkBox' : checkBox},
+            data: {'student_id': std_id, 'question_id': question_id, 'text' : answer_text, 'checkbox_record' : checkbox_record, 'checkBoxDelete' : checkBoxDelete, 'checkbox_record_delete' : checkbox_record_delete, 'checkBox' : checkBox, 'random_id' : random_id},
             success: function (response)
             {
                 console.log(response);
@@ -274,9 +272,3 @@
 	}
     document.getElementById("StudentLiveForm").reset();
 })(jQuery);
-
-
-function startRefresh() {
-    setTimeout(startRefresh,1000);
-    console.log('hi');
-}

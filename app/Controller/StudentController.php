@@ -14,248 +14,164 @@ class StudentController extends AppController {
     public function update_answer() {
         $this->autoRender = false;
         $response = array('success' => true);
-        // if student id exist then save answer in db
-        // if student id not exist then save answer in session
-        if (!empty($this->request->data['student_id'])) { // save in database
-            // pr($this->request->data);
-            // exit;
-            $student = $this->Student->findById($this->request->data['student_id']);
-
-            $checkbox_record_delete = $this->request->data['checkbox_record_delete'];
-            $checkBox = $this->request->data['checkBox'];
-
-            // pr($checkbox_record_delete);
-            // exit;
-
-            $data = array();
-            $points = 0;
-            $total_change = false;
-            $ranking['Ranking'] = $student['Ranking'];
-
-            if (!empty($student['Answer'])) { // Check if answer exist, then modify or delete
-                foreach ($student['Answer'] as $key => $answer) {
-                    if ($answer['question_id'] == $this->request->data['question_id']) { // if question id exist
-                        $data['Answer']['id'] = $answer['id'];
-                        $points = empty($answer['score']) ? 0 : $answer['score']; // Need to deduct from ranking point
-                    }    
-                }
-                if ((!empty($checkbox_record_delete) && empty($checkBox))) {
-                    // Deduct point whatever it is
-                    $ranking['Ranking']['score'] = $ranking['Ranking']['score']-$points;
-                } 
-            } 
-
-
-            if (empty($data)) { // New Answer
-                $total_change = true;
-            }
-
-            // Compare with choice if its correct or not
-            $this->loadModel('Choice');
-            $choices = $this->Choice->find('all', array(
-                'conditions' => array(
-                    'Choice.question_id' => (int)$this->request->data['question_id']
-                )
-            ));
-            // pr($choices);
-            // exit;
-            $checkMax = 0;
-            $correct_answer = 0;
-            foreach ($choices as $key2 => $value2) {
-                // get maxvalue as a total point increment
-                if ($checkMax < $value2['Choice']['points']) {
-                    $checkMax = $value2['Choice']['points'];
-                }
-
-                if (($value2['Question']['question_type_id'] == 1) || 
-                    ($value2['Question']['question_type_id'] == 3)) {
-                    // multiple choice one or many
-                    if ($value2['Choice']['text'] == $this->request->data['text']) {
-                        $data['Answer']['score'] = $value2['Choice']['points'];
-                        if ((empty($checkbox_record_delete) && !empty($checkBox)) || (!empty($checkbox_record_delete) && empty($checkBox))) {
-                            $correct_answer = $correct_answer + $value2['Choice']['points'];
-                        } else {
-                            $correct_answer = $correct_answer - $value2['Choice']['points'];
-                        }
-                    } 
-
-
-                } elseif ($value2['Question']['question_type_id'] == 2) {
-                    // short automatic point
-                    $words = explode(';', $this->request->data['text']);
-                    if (count($words) == 1) {
-                        $words = explode(' ', $this->request->data['text']);
-                    }
-                    $ans_string = str_replace(' ', '', $value2['Choice']['text']);
-
-                    $matched_word = explode(';', $ans_string);
-                    
-                    foreach ($words as $key => $value) {
-                        //if (!empty($value) && (strpos(strtolower($value2['Choice']['text']), strtolower(trim($value))) !== false)) {
-                        if (!empty($value) && (in_array(trim($value), $matched_word))) {
-                            $data['Answer']['score'] = $value2['Choice']['points'];
-                            $correct_answer = $correct_answer + $value2['Choice']['points'];
-                            break;
-                        } else {
-                            $data['Answer']['score'] = 0;
-                        }
-                    }
-                    $data['Answer']['text'] = $this->request->data['text'];
-
-                } elseif ($value2['Question']['question_type_id'] == 4) {
-                    // short manual point
-                    $data['Answer']['score'] = null;
-
-                } else {
-                    $data['Answer']['score'] = null;
-                }
-            }
-            // pr($checkbox_record_delete);
-            // exit;
-
-            if ((empty($checkbox_record_delete) && !empty($checkBox)) || (!empty($checkbox_record_delete) && empty($checkBox))) {
-                $data['Answer']['text'] = $this->request->data['text'];
-            } else {
-                $data['Answer']['text'] = '';
-            }
-
-            $ranking['Ranking']['score'] = $ranking['Ranking']['score']+$correct_answer;
-            
-            // pr($data);
-            // pr($ranking);
-            // exit;
-
-            if (empty($data['Answer']['text']) && !empty($data['Answer']['id'])) {
-                // Deleted answer
-                $this->Student->Answer->delete($data['Answer']['id']);
-            } else { // Update or add new answer
-                if (!empty($this->request->data['checkbox_record'])) {
-                    $data['Answer']['id'] = '';
-                }
-                $data['Answer']['question_id'] = (int) $this->request->data['question_id'];
-                $data['Answer']['student_id'] = (int) $this->request->data['student_id'];
-                $this->Student->Answer->save($data);
-            }
-            $this->Student->Ranking->save($ranking);
-            
-
-        } else { // save on session
-            $runningFor = $this->Session->read('started');
-            if (!empty($this->request->data['checkBoxDelete'])) { // Delete checkbox
-                $this->Session->delete($runningFor.'.'.$this->request->data['question_id']);
-            } else {
-                if (!empty($this->request->data['checkbox_record'])) {
-                    $this->Session->write($runningFor.'.'.$this->request->data['question_id'], $this->request->data['checkbox_record']);
-                } else {
-                    $this->Session->write($runningFor.'.'.$this->request->data['question_id'], $this->request->data['text']);
-                }             
-            }
-            
-        }
         
+        if (empty($this->request->data['student_id']) && !$this->Session->check('student_id')) { // check student record
+            // student record new entry
+            $this->request->data['fname'] = '';
+            $this->request->data['lname'] = '';
+            $this->request->data['class'] = '';
+            $response = $this->recordStudentData($this->request->data);
+        } 
+
+        $this->request->data['student_id'] = !empty($this->request->data['student_id']) ? (int)$this->request->data['student_id'] : (int)$this->Session->read('student_id');
+        $student = $this->Student->findById($this->request->data['student_id']);
+
+        $checkbox_record_delete = $this->request->data['checkbox_record_delete'];
+        $checkBox = $this->request->data['checkBox'];
+
+        // pr($checkbox_record_delete);
+        // exit;
+
+        $data = array();
+        $points = 0;
+        $total_change = false;
+        $ranking['Ranking'] = $student['Ranking'];
+
+        if (!empty($student['Answer'])) { // Check if answer exist, then modify or delete
+            foreach ($student['Answer'] as $key => $answer) {
+                if ($answer['question_id'] == $this->request->data['question_id']) { // if question id exist
+                    $data['Answer']['id'] = $answer['id'];
+                    $points = empty($answer['score']) ? 0 : $answer['score']; // Need to deduct from ranking point
+                }    
+            }
+            if ((!empty($checkbox_record_delete) && empty($checkBox))) {
+                // Deduct point whatever it is
+                $ranking['Ranking']['score'] = $ranking['Ranking']['score']-$points;
+            } 
+        } 
+
+
+        if (empty($data)) { // New Answer
+            $total_change = true;
+        }
+
+        // Compare with choice if its correct or not
+        $this->loadModel('Choice');
+        $choices = $this->Choice->find('all', array(
+            'conditions' => array(
+                'Choice.question_id' => (int)$this->request->data['question_id']
+            )
+        ));
+        // pr($choices);
+        // exit;
+        $checkMax = 0;
+        $correct_answer = 0;
+        foreach ($choices as $key2 => $value2) {
+            // get maxvalue as a total point increment
+            if ($checkMax < $value2['Choice']['points']) {
+                $checkMax = $value2['Choice']['points'];
+            }
+
+            if (($value2['Question']['question_type_id'] == 1) || 
+                ($value2['Question']['question_type_id'] == 3)) {
+                // multiple choice one or many
+                if ($value2['Choice']['text'] == $this->request->data['text']) {
+                    $data['Answer']['score'] = $value2['Choice']['points'];
+                    if ((empty($checkbox_record_delete) && !empty($checkBox)) || (!empty($checkbox_record_delete) && empty($checkBox))) {
+                        $correct_answer = $correct_answer + $value2['Choice']['points'];
+                    } else {
+                        $correct_answer = $correct_answer - $value2['Choice']['points'];
+                    }
+                } 
+
+
+            } elseif ($value2['Question']['question_type_id'] == 2) {
+                // short automatic point
+                $words = explode(';', $this->request->data['text']);
+                if (count($words) == 1) {
+                    $words = explode(' ', $this->request->data['text']);
+                }
+                $ans_string = str_replace(' ', '', $value2['Choice']['text']);
+
+                $matched_word = explode(';', $ans_string);
+                
+                foreach ($words as $key => $value) {
+                    //if (!empty($value) && (strpos(strtolower($value2['Choice']['text']), strtolower(trim($value))) !== false)) {
+                    if (!empty($value) && (in_array(trim($value), $matched_word))) {
+                        $data['Answer']['score'] = $value2['Choice']['points'];
+                        $correct_answer = $correct_answer + $value2['Choice']['points'];
+                        break;
+                    } else {
+                        $data['Answer']['score'] = 0;
+                    }
+                }
+                $data['Answer']['text'] = $this->request->data['text'];
+
+            } elseif ($value2['Question']['question_type_id'] == 4) {
+                // short manual point
+                $data['Answer']['score'] = null;
+
+            } else {
+                $data['Answer']['score'] = null;
+            }
+        }
+        // pr($checkbox_record_delete);
+        // exit;
+
+        if ((empty($checkbox_record_delete) && !empty($checkBox)) || (!empty($checkbox_record_delete) && empty($checkBox))) {
+            $data['Answer']['text'] = $this->request->data['text'];
+        } else {
+            $data['Answer']['text'] = '';
+        }
+
+        $ranking['Ranking']['score'] = $ranking['Ranking']['score']+$correct_answer;
+        
+        // pr($data);
+        // pr($ranking);
+        // exit;
+
+        if (empty($data['Answer']['text']) && !empty($data['Answer']['id'])) {
+            // Deleted answer
+            $this->Student->Answer->delete($data['Answer']['id']);
+        } else { // Update or add new answer
+            if (!empty($this->request->data['checkbox_record'])) {
+                $data['Answer']['id'] = '';
+            }
+            $data['Answer']['question_id'] = (int) $this->request->data['question_id'];
+            $data['Answer']['student_id'] = (int) $this->request->data['student_id'];
+            $this->Student->Answer->save($data);
+        }
+        $this->Student->Ranking->save($ranking);
+
         echo json_encode($response);
         exit;
     }
 
     public function update_student() {
         $this->autoRender = false;
-        $response = array('success' => false);
+        $response = $this->recordStudentData($this->request->data);
+        echo json_encode($response);
+        exit;
+    }
 
+    // student information updating
+    private function recordStudentData() {
+        $response = array('success' => false);
         $this->loadModel('Quiz');
-        if (!empty($this->request->data['student_id'])) {
+        if ($this->Session->check('student_id')) {
             // Update student information
-            $data['Student']['id'] = (int) $this->request->data['student_id'];
-        } else { 
+            $data['Student']['id'] = (int) $this->Session->read('student_id');
+        } else {
             // Find quiz id
             $quiz = $this->Quiz->findByRandomId((int)$this->request->data['random_id']);
             $questions = Hash::combine($quiz['Question'], '{n}.id', '{n}.id');
             $data['Student']['quiz_id'] = $quiz['Quiz']['id'];
-            // check session data
-            $runningFor = $this->Session->read('started');
-
-            $correct_answer = 0;
-            $total = 0;
-
-            if ($this->Session->check($runningFor)) {
-                $answered = $this->Session->read($runningFor);
-            } else {
-                $answered = array();
-            } 
-
-            $i = 0;
-            $answers = array();
-            foreach ($answered as $key => $answer) {
-                if (is_array($answer)) {
-                    foreach ($answer as $text) {
-                        if (!empty($text)) {
-                            $answers[$i++] = array(
-                                'question_id' => $key,
-                                'text' => $text
-                            );
-                        }
-                    }
-                } else {
-                    $answers[$i++] = array(
-                        'question_id' => $key,
-                        'text' => $answer
-                    );
-                }
-            }
             
-            $data['Answer'] = $answers;
+            $total = 0;
+            
             $this->loadModel('Choice');
 
             $choices = $this->Choice->find('all', array('conditions' => array('Choice.question_id' => $questions)));
-
-            $this->loadModel('QuestionType');
-            
-            foreach ($data['Answer'] as $key1 => $value1) {
-                foreach ($choices as $key2 => $value2) {
-                    if ($value2['Choice']['question_id'] == $value1['question_id']) {
-                        if (($value2['Question']['question_type_id'] == 1) || 
-                            ($value2['Question']['question_type_id'] == 3)) {
-                            // multiple choice one or many
-                            if ($value2['Choice']['text'] == $value1['text']) {
-                                $data['Answer'][$key1]['score'] = $value2['Choice']['points'];
-                                if ($value2['Choice']['points'] != 0) {
-                                    $correct_answer = $correct_answer + $value2['Choice']['points'];
-                                }
-                            }
-                        } elseif ($value2['Question']['question_type_id'] == 2) {
-                            // short automatic point
-                            $words = explode(';', $value1['text']);
-
-                            if (count($words) == 1) {
-                                $words = explode(' ', $value1['text']);
-                            }
-
-                            $ans_string = str_replace(' ', '', $value2['Choice']['text']);
-
-                            $matched_word = explode(';', $ans_string);
-                            
-                            foreach ($words as $key => $value) {
-                                //if (!empty($value) && (strpos(strtolower($value2['Choice']['text']), strtolower(trim($value))) !== false)) {
-                                if (!empty($value) && (in_array(trim($value), $matched_word))) {
-                                    $data['Answer'][$key1]['score'] = $value2['Choice']['points'];
-                                    $correct_answer = $correct_answer + $value2['Choice']['points'];
-                                    break;
-                                } else {
-                                    $data['Answer'][$key1]['score'] = 0;
-                                }
-                            }
-
-                        } elseif ($value2['Question']['question_type_id'] == 4) {
-                            // short manual point
-                            $manual_scoring_short = $this->QuestionType->findById(4, array('QuestionType.manual_scoring'));
-                            $data['Answer'][$key1]['score'] = null;
-
-                        } else {
-                            $manual_scoring_essay = $this->QuestionType->findById(5, array('QuestionType.manual_scoring'));
-                            $data['Answer'][$key1]['score'] = null;
-                        }
-                    } 
-                }
-            }
 
             //pr($choices);
             $checkQuestion = array();
@@ -295,22 +211,17 @@ class StudentController extends AppController {
                     }
                 }
             }
-            $this->Session->delete($runningFor);     
             
-            $correct_answer = $correct_answer < 0 ? 0 : $correct_answer;
             // save data in ranking table
             $data['Ranking']['quiz_id'] = $quiz['Quiz']['id'];
             $data['Ranking']['total'] = $total;
-            $data['Ranking']['score'] = $correct_answer;
+            $data['Ranking']['score'] = 0;
         }
 
         $data['Student']['fname'] = $this->request->data['fname'];
         $data['Student']['lname'] = $this->request->data['lname'];
         $data['Student']['class'] = strtolower(preg_replace('/\s+/', '', $this->request->data['class']));
         $data['Student']['submitted'] = date('Y-m-d H:i:s');
-
-        // pr($data);
-        // exit;
 
         $student = $this->Student->saveAssociated($data);
         if (!empty($student)) {
@@ -338,9 +249,7 @@ class StudentController extends AppController {
         } else {
             $response['message'] = __('Student saved failed');
         }
-    
-        echo json_encode($response);
-        exit;
+        return $response;
     }
 
     public function submit($quizRandomId) {

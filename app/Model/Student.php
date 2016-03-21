@@ -10,45 +10,7 @@ class Student extends AppModel {
         )
     );
     public $validate = array(
-        'fname' => array(
-            'notempty' => array(
-                'rule'       => 'notEmpty',
-                'message'    => 'First name is required',
-                'allowEmpty' => false,
-                'required'   => false,
-            ),
-            'alphaNumericWithSpace' => array(
-                'rule' => array('custom', "/[a-zA-Z0-9]+/"),
-                'required' => true,
-                'message' => 'Invalid First Name'
-            )
-        ),
-        'lname' => array(
-            'notempty' => array(
-                'rule'       => 'notEmpty',
-                'message'    => 'Last name is required',
-                'allowEmpty' => false,
-                'required'   => false,
-            ),
-            'alphaNumericWithSpace' => array(
-                'rule' => array('custom', "/[a-zA-Z0-9]+/"),
-                'required' => true,
-                'message' => 'Invalid Last Name'
-            )
-        ),
-        'class' => array(
-            'notempty' => array(
-                'rule'       => 'notEmpty',
-                'message'    => 'Class is required',
-                'allowEmpty' => false,
-                'required'   => false,
-            ),
-            'alphaNumericWithSpace' => array(
-                'rule' => array('custom', "/[a-zA-Z0-9]+/"),
-                'required' => true,
-                'message' => 'Invalid Class'
-            )
-        )
+        
     );
 
 }
