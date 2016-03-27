@@ -20,7 +20,7 @@ msgstr ""
 #: View/Elements/Invoice/invoice_success_dialog.ctp:7
 #: View/User/settings.ctp:55
 msgid "Upgrade Account"
-msgstr "Päivitä käyttäjätili"
+msgstr "Tilaa vuosilisenssi (29 €)"
 
 #: Controller/QuestionController.php:60
 msgid "New Question"
@@ -63,7 +63,7 @@ msgstr "Laskun lähetys epäonnistui! Yritä uudelleen."
 
 #: View/Elements/Invoice/invoice_send_dialog.ctp:10
 msgid "An invoice will be sent to upgrade your account. Proceed?"
-msgstr "Lasku lähetetään sähköpostiisi. Jatketaanko?"
+msgstr "29€ lasku lähetetään sähköpostiisi. <br/>Laskun maksamalla saat Verkkotestiin 12 kk lisää käyttöaikaa. <br/><br/>Jatketaanko?"
 
 #: View/Elements/Invoice/invoice_success_dialog.ctp:10
 msgid "You will receive an invoice into your email shortly. By paying it you can upgrade your account."
@@ -135,7 +135,7 @@ msgstr "Luo uusi testi"
 
 #: View/Quiz/index.ctp:20
 msgid "Upgrade to Create More Quiz"
-msgstr "Päivitä käyttäjätili uusien testien luomiseksi"
+msgstr "Tilaa vuosilisenssi (29 €)"
 
 #: View/Quiz/index.ctp:39
 msgid "Give test!"
@@ -1255,3 +1255,11 @@ msgstr "Suurin sallittu vastausten määrä"
 #
 msgid "Choose at most"
 msgstr "Valitse enintään"
+
+#: Controller/MaintenanceController.php:11
+msgid "Pardon for the dust!"
+msgstr "Pahoittelut raksapölystä!"
+
+#: View/Elements/Maintenance/notice.ctp:11
+msgid "We are currently making the app even better. We will be back online tonight at 22:00."
+msgstr "Teemme parhaillaan Verkkotestistä entistäkin parempaa. Verkkotesti on käytössäsi taas tänään klo 22:00."

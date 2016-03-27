@@ -160,6 +160,7 @@ class QuizController extends AppController {
     }
 
     public function add() {
+        
         $this->accountStatus(); 
 
         $userId = $this->Auth->user('id');
@@ -184,15 +185,23 @@ class QuizController extends AppController {
 
         // check if free user creating first quiz send email notification to admin
         $user = $this->Auth->user();
-        if (empty($user['account_level'])) { // if this is the free user
-            $Email = new CakeEmail();
-            $Email->viewVars(array('user' => $user));
-            $Email->from(array('pietu.halonen@verkkotesti.fi' => 'WebQuiz.fi'));
-            $Email->template('first_quiz_create');
-            $Email->emailFormat('html');
-            $Email->to(Configure::read('AdminEmail'));
-            $Email->subject(__('[Verkkotesti] First quiz created'));
-            $Email->send();
+        if (empty($user['account_level']) || ($user['account_level'] == 22)) { // if this is the free user
+            // check if its first quiz
+            $quiz_count = $this->User->Quiz->find('count', array(
+                'conditions' => array(
+                    'Quiz.user_id' => $this->Auth->user('id')
+                )
+            ));
+            if ($quiz_count == 1) {
+                $Email = new CakeEmail();
+                $Email->viewVars(array('user' => $user));
+                $Email->from(array('pietu.halonen@verkkotesti.fi' => 'WebQuiz.fi'));
+                $Email->template('first_quiz_create');
+                $Email->emailFormat('html');
+                $Email->to(Configure::read('AdminEmail'));
+                $Email->subject(__('[Verkkotesti] First quiz created'));
+                $Email->send();
+            } 
         }
 
         return $this->redirect(array(

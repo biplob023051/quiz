@@ -72,6 +72,10 @@ class AppController extends Controller {
         $this->Cookie->secure = false;
         $this->Cookie->httpOnly = true;
 
+        // if ($this->request->controller != 'maintenance' && $this->request->action != 'notice') {
+        //     $this->redirect(array('controller' => 'maintenance', 'action' => 'notice'));
+        // }
+
         // check user language, default language finish
         $language = $this->Auth->user('language');
         if (empty($language) or !file_exists(APP . 'Locale' . DS . $language . DS . 'LC_MESSAGES' . DS . 'default.po'))

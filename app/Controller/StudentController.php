@@ -39,9 +39,16 @@ class StudentController extends AppController {
 
         if (!empty($student['Answer'])) { // Check if answer exist, then modify or delete
             foreach ($student['Answer'] as $key => $answer) {
-                if ($answer['question_id'] == $this->request->data['question_id']) { // if question id exist
-                    $data['Answer']['id'] = $answer['id'];
-                    $points = empty($answer['score']) ? 0 : $answer['score']; // Need to deduct from ranking point
+                if (empty($checkBox)) { // if not check box
+                    if ($answer['question_id'] == $this->request->data['question_id']) { // if question id exist
+                        $data['Answer']['id'] = $answer['id'];
+                        $points = empty($answer['score']) ? 0 : $answer['score']; // Need to deduct from ranking point
+                    }
+                } else {
+                    if (($answer['question_id'] == $this->request->data['question_id']) && ($answer['text'] == $this->request->data['text'])) { // if question id exist
+                        $data['Answer']['id'] = $answer['id'];
+                        $points = empty($answer['score']) ? 0 : $answer['score']; // Need to deduct from ranking point
+                    }
                 }    
             }
             if ((!empty($checkbox_record_delete) && empty($checkBox))) {
