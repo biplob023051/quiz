@@ -105,38 +105,53 @@ $this->assign('title', __('My Quizzes'));
 <?php if (!empty($userPermissions['access'])) : ?>
     <!-- Quiz list -->
     <div class="panel panel-default">
-        <table class="table">
-            <tbody>
-                <!--nocache-->
-                <?php foreach ($data['quizzes'] as $id => $quiz): ?> 
-                    <?php $class = empty($quiz['Quiz']['status']) ? 'incativeQuiz' : 'activeQuiz'; ?>
-                    <tr class="<?php echo $class; ?>">
-                        <td>
-                            <button type="button" class="btn btn-danger btn-sm delete-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Remove quiz'); ?>">
-                                <i class="glyphicon trash"></i>
-                            </button>
-                            <?php if ($quiz['Quiz']['status']) : ?>
-                                <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Archive quiz'); ?>">
-                                    <i class="glyphicon archive"></i>
+        <?php if (!empty($data['quizzes'])) : ?>
+            <!-- show quiz list -->
+            <table class="table">
+                <tbody>
+                    <?php foreach ($data['quizzes'] as $id => $quiz): ?> 
+                        <?php $class = empty($quiz['Quiz']['status']) ? 'incativeQuiz' : 'activeQuiz'; ?>
+                        <tr class="<?php echo $class; ?>">
+                            <td>
+                                <button type="button" class="btn btn-danger btn-sm delete-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Remove quiz'); ?>">
+                                    <i class="glyphicon trash"></i>
                                 </button>
-                            <?php else: ?>
-                                <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Activate quiz'); ?>">
-                                    <i class="glyphicon recycle"></i>
-                                </button>
-                            <?php endif; ?>
-                            <?php echo $this->Html->link($quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id'])); ?>
-                        </td>
-                        <td>
-                            <?php if ($quiz['Quiz']['status']) : ?>
-                                <?php echo $this->Html->link(__("Give test!"), '/quiz/present/' . $quiz['Quiz']['id']); ?>
-                            <?php endif; ?>
-                            <mark><?php echo $this->Html->link(__("Answers (%s)", $quiz['Quiz']['student_count']), '/quiz/table/' . $quiz['Quiz']['id']); ?></mark>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-            <!--/nocache-->
-        </table>
+                                <?php if ($quiz['Quiz']['status']) : ?>
+                                    <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Archive quiz'); ?>">
+                                        <i class="glyphicon archive"></i>
+                                    </button>
+                                <?php else: ?>
+                                    <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Activate quiz'); ?>">
+                                        <i class="glyphicon recycle"></i>
+                                    </button>
+                                <?php endif; ?>
+                                <?php echo $this->Html->link($quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id'])); ?>
+                            </td>
+                            <td>
+                                <?php if ($quiz['Quiz']['status']) : ?>
+                                    <?php echo $this->Html->link(__("Give test!"), '/quiz/present/' . $quiz['Quiz']['id']); ?>
+                                <?php endif; ?>
+                                <mark><?php echo $this->Html->link(__("Answers (%s)", $quiz['Quiz']['student_count']), '/quiz/table/' . $quiz['Quiz']['id']); ?></mark>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <!--nocache-->
+                </tbody>
+                <!--/nocache-->
+            </table>
+        <?php else : ?>
+            <!-- show dummy data installation module -->
+            <div class="row">
+                <div id="demo-data">
+                    <div class="col-md-10 col-md-offset-1">
+                        <p class="text-center"><?php echo __('Welcome to Verkkotesti! You can dive straight in and ') . '<b>' . __('Create a New Quiz') . '</b>' . __(' (blue button above). If you want to explore a bit, you can ') . '<b>' . __('a set of demo quizzes') . '</b>' . __('gray button bellow. You can delete demo quizzes when you don\'t need them anymore.'); ?></p>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4">
+                        <?php echo $this->Form->postLink(__('Load dummy quizzes'), array('controller' => 'maintenance', 'action' => 'load_dummy_data', AuthComponent::user('id')),array('class'=>'btn btn-gray btn-block','escape'=>false), __('Are you sure that you want to import dummy quizzes?')); ?>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 <?php endif; ?>
 
@@ -157,3 +172,17 @@ $this->assign('title', __('My Quizzes'));
 <script type="text/javascript">
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
 </script>
+
+<style type="text/css">
+    #demo-data {
+        width: 100%;
+        margin: 60px auto;
+        float: left;
+    }
+
+    .btn-gray {
+        color: #fff;
+        background-color: gray;
+        border-color: gray;
+    }
+</style>
