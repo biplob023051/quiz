@@ -1,5 +1,5 @@
 <?php
-App::uses('CakeEmail', 'Network/Email');
+
 class MaintenanceController extends AppController {
 
     public function beforeFilter() {
@@ -14,35 +14,6 @@ class MaintenanceController extends AppController {
         $this->render('/Elements/Maintenance/notice');
     }
 
-    public function admin_import() {
-        if ($this->Auth->user('account_level') != 51)
-            throw new ForbiddenException;
-        $this->set('title_for_layout',__('Import Demo Quiz'));
-
-        if ($this->request->is('post')) {
-            if (empty($this->request->data['Maintenance']['user_id'])) {
-                $this->Session->setFlash(__('Please enter an user id'), 'error_form', array(), 'error');
-            } elseif (!is_numeric($this->request->data['Maintenance']['user_id'])) {
-                $this->Session->setFlash(__('Please enter a numeric id'), 'error_form', array(), 'error');
-            } else {
-                $this->importQuizzes($this->request->data['Maintenance']['user_id']);
-                $this->Session->setFlash(__('Imported successfully'), 'notification_form', array(), 'notification');
-            }
-            $this->redirect($this->referer());
-        }
-    }
-
-    public function sendEmail() {
-        $Email = new CakeEmail();
-        $Email->viewVars(array('user' => $this->Auth->user()));
-        $Email->from(array('pietu.halonen@verkkotesti.fi' => 'WebQuiz.fi'));
-        $Email->template('first_quiz_create');
-        $Email->emailFormat('html');
-        $Email->to(Configure::read('AdminEmail'));
-        $Email->subject(__('[Verkkotesti] Demo quizzes loaded'));
-        $Email->send();
-    }
-
     public function load_dummy_data() {
         $this->autoRender = false;
         $this->loadModel('Quiz');
@@ -51,14 +22,7 @@ class MaintenanceController extends AppController {
             $this->Session->setFlash(__('No direct access on this location'), 'error_form', array(), 'error');
             $this->redirect(array('controller' => 'quiz', 'action' => 'index'));
         }
-        $this->importQuizzes($this->Auth->user('id'));
-        $this->sendEmail();
-        $this->Session->setFlash(__('Imported successfully'), 'notification_form', array(), 'notification');
-        $this->redirect($this->referer());
-    }
 
-    public function importQuizzes($user_id) {
-        $this->loadModel('Quiz');
         $quizes[0]['Quiz']['name'] = 'MALLITESTI: Fruits and vegetables';
         $quizes[0]['Quiz']['description'] = 'Tässä kokeessa testataan hedelmien ja vihannesten sanastoa englanniksi. (MALLITESTI: voit poistaa tämän testin kun et tarvitse sitä enää.)';
         $quizes[0]['Quiz']['student_count'] = 9;
@@ -73,7 +37,7 @@ class MaintenanceController extends AppController {
         $quizes[2]['Quiz']['student_count'] = 9;
 
         foreach ($quizes as $key1 => $quiz) {
-            $quiz['Quiz']['user_id'] = $user_id;
+            $quiz['Quiz']['user_id'] = $this->Auth->user('id');
             $this->Quiz->create();
             if ($this->Quiz->save($quiz)) { // Save Quiz
                 
@@ -3022,6 +2986,8 @@ class MaintenanceController extends AppController {
 
             } // Save Quiz end
         }
+        $this->redirect($this->referer());
+        //$quizes[]['Quiz']['random_id'] = 9;
     }
     
 }

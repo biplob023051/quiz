@@ -57,6 +57,8 @@ class QuizController extends AppController {
             'quizzes' => $quizzes,
         );
 
+        $this->set('quiz_created', $this->Quiz->findByUserId($this->Auth->user('id'), array('Quiz.id')));
+
         $lang_strings['delete_quiz_1'] = __('There are ');
         $lang_strings['delete_quiz_2'] = __(' answers, ');
         $lang_strings['delete_quiz_3'] = __(' students, and ');

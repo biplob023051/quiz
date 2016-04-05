@@ -440,3 +440,21 @@ i.close {
 .panel>.table>tbody:last-child>tr:last-child td { 
     border-bottom: 0;   
 }
+
+.btn-green {
+    background-color: #009f00;
+    border-color: #009f00;
+    color: #ffffff;
+}
+
+ #demo-data {
+    width: 100%;
+    margin: 60px auto;
+    float: left;
+}
+
+.btn-gray {
+    color: #fff;
+    background-color: gray;
+    border-color: gray;
+}

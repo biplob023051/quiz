@@ -86,7 +86,7 @@ $this->assign('title', __('My Quizzes'));
         </div>
     <?php endif; ?>
 
-    <?php if (!empty($userPermissions['access'])) : ?>
+    <?php if (!empty($userPermissions['access']) && !empty($quiz_created)) : ?>
         <div class="col-xa-12 col-md-4 pull-right">
             <form class="form" id="quiz-filter" method="post">
                 <?php
@@ -140,17 +140,21 @@ $this->assign('title', __('My Quizzes'));
                 <!--/nocache-->
             </table>
         <?php else : ?>
-            <!-- show dummy data installation module -->
-            <div class="row">
-                <div id="demo-data">
-                    <div class="col-md-10 col-md-offset-1">
-                        <p class="text-center"><?php echo __('Welcome to Verkkotesti! You can dive straight in and ') . '<b>' . __('Create a New Quiz') . '</b>' . __(' (blue button above). If you want to explore a bit, you can ') . '<b>' . __('a set of demo quizzes') . '</b>' . __('gray button bellow. You can delete demo quizzes when you don\'t need them anymore.'); ?></p>
-                    </div>
-                    <div class="col-md-4 col-md-offset-4">
-                        <?php echo $this->Form->postLink(__('Load dummy quizzes'), array('controller' => 'maintenance', 'action' => 'load_dummy_data', AuthComponent::user('id')),array('class'=>'btn btn-gray btn-block','escape'=>false), __('Are you sure that you want to import dummy quizzes?')); ?>
+            <?php if (empty($quiz_created)) : ?>
+                <!-- show dummy data installation module -->
+                <div class="row">
+                    <div id="demo-data">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p class="text-center"><?php echo __('Welcome to Verkkotesti!') ?></p>
+                            <p class="text-center"><?php echo __('If you want to start by looking at demo quizzes, click the gray button ') . '<b>"' . __('Load demo quizzes') . '"</b>.'; ?></p>
+                            <p class="text-center"><?php echo __('(You can delete demo quizzes when you don\'t need them anymore.)'); ?></p>
+                            <p class="text-center"><?php echo __('If you want to dive straight in, click the blue button') . '<b> "' . __('Create a New test') . '"</b>.'; ?></p>
+                        </div>
+                        <div class="col-md-4 col-md-offset-4"><button type="button" class="btn btn-gray btn-block" data-toggle="modal" data-target="#demo-dialog" id="upgrade_account"><span class="glyphicon glyphicon-import" aria-hidden="true"></span><span> <?php echo __('Load demo quizzes'); ?></span></button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
 <?php endif; ?>
@@ -159,6 +163,7 @@ $this->assign('title', __('My Quizzes'));
 <?php echo $this->element('Invoice/invoice_success_dialog'); ?>
 <?php echo $this->element('Invoice/invoice_error_dialog'); ?>
 <?php echo $this->element('Invoice/delete_confirm'); ?>
+<?php echo $this->element('Invoice/demo_dialog'); ?>
 
 
 <script id="app-data" type="application/json">
@@ -172,17 +177,3 @@ $this->assign('title', __('My Quizzes'));
 <script type="text/javascript">
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
 </script>
-
-<style type="text/css">
-    #demo-data {
-        width: 100%;
-        margin: 60px auto;
-        float: left;
-    }
-
-    .btn-gray {
-        color: #fff;
-        background-color: gray;
-        border-color: gray;
-    }
-</style>

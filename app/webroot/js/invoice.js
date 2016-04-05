@@ -81,5 +81,9 @@
         });    
     });
 
+    $(document).on('click', '#import', function () {
+        window.location.assign(appData.baseUrl + "maintenance/load_dummy_data");  
+    });
+
 
 })(jQuery);

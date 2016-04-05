@@ -623,7 +623,7 @@ var webQuiz = {
             update: function( ) {
                 webQuiz.changeChoiceWeightValue();
             }
-        }).disableSelection();
+        });
     },
     changeChoiceWeightValue: function ()
     {

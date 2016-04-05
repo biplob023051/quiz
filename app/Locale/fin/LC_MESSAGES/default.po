@@ -783,7 +783,7 @@ msgstr "Ilmainen <br />kokeilutili"
 
 #: View/Pages/prices.ctp:15
 msgid "19 E/Y"
-msgstr "19 €/v"
+msgstr "29 €/v"
 
 #: View/Pages/prices.ctp:20
 msgid "Users"
@@ -799,7 +799,7 @@ msgstr "Rajoittamaton"
 
 #: View/Pages/prices.ctp:30
 msgid "Students/Test"
-msgstr "Oppilaita/testi"
+msgstr "Käyttöpäivät"
 
 #: View/Pages/prices.ctp:37
 msgid "Buy"
@@ -1263,3 +1263,71 @@ msgstr "Pahoittelut raksapölystä!"
 #: View/Elements/Maintenance/notice.ctp:11
 msgid "We are currently making the app even better. We will be back online tonight at 22:00."
 msgstr "Teemme parhaillaan Verkkotestistä entistäkin parempaa. Verkkotesti on käytössäsi taas tänään klo 22:00."
+
+#: View/Quiz/index.ctp:150
+msgid "Load demo quizzes"
+msgstr "Lataa mallitestit"
+
+#: View/Quiz/index.ctp:147
+msgid "Welcome to Verkkotesti!"
+msgstr "Tervetuloa Verkkotestiin!"
+
+#: View/Quiz/index.ctp:147
+msgid "If you want to start by looking at demo quizzes, click the gray button "
+msgstr "Jos haluat ensin tutustua mallitesteihin, klikkaa harmaata nappia "
+
+#: View/Quiz/index.ctp:147
+msgid "Create a New test"
+msgstr "Luo uusi testi"
+
+#: View/Quiz/index.ctp:147
+msgid "(You can delete demo quizzes when you don't need them anymore.)"
+msgstr "(Voit poistaa mallitestit sitten, kun et enää tarvitse niitä.)"
+
+#: View/Quiz/index.ctp:147
+msgid "If you want to dive straight in, click the blue button"
+msgstr "Jos haluat mennä suoraan asiaan, klikkaa sinistä nappia"
+
+#: View/Quiz/index.ctp:147
+msgid "If you want to dive straight in, click the blue button"
+msgstr "Jos haluat mennä suoraan asiaan, klikkaa sinistä nappia"
+
+#: View/Elements/Invoice/demo_dialog.ctp:7
+msgid "Would you like to load the demo quizzes?"
+msgstr "Haluatko ladata mallitestit?"
+
+#: View/Elements/Invoice/demo_dialog.ctp:7
+msgid "Choose Ok if you want to load a couple of demo quizzes to take a look at Verkkotesti features."
+msgstr "Valitse Ok, jos haluat ladata muutaman mallitestin, joilla voit tutustua Verkkotestin ominaisuuksiin."
+
+#: Controller/MaintenanceController.php:29
+msgid "Imported successfully"
+msgstr "Mallitestit ladattiin"
+
+#: Controller/MaintenanceController.php:24
+msgid "Please enter an user id"
+msgstr "Kirjoita käyttäjän id numero"
+
+#: Controller/MaintenanceController.php:24
+msgid "Please enter a numeric id"
+msgstr "Kirjoita pelkkiä numeroita"
+
+#: Controller/MaintenanceController.php:20
+msgid "Import Demo Quiz"
+msgstr "Lataa mallitestit"
+
+#: Controller/MaintenanceController.php:40
+msgid "No direct access on this location"
+msgstr "Ei pääsyä sivulle"
+
+#:
+msgid "User Id"
+msgstr "Käyttäjänumero"
+
+#:
+msgid "Please insert user id"
+msgstr "Kirjoita käyttäjänumero"
+
+#:
+msgid "Import"
+msgstr "Lataa"

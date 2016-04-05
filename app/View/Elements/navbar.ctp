@@ -20,6 +20,7 @@
                     <?php if ($this->Session->read('Auth.User.account_level') == 51): ?>
                         <?php $admin_actions = array('admin_titles', 'admin_add', 'admin_insert', 'admin_index'); ?>
                         <li <?php if (in_array($c_action, $admin_actions)) : ?>class="active"<?php endif; ?>><?php echo $this->Html->link(__('Create Help'), array('controller' => 'helps', 'action' => 'titles', 'admin' => true)); ?></li>
+                        <li <?php if ($c_action == 'admin_import') : ?>class="active"<?php endif; ?>><?php echo $this->Html->link(__('Demo Quiz'), array('controller' => 'maintenance', 'action' => 'import', 'admin' => true)); ?></li>
                     <?php endif ?>
                     <?php if ($this->Session->read('Auth.User.account_level') == 51): ?>
                         <?php $admin_actions = array('admin_videos', 'admin_create'); ?>

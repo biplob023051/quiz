@@ -353,6 +353,6 @@ var debugVar;
         update: function( ) {
             webQuiz.reArrangeQuestionNumber();
         }
-    }).disableSelection();
+    });
 
 })(jQuery);
