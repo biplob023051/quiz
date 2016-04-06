@@ -341,7 +341,7 @@ class QuizController extends AppController {
         if ($this->request->is('post')) {
             $data = $this->request->data;
             if (isset($data['Filter'])) {
-                $filter = array('class' => $data['Filter']['class'], 'daterange' => $data['Filter']['daterange']);
+                $filter = array('class' => !empty($data['Filter']['class']) ? $data['Filter']['class'] : 'all', 'daterange' => $data['Filter']['daterange']);
                 $this->Session->write('Filter', $filter);
             }
         } else {

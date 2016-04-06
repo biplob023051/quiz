@@ -264,7 +264,7 @@ class StudentController extends AppController {
         $data = $this->request->data;
 
         // remove unwanted space and make uppercase for student class
-        $data['Student']['class'] = strtolower(preg_replace('/\s+/', '', $data['Student']['class']));
+        $data['Student']['class'] = !empty($data['Student']['class']) ? strtolower(preg_replace('/\s+/', '', $data['Student']['class'])) : '';
 
         $this->Student->set($data['Student']);
         if (!$this->Student->validates()) {

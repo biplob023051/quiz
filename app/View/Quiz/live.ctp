@@ -24,30 +24,32 @@ echo $this->Form->create('Student', array(
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <div class="alert alert-danger" id="error-message" style="display: none;"></div>
-        <div class="row">
-            <div class="col-xs-12 col-md-4">
-                <?php
-                echo $this->Form->input('fname', array(
-                    'placeholder' => __('First Name')
-                ));
-                ?>
+        <?php if (empty($data['Quiz']['anonymous'])) : ?>
+            <div class="alert alert-danger" id="error-message" style="display: none;"></div>
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <?php
+                    echo $this->Form->input('fname', array(
+                        'placeholder' => __('First Name')
+                    ));
+                    ?>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <?php
+                    echo $this->Form->input('lname', array(
+                        'placeholder' => __('Last Name')
+                    ));
+                    ?>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <?php
+                    echo $this->Form->input('class', array(
+                        'placeholder' => __('Class')
+                    ));
+                    ?>
+                </div>
             </div>
-            <div class="col-xs-12 col-md-4">
-                <?php
-                echo $this->Form->input('lname', array(
-                    'placeholder' => __('Last Name')
-                ));
-                ?>
-            </div>
-            <div class="col-xs-12 col-md-4">
-                <?php
-                echo $this->Form->input('class', array(
-                    'placeholder' => __('Class')
-                ));
-                ?>
-            </div>
-        </div>
+        <?php endif; ?>
         <div class="row">
             <div class="col-xs-12 col-md-12">
                 <p><?php echo $data['Quiz']['description']; ?></p>

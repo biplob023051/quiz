@@ -30,14 +30,16 @@ $this->assign('title', __('Answer Table'));
             ?>
         </div>
         <div class="col-md-3 col-xs-12">
-            <?php
-            echo $this->Form->input('Filter.class', array(
-                'options' => $classes,
-                'div' => array('class' => 'form-group'),
-                'default' => $filter['class'],
-                'class' => 'form-control',
-                'label' => false
-            ));
+            <?php 
+                if (empty($quizDetails['Quiz']['anonymous'])) {
+                    echo $this->Form->input('Filter.class', array(
+                        'options' => $classes,
+                        'div' => array('class' => 'form-group'),
+                        'default' => $filter['class'],
+                        'class' => 'form-control',
+                        'label' => false
+                    ));
+                }
             ?>
         </div>
         <div class="col-md-4 col-xs-12">

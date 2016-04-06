@@ -23,4 +23,17 @@ class QuizHelper extends AppHelper {
         return empty($result) ? '' : $result['Choice']['text'];
 	}
 
+	// Function to check if there has points or not in choice array
+	// if point, return true otherwise return false
+	public function checkPoint($choices = array()) {
+		$points = false;
+		foreach ($choices as $key => $choice) {
+			if ($choice['points'] != '0.00') {
+				$points = true;
+				break;
+			}
+		}
+		return $points;
+	}
+
 }

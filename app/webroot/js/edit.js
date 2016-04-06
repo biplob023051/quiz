@@ -293,18 +293,21 @@ var debugVar;
     $(document).on('click', '#questions button.edit-done', function (e) {
         e.preventDefault();
         var questionTypeId = $('#questions select.choice-type-selector').val();
-        if ($('#QuestionText').val() == '') {
-            var currentEditQid = $("#q" + webQuiz.currentEditQid),
-            choiceContainer = currentEditQid.find("div.choices");
-            if ($('.alert-danger').length){
-                $('.alert-danger').remove();
+        
+        if ((questionTypeId != 7) && (questionTypeId != 8)) { // don't validate empty question for youtube or image
+            if ($('#QuestionText').val() == '') {
+                var currentEditQid = $("#q" + webQuiz.currentEditQid),
+                choiceContainer = currentEditQid.find("div.choices");
+                if ($('.alert-danger').length){
+                    $('.alert-danger').remove();
+                }
+                if (questionTypeId == 6) {
+                    choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['empty_header'] + '</div>');      
+                } else {
+                    choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['empty_question'] + '</div>');
+                }
+                return;
             }
-            if (questionTypeId == 6) {
-                choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['empty_header'] + '</div>');      
-            } else {
-                choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['empty_question'] + '</div>');
-            }
-            return;
         }
         
         var validationError = webQuiz.dataValidation(

@@ -46,6 +46,12 @@ echo $this->Form->create('Quiz', array(
                 echo $this->Form->label('show_result', __('Show results to the student after finishing the quiz.'));
             ?>
         </div>
+        <div class="form-group">
+            <?php 
+                echo $this->Form->checkbox('anonymous', array('default' => $data['Quiz']['anonymous'])); 
+                echo $this->Form->label('anonymous', __('Anonymous participation?'));
+            ?>
+        </div>
     </div>
 </div>
 <div class="panel panel-primary">
@@ -198,5 +204,8 @@ echo json_encode(array(
 }
 #settings-options label {
     padding: 0 5px !important;
+}
+#settings-options .form-group {
+    margin-bottom: 0px;
 }
 </style>

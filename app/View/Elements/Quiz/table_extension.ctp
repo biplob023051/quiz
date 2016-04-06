@@ -5,8 +5,10 @@
             <tr>
                 <th class="serial sortable"><?php echo __('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'); ?></th>
                 <th class="sortable"><?php echo __('Timestamp'); ?></th>
-                <th class="sortable"><?php echo __('Name'); ?></th>
-                <th class="sortable"><?php echo __('Class'); ?></th>
+                <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
+                    <th class="sortable"><?php echo __('Name'); ?></th>
+                    <th class="sortable"><?php echo __('Class'); ?></th>
+                <?php endif; ?>
                 <th class="sortable"><?php echo __('Total Points'); ?></th>
                 <th class="sortable"><?php echo __('Progress'); ?></th>
                 <?php $i = 1; foreach ($quizDetails['Question'] as $question): ?>
@@ -33,11 +35,13 @@
                             </button>
                         </td>
                         <td><?php echo $value1['submitted'] ?></td>
-                        <td>
-                            <?php echo $value1['lname']; ?>
-                            <?php echo $value1['fname']; ?> 
-                        </td>
-                        <td><?php echo $value1['class']; ?></td>
+                        <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
+                            <td>
+                                <?php echo $value1['lname']; ?>
+                                <?php echo $value1['fname']; ?> 
+                            </td>
+                            <td><?php echo $value1['class']; ?></td>
+                        <?php endif; ?>
                         <?php foreach ($quizDetails['Ranking'] as $key2 => $value2) : ?>
                             <?php if ($value1['id'] == $value2['student_id']) : ?>
                                 <td>
