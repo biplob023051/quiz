@@ -588,4 +588,61 @@ class QuizController extends AppController {
         $this->set(compact('quizDetails', 'quizId'));
     }
 
+    // Duplicate quiz
+    // Only quiz name, questions and choices will be duplicated
+    public function duplicate() {
+        $this->autoRender = false;
+
+        $response['result'] = 0;
+
+        $this->Quiz->Behaviors->load('Containable');
+        $quizId = $this->request->data['quiz_id'];
+        $quizInfo = $this->Quiz->find('first', array(
+            'conditions' => array(
+                'Quiz.id' => $quizId,
+                'Quiz.user_id' => $this->Auth->user('id')
+            ),
+            'contain' => array(
+                'Question' => array(
+                    'Choice'
+                )
+            )
+        ));
+
+        if (!empty($quizInfo)) {
+            $quizInfo['Quiz']['id'] = '';
+            $quizInfo['Quiz']['name'] = __('Copy of') . ' ' . $quizInfo['Quiz']['name'];
+            unset($quizInfo['Quiz']['created']);
+            unset($quizInfo['Quiz']['modified']);
+            unset($quizInfo['Quiz']['student_count']);
+            unset($quizInfo['Quiz']['random_id']);
+
+            foreach ($quizInfo['Question'] as $key1 => $question) {
+                $quizInfo['Question'][$key1]['id'] = '';
+                $quizInfo['Question'][$key1]['quiz_id'] = '';
+                unset($quizInfo['Question'][$key1]['created']);
+                unset($quizInfo['Question'][$key1]['modified']);
+                foreach ($question['Choice'] as $key2 => $choice) {
+                    $quizInfo['Question'][$key1]['Choice'][$key2]['id'] = '';
+                    $quizInfo['Question'][$key1]['Choice'][$key2]['question_id'] = '';
+                }
+            }
+
+            if ($this->Quiz->saveAll($quizInfo, array('deep' => true))) {
+                $random_id = $this->Quiz->id . $this->Quiz->randText(2);
+                $this->Quiz->saveField('random_id', $random_id);
+                $response['message'] = __('Duplicated Successfuly');
+                $response['result'] = 1;
+                $response['id'] = $this->Quiz->id;
+            } else {
+                $response['message'] = __('Something went wrong, please try again later!');
+            }
+        } else {
+            $response['message'] = __('Invalid Quiz');
+        }
+        echo json_encode($response);
+        exit;
+
+    }
+
 }

@@ -125,6 +125,9 @@ $this->assign('title', __('My Quizzes'));
                                         <i class="glyphicon recycle"></i>
                                     </button>
                                 <?php endif; ?>
+                                <button type="button" class="btn btn-success btn-sm duplicate-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Duplicate quiz'); ?>">
+                                    <i class="glyphicon glyphicon-repeat"></i>
+                                </button>
                                 <?php echo $this->Html->link($quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id'])); ?>
                             </td>
                             <td>

@@ -81,6 +81,30 @@
         });    
     });
 
+    $(document).on('click', 'button.duplicate-quiz', function () {
+        var quiz_id = $(this).attr('quiz-id'),
+            button_box = $(this);
+        $.ajax({
+            data: {'quiz_id': quiz_id},
+            type: 'post',
+            url: appData.baseUrl + 'quiz/duplicate',
+            dataType: 'json',
+            success: function (response)
+            {
+                if (response.result === 1)
+                {
+                    if (response.id != '') {
+                        window.location.href = appData.baseUrl + 'quiz/edit/' + response.id;
+                    } else {
+                        location.reload();
+                    } 
+                } else {
+                    alert(response.message);
+                }
+            }
+        });    
+    });
+
     $(document).on('click', '#import', function () {
         window.location.assign(appData.baseUrl + "maintenance/load_dummy_data");  
     });
