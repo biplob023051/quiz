@@ -29,10 +29,11 @@
                     <?php //pr($value1); ?>
                     <tr id="student-<?php echo $value1['id']; ?>">
                         <td class="serial">
-                            <?php echo $sl; ?>
+                            <span class="question-serial"><?php echo $sl; ?></span>
                             <button type="button" class="btn btn-danger btn-sm delete-answer" id="<?php echo $value1['id']; ?>" title="<?php echo __('Remove answer'); ?>">
                                 <i class="glyphicon trash"></i>
                             </button>
+                            <span class="ajax-loader"><img src="<?php echo $this->request->webroot; ?>img/ajax-loader.gif" /></span>
                         </td>
                         <td><?php echo $value1['submitted'] ?></td>
                         <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>

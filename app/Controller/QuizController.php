@@ -10,6 +10,25 @@ class QuizController extends AppController {
         $this->Auth->allow('present', 'live', 'no_permission');
     }
 
+    public function ajax_student_update() {
+        $this->layout = 'ajax';
+        $student = $this->Quiz->Student->findById($this->request->data['student_id']);
+        $student['id'] = $student['Student']['id'];
+        $student['fname'] = $student['Student']['fname'];
+        $student['lname'] = $student['Student']['lname'];
+        $student['class'] = $student['Student']['class'];
+        $student['submitted'] = $student['Student']['submitted'];
+        $student['quiz_id'] = $student['Student']['quiz_id'];
+        $student['status'] = $student['Student']['status'];
+        unset($student['Student']);
+        
+        $this->set('value1', $student);
+        $filter = $this->Session->read('Filter');
+        $quizDetails = $this->Quiz->quizDetails($student['quiz_id'], $filter);
+        $sl = (int)$this->request->data['sl'];
+        $this->set(compact('quizDetails','sl'));
+    }
+
     public function index() {
 
         $userId = $this->Auth->user('id');
@@ -324,6 +343,21 @@ class QuizController extends AppController {
         
     }
 
+    public function check_diff_multi($array1, $array2){
+        $result = array();
+        foreach($array1 as $key => $val) {
+             if(isset($array2[$key])){
+               if(is_array($val) && $array2[$key]){
+                   $result[$key] = $this->check_diff_multi($val, $array2[$key]);
+               }
+           } else {
+               $result[$key] = $val;
+           }
+        }
+
+        return $result;
+    }
+
     public function table($quizId) {
         if (empty($quizId)) {
             return $this->redirect('/');
@@ -360,13 +394,16 @@ class QuizController extends AppController {
         // get student id's for ajax auto checking
         $studentIds = array();
         foreach ($quizDetails['Student'] as $key1 => $value1) {
-            $basicInfo = array('fname' => $value1['fname'], 'lname' => $value1['lname'], 'class' => $value1['class']);
+            $informations = array();
+            $informations[] = array('fname' => $value1['fname'], 'lname' => $value1['lname'], 'class' => $value1['class']);
             $answers = array();
             foreach ($value1['Answer'] as $key2 => $value2) {
-                $answers[] = $value2['text'];
+                $answers[$value2['question_id']] = $value2['text'];
             }
-            $studentIds[$value1['id']] = array($basicInfo, $answers);
+            $informations[] = $answers;
+            $studentIds[$value1['id']] = $informations;
         }
+    
         $studentIds = json_encode($studentIds);
         // get student classes
         $classes = Hash::combine($checkPermission['Student'], '{n}.class', '{n}.class');
@@ -403,12 +440,14 @@ class QuizController extends AppController {
         $quizDetails = $this->Quiz->quizDetails((int) $this->request->data['quizId'], $filter);
         $studentIds = array();
         foreach ($quizDetails['Student'] as $key1 => $value1) {
-            $basicInfo = array('fname' => $value1['fname'], 'lname' => $value1['lname'], 'class' => $value1['class']);
+            $informations = array();
+            $informations[] = array('fname' => $value1['fname'], 'lname' => $value1['lname'], 'class' => $value1['class']);
             $answers = array();
             foreach ($value1['Answer'] as $key2 => $value2) {
-                $answers[] = $value2['text'];
+                $answers[$value2['question_id']] = $value2['text'];
             }
-            $studentIds[$value1['id']] = array($basicInfo, $answers);
+            $informations[] = $answers;
+            $studentIds[$value1['id']] = $informations;
         }
         
         echo json_encode($studentIds);
@@ -421,32 +460,24 @@ class QuizController extends AppController {
             throw new ForbiddenException;
         }
 
-        $currentTab = $this->request->data['currentTab'];
+        $old_data = json_decode($this->request->data['old_data'], true);
+        $new_data = json_decode($this->request->data['new_data'], true);
 
-        if (!$this->Session->check('Filter')) {
-            $filter = array('class' => 'all', 'daterange' => 'all');
-            $this->Session->write('Filter', $filter);
-        } else {
-            $filter = $this->Session->read('Filter');
-        }
-        $quizDetails = $this->Quiz->quizDetails((int)$this->request->data['quizId'], $filter);
-        
+        $modified_ids = array();
 
-        $studentIds = Hash::combine($quizDetails['Student'], '{n}.id', '{n}.id');
-        $studentIds = json_encode($studentIds);
-        // get student classes
-        $classes = Hash::combine($checkPermission['Student'], '{n}.class', '{n}.class');
-        // classes merge with all class
-        function cmp($a, $b) {
-            if ($a == $b) {
-                return 0;
+        foreach ($new_data as $id1 => $dataset) {
+            if (array_key_exists($id1, $old_data)) { // if old student
+                $arraysAreEqual = ($dataset == $old_data[$id1]);
+                if (empty($arraysAreEqual)) {
+                    $modified_ids[] = $id1;
+                }
+            } else {
+                $modified_ids[] = $id1; // new student found
             }
-            return ($a < $b) ? -1 : 1;
         }
-        uasort($classes, 'cmp');
-        $classes = Hash::merge(array('all' => __('All Classes')), $classes);
 
-        $this->set(compact('quizDetails', 'classes', 'filter', 'studentIds', 'quizId', 'currentTab'));
+        echo json_encode($modified_ids);
+        exit;
     }
 
     /*

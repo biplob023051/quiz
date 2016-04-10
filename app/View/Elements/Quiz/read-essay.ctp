@@ -11,7 +11,7 @@
             </div>
             <div class="modal-footer">
                 <span class="all-button">
-                    <?php if ($value3['Choice'][0]['points'] > 0) : ?>
+                    <?php if (isset($value3['Choice'][0]['points']) && ($value3['Choice'][0]['points'] > 0)) : ?>
                         <?php if ($value4['score'] == NULL) : ?>
                             <input 
                 placeholder="<?php echo __('Rate!'); ?>" 

@@ -140,6 +140,11 @@ $(document).ready(function(){
                     $("#ajax-message").removeClass('alert-danger');
                     $("#ajax-message").addClass('alert-success');
                     $("button#" + std_id).closest('tr').remove();
+                    var re_index = 1;
+                    $("#answer-table > table > tbody  > tr").each(function() { 
+                        $(this).find('.question-serial').html(re_index);
+                        re_index++;
+                    });
                 } else {
                     $("#ajax-message").removeClass('alert-success');
                     $("#ajax-message").addClass('alert-danger');
@@ -150,7 +155,7 @@ $(document).ready(function(){
         });
     });
 
-    interval = setInterval(getUpdated, 5000);
+    interval = setInterval(getUpdated, 2000);
 
     function getUpdated() {
         var quizId = $("#quizId").text();
@@ -163,23 +168,63 @@ $(document).ready(function(){
                 if ($("#prev_data").html() == data) {
                     // do nothing
                 } else {
+                    
                     clearInterval(interval);
+                    var old_data = $("#prev_data").html();
+                    console.log(old_data);
                     $("#prev_data").html(data);
                     var openTab = getCookie("tabInfo");
                     $.ajax({
-                        dataType: 'html',
+                        dataType: 'JSON',
                         type: "POST",
                         url: appData.baseUrl + 'quiz/ajax_update',
-                        data: {quizId:quizId, currentTab:openTab},
+                        data: {quizId:quizId, currentTab:openTab, old_data:old_data, new_data:data},
                         async: true,
                         success: function(data) {
-                            $(".panel").html(data);
-                            $(".table").tablesorter({ selectorHeaders: 'thead th.sortable' });
-                            testFunc();
-                            interval = setInterval(getUpdated, 5000);
+                            console.log(data);
+                            $.each(data, function(index, value) {
+                                updateIndividulaStudent(value);
+
+                            })
+                            interval = setInterval(getUpdated, 2000);
+                            // $(".panel").html(data);
+                            // testFunc();
+                            // interval = setInterval(getUpdated, 5000);
                         }
                     });
                 }
+            }
+        });
+    }
+
+    function updateIndividulaStudent(student_id) {
+        if ($("tr#student-" + student_id).length == 0) {
+            var sl = parseInt($('#answer-table table tbody tr').length)+1;
+        } else {
+            $("tr#student-" + student_id).find('.delete-answer').hide();
+            $("tr#student-" + student_id).find('.ajax-loader').show();
+            var sl = parseInt($("tr#student-" + student_id).find('.question-serial').text());
+        }
+        $.ajax({
+            dataType: 'html',
+            type: "POST",
+            url: appData.baseUrl + 'quiz/ajax_student_update',
+            data: {student_id:student_id, sl:sl},
+            async: true,
+            success: function(data) {
+                if ($("tr#student-" + student_id).length == 0) {
+                    // New stduent
+                    var html = '<tr id="student-'+student_id+'">';
+                    html+=data;
+                    html+='</tr>';
+                    $('#answer-table table tbody').append(html);
+                } else {
+                    $("tr#student-" + student_id).html(data);
+                    $("tr#student-" + student_id).find('.ajax-loader').hide();
+                    $("tr#student-" + student_id).find('.delete-answer').show();
+                }
+                testFunc();
+                $(".table").tablesorter({ selectorHeaders: 'thead th.sortable' });
             }
         });
     }
