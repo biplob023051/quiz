@@ -611,7 +611,7 @@ class QuizController extends AppController {
 
         if (!empty($quizInfo)) {
             $quizInfo['Quiz']['id'] = '';
-            $quizInfo['Quiz']['name'] = __('Copy of') . ' ' . $quizInfo['Quiz']['name'];
+            $quizInfo['Quiz']['name'] = __('Copy of:') . ' ' . $quizInfo['Quiz']['name'];
             unset($quizInfo['Quiz']['created']);
             unset($quizInfo['Quiz']['modified']);
             unset($quizInfo['Quiz']['student_count']);
