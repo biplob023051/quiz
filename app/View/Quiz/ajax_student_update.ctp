@@ -6,6 +6,7 @@
         <i class="glyphicon trash"></i>
     </button>
     <span class="ajax-loader"><img src="<?php echo $this->request->webroot; ?>img/ajax-loader.gif" /></span>
+    <i class="glyphicon online"></i>
 </td>
 <td><?php echo $value1['submitted'] ?></td>
 <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>

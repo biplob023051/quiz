@@ -81,4 +81,5 @@ $this->assign('title', __('Answer Table'));
 
 <script type="text/javascript">
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
+    var onlineStds = <?php echo json_encode($onlineStds) ?>;
 </script>

@@ -119,10 +119,12 @@ class QuestionController extends AJAXController {
                 echo json_encode(array('success' => false, 'message' => __('Enter correct answers!')));
                 exit;
             }
-            if (empty($data['Choice'][0]['points'])) {   
-                echo json_encode(array('success' => false, 'message' => __('Enter point!')));
-                exit;
-            }
+            $data['Choice'][0]['points'] = !empty($data['Choice'][0]['points']) ? $data['Choice'][0]['points'] : 0;
+            
+            // if (empty($data['Choice'][0]['points'])) {   
+            //     echo json_encode(array('success' => false, 'message' => __('Enter point!')));
+            //     exit;
+            // }
         } elseif($data['Question']['question_type_id'] == 4) {
             // short_manual
             $data['Choice'][0]['text'] = 'Short_manual';

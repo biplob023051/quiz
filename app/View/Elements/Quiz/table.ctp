@@ -39,7 +39,7 @@
                 <p class="text-danger"><span class="label"><?php echo __('Not Answered'); ?></span></p>
             <?php else : ?>
                 <?php echo $value4['text'] . '<br />'; ?>
-                <?php if (!empty($value3['Choice'][0]['points'])) : ?>
+                <?php if ($value3['Choice'][0]['points'] != '0.00') : ?>
                     <input 
                 placeholder="<?php echo __('Rate!'); ?>" 
                 type="number" 

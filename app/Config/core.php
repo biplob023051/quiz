@@ -215,11 +215,22 @@
  * the cake shell command: cake schema create Sessions
  *
  */
+	// Configure::write('Session', array(
+	// 	'defaults' => 'database',
+	//     'cookie' => 'VERKKOTESTI',
+	//     'timeout' => 1440 //1 days
+	// ));
+
 	Configure::write('Session', array(
-		'defaults' => 'database',
-	    'cookie' => 'VERKKOTESTI',
-	    'timeout' => 1440 //1 days
+	    'defaults' => 'database',
+	    'cookieTimeout' => 0,   //Lives until the browser is closed.
+	    'checkAgent'  => false  //To fix a little the Chrome Frame problem
 	));
+
+	/**
+ * The level of CakePHP security.
+ */
+	//Configure::write('Security.level', 'medium');
 
 /**
  * A random string used in security hashing methods.
@@ -277,7 +288,10 @@
  * then the value of `Config.timezone` will be used. This feature allows you to set users' timezone just
  * once instead of passing it each time in function calls.
  */
-	//Configure::write('Config.timezone', 'Europe/Paris');
+	//Configure::write('Config.timezone', 'Asia/Dacca');
+	date_default_timezone_set('Europe/Helsinki');
+	//date_default_timezone_set('Asia/Dacca');
+	
 
 /**
  * Cache Engine Configuration

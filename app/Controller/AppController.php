@@ -64,13 +64,13 @@ class AppController extends Controller {
 
     public function beforeFilter() {
         
-        //default cookie seetings
-        $this->Cookie->name = 'VERKKOTESTI';
-        $this->Cookie->time = 3600;  // or '1 hour'
-        $this->Cookie->path = '/';
-        $this->Cookie->domain = false;
-        $this->Cookie->secure = false;
-        $this->Cookie->httpOnly = true;
+        // //default cookie seetings
+        // $this->Cookie->name = 'VERKKOTESTI';
+        // $this->Cookie->time = 3600;  // or '1 hour'
+        // $this->Cookie->path = '/';
+        // $this->Cookie->domain = false;
+        // $this->Cookie->secure = false;
+        // $this->Cookie->httpOnly = true;
 
         // if ($this->request->controller != 'maintenance' && $this->request->action != 'notice') {
         //     $this->redirect(array('controller' => 'maintenance', 'action' => 'notice'));

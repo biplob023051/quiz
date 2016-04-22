@@ -1,1 +1,0 @@
-ALTER TABLE `quizzes` ADD `anonymous` TINYINT(1) NULL DEFAULT NULL COMMENT '1 for anonymous participation' AFTER `show_result`;

@@ -479,10 +479,12 @@ var webQuiz = {
                 }
             });
             if (validationError == true) {
+                validationError = false;
                 if ($('.alert-danger').length){
                     $('.alert-danger').remove();
                 }
-                choiceContainer.prepend('<div class="alert alert-danger">' + lang_strings['point_greater'] + '</div>');
+                var currentEditQid = $("#q" + webQuiz.currentEditQid);
+                $(currentEditQid.selector).addClass('warn');
             }
         }
         return validationError;

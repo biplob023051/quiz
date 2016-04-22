@@ -346,6 +346,22 @@ i.close {
     width: 16px;    
 }
 
+i.duplicate {
+    background-image:url(../img/icons/16x16/duplicate.png); 
+    background-position: center center;
+    height: 16px;
+    line-height: 16px;
+    width: 16px;
+}
+
+i.online {
+    background-image:url(../img/icons/8x8/online.png); 
+    background-position: center center;
+    height: 8px;
+    line-height: 8px;
+    width: 8px;
+}
+
 .btn-danger {
   color: #fff;
   background-color: #F0BAB9;
@@ -461,4 +477,9 @@ i.close {
 
 .ajax-loader {
     display: none;
+}
+
+.quiz-name {
+    font-weight: bolder;
+    font-size: 15px;
 }

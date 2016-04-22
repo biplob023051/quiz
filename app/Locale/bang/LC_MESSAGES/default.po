@@ -1,0 +1,1626 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2016-04-11 12:58+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: /MaintenanceController.php:13
+#: /Controller/MaintenanceController.php:13
+msgid "Pardon for the dust!"
+msgstr ""
+
+#: /MaintenanceController.php:22
+#: /Controller/MaintenanceController.php:51
+msgid "No direct access on this location"
+msgstr ""
+
+#: /Controller/HelpsController.php:10
+#: /View/Helps/admin_add.ctp:6
+#: /View/Helps/admin_index.ctp:12
+#: /View/Helps/admin_insert.ctp:11
+#: /View/Helps/admin_titles.ctp:7
+msgid "Helps List"
+msgstr ""
+
+#: /Controller/HelpsController.php:38
+#: /View/Helps/admin_add.ctp:7
+#: /View/Helps/admin_index.ctp:13
+#: /View/Helps/admin_insert.ctp:12
+#: /View/Helps/admin_titles.ctp:8
+msgid "New Help"
+msgstr ""
+
+#: /Controller/HelpsController.php:40
+msgid "Edit Help"
+msgstr ""
+
+#: /Controller/HelpsController.php:61
+msgid "Help saved successfully"
+msgstr ""
+
+#: /Controller/HelpsController.php:68
+msgid "Help saved failed"
+msgstr ""
+
+#: /Controller/HelpsController.php:83
+msgid "Help not found"
+msgstr ""
+
+#: /Controller/HelpsController.php:94
+#: /View/Helps/admin_add.ctp:4
+#: /View/Helps/admin_index.ctp:10
+#: /View/Helps/admin_insert.ctp:9
+#: /View/Helps/admin_titles.ctp:5
+msgid "Main Title List"
+msgstr ""
+
+#: /Controller/HelpsController.php:119
+#: /View/Helps/admin_add.ctp:5
+#: /View/Helps/admin_index.ctp:11
+#: /View/Helps/admin_insert.ctp:10
+#: /View/Helps/admin_titles.ctp:6
+msgid "New Main Title"
+msgstr ""
+
+#: /Controller/HelpsController.php:121
+msgid "Edit Main Title"
+msgstr ""
+
+#: /Controller/HelpsController.php:129
+msgid "Title saved successfully"
+msgstr ""
+
+#: /Controller/HelpsController.php:136
+msgid "Title saved failed"
+msgstr ""
+
+#: /Controller/HelpsController.php:150
+msgid "Title not found"
+msgstr ""
+
+#: /Controller/HelpsController.php:162
+msgid "New Site Video"
+msgstr ""
+
+#: /Controller/HelpsController.php:164
+msgid "Edit Site Video"
+msgstr ""
+
+#: /Controller/HelpsController.php:197
+msgid "Site videos saved successfully"
+msgstr ""
+
+#: /Controller/HelpsController.php:204
+msgid "Site videos saved failed"
+msgstr ""
+
+#: /Controller/HelpsController.php:219
+msgid "Site videos not found"
+msgstr ""
+
+#: /Controller/HelpsController.php:224
+msgid "Upload a Picture"
+msgstr ""
+
+#: /Controller/HelpsController.php:231
+msgid "Site Videos List"
+msgstr ""
+
+#: /Controller/HelpsController.php:269
+msgid "Can not delete"
+msgstr ""
+
+#: /Controller/HelpsController.php:301
+msgid "Can not save"
+msgstr ""
+
+#: /Controller/HelpsController.php:329;332;357;360
+msgid "Sort failed"
+msgstr ""
+
+#: /Controller/HelpsController.php:371
+#: /View/Elements/navbar.ctp:29
+msgid "Help"
+msgstr ""
+
+#: /Controller/InvoiceController.php:29
+#: /Controller/UserController.php:285
+#: /View/Elements/Invoice/invoice_error_dialog.ctp:7
+#: /View/Elements/Invoice/invoice_send_dialog.ctp:7
+#: /View/Elements/Invoice/invoice_success_dialog.ctp:7
+#: /View/Quiz/index.ctp:23;69
+#: /View/User/settings.ctp:57
+msgid "Upgrade Account"
+msgstr ""
+
+#: /Controller/MaintenanceController.php:20
+msgid "Import Demo Quiz"
+msgstr ""
+
+#: /Controller/MaintenanceController.php:24
+msgid "Please enter an user id"
+msgstr ""
+
+#: /Controller/MaintenanceController.php:26
+msgid "Please enter a numeric id"
+msgstr ""
+
+#: /Controller/MaintenanceController.php:29;56
+msgid "Imported successfully"
+msgstr ""
+
+#: /Controller/MaintenanceController.php:42
+msgid "[Verkkotesti] Demo quizzes loaded"
+msgstr ""
+
+#: /Controller/PagesController.php:74;83
+#: /Controller/UserController.php:75;197
+msgid "Require Email Address"
+msgstr ""
+
+#: /Controller/PagesController.php:75;84
+#: /Controller/UserController.php:76;198
+msgid "Invalid email"
+msgstr ""
+
+#: /Controller/PagesController.php:76
+msgid "Require Message"
+msgstr ""
+
+#: /Controller/PagesController.php:81
+#: /Controller/UserController.php:73
+msgid "Require Name"
+msgstr ""
+
+#: /Controller/PagesController.php:82
+#: /Controller/UserController.php:74
+msgid "Name contains invalid character"
+msgstr ""
+
+#: /Controller/PagesController.php:85
+#: /Controller/UserController.php:77
+msgid "Email already registered"
+msgstr ""
+
+#: /Controller/PagesController.php:86
+#: /Controller/UserController.php:78
+msgid "Require Password"
+msgstr ""
+
+#: /Controller/PagesController.php:87
+#: /Controller/UserController.php:79;249
+msgid "Password did not match, please try again"
+msgstr ""
+
+#: /Controller/PagesController.php:88
+#: /Controller/UserController.php:80;250
+#: /View/Elements/Page/buy_modal.ctp:46
+#: /View/User/create.ctp:54
+#: /View/User/reset_password.ctp:28
+msgid "Password must be 8 characters long"
+msgstr ""
+
+#: /Controller/PagesController.php:115
+msgid "Welcome to Verkkotesti"
+msgstr ""
+
+#: /Controller/QuestionController.php:111
+msgid "Choice %d"
+msgstr ""
+
+#: /Controller/QuestionController.php:119
+msgid "Enter correct answers!"
+msgstr ""
+
+#: /Controller/QuestionController.php:123
+msgid "Enter point!"
+msgstr ""
+
+#: /Controller/QuestionController.php:141
+msgid "Enter youtube url"
+msgstr ""
+
+#: /Controller/QuestionController.php:151
+msgid "Enter image url"
+msgstr ""
+
+#: /Controller/QuestionController.php:158
+msgid "New Question"
+msgstr ""
+
+#: /Controller/QuizController.php:81
+msgid "There are "
+msgstr ""
+
+#: /Controller/QuizController.php:82
+msgid " answers, "
+msgstr ""
+
+#: /Controller/QuizController.php:83
+msgid " students, and "
+msgstr ""
+
+#: /Controller/QuizController.php:84
+msgid " number of questions. This can not be undone. Are you sure want to delete?"
+msgstr ""
+
+#: /Controller/QuizController.php:85
+msgid "Delete quiz "
+msgstr ""
+
+#: /Controller/QuizController.php:86
+#: /View/Quiz/index.ctp:55
+msgid "Upgrade Pending"
+msgstr ""
+
+#: /Controller/QuizController.php:161
+msgid "Empty Question Is Not Permit"
+msgstr ""
+
+#: /Controller/QuizController.php:162
+msgid "Empty or Same Choices Are Not Permit"
+msgstr ""
+
+#: /Controller/QuizController.php:163
+msgid "At least a point should be greater than 0"
+msgstr ""
+
+#: /Controller/QuizController.php:164
+msgid "Enter correct answers, if multiple answers comma separated"
+msgstr ""
+
+#: /Controller/QuizController.php:165
+msgid "At least point should be greater than 0"
+msgstr ""
+
+#: /Controller/QuizController.php:166
+msgid "At least 2 points should be greater than 0"
+msgstr ""
+
+#: /Controller/QuizController.php:167
+msgid "You put only one correct answers, please choose another point greater than 0!!!"
+msgstr ""
+
+#: /Controller/QuizController.php:168
+msgid "Please enter Youtube url"
+msgstr ""
+
+#: /Controller/QuizController.php:169
+msgid "Please enter image url"
+msgstr ""
+
+#: /Controller/QuizController.php:170
+msgid "Enter the header"
+msgstr ""
+
+#: /Controller/QuizController.php:171
+#: /View/Elements/Quiz/edit/Handlebars/question.edit.ctp:14
+msgid "Enter the question"
+msgstr ""
+
+#: /Controller/QuizController.php:173
+msgid "Video explanation text"
+msgstr ""
+
+#: /Controller/QuizController.php:174
+msgid "Image explanation text"
+msgstr ""
+
+#: /Controller/QuizController.php:175
+#: /View/Elements/Quiz/edit/Handlebars/question.edit.ctp:71
+msgid "Explanation text"
+msgstr ""
+
+#: /Controller/QuizController.php:176
+msgid "Please enter Header text"
+msgstr ""
+
+#: /Controller/QuizController.php:194
+#: /View/Quiz/edit.ctp:64;70
+msgid "Name the quiz"
+msgstr ""
+
+#: /Controller/QuizController.php:223
+msgid "[Verkkotesti] First quiz created"
+msgstr ""
+
+#: /Controller/QuizController.php:295
+msgid "Closed"
+msgstr ""
+
+#: /Controller/QuizController.php:302
+msgid "Sorry, only allow 40 students to take this quiz."
+msgstr ""
+
+#: /Controller/QuizController.php:319
+msgid "Internet connection has been lost, please try again later."
+msgstr ""
+
+#: /Controller/QuizController.php:320
+#: /View/Elements/Quiz/confirm_submit.ctp:8
+msgid "All questions answered. Turn in your quiz?"
+msgstr ""
+
+#: /Controller/QuizController.php:321
+msgid "Questions "
+msgstr ""
+
+#: /Controller/QuizController.php:322
+msgid " unanswered."
+msgstr ""
+
+#: /Controller/QuizController.php:323
+msgid " Turn in your quiz?"
+msgstr ""
+
+#: /Controller/QuizController.php:324
+msgid "First Name is Required"
+msgstr ""
+
+#: /Controller/QuizController.php:325
+msgid "Last Name is Required"
+msgstr ""
+
+#: /Controller/QuizController.php:326
+msgid "Class is Required"
+msgstr ""
+
+#: /Controller/QuizController.php:327
+msgid "Invalid Last Name"
+msgstr ""
+
+#: /Controller/QuizController.php:328
+msgid "Invalid First Name"
+msgstr ""
+
+#: /Controller/QuizController.php:329
+msgid "Invalid Class"
+msgstr ""
+
+#: /Controller/QuizController.php:330
+msgid "Sorry, right click disabled"
+msgstr ""
+
+#: /Controller/QuizController.php:331
+msgid "Sorry, you are not allowed to switch browser tab"
+msgstr ""
+
+#: /Controller/QuizController.php:332
+msgid "Are you sure that you want to leave this quiz?"
+msgstr ""
+
+#: /Controller/QuizController.php:420
+msgid "All Classes"
+msgstr ""
+
+#: /Controller/QuizController.php:422
+msgid "Are you sure you want to remove "
+msgstr ""
+
+#: /Controller/QuizController.php:423
+msgid ") answer with points "
+msgstr ""
+
+#: /Controller/QuizController.php:424
+msgid "Please Give a postive number!"
+msgstr ""
+
+#: /Controller/QuizController.php:425
+msgid "You have not updated score yet!"
+msgstr ""
+
+#: /Controller/QuizController.php:426
+msgid "Points not allowed more than "
+msgstr ""
+
+#: /Controller/QuizController.php:427
+msgid " value"
+msgstr ""
+
+#: /Controller/QuizController.php:504
+msgid "You are not authorized to do this action"
+msgstr ""
+
+#: /Controller/QuizController.php:519
+msgid "Operation Successfuly Done"
+msgstr ""
+
+#: /Controller/QuizController.php:567
+msgid "You have Successfuly deleted quiz"
+msgstr ""
+
+#: /Controller/QuizController.php:573
+msgid "No permission"
+msgstr ""
+
+#: /Controller/QuizController.php:614
+msgid "Copy of:"
+msgstr ""
+
+#: /Controller/QuizController.php:634
+msgid "Duplicated Successfuly"
+msgstr ""
+
+#: /Controller/QuizController.php:638
+msgid "Something went wrong, please try again later!"
+msgstr ""
+
+#: /Controller/QuizController.php:641
+msgid "Invalid Quiz"
+msgstr ""
+
+#: /Controller/StudentController.php:246
+msgid "[Verkkotesti] Quiz given to students"
+msgstr ""
+
+#: /Controller/StudentController.php:255
+msgid "Student saved"
+msgstr ""
+
+#: /Controller/StudentController.php:257
+msgid "Student saved failed"
+msgstr ""
+
+#: /Controller/StudentController.php:350
+msgid "Successfully removed"
+msgstr ""
+
+#: /Controller/StudentController.php:354
+msgid "You are not authorized to continue this operation!"
+msgstr ""
+
+#: /Controller/UserController.php:49
+msgid "[Verkkotesti] New User"
+msgstr ""
+
+#: /Controller/UserController.php:52
+msgid "Registration success"
+msgstr ""
+
+#: /Controller/UserController.php:65
+msgid "The result of the calculation was incorrect. Please try again."
+msgstr ""
+
+#: /Controller/UserController.php:81
+msgid "Require Captcha"
+msgstr ""
+
+#: /Controller/UserController.php:112
+msgid "You have logged out"
+msgstr ""
+
+#: /Controller/UserController.php:132
+msgid "Settings has been saved"
+msgstr ""
+
+#: /Controller/UserController.php:155
+#: /View/Emails/html/inquary.ctp:1
+msgid "General Inquary"
+msgstr ""
+
+#: /Controller/UserController.php:157
+msgid "Your email sent successfully"
+msgstr ""
+
+#: /Controller/UserController.php:159;189;192;236
+msgid "Something went wrong, please try again later"
+msgstr ""
+
+#: /Controller/UserController.php:169
+#: /View/Elements/Page/buy_modal.ctp:15
+#: /View/User/create.ctp:23
+#: /View/User/login.ctp:63
+msgid "Password Recover"
+msgstr ""
+
+#: /Controller/UserController.php:185
+msgid "Reset password for your account on Verkkotesti"
+msgstr ""
+
+#: /Controller/UserController.php:187
+msgid "Your request has been received, please check you email."
+msgstr ""
+
+#: /Controller/UserController.php:199
+msgid "This email has not registered yet!"
+msgstr ""
+
+#: /Controller/UserController.php:219
+msgid "Reset Password"
+msgstr ""
+
+#: /Controller/UserController.php:226
+msgid "Password Reset Link Expired."
+msgstr ""
+
+#: /Controller/UserController.php:233
+msgid "Your password has been successfully changed."
+msgstr ""
+
+#: /Controller/UserController.php:248
+msgid "Require New Password"
+msgstr ""
+
+#: /Controller/UserController.php:288
+msgid "Registration success and we will contact you soon to upgrade your account"
+msgstr ""
+
+#: /Model/Help.php:9
+msgid "Home Page"
+msgstr ""
+
+#: /Model/Help.php:9
+msgid "User Create Page"
+msgstr ""
+
+#: /Model/Quiz.php:11
+msgid "Active Quizzes"
+msgstr ""
+
+#: /Model/Quiz.php:11
+msgid "Archived Quizzes"
+msgstr ""
+
+#: /Model/Quiz.php:11
+msgid "All Quizzes"
+msgstr ""
+
+#: /View/Answer/mark.ctp:11
+#: /View/Quiz/edit.ctp:19
+msgid "Edit Quiz"
+msgstr ""
+
+#: /View/Answer/table.ctp:10
+#: /View/Quiz/table.ctp:10
+msgid "Answer Table"
+msgstr ""
+
+#: /View/Answer/table.ctp:45
+#: /View/Elements/page-navbar.ctp:19
+#: /View/Quiz/table.ctp:48
+msgid "Overview"
+msgstr ""
+
+#: /View/Answer/table.ctp:46
+#: /View/Quiz/table.ctp:49
+msgid "Answers"
+msgstr ""
+
+#: /View/Answer/table.ctp:57
+#: /View/Elements/Quiz/table_extension.ctp:7
+msgid "Timestamp"
+msgstr ""
+
+#: /View/Answer/table.ctp:58
+#: /View/Elements/Quiz/table_extension.ctp:9
+#: /View/User/settings.ctp:26
+msgid "Name"
+msgstr ""
+
+#: /View/Answer/table.ctp:59
+#: /View/Elements/Quiz/table_extension.ctp:10
+#: /View/Quiz/live.ctp:47
+msgid "Class"
+msgstr ""
+
+#: /View/Answer/table.ctp:60
+#: /View/Elements/Quiz/table_extension.ctp:12
+msgid "Total Points"
+msgstr ""
+
+#: /View/Answer/table.ctp:159
+msgid "No Submission"
+msgstr ""
+
+#: /View/Answer/table.ctp:169
+#: /View/Elements/Invoice/invoice_error_dialog.ctp:13
+#: /View/Elements/Page/video_modal.ctp:11
+#: /View/Elements/Quiz/read-essay.ctp:39;41
+#: /View/Elements/User/video_modal.ctp:11
+msgid "Close"
+msgstr ""
+
+#: /View/Elements/navbar.ctp:14
+#: /View/Quiz/index.ctp:5
+msgid "My Quizzes"
+msgstr ""
+
+#: /View/Elements/navbar.ctp:22
+msgid "Create Help"
+msgstr ""
+
+#: /View/Elements/navbar.ctp:23
+msgid "Demo Quiz"
+msgstr ""
+
+#: /View/Elements/navbar.ctp:27
+#: /View/Helps/admin_create.ctp:12
+#: /View/Helps/admin_videos.ctp:10
+msgid "Site Videos"
+msgstr ""
+
+#: /View/Elements/navbar.ctp:39
+#: /View/Elements/userbar.ctp:22
+#: /View/User/settings.ctp:7
+msgid "Settings"
+msgstr ""
+
+#: /View/Elements/navbar.ctp:42
+#: /View/Elements/userbar.ctp:32
+msgid "Logout"
+msgstr ""
+
+#: /View/Elements/page-navbar.ctp:10
+msgid "Navigation"
+msgstr ""
+
+#: /View/Elements/page-navbar.ctp:20
+#: /View/Pages/1bgfg9sq.ctp:6
+#: /View/Pages/4bgfg9sq.ctp:6
+#: /View/Pages/5bgfg9sq.ctp:6
+#: /View/Pages/9bgfg9sq.ctp:6
+#: /View/Pages/prices.ctp:6
+msgid "Prices"
+msgstr ""
+
+#: /View/Elements/page-navbar.ctp:21
+#: /View/Pages/contact.ctp:6
+msgid "Contact"
+msgstr ""
+
+#: /View/Elements/page-navbar.ctp:24
+#: /View/User/login.ctp:58
+msgid "If you don’t have account?"
+msgstr ""
+
+#: /View/Elements/page-navbar.ctp:24
+#: /View/Pages/1bgfg9sq.ctp:36
+#: /View/Pages/4bgfg9sq.ctp:36
+#: /View/Pages/5bgfg9sq.ctp:36
+#: /View/Pages/9bgfg9sq.ctp:36
+#: /View/Pages/prices.ctp:36
+#: /View/User/login.ctp:59
+msgid "Register Now!"
+msgstr ""
+
+#: /View/Elements/page-navbar.ctp:25
+#: /View/User/create.ctp:20
+#: /View/User/login.ctp:2;40
+msgid "Login"
+msgstr ""
+
+#: /View/Elements/Answer/confirm_delete.ctp:5
+msgid "Remove answer?"
+msgstr ""
+
+#: /View/Elements/Answer/confirm_delete.ctp:8
+msgid "Are you sure you want to remove John Smiths answer with points 0/30?"
+msgstr ""
+
+#: /View/Elements/Answer/confirm_delete.ctp:11
+#: /View/Elements/Invoice/delete_confirm.ctp:11
+#: /View/Elements/Invoice/demo_dialog.ctp:13
+#: /View/Elements/Invoice/invoice_send_dialog.ctp:13
+#: /View/Elements/Page/buy_modal.ctp:58
+#: /View/Elements/Quiz/confirm_submit.ctp:11
+#: /View/User/settings.ctp:89
+msgid "Cancel"
+msgstr ""
+
+#: /View/Elements/Answer/confirm_delete.ctp:12
+#: /View/Elements/Quiz/confirm_submit.ctp:12
+msgid "Confirm"
+msgstr ""
+
+#: /View/Elements/Invoice/delete_confirm.ctp:5
+msgid "Delete quiz “Chemical Elements”?"
+msgstr ""
+
+#: /View/Elements/Invoice/delete_confirm.ctp:8
+msgid "There are 14 answers for this quiz. This can’t be undone. Are you sure you want to delete the quiz and all the answers?"
+msgstr ""
+
+#: /View/Elements/Invoice/delete_confirm.ctp:12
+#: /View/Helps/admin_index.ctp:62
+#: /View/Helps/admin_titles.ctp:49
+#: /View/Helps/admin_videos.ctp:60
+msgid "Delete"
+msgstr ""
+
+#: /View/Elements/Invoice/demo_dialog.ctp:7
+msgid "Would you like to load the demo quizzes?"
+msgstr ""
+
+#: /View/Elements/Invoice/demo_dialog.ctp:10
+msgid "Choose Ok if you want to load a couple of demo quizzes to take a look at Verkkotesti features."
+msgstr ""
+
+#: /View/Elements/Invoice/demo_dialog.ctp:14
+#: /View/Elements/Invoice/invoice_send_dialog.ctp:14
+#: /View/Elements/Invoice/invoice_success_dialog.ctp:13
+msgid "OK"
+msgstr ""
+
+#: /View/Elements/Invoice/invoice_error_dialog.ctp:10
+msgid "Send invoice failed, please try close this dialog and click Upgrade again."
+msgstr ""
+
+#: /View/Elements/Invoice/invoice_send_dialog.ctp:10
+msgid "An invoice will be sent to upgrade your account. Proceed?"
+msgstr ""
+
+#: /View/Elements/Invoice/invoice_success_dialog.ctp:10
+msgid "You will receive an invoice into your email shortly. By paying it you can upgrade your account."
+msgstr ""
+
+#: /View/Elements/Maintenance/notice.ctp:3
+msgid "We are currently making the app even better. We will be back online tonight at 22:00."
+msgstr ""
+
+#: /View/Elements/Page/buy_modal.ctp:5
+msgid "Create Account And Buy"
+msgstr ""
+
+#: /View/Elements/Page/buy_modal.ctp:10
+#: /View/User/create.ctp:18
+msgid "Already Registered?"
+msgstr ""
+
+#: /View/Elements/Page/buy_modal.ctp:12
+msgid "Login and Buy"
+msgstr ""
+
+#: /View/Elements/Page/buy_modal.ctp:34
+#: /View/User/create.ctp:41
+msgid "Enter Your Name"
+msgstr ""
+
+#: /View/Elements/Page/buy_modal.ctp:38
+#: /View/User/create.ctp:46
+msgid "Enter Valid Email"
+msgstr ""
+
+#: /View/Elements/Page/buy_modal.ctp:43
+#: /View/User/create.ctp:51
+msgid "Enter Password"
+msgstr ""
+
+#: /View/Elements/Page/buy_modal.ctp:51
+#: /View/User/create.ctp:59
+msgid "Password Verify"
+msgstr ""
+
+#: /View/Elements/Page/buy_modal.ctp:61
+msgid "Submit"
+msgstr ""
+
+#: /View/Elements/Quiz/answer-print.ctp:5;29;40
+#: /View/Elements/Quiz/table.ctp:5;22;39;58
+#: /View/Student/success.ctp:38
+msgid "Not Answered"
+msgstr ""
+
+#: /View/Elements/Quiz/confirm_submit.ctp:5
+msgid "Turn in your quiz?"
+msgstr ""
+
+#: /View/Elements/Quiz/read-essay.ctp:17;28
+#: /View/Elements/Quiz/table.ctp:44
+msgid "Rate!"
+msgstr ""
+
+#: /View/Elements/Quiz/table.ctp:61
+msgid "READ"
+msgstr ""
+
+#: /View/Elements/Quiz/table_extension.ctp:6
+msgid "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+msgstr ""
+
+#: /View/Elements/Quiz/table_extension.ctp:13
+msgid "Progress"
+msgstr ""
+
+#: /View/Elements/Quiz/table_extension.ctp:33
+#: /View/Quiz/ajax_student_update.ctp:5
+msgid "Remove answer"
+msgstr ""
+
+#: /View/Elements/Quiz/table_extension.ctp:82
+msgid "Quiz not taken yet!"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/question.ctp:37
+#: /View/Elements/Quiz/edit/Handlebars/question.preview.ctp:28
+#: /View/Elements/Quiz/live/question.ctp:27
+msgid "Choose at most"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/question.ctp:47
+#: /View/Elements/Quiz/edit/Handlebars/question.preview.ctp:44
+msgid "Edit question"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/question.ctp:50
+#: /View/Elements/Quiz/edit/Handlebars/question.preview.ctp:47
+msgid "Remove question"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/choice.essay.edit.ctp:29
+#: /View/Elements/Quiz/edit/Handlebars/choice.short_manual.edit.ctp:12
+msgid "Max. points"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/choice.image_url.edit.ctp:12
+msgid "Enter Image Url"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/choice.multiple_many.edit.ctp:17;61
+#: /View/Elements/Quiz/edit/Handlebars/choice.multiple_one.edit.ctp:17;61
+msgid "Choice"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/choice.multiple_many.edit.ctp:25;69
+#: /View/Elements/Quiz/edit/Handlebars/choice.multiple_one.edit.ctp:25;69
+#: /View/Elements/Quiz/edit/Handlebars/choice.short_auto.edit.ctp:26
+msgid "Points"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/choice.multiple_many.edit.ctp:39;83
+#: /View/Elements/Quiz/edit/Handlebars/choice.multiple_one.edit.ctp:39;83
+msgid "Remove choice"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/choice.short_auto.edit.ctp:12
+msgid "Corect answers separated by semicolon"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/choice.youtube_video.edit.ctp:12
+msgid "Enter Youtube Url"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/question.edit.ctp:48
+msgid "Question types"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/question.edit.ctp:53
+msgid "Others"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/question.edit.ctp:86
+msgid "Max allowed to check"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/question.edit.ctp:102
+msgid "Add Choice"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/question.edit.ctp:104
+msgid "Save Question"
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/question.preview.ctp:38
+msgid "Notice: "
+msgstr ""
+
+#: /View/Elements/Quiz/edit/Handlebars/question.preview.ctp:38
+msgid "you inserted 0 points in all of the choices."
+msgstr ""
+
+#: /View/Emails/html/first_quiz_create.ctp:1
+msgid "First quiz created"
+msgstr ""
+
+#: /View/Emails/html/first_quiz_create.ctp:2
+#: /View/Emails/html/quiz_taken_started.ctp:2
+#: /View/Emails/html/user_create.ctp:2
+msgid "Id: "
+msgstr ""
+
+#: /View/Emails/html/first_quiz_create.ctp:3
+#: /View/Emails/html/quiz_taken_started.ctp:3
+#: /View/Emails/html/user_create.ctp:3
+msgid "Name: "
+msgstr ""
+
+#: /View/Emails/html/first_quiz_create.ctp:4
+#: /View/Emails/html/quiz_taken_started.ctp:4
+#: /View/Emails/html/user_create.ctp:4
+msgid "Email: "
+msgstr ""
+
+#: /View/Emails/html/inquary.ctp:2
+msgid "Sender email address:"
+msgstr ""
+
+#: /View/Emails/html/inquary.ctp:3
+#: /View/Pages/contact.ctp:22
+msgid "Message"
+msgstr ""
+
+#: /View/Emails/html/invoice.ctp:1
+msgid "Invoice"
+msgstr ""
+
+#: /View/Emails/html/quiz_taken_started.ctp:1
+msgid "A quiz given to students!"
+msgstr ""
+
+#: /View/Emails/html/reset_password.ctp:1
+msgid "Password Reset"
+msgstr ""
+
+#: /View/Emails/html/reset_password.ctp:2
+msgid "To reset your password click on the bellow link or paste on your browser."
+msgstr ""
+
+#: /View/Emails/html/reset_password.ctp:4
+msgid "If you have not sent this request, just ignore this mail."
+msgstr ""
+
+#: /View/Emails/html/user_create.ctp:1
+msgid "New User"
+msgstr ""
+
+#: /View/Emails/html/user_create.ctp:5
+msgid "Registered: "
+msgstr ""
+
+#: /View/Helps/admin_add.ctp:31
+#: /View/Helps/admin_create.ctp:39
+#: /View/Helps/admin_index.ctp:27
+#: /View/Helps/admin_insert.ctp:37
+#: /View/Helps/admin_videos.ctp:25
+msgid "Title"
+msgstr ""
+
+#: /View/Helps/admin_add.ctp:31
+msgid "Please insert main title"
+msgstr ""
+
+#: /View/Helps/admin_add.ctp:37;39
+#: /View/Helps/admin_create.ctp:53;55
+#: /View/Helps/admin_insert.ctp:46;48
+msgid "BACK"
+msgstr ""
+
+#: /View/Helps/admin_add.ctp:41
+#: /View/Helps/admin_create.ctp:57
+#: /View/Helps/admin_insert.ctp:50
+msgid "SAVE"
+msgstr ""
+
+#: /View/Helps/admin_create.ctp:13
+#: /View/Helps/admin_videos.ctp:11
+msgid "Create Videos"
+msgstr ""
+
+#: /View/Helps/admin_create.ctp:38
+#: /View/Helps/admin_videos.ctp:27
+msgid "Display Page"
+msgstr ""
+
+#: /View/Helps/admin_create.ctp:38
+#: /View/Helps/admin_insert.ctp:36
+msgid "Select One"
+msgstr ""
+
+#: /View/Helps/admin_create.ctp:39
+msgid "Please insert video title"
+msgstr ""
+
+#: /View/Helps/admin_create.ctp:40
+#: /View/Helps/admin_index.ctp:28
+#: /View/Helps/admin_insert.ctp:38
+#: /View/Helps/admin_videos.ctp:26
+msgid "Sub Title"
+msgstr ""
+
+#: /View/Helps/admin_create.ctp:40
+msgid "Please insert video sub title"
+msgstr ""
+
+#: /View/Helps/admin_create.ctp:41
+#: /View/Helps/admin_insert.ctp:39
+msgid "Youtube Video Url"
+msgstr ""
+
+#: /View/Helps/admin_create.ctp:41
+#: /View/Helps/admin_insert.ctp:39
+msgid "Please insert youtube video url here"
+msgstr ""
+
+#: /View/Helps/admin_create.ctp:42
+#: /View/Helps/admin_insert.ctp:40
+msgid "Description"
+msgstr ""
+
+#: /View/Helps/admin_create.ctp:42
+#: /View/Helps/admin_insert.ctp:40
+msgid "Description here"
+msgstr ""
+
+#: /View/Helps/admin_create.ctp:46
+msgid "Photo"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:26
+#: /View/Helps/admin_titles.ctp:21
+#: /View/Helps/admin_videos.ctp:24
+msgid "id"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:29
+#: /View/Helps/admin_insert.ctp:36
+#: /View/Helps/admin_titles.ctp:22
+msgid "Main Title"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:30
+#: /View/Helps/admin_videos.ctp:28
+msgid "Url"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:31
+#: /View/Helps/admin_titles.ctp:23
+#: /View/Helps/admin_videos.ctp:29
+msgid "Created"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:32
+#: /View/Helps/admin_titles.ctp:24
+#: /View/Helps/admin_videos.ctp:30
+msgid "Sort"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:33
+#: /View/Helps/admin_titles.ctp:25
+#: /View/Helps/admin_videos.ctp:31
+msgid "Status"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:34
+#: /View/Helps/admin_titles.ctp:26
+#: /View/Helps/admin_videos.ctp:32
+msgid "Action"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:54;56
+#: /View/Helps/admin_titles.ctp:41;43
+#: /View/Helps/admin_videos.ctp:52;54
+msgid "On"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:54;56
+#: /View/Helps/admin_titles.ctp:41;43
+#: /View/Helps/admin_videos.ctp:52;54
+msgid "Off"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:54
+#: /View/Helps/admin_titles.ctp:41
+#: /View/Helps/admin_videos.ctp:52
+msgid "Confirm inactive title %s?"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:56
+#: /View/Helps/admin_titles.ctp:43
+#: /View/Helps/admin_videos.ctp:54
+msgid "Confirm active title %s?"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:60
+#: /View/Helps/admin_titles.ctp:47
+#: /View/Helps/admin_videos.ctp:58
+msgid "Edit"
+msgstr ""
+
+#: /View/Helps/admin_index.ctp:62
+#: /View/Helps/admin_titles.ctp:49
+#: /View/Helps/admin_videos.ctp:60
+msgid "Confirm delete of title %s?"
+msgstr ""
+
+#: /View/Helps/admin_insert.ctp:37
+msgid "Please insert help title"
+msgstr ""
+
+#: /View/Helps/admin_insert.ctp:38
+msgid "Please insert help sub title"
+msgstr ""
+
+#: /View/Helps/index.ctp:16
+msgid "Getting Started"
+msgstr ""
+
+#: /View/Maintenance/admin_import.ctp:22
+msgid "User Id"
+msgstr ""
+
+#: /View/Maintenance/admin_import.ctp:22
+msgid "Please insert user id"
+msgstr ""
+
+#: /View/Maintenance/admin_import.ctp:27
+msgid "Import"
+msgstr ""
+
+#: /View/Pages/1bgfg9sq.ctp:7
+#: /View/Pages/4bgfg9sq.ctp:7
+#: /View/Pages/5bgfg9sq.ctp:7
+#: /View/Pages/9bgfg9sq.ctp:7
+#: /View/Pages/prices.ctp:7
+msgid "Select your favorite package to continue."
+msgstr ""
+
+#: /View/Pages/1bgfg9sq.ctp:14
+#: /View/Pages/4bgfg9sq.ctp:14
+#: /View/Pages/5bgfg9sq.ctp:14
+#: /View/Pages/9bgfg9sq.ctp:14
+#: /View/Pages/prices.ctp:14
+msgid "FREE"
+msgstr ""
+
+#: /View/Pages/1bgfg9sq.ctp:15;49
+#: /View/Pages/prices.ctp:15;49
+msgid "19 E/Y"
+msgstr ""
+
+#: /View/Pages/1bgfg9sq.ctp:20
+#: /View/Pages/4bgfg9sq.ctp:20
+#: /View/Pages/5bgfg9sq.ctp:20
+#: /View/Pages/9bgfg9sq.ctp:20
+#: /View/Pages/prices.ctp:20
+msgid "Users"
+msgstr ""
+
+#: /View/Pages/1bgfg9sq.ctp:21;22;26
+#: /View/Pages/4bgfg9sq.ctp:21;22;26
+#: /View/Pages/5bgfg9sq.ctp:21;22;26
+#: /View/Pages/9bgfg9sq.ctp:21;22;26
+#: /View/Pages/prices.ctp:21;22;26
+msgid "1"
+msgstr ""
+
+#: /View/Pages/1bgfg9sq.ctp:25
+#: /View/Pages/4bgfg9sq.ctp:25
+#: /View/Pages/5bgfg9sq.ctp:25
+#: /View/Pages/9bgfg9sq.ctp:25
+#: /View/Pages/prices.ctp:25
+msgid "Tests"
+msgstr ""
+
+#: /View/Pages/1bgfg9sq.ctp:27;32
+#: /View/Pages/4bgfg9sq.ctp:27;32
+#: /View/Pages/5bgfg9sq.ctp:27;32
+#: /View/Pages/9bgfg9sq.ctp:27;32
+#: /View/Pages/prices.ctp:27;32
+msgid "Unlimited"
+msgstr ""
+
+#: /View/Pages/1bgfg9sq.ctp:30
+#: /View/Pages/4bgfg9sq.ctp:30
+#: /View/Pages/5bgfg9sq.ctp:30
+#: /View/Pages/9bgfg9sq.ctp:30
+#: /View/Pages/prices.ctp:30
+msgid "Students/Test"
+msgstr ""
+
+#: /View/Pages/1bgfg9sq.ctp:31
+#: /View/Pages/4bgfg9sq.ctp:31
+#: /View/Pages/5bgfg9sq.ctp:31
+#: /View/Pages/9bgfg9sq.ctp:31
+#: /View/Pages/prices.ctp:31
+msgid "40"
+msgstr ""
+
+#: /View/Pages/1bgfg9sq.ctp:37
+#: /View/Pages/4bgfg9sq.ctp:37
+#: /View/Pages/5bgfg9sq.ctp:37
+#: /View/Pages/9bgfg9sq.ctp:37
+#: /View/Pages/prices.ctp:37
+msgid "Buy"
+msgstr ""
+
+#: /View/Pages/4bgfg9sq.ctp:15;49
+msgid "49 E/Y"
+msgstr ""
+
+#: /View/Pages/5bgfg9sq.ctp:15
+msgid "9 &#8364;/kk (=108 &#8364;/v)</br> TAI 90 &#8364;/v"
+msgstr ""
+
+#: /View/Pages/5bgfg9sq.ctp:41
+msgid "Lorem ipsum dummy text here. Lorem ipsum dummy text here Lorem ipsum dummy text here. Lorem ipsum dummy text here"
+msgstr ""
+
+#: /View/Pages/5bgfg9sq.ctp:50
+msgid "59 E/Y"
+msgstr ""
+
+#: /View/Pages/9bgfg9sq.ctp:15;49
+msgid "99 E/Y"
+msgstr ""
+
+#: /View/Pages/contact.ctp:7
+msgid "MeSTRADA Oy / Pietu Halonen"
+msgstr ""
+
+#: /View/Pages/contact.ctp:7
+msgid "040-5866 105"
+msgstr ""
+
+#: /View/Pages/contact.ctp:12
+msgid "Get in Touch"
+msgstr ""
+
+#: /View/Pages/contact.ctp:16
+msgid "Your Email"
+msgstr ""
+
+#: /View/Pages/contact.ctp:29
+msgid "Send Message"
+msgstr ""
+
+#: /View/Pages/index.ctp:6
+msgid "Web test enables a teacher"
+msgstr ""
+
+#: /View/Pages/index.ctp:7
+msgid "to give a quiz to students quickly and easily"
+msgstr ""
+
+#: /View/Pages/index.ctp:7
+msgid "with their "
+msgstr ""
+
+#: /View/Pages/index.ctp:7
+msgid "mobile phones"
+msgstr ""
+
+#: /View/Pages/index.ctp:9
+#: /View/User/create.ctp:8
+msgid "Create Account"
+msgstr ""
+
+#: /View/Pages/index.ctp:15
+msgid "This is how it works!"
+msgstr ""
+
+#: /View/Pages/index.ctp:19
+msgid "Create a Test"
+msgstr ""
+
+#: /View/Pages/index.ctp:20
+msgid "Create a test with one or more questions."
+msgstr ""
+
+#: /View/Pages/index.ctp:23
+msgid "Give a Test"
+msgstr ""
+
+#: /View/Pages/index.ctp:24
+msgid "Let the students attend the test in the classroom or at home."
+msgstr ""
+
+#: /View/Pages/index.ctp:27
+msgid "Check the Result"
+msgstr ""
+
+#: /View/Pages/index.ctp:28
+msgid "Check the results as soon as the stundents have attended."
+msgstr ""
+
+#: /View/Quiz/ajax_print_answer.ctp:4
+msgid "Quiz name: "
+msgstr ""
+
+#: /View/Quiz/ajax_print_answer.ctp:12
+msgid "Student name: "
+msgstr ""
+
+#: /View/Quiz/ajax_print_answer.ctp:15
+msgid "Quiz taken: "
+msgstr ""
+
+#: /View/Quiz/ajax_print_answer.ctp:18
+msgid "Class: "
+msgstr ""
+
+#: /View/Quiz/ajax_print_answer.ctp:24
+msgid "Total: "
+msgstr ""
+
+#: /View/Quiz/edit.ctp:39
+msgid "Quiz Settings"
+msgstr ""
+
+#: /View/Quiz/edit.ctp:46
+msgid "Show results to the student after finishing the quiz."
+msgstr ""
+
+#: /View/Quiz/edit.ctp:52
+msgid "Anonymous participation?"
+msgstr ""
+
+#: /View/Quiz/edit.ctp:80
+msgid "Describe the quiz to respondents"
+msgstr ""
+
+#: /View/Quiz/edit.ctp:121
+msgid "Add New Question"
+msgstr ""
+
+#: /View/Quiz/edit.ctp:127
+msgid "Finish"
+msgstr ""
+
+#: /View/Quiz/finish.ctp:1
+msgid "Thank you"
+msgstr ""
+
+#: /View/Quiz/index.ctp:17;43;63
+msgid "Your account will be expired in"
+msgstr ""
+
+#: /View/Quiz/index.ctp:17;43;63
+msgid "days."
+msgstr ""
+
+#: /View/Quiz/index.ctp:29;49
+msgid "Your account has expired."
+msgstr ""
+
+#: /View/Quiz/index.ctp:35
+msgid "Upgrade to Create More Quiz"
+msgstr ""
+
+#: /View/Quiz/index.ctp:83
+msgid "Create New Quiz"
+msgstr ""
+
+#: /View/Quiz/index.ctp:116
+msgid "Remove quiz"
+msgstr ""
+
+#: /View/Quiz/index.ctp:120
+msgid "Archive quiz"
+msgstr ""
+
+#: /View/Quiz/index.ctp:124
+msgid "Activate quiz"
+msgstr ""
+
+#: /View/Quiz/index.ctp:128
+msgid "Duplicate quiz"
+msgstr ""
+
+#: /View/Quiz/index.ctp:135
+msgid "Give test!"
+msgstr ""
+
+#: /View/Quiz/index.ctp:137
+msgid "Answers (%s)"
+msgstr ""
+
+#: /View/Quiz/index.ctp:151
+msgid "Welcome to Verkkotesti!"
+msgstr ""
+
+#: /View/Quiz/index.ctp:152
+msgid "If you want to start by looking at demo quizzes, click the gray button "
+msgstr ""
+
+#: /View/Quiz/index.ctp:152;156
+msgid "Load demo quizzes"
+msgstr ""
+
+#: /View/Quiz/index.ctp:153
+msgid "(You can delete demo quizzes when you don't need them anymore.)"
+msgstr ""
+
+#: /View/Quiz/index.ctp:154
+msgid "If you want to dive straight in, click the blue button"
+msgstr ""
+
+#: /View/Quiz/index.ctp:154
+msgid "Create a New test"
+msgstr ""
+
+#: /View/Quiz/live.ctp:8
+msgid "Quiz: "
+msgstr ""
+
+#: /View/Quiz/live.ctp:33
+msgid "First Name"
+msgstr ""
+
+#: /View/Quiz/live.ctp:40
+msgid "Last Name"
+msgstr ""
+
+#: /View/Quiz/live.ctp:123
+msgid "Turn in your quiz"
+msgstr ""
+
+#: /View/Quiz/not_found.ctp:1
+msgid "The quiz is closed at this time."
+msgstr ""
+
+#: /View/Quiz/present.ctp:8
+msgid "Read the QR code with your mobile service"
+msgstr ""
+
+#: /View/Quiz/present.ctp:10
+msgid "OR"
+msgstr ""
+
+#: /View/Quiz/present.ctp:11
+msgid "Surf to this web address:"
+msgstr ""
+
+#: /View/Quiz/present.ctp:20
+#: /View/Quiz/table.ctp:68
+msgid "Back"
+msgstr ""
+
+#: /View/Quiz/table.ctp:19
+msgid "All Time"
+msgstr ""
+
+#: /View/Quiz/table.ctp:20
+msgid "Today"
+msgstr ""
+
+#: /View/Quiz/table.ctp:21
+msgid "This Year"
+msgstr ""
+
+#: /View/Quiz/table.ctp:22
+msgid "This Month"
+msgstr ""
+
+#: /View/Quiz/table.ctp:23
+msgid "This Week"
+msgstr ""
+
+#: /View/Quiz/table.ctp:64
+msgid "Print"
+msgstr ""
+
+#: /View/Student/success.ctp:3
+msgid "Success"
+msgstr ""
+
+#: /View/Student/success.ctp:6
+msgid "Thank You!"
+msgstr ""
+
+#: /View/Student/success.ctp:7
+msgid "Your answer(s) has been submitted successfully."
+msgstr ""
+
+#: /View/Student/success.ctp:44
+msgid "On hold"
+msgstr ""
+
+#: /View/Student/success.ctp:60
+msgid "YOUR RESULTS"
+msgstr ""
+
+#: /View/Student/success.ctp:61
+msgid "Total"
+msgstr ""
+
+#: /View/Student/success.ctp:61
+msgid "YOUR ANSWER waiting for rating"
+msgstr ""
+
+#: /View/User/create.ctp:69
+msgid "Enter result"
+msgstr ""
+
+#: /View/User/create.ctp:77
+msgid "Create Account & Log In"
+msgstr ""
+
+#: /View/User/login.ctp:22
+#: /View/User/settings.ctp:36
+msgid "Email"
+msgstr ""
+
+#: /View/User/login.ctp:31
+#: /View/User/settings.ctp:45
+msgid "Password"
+msgstr ""
+
+#: /View/User/login.ctp:46
+msgid "Register"
+msgstr ""
+
+#: /View/User/login.ctp:62
+msgid "If you forgot password?"
+msgstr ""
+
+#: /View/User/password_recover.ctp:23
+msgid "Enter your email"
+msgstr ""
+
+#: /View/User/password_recover.ctp:27
+msgid "Send Request"
+msgstr ""
+
+#: /View/User/reset_password.ctp:24
+msgid "Enter New Password"
+msgstr ""
+
+#: /View/User/reset_password.ctp:30
+msgid "New Password Verify"
+msgstr ""
+
+#: /View/User/reset_password.ctp:33
+msgid "Reset"
+msgstr ""
+
+#: /View/User/settings.ctp:46
+msgid "Fill if you want to change password"
+msgstr ""
+
+#: /View/User/settings.ctp:83
+msgid "Save"
+msgstr ""
+
+#: Model/Quiz.php:validation for field name
+msgid "Quiz name is required"
+msgstr "Lisää testin nimi"
+
+#: Model/Quiz.php:validation for field name
+msgid "Quiz name must be alphanumeric"
+msgstr "Testin nimessä saa olla vain kirjaimia tai numeroita."
+
+
+#: Model/User.php:validation for field name
+msgid "Name contains invalid character"
+msgstr "Nimi sisältää virheellisiä merkkejä"
+
+#: Model/User.php:validation for field email
+msgid "Invalid email"
+msgstr "Virheellinen email"
+
+#: Model/User.php:validation for field email
+msgid "Email already registered"
+msgstr "Email jo rekisteröity"
+
+#: Model/User.php:validation for field password
+msgid "Password must be 8 characters long"
+msgstr "Salasanassa on oltava vähintään 8 merkkiä"
+
+#: Model/Help.php:validation for field title
+msgid "Title is required"
+msgstr "Otsikko on pakollinen"
+
+#: Model/Help.php:validation for field parent_id
+msgid "Main title is required"
+msgstr "Pääotsikko on pakollinen"
+
+#: Model/Help.php:validation for field url notempty
+msgid "Youtube video url is required"
+msgstr "Youtube url on pakollinen"
+
+#: Model/Help.php:validation for field url website
+msgid "Valid youtube video url is required"
+msgstr "Validi Youtube url on pakollinen"
+
+#: Model/Help.php:validation for field type
+msgid "Display page is required"
+msgstr "Sivun valinta vaaditaan"

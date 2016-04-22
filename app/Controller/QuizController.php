@@ -244,10 +244,12 @@ class QuizController extends AppController {
     }
 
     public function live($quizRandomId) {
+
         // start session for examination
         if (!$this->Session->check('started')) {
             $randomString = $this->randText(10);
             $this->Session->write('started', $randomString);
+            $this->Session->write('random_id', $quizRandomId); // Write random_id on session to keey track of online students
             $this->redirect(array('controller' => 'quiz', 'action' => 'live', $quizRandomId, '?' => array('runningFor' => $randomString)));
         }
 
@@ -258,8 +260,10 @@ class QuizController extends AppController {
             // remove session and start new
             $this->Session->delete('started');
             $this->Session->delete('student_id');
+            $this->Session->delete('random_id');
             $randomString = $this->randText(10);
             $this->Session->write('started', $randomString);
+            $this->Session->write('random_id', $quizRandomId);
             $this->redirect(array('controller' => 'quiz', 'action' => 'live', $quizRandomId, '?' => array('runningFor' => $randomString)));
         }
 
@@ -364,7 +368,6 @@ class QuizController extends AppController {
         }
         $this->accountStatus();
 
-
         // authenticate or not
         $checkPermission = $this->Quiz->checkPermission($quizId, $this->Auth->user('id'));
         if (empty($checkPermission)) {
@@ -404,7 +407,13 @@ class QuizController extends AppController {
             $studentIds[$value1['id']] = $informations;
         }
     
-        $studentIds = json_encode($studentIds);
+        
+        // find online students
+        $onlineStds = $this->checkOnlineStudent($quizDetails['Quiz']['random_id']);
+        $this->set(compact('onlineStds'));
+
+        $studentIds = json_encode(array('studentIds' => $studentIds, 'onlineStds' => $onlineStds));
+
         // get student classes
         $classes = Hash::combine($checkPermission['Student'], '{n}.class', '{n}.class');
         
@@ -429,6 +438,26 @@ class QuizController extends AppController {
         $this->set(compact('quizDetails', 'classes', 'filter', 'studentIds', 'quizId', 'lang_strings'));
     }
 
+    // Student online status
+    public function checkOnlineStudent($random_id) {
+        $onlineStds = array();
+        $time = time()+14400-1200; // (14400 == 4 huors and 10 mins = 600)
+        $sessions = $this->Quiz->query('SELECT data FROM ' . $this->Quiz->tablePrefix . 'cake_sessions WHERE expires > ' . $time . ' AND data LIKE ' . "'%" . '"' . $random_id . '"' . "%'");
+        foreach ($sessions as $session) {
+            $tmp = explode(';random_id|', $session[$this->Quiz->tablePrefix . 'cake_sessions']['data']);
+            if (!empty($tmp[1]) && (strpos($tmp[1], 'student_id') !== false)) {
+                $tmp = explode('student_id', $tmp[1]);
+                $q_random_id = explode('"', $tmp[0]);
+                $q_student_id = explode('"', $tmp[1]);
+                if (!empty($q_random_id[1]) && ($q_random_id[1] == $random_id) && !empty($q_student_id[1])) {
+                    $onlineStds[] = $q_student_id[1];
+                }
+            } 
+        }
+        return $onlineStds;
+    }
+
+    // Ajax latest
     public function ajax_latest() {
         $this->autoRender = false;
         if (!$this->Session->check('Filter')) {
@@ -449,8 +478,12 @@ class QuizController extends AppController {
             $informations[] = $answers;
             $studentIds[$value1['id']] = $informations;
         }
-        
-        echo json_encode($studentIds);
+
+        $onlineStds = $this->checkOnlineStudent($quizDetails['Quiz']['random_id']);
+        // $oldOnlineStds = json_decode($this->request->data['onlineStds'], true);
+        // $offlineStds = array_diff($oldOnlineStds, $onlineStds);
+
+        echo json_encode(array('studentIds' => $studentIds, 'onlineStds' => $onlineStds));
     }
 
     public function ajax_update() {
@@ -460,8 +493,10 @@ class QuizController extends AppController {
             throw new ForbiddenException;
         }
 
-        $old_data = json_decode($this->request->data['old_data'], true);
-        $new_data = json_decode($this->request->data['new_data'], true);
+        // $old_data = json_decode($this->request->data['old_data'], true);
+        // $new_data = json_decode($this->request->data['new_data'], true);
+        $old_data = !empty($this->request->data['old_data']) ? $this->request->data['old_data'] : array();
+        $new_data = $this->request->data['new_data'];
 
         $modified_ids = array();
 
@@ -631,14 +666,14 @@ class QuizController extends AppController {
             if ($this->Quiz->saveAll($quizInfo, array('deep' => true))) {
                 $random_id = $this->Quiz->id . $this->Quiz->randText(2);
                 $this->Quiz->saveField('random_id', $random_id);
-                $response['message'] = __('Duplicated Successfuly');
+                $response['message'] = __('Duplicated Successfully');
                 $response['result'] = 1;
                 $response['id'] = $this->Quiz->id;
             } else {
                 $response['message'] = __('Something went wrong, please try again later!');
             }
         } else {
-            $response['message'] = __('Invalid Quiz');
+            $response['message'] = __('Invalid Quiz!');
         }
         echo json_encode($response);
         exit;

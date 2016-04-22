@@ -1331,3 +1331,23 @@ msgstr "Kirjoita käyttäjänumero"
 #:
 msgid "Import"
 msgstr "Lataa"
+
+#: Controller/QuizController.php:104
+msgid "Copy of:"
+msgstr "Kopio:"
+
+#: Controller/QuizController.php:638
+msgid "Jotakin meni pieleen. Yritä kohta uudelleen!"
+msgstr ""
+
+#: Controller/QuizController.php:641
+msgid "Invalid Quiz!"
+msgstr "Testiä ei löydy"
+
+#: Controller/QuizController.php:634
+msgid "Duplicated Successfully"
+msgstr "Testi on monistettu"
+
+#: View/Quiz/index.ctp:141
+msgid "Duplicate quiz"
+msgstr "Monista testi"

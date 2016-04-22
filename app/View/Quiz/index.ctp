@@ -112,7 +112,20 @@ $this->assign('title', __('My Quizzes'));
                     <?php foreach ($data['quizzes'] as $id => $quiz): ?> 
                         <?php $class = empty($quiz['Quiz']['status']) ? 'incativeQuiz' : 'activeQuiz'; ?>
                         <tr class="<?php echo $class; ?>">
-                            <td>
+                            <td style="vertical-align:middle">
+                                
+                                <div style="width: 40%; float: left">
+                                    <?php echo $this->Html->link($quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id']), array('class' => 'quiz-name')); ?>
+                                </div>
+                                <div style="width: 60%; float: left">
+                                    <?php if ($quiz['Quiz']['status']) : ?>
+                                        <?php echo $this->Html->link(__("Give test!"), '/quiz/present/' . $quiz['Quiz']['id']); ?>
+                                    <?php endif; ?>
+                                    <mark><?php echo $this->Html->link(__("Answers (%s)", $quiz['Quiz']['student_count']), '/quiz/table/' . $quiz['Quiz']['id']); ?></mark>
+                                </div>
+                               
+                            </td>
+                            <td align="right">
                                 <button type="button" class="btn btn-danger btn-sm delete-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Remove quiz'); ?>">
                                     <i class="glyphicon trash"></i>
                                 </button>
@@ -126,15 +139,8 @@ $this->assign('title', __('My Quizzes'));
                                     </button>
                                 <?php endif; ?>
                                 <button type="button" class="btn btn-success btn-sm duplicate-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Duplicate quiz'); ?>">
-                                    <i class="glyphicon glyphicon-repeat"></i>
+                                    <i class="glyphicon duplicate"></i>
                                 </button>
-                                <?php echo $this->Html->link($quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id'])); ?>
-                            </td>
-                            <td>
-                                <?php if ($quiz['Quiz']['status']) : ?>
-                                    <?php echo $this->Html->link(__("Give test!"), '/quiz/present/' . $quiz['Quiz']['id']); ?>
-                                <?php endif; ?>
-                                <mark><?php echo $this->Html->link(__("Answers (%s)", $quiz['Quiz']['student_count']), '/quiz/table/' . $quiz['Quiz']['id']); ?></mark>
                             </td>
                         </tr>
                     <?php endforeach; ?>
