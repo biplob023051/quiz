@@ -92,28 +92,30 @@ class StudentController extends AppController {
                 } 
 
 
-            } elseif ($value2['Question']['question_type_id'] == 2) {
-                // short automatic point
-                $words = explode(';', $this->request->data['text']);
-                if (count($words) == 1) {
-                    $words = explode(' ', $this->request->data['text']);
-                }
-                $ans_string = str_replace(' ', '', $value2['Choice']['text']);
+            } elseif ($value2['Question']['question_type_id'] == 2) { // short automatic point
+                $student_answer = preg_replace('/\s+/', ' ', trim($this->request->data['text']));
+                $ans_string = preg_replace('/\s+/', ' ', trim($value2['Choice']['text']));
 
-                $matched_word = explode(';', $ans_string);
-                
-                foreach ($words as $key => $value) {
-                    //if (!empty($value) && (strpos(strtolower($value2['Choice']['text']), strtolower(trim($value))) !== false)) {
-                    if (!empty($value) && (in_array(trim($value), $matched_word))) {
-                        $data['Answer']['score'] = $value2['Choice']['points'];
-                        $correct_answer = $correct_answer + $value2['Choice']['points'];
-                        break;
-                    } else {
-                        $data['Answer']['score'] = 0;
+                if ($student_answer === $ans_string) { // Compare whole string
+                    $data['Answer']['score'] = $value2['Choice']['points'];
+                    $correct_answer = $correct_answer + $value2['Choice']['points'];
+                } else {
+                    $student_answer = preg_replace('/\s+/', '', $this->request->data['text']);
+                    $ans_string = preg_replace('/\s+/', '', $value2['Choice']['text']);
+                    $words = explode(';', $student_answer);
+                    $matched_word = explode(';', $ans_string);
+                    foreach ($words as $key => $value) {
+                        //if (!empty($value) && (strpos(strtolower($value2['Choice']['text']), strtolower(trim($value))) !== false)) {
+                        if (!empty($value) && (in_array($value, $matched_word))) {
+                            $data['Answer']['score'] = $value2['Choice']['points'];
+                            $correct_answer = $correct_answer + $value2['Choice']['points'];
+                            break;
+                        } else {
+                            $data['Answer']['score'] = 0;
+                        }
                     }
                 }
                 $data['Answer']['text'] = $this->request->data['text'];
-
             } elseif ($value2['Question']['question_type_id'] == 4) {
                 // short manual point
                 $data['Answer']['score'] = null;
