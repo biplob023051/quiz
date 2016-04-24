@@ -263,11 +263,9 @@ class StudentController extends AppController {
 
     public function submit($quizRandomId) {
 
-        $data = $this->request->data;
-
         // remove unwanted space and make uppercase for student class
-        $data['Student']['class'] = !empty($data['Student']['class']) ? strtolower(preg_replace('/\s+/', '', $data['Student']['class'])) : '';
-
+        $this->request->data['Student']['class'] = !empty($this->request->data['Student']['class']) ? strtolower(preg_replace('/\s+/', '', $this->request->data['Student']['class'])) : '';
+        $data = $this->request->data;
         $this->Student->set($data['Student']);
         if (!$this->Student->validates()) {
             $error = array();

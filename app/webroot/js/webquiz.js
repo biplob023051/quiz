@@ -158,6 +158,26 @@ var webQuiz = {
             }
         });
     },
+    duplicateQuestion: function (questionId, questionContainer)
+    {
+        $.ajax({
+            data: {id: questionId},
+            url: this.baseUrl + 'question/duplicate',
+            dataType: 'json',
+            type: 'post',
+            success: function (response)
+            {
+                if (response.success === true)
+                {
+                    window.location.reload();
+                }
+                else
+                {
+                    alert(response.message);
+                }
+            }
+        });
+    },
     getQuestion: function (questionId)
     {
         questionId = parseInt(questionId);

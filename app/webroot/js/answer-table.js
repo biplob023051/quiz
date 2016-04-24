@@ -203,7 +203,7 @@ $(document).ready(function(){
                 {
                     var str = '';
                     if (std_online == 1) {
-                        str += 'Fyi, Student is online and giving test! ';
+                        str += lang_strings['online_warning'];
                     }
                     str += lang_strings['remove_question'] + response.student_full_name + ' (' + response.student_class + lang_strings['with_points'] + response.student_score + '?';
                     infoModal.find('.modal-body').html(str);

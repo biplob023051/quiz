@@ -270,7 +270,7 @@ class UserController extends AppController {
                 if (empty($user))
                     throw new NotFoundException;
 
-                $date = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d'), date('Y') + 5));
+                $date = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d'), date('Y') + 1));
 
                 // increate user account expired time
                 $this->User->id = $user['User']['id'];

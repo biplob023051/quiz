@@ -47,6 +47,7 @@
                     <button type="button" class="btn btn-danger btn-sm delete-question" id="delete-q{{id}}" title="<?php echo __('Remove question'); ?>">
                         <i class="glyphicon trash"></i>
                     </button>
+                    <button type="button" class="btn btn-success btn-sm duplicate-question" id="duplicate-q{{id}}" title="<?php echo __('Duplicate question'); ?>"><i class="glyphicon duplicate"></i></button>
                 </div>
             </div>
         </div>

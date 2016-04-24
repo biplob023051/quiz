@@ -206,6 +206,42 @@ class QuestionController extends AJAXController {
         }
     }
 
+    public function duplicate() {
+        $questionId = $this->request->data['id'];
+
+        // If user is trying to delete another user quiz, cancel.
+        if (!$this->isAuthorized($questionId))
+            throw new ForbiddenException;
+
+        $this->Question->unbindModelAll(array('Choice'));
+        $question = $this->Question->findById($questionId);
+
+        $response['success'] = false;
+
+        if (!empty($question)) {
+            $question['Question']['id'] = '';
+            $question['Question']['text'] = __('Copy of:') . ' ' . $question['Question']['text'];
+            unset($question['Question']['created']);
+            unset($question['Question']['modified']);
+            if (!empty($question['Choice'])) {
+                foreach ($question['Choice'] as $key => $choice) {
+                    $question['Choice'][$key]['id'] = '';
+                }
+            }
+            if ($this->Question->saveAll($question, array('deep' => true))) {
+               $response['message'] = __('Duplicated Successfully');
+                $response['success'] = true;
+                $response['id'] = $this->Question->id;
+            } else {
+                $response['message'] = __('Something went wrong, please try again later!');
+            }
+        } else {
+            $response['message'] = __('Invalid question');
+        }
+
+        $this->set('data', $response);
+    }
+
     // ajax sorting question on drag drop
     public function ajax_sort() {
         $question_ids = $this->request->data['question_ids'];

@@ -358,4 +358,13 @@ var debugVar;
         }
     });
 
+    $(document).on('click', '#questions tr td div.preview-btn button.duplicate-question', function () {
+        //console.profile("Delete question");
+        var qidStr = $(this).attr('id'),
+                questionId = parseInt($(this).attr('id').substr(11, qidStr.length - 1));
+        console.log('questionId', questionId);
+        webQuiz.duplicateQuestion(questionId, $("#q" + questionId));
+        //console.profileEnd();
+    });
+
 })(jQuery);

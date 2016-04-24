@@ -1351,3 +1351,7 @@ msgstr "Testi on monistettu"
 #: View/Quiz/index.ctp:141
 msgid "Duplicate quiz"
 msgstr "Monista testi"
+
+#: Controller/QuizController.php:641
+msgid "Student is online and giving test! "
+msgstr "Oppilas vastaa parhaillaan testiin! "

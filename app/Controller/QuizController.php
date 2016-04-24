@@ -425,6 +425,14 @@ class QuizController extends AppController {
         }
         uasort($classes, 'cmp');
         // classes merge with all class
+       
+        // $class_ar = array();
+        // foreach ($classes as $key => $ind_class) {
+        //     $new_class = strtolower(preg_replace('/\s+/', '', $ind_class));
+        //     if (!in_array($new_class, $class_ar)) {
+        //         $class_ar[$new_class] = $new_class;
+        //     }
+        // }
         
         $classes = Hash::merge(array('all' => __('All Classes')), $classes);
 
@@ -434,6 +442,7 @@ class QuizController extends AppController {
         $lang_strings['update_require'] = __('You have not updated score yet!');
         $lang_strings['more_point_1'] = __('Points not allowed more than ');
         $lang_strings['more_point_2'] = __(' value');
+        $lang_strings['online_warning'] = __('Student is online and giving test! ');
 
         $this->set(compact('quizDetails', 'classes', 'filter', 'studentIds', 'quizId', 'lang_strings'));
     }
@@ -441,7 +450,7 @@ class QuizController extends AppController {
     // Student online status
     public function checkOnlineStudent($random_id) {
         $onlineStds = array();
-        $time = time()+14400-1200; // (14400 == 4 huors and 10 mins = 600)
+        $time = time()+14400-60; // (14400 == 4 huors and 10 mins = 600)
         $sessions = $this->Quiz->query('SELECT data FROM ' . $this->Quiz->tablePrefix . 'cake_sessions WHERE expires > ' . $time . ' AND data LIKE ' . "'%" . '"' . $random_id . '"' . "%'");
         foreach ($sessions as $session) {
             $tmp = explode(';random_id|', $session[$this->Quiz->tablePrefix . 'cake_sessions']['data']);
