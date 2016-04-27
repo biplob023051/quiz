@@ -378,4 +378,42 @@ class StudentController extends AppController {
         echo json_encode($response);
         exit;
     }
+
+    // Method of student name class update from answer table
+    public function ajax_std_update() {
+        $this->autoRender = false;
+        $response = array('success' => false);
+        $details = explode('-', $this->request->data['std_info']);
+        $this->Student->Behaviors->load('Containable');
+        $student_record = $this->Student->find('first', array(
+            'conditions' => array(
+                'Student.id' => $details[1]
+            ),
+            'contain' => array(
+                'Quiz' => array(
+                    'fields' => array('Quiz.id', 'Quiz.user_id')
+                )
+            ),
+            'fields' => array('Student.id'),
+            'recursive' => -1
+        ));
+        if (!empty($student_record) && ($student_record['Quiz']['user_id'] == $this->Auth->user('id'))) { // permission granted
+            $this->Student->id = $student_record['Student']['id'];
+            
+            if ($details[0] == 'class') { // remove unwanted space and make lowercase
+                $this->request->data['value_info'] = !empty($this->request->data['value_info']) ? strtolower(preg_replace('/\s+/', '', $this->request->data['value_info'])) : '';
+            }
+
+            if ($this->Student->saveField($details[0], $this->request->data['value_info'])) {
+                $response['success'] = true;
+                $response['changetext'] = $this->request->data['value_info'];
+            } else {
+                $response['message'] = __('Something wrong, please try again!');
+            }
+        } else {
+            $response['message'] = __('Something wrong, please try again!');
+        }
+        echo json_encode($response);
+        exit;
+    }
 }

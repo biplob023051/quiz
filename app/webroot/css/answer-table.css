@@ -160,6 +160,17 @@ span.score {
   font-size: 7px;
 }
 
+.update-std {
+  display: none;
+  width: 120px;
+}
+
+.std-info {
+    cursor: pointer;
+    /*background-color: #6E889E !important;
+    color: white !important;*/
+}
+
 /*XXLarge screens*/
 @media only screen and (min-width: 120.063em) { 
   .container {

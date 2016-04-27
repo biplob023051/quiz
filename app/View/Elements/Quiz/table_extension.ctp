@@ -39,10 +39,10 @@
                         <td><?php echo $value1['submitted'] ?></td>
                         <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
                             <td>
-                                <?php echo $value1['lname']; ?>
-                                <?php echo $value1['fname']; ?> 
+                                <span class="std-info"><?php echo !empty($value1['lname']) ? $value1['lname'] : __('Last Name'); ?></span><input type="text" placeholder="<?php echo __('Enter last name'); ?>" class="form-control update-std" name="lname" data-rel="lname-<?php echo $value1['id']; ?>" value="<?php echo $value1['lname']; ?>">
+                                <span class="std-info"><?php echo !empty($value1['fname']) ? $value1['fname'] : __('First Name'); ?></span><input type="text" placeholder="<?php echo __('Enter first name'); ?>" class="form-control update-std" name="fname" data-rel="fname-<?php echo $value1['id']; ?>" value="<?php echo $value1['fname']; ?>">
                             </td>
-                            <td><?php echo $value1['class']; ?></td>
+                            <td><span class="std-info"><?php echo !empty($value1['class']) ? $value1['class'] : __('Class'); ?></span><input type="text" placeholder="<?php echo __('Enter class'); ?>" class="form-control update-std" name="class" data-rel="class-<?php echo $value1['id']; ?>" value="<?php echo $value1['class']; ?>"></td>
                         <?php endif; ?>
                         <?php foreach ($quizDetails['Ranking'] as $key2 => $value2) : ?>
                             <?php if ($value1['id'] == $value2['student_id']) : ?>

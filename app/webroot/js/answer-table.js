@@ -299,6 +299,50 @@ $(document).ready(function(){
             elem.show();
         }, 7000);
     });
+
+    $(document).on('click', '.std-info', function () {
+        $('.update-std').each(function(){
+            $(this).hide();
+            $(this).prev().show();
+        });
+        $(this).hide();
+        $(this).next().show();
+        var elem = $(this);
+        setTimeout(function(){
+            elem.next().hide();
+            elem.show();
+        }, 10000);
+    });
+
+    $('#answer-table input.update-std').donetyping(function(){
+        var std_info = $(this).attr('data-rel');
+        var value_info = $(this).val();
+        var inputField = $(this);
+        clearInterval(interval);
+        $.ajax({
+            dataType: 'json',
+            url: appData.baseUrl + 'student/ajax_std_update',
+            type: 'post',
+            data: {'std_info' : std_info, 'value_info' : value_info},
+            success: function (response)
+            {
+                if (response.success || response.success === "true")
+                {
+                    var result = std_info.split('-');
+                    console.log(result[1]);
+                    var old_data = $.parseJSON($("#prev_data").html());
+                    old_data.studentIds[result[1]][0][result[0]] = response.changetext;
+                    $("#prev_data").html(JSON.stringify(old_data));
+                    inputField.hide();
+                    inputField.prev().html(response.changetext).show();
+                } else {
+                    alert(response.message);
+                }
+                clearInterval(interval);
+                interval = setInterval(getUpdated, 2000);
+            }
+        });
+    });
     
 })(jQuery);
 
@@ -337,7 +381,7 @@ function checkCookie() {
 }
 
 function testFunc() {
-    $('#answer-table input').donetyping(function(){
+    $('#answer-table input:not(.update-std)').donetyping(function(){
         $("#ajax-message").hide();
         var current_score = parseFloat($(this).attr("current-score"));
         if (($(this).val() == '' || $(this).val() == null) && isNaN(current_score)) {
