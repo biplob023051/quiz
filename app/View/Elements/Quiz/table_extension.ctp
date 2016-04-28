@@ -6,8 +6,8 @@
                 <th class="serial sortable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th class="sortable"><?php echo __('Timestamp'); ?></th>
                 <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
-                    <th class="sortable"><?php echo __('Name'); ?></th>
-                    <th class="sortable"><?php echo __('Class'); ?></th>
+                    <th class="sortable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Name'); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th class="sortable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Class'); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <?php endif; ?>
                 <th class="sortable"><?php echo __('Total Points'); ?></th>
                 <th class="sortable"><?php echo __('Progress'); ?></th>
@@ -38,11 +38,12 @@
                         </td>
                         <td><?php echo $value1['submitted'] ?></td>
                         <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
-                            <td>
-                                <span class="std-info"><?php echo !empty($value1['lname']) ? $value1['lname'] : __('Last Name'); ?></span><input type="text" placeholder="<?php echo __('Enter last name'); ?>" class="form-control update-std" name="lname" data-rel="lname-<?php echo $value1['id']; ?>" value="<?php echo $value1['lname']; ?>">
-                                <span class="std-info"><?php echo !empty($value1['fname']) ? $value1['fname'] : __('First Name'); ?></span><input type="text" placeholder="<?php echo __('Enter first name'); ?>" class="form-control update-std" name="fname" data-rel="fname-<?php echo $value1['id']; ?>" value="<?php echo $value1['fname']; ?>">
+                            <td class="text-center">
+                                <span class="std-info"><?php echo !empty($value1['lname']) ? $value1['lname'] : __('Last Name'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter last name'); ?>" class="form-control update-std" name="lname" data-rel="lname-<?php echo $value1['id']; ?>" value="<?php echo $value1['lname']; ?>">
+                                
+                                <span class="std-info"><?php echo !empty($value1['fname']) ? $value1['fname'] : __('First Name'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter first name'); ?>" class="form-control update-std" name="fname" data-rel="fname-<?php echo $value1['id']; ?>" value="<?php echo $value1['fname']; ?>">
                             </td>
-                            <td><span class="std-info"><?php echo !empty($value1['class']) ? $value1['class'] : __('Class'); ?></span><input type="text" placeholder="<?php echo __('Enter class'); ?>" class="form-control update-std" name="class" data-rel="class-<?php echo $value1['id']; ?>" value="<?php echo $value1['class']; ?>"></td>
+                            <td class="text-center"><span class="std-info"><?php echo !empty($value1['class']) ? $value1['class'] : __('Class'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter class'); ?>" class="form-control update-std" name="class" data-rel="class-<?php echo $value1['id']; ?>" value="<?php echo $value1['class']; ?>"></td>
                         <?php endif; ?>
                         <?php foreach ($quizDetails['Ranking'] as $key2 => $value2) : ?>
                             <?php if ($value1['id'] == $value2['student_id']) : ?>

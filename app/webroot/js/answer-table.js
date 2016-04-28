@@ -334,7 +334,7 @@ $(document).ready(function(){
                     old_data.studentIds[result[1]][0][result[0]] = response.changetext;
                     $("#prev_data").html(JSON.stringify(old_data));
                     inputField.hide();
-                    inputField.prev().html(response.changetext).show();
+                    inputField.prev().html(response.changetext + ' <i class="glyphicon pencil-small"></i>').show();
                 } else {
                     alert(response.message);
                 }
