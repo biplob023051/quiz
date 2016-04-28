@@ -3,7 +3,7 @@
     <table class="table table-hover table-responsive table-striped">
         <thead>
             <tr>
-                <th class="serial sortable"><?php echo __('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'); ?></th>
+                <th class="serial sortable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th class="sortable"><?php echo __('Timestamp'); ?></th>
                 <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
                     <th class="sortable"><?php echo __('Name'); ?></th>
@@ -29,12 +29,12 @@
                     <?php //pr($value1); ?>
                     <tr id="student-<?php echo $value1['id']; ?>">
                         <td class="serial">
+                            <?php if (in_array($value1['id'], $onlineStds)) : ?><i class="glyphicon online"></i><?php endif; ?>
                             <span class="question-serial"><?php echo $sl; ?></span>
                             <button type="button" class="btn btn-danger btn-sm delete-answer" id="<?php echo $value1['id']; ?>" title="<?php echo __('Remove answer'); ?>">
                                 <i class="glyphicon trash"></i>
                             </button>
                             <span class="ajax-loader"><img src="<?php echo $this->request->webroot; ?>img/ajax-loader.gif" /></span>
-                            <?php if (in_array($value1['id'], $onlineStds)) : ?><i class="glyphicon online"></i><?php endif; ?>
                         </td>
                         <td><?php echo $value1['submitted'] ?></td>
                         <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>

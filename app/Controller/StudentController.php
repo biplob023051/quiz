@@ -230,6 +230,7 @@ class StudentController extends AppController {
         $data['Student']['fname'] = $this->request->data['fname'];
         $data['Student']['lname'] = $this->request->data['lname'];
         $data['Student']['class'] = strtolower(preg_replace('/\s+/', '', $this->request->data['class']));
+        $data['Student']['class'] = !empty($this->request->data['class']) ? strtolower(preg_replace('/\s+/', '', $this->request->data['class'])) : '';
         $data['Student']['submitted'] = date('Y-m-d H:i:s');
 
         $student = $this->Student->saveAssociated($data);

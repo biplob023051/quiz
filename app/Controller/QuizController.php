@@ -247,6 +247,7 @@ class QuizController extends AppController {
 
         // start session for examination
         if (!$this->Session->check('started')) {
+            $this->Session->destroy();
             $randomString = $this->randText(10);
             $this->Session->write('started', $randomString);
             $this->Session->write('random_id', $quizRandomId); // Write random_id on session to keey track of online students
@@ -261,6 +262,7 @@ class QuizController extends AppController {
             $this->Session->delete('started');
             $this->Session->delete('student_id');
             $this->Session->delete('random_id');
+            $this->Session->destroy();
             $randomString = $this->randText(10);
             $this->Session->write('started', $randomString);
             $this->Session->write('random_id', $quizRandomId);
@@ -450,8 +452,11 @@ class QuizController extends AppController {
     // Student online status
     public function checkOnlineStudent($random_id) {
         $onlineStds = array();
+        //$time = time()+14400-60; // (14400 == 4 huors and 10 mins = 600)
         $time = time()+14400-60; // (14400 == 4 huors and 10 mins = 600)
         $sessions = $this->Quiz->query('SELECT data FROM ' . $this->Quiz->tablePrefix . 'cake_sessions WHERE expires > ' . $time . ' AND data LIKE ' . "'%" . '"' . $random_id . '"' . "%'");
+        // pr($sessions);
+        // exit;
         foreach ($sessions as $session) {
             $tmp = explode(';random_id|', $session[$this->Quiz->tablePrefix . 'cake_sessions']['data']);
             if (!empty($tmp[1]) && (strpos($tmp[1], 'student_id') !== false)) {

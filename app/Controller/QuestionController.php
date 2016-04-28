@@ -220,7 +220,7 @@ class QuestionController extends AJAXController {
 
         if (!empty($question)) {
             $question['Question']['id'] = '';
-            $question['Question']['text'] = __('Copy of:') . ' ' . $question['Question']['text'];
+            //$question['Question']['text'] = __('Copy of:') . ' ' . $question['Question']['text'];
             unset($question['Question']['created']);
             unset($question['Question']['modified']);
             if (!empty($question['Choice'])) {
