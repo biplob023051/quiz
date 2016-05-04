@@ -50,6 +50,9 @@
 		var std_class = $('#StudentClass').val();
 		if ((fname != '') || (fname != '') || (std_class != '')) { // only save if 3 basic information exist
 			// Execute for student information save
+			//$(".basic-info").not($(this)).attr('disabled', true);
+			$(".form-input").attr('disabled', true);
+			$(".ajax-loader").show();
 			$.ajax({
 	            dataType: 'json',
 	            url: appData.baseUrl + 'student/update_student',
@@ -60,6 +63,8 @@
 	                console.log(response);
 	                //var json = $.parseJSON(response);
 	                $('#studentId').attr('value', response.student_id);
+	                $(".form-input").attr('disabled', false);
+	                $(".ajax-loader").hide();
 	            }
 	        });
 		}

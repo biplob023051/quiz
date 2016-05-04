@@ -39,7 +39,7 @@
                         <td><?php echo $value1['submitted'] ?></td>
                         <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
                             <td class="text-center">
-                                <span class="std-info"><?php echo !empty($value1['lname']) ? $value1['lname'] : __('Last Name'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter last name'); ?>" class="form-control update-std" name="lname" data-rel="lname-<?php echo $value1['id']; ?>" value="<?php echo $value1['lname']; ?>">
+                                <span class="std-info" style="margin-right: 10px;"><?php echo !empty($value1['lname']) ? $value1['lname'] : __('Last Name'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter last name'); ?>" class="form-control update-std" name="lname" data-rel="lname-<?php echo $value1['id']; ?>" value="<?php echo $value1['lname']; ?>">
                                 
                                 <span class="std-info"><?php echo !empty($value1['fname']) ? $value1['fname'] : __('First Name'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter first name'); ?>" class="form-control update-std" name="fname" data-rel="fname-<?php echo $value1['id']; ?>" value="<?php echo $value1['fname']; ?>">
                             </td>

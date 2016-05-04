@@ -15,7 +15,7 @@ echo $this->Form->create('Student', array(
     'inputDefaults' => array(
         'label' => array('class' => 'sr-only'),
         'div' => array('class' => 'form-group'),
-        'class' => 'form-control input-lg',
+        'class' => 'form-control input-lg basic-info',
     ),
     'novalidate' => true,
     'url' => array('controller' => 'student', 'action' => 'submit', $data['Quiz']['random_id'])
@@ -57,6 +57,7 @@ echo $this->Form->create('Student', array(
         </div>
     </div>
     <div class="panel-body">
+        <div class="ajax-loader col-xs-12 col-md-12" style="color: red; font-weight: bold"><?php echo __('Processing...'); ?></div>
         <table class="table table-condensed" id="questions">
             <tbody>
                 <?php

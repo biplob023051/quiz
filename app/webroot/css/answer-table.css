@@ -177,3 +177,13 @@ span.score {
     width: 1890px;
   }
 } /* min-width 1921px, xxlarge screens */
+
+
+.std-info {
+  border-bottom: 1px solid #337ab7;
+  border-radius: 5px;
+  /*text-shadow: 1px 1px #337ab7;*/
+  /*color: black;
+  text-shadow: 1px 1px 2px white, 0 0 25px blue, 0 0 5px #337ab7;*/
+  /*box-shadow: 1px 1px #cccccc;*/
+}
