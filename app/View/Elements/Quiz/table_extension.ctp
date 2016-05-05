@@ -3,13 +3,13 @@
     <table class="table table-hover table-responsive table-striped">
         <thead>
             <tr>
-                <th class="serial sortable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th class="serial sortable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <th class="sortable"><?php echo __('Timestamp'); ?></th>
                 <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
-                    <th class="sortable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Name'); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                    <th class="sortable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo __('Class'); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th class="sortable"><?php echo __('Name'); ?></th>
+                    <th class="sortable class-th"><?php echo __('Class'); ?></th>
                 <?php endif; ?>
-                <th class="sortable"><?php echo __('Total Points'); ?></th>
+                <th class="sortable point-th"><?php echo __('Total Points'); ?></th>
                 <th class="sortable"><?php echo __('Progress'); ?></th>
                 <?php $i = 1; foreach ($quizDetails['Question'] as $question): ?>
                     <?php if (!in_array($question['question_type_id'], $othersQuestionType)) : ?>
@@ -29,8 +29,8 @@
                     <?php //pr($value1); ?>
                     <tr id="student-<?php echo $value1['id']; ?>">
                         <td class="serial">
-                            <?php if (in_array($value1['id'], $onlineStds)) : ?><i class="glyphicon online"></i><?php endif; ?>
-                            <span class="question-serial"><?php echo $sl; ?></span>
+                            <?php if (in_array($value1['id'], $onlineStds)) : ?><i class="glyphicon online"></i><?php $paddingClass = 'small-padding-false'; else : $paddingClass = 'small-padding-true'; ?><?php endif; ?>
+                            <span class="question-serial <?php echo $paddingClass; ?>"><?php echo $sl; ?></span>
                             <button type="button" class="btn btn-danger btn-sm delete-answer" id="<?php echo $value1['id']; ?>" title="<?php echo __('Remove answer'); ?>">
                                 <i class="glyphicon trash"></i>
                             </button>
@@ -38,12 +38,12 @@
                         </td>
                         <td><?php echo $value1['submitted'] ?></td>
                         <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
-                            <td class="text-center">
-                                <span class="std-info" style="margin-right: 10px;"><?php echo !empty($value1['lname']) ? $value1['lname'] : __('Last Name'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter last name'); ?>" class="form-control update-std" name="lname" data-rel="lname-<?php echo $value1['id']; ?>" value="<?php echo $value1['lname']; ?>">
+                            <td>
+                                <span class="std-info" style="margin-right: 5px;"><?php echo !empty($value1['lname']) ? $value1['lname'] : __('Last Name'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter last name'); ?>" class="form-control update-std" name="lname" data-rel="lname-<?php echo $value1['id']; ?>" value="<?php echo $value1['lname']; ?>">
                                 
                                 <span class="std-info"><?php echo !empty($value1['fname']) ? $value1['fname'] : __('First Name'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter first name'); ?>" class="form-control update-std" name="fname" data-rel="fname-<?php echo $value1['id']; ?>" value="<?php echo $value1['fname']; ?>">
                             </td>
-                            <td class="text-center"><span class="std-info"><?php echo !empty($value1['class']) ? $value1['class'] : __('Class'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter class'); ?>" class="form-control update-std" name="class" data-rel="class-<?php echo $value1['id']; ?>" value="<?php echo $value1['class']; ?>"></td>
+                            <td><span class="std-info"><?php echo !empty($value1['class']) ? $value1['class'] : __('Class'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter class'); ?>" class="form-control update-std" name="class" data-rel="class-<?php echo $value1['id']; ?>" value="<?php echo $value1['class']; ?>"></td>
                         <?php endif; ?>
                         <?php foreach ($quizDetails['Ranking'] as $key2 => $value2) : ?>
                             <?php if ($value1['id'] == $value2['student_id']) : ?>
