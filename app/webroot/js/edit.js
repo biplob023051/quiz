@@ -367,4 +367,23 @@ var debugVar;
         //console.profileEnd();
     });
 
+    // Show sort button on question hover
+    $('#questions').on('mouseenter', 'tr', function(e){
+        $(this).find(".shorter-arrow").fadeIn("slow");
+    });
+
+    $('#questions').on('mouseleave', 'tr', function(e){
+        $(this).find(".shorter-arrow").fadeOut("slow");
+    });
+
+    // Show sort button on choice hover
+    //$('tr.EditQuestionBorder td form div.choices').on('mouseenter', '.make-sortable', function(e){
+    $(document).on('mouseenter', '.make-sortable', function(e){
+        $(this).find(".choice-arrow").fadeIn("slow");
+    });
+
+    $(document).on('mouseleave', '.make-sortable', function(e){
+        $(this).find(".choice-arrow").fadeOut("slow");
+    });
+
 })(jQuery);

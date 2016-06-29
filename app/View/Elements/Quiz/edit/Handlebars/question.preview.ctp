@@ -7,7 +7,10 @@
 {{else}}
     <tr id="q{{id}}">
 {{/if}}
-    <td>   
+    <td>
+        <div class="pull-right shorter-arrow">
+            <i class="glyphicon glyphicon-resize-vertical"></i>
+        </div>   
         <div class="row">
             <div class="col-xs-12 col-md-6">         
                 <p>

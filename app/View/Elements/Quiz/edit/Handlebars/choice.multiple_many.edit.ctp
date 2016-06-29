@@ -1,6 +1,9 @@
 {{#if points}}
     <div class="row choice-<?php echo '{{id}}'; ?>">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 make-sortable">
+            <div class="pull-right choice-arrow">
+                <i class="glyphicon glyphicon-resize-vertical"></i>
+            </div>
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >
@@ -44,7 +47,10 @@
     </div>
 {{else}}
     <div class="row choice-<?php echo '{{id}}'; ?>">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 make-sortable">
+            <div class="pull-right choice-arrow">
+                <i class="glyphicon glyphicon-resize-vertical"></i>
+            </div>
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" >

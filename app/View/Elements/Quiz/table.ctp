@@ -23,14 +23,14 @@
             <?php else : ?>
                 <!-- check correct and incorrect -->
                 <?php if ($value4['score'] > 0) : ?>
-                    <p class="text-success"><?php echo $value4['text'] . ' <span class="score automatic">' . ($value4['score']+0) . '</span><input type="number" class="form-control automatic_rating update-score" value="'. $value4['score'] .'" name="' . $value1['id'] . '" question="' . $value3['id'] . '" current-score="' . $value4['score'] . '" max="' . $value3['Choice'][0]['points'] . '"><br/>'; ?></p>
+                    <p class="text-success"><?php echo $value4['text'] . ' <span class="automatic_rating_box"><span class="score automatic">' . ($value4['score']+0) . '</span> <i class="glyphicon pencil-small"></i></span><input type="number" class="form-control automatic_rating update-score" value="'. $value4['score'] .'" name="' . $value1['id'] . '" question="' . $value3['id'] . '" current-score="' . $value4['score'] . '" max="' . $value3['Choice'][0]['points'] . '"><br/>'; ?></p>
                 <?php elseif ($value4['score'] == 0) : ?>
                     <?php $points = $this->Quiz->checkPoint($value3['Choice']); ?>
                     <p class="text-warning">
-                        <?php echo !empty($points) ? $value4['text'] . ' <span class="score automatic">' . ($value4['score']+0) . '</span><input type="number" class="form-control automatic_rating update-score" value="'. $value4['score'] .'" name="' . $value1['id'] . '" question="' . $value3['id'] . '" current-score="' . $value4['score'] . '" max="' . $value3['Choice'][0]['points'] . '"><br/>' : $value4['text'] . '<br/>'; ?>
+                        <?php echo !empty($points) ? $value4['text'] . ' <span class="automatic_rating_box"><span class="score automatic">' . ($value4['score']+0) . '</span> <i class="glyphicon pencil-small"></i></span><input type="number" class="form-control automatic_rating update-score" value="'. $value4['score'] .'" name="' . $value1['id'] . '" question="' . $value3['id'] . '" current-score="' . $value4['score'] . '" max="' . $value3['Choice'][0]['points'] . '"><br/>' : $value4['text'] . '<br/>'; ?>
                     </p>
                 <?php else : ?>
-                    <p class="text-danger"><?php echo $value4['text'] . ' <span class="score automatic">' . ($value4['score']+0) . '</span><input type="number" class="form-control automatic_rating update-score" value="'. $value4['score'] .'" name="' . $value1['id'] . '" question="' . $value3['id'] . '" current-score="' . $value4['score'] . '" max="' . $value3['Choice'][0]['points'] . '"><br/>'; ?></p>
+                    <p class="text-danger"><?php echo $value4['text'] . ' <span class="automatic_rating_box"><span class="score automatic">' . ($value4['score']+0) . '</span> <i class="glyphicon pencil-small"></i></span><input type="number" class="form-control automatic_rating update-score" value="'. $value4['score'] .'" name="' . $value1['id'] . '" question="' . $value3['id'] . '" current-score="' . $value4['score'] . '" max="' . $value3['Choice'][0]['points'] . '"><br/>'; ?></p>
                 <?php endif; ?>     
             <?php endif; ?> 
         <!-- short manual scoring -->

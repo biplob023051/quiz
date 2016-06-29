@@ -1,6 +1,3 @@
-<?php 
-    if ($this->request->action != 'ajax_update') : 
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -33,8 +30,13 @@
 
     </head>
     <body <?php if ($this->request->action == 'login') : ?>style="padding-top:50px;" class="bg-cover"<?php else : ?>style="background:#ffffff; padding-top:50px;"<?php endif; ?>>
+        <?php 
+            if (!empty($setting['visible']) && empty($setting['offline_status'])) {
+                echo $this->element('Maintenance/alert');
+            }
+        ?>
         <?php if ($this->request->controller != 'pages') : ?>
-            <div class="container">
+            <div class="container" id="maintenance-alert">
                 <?php if ($this->Session->check('Auth.User.name')): ?>
                     <?php echo $this->element('navbar');?>
                 <?php else : ?>
@@ -67,6 +69,3 @@
         <?php echo $this->element('google-analytics'); ?>
     </body>
 </html>
-<?php else: ?>
-    <?php echo $this->fetch('content'); ?>
-<?php endif ?>

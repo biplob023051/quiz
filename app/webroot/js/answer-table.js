@@ -34,6 +34,7 @@ function getUpdated() {
                     if ($.inArray(el, new_data.onlineStds) == -1) {
                         offline = true;
                         $('tr#student-'+el).find('.online').remove();
+                        $('tr#student-'+el).find('.question-serial').addClass('small-padding-true');
                     } 
                 });
                 if (offline) {
@@ -111,7 +112,7 @@ $(document).ready(function(){
 
     $.fn.extend({
         donetyping: function(callback,timeout){
-            timeout = timeout || 1e3; // 1 second default timeout
+            timeout = timeout || 3e3; // 1 second default timeout
             var timeoutReference,
                 doneTyping = function(el){
                     if (!timeoutReference) return;
@@ -286,7 +287,7 @@ $(document).ready(function(){
         window.frames["print_frame"].window.print();
     }
 
-    $(document).on('click', '.automatic', function () {
+    $(document).on('click', '.automatic_rating_box', function () {
         $('.automatic_rating').each(function(){
             $(this).hide();
             $(this).prev().show();
@@ -329,12 +330,15 @@ $(document).ready(function(){
                 if (response.success || response.success === "true")
                 {
                     var result = std_info.split('-');
-                    console.log(result[1]);
                     var old_data = $.parseJSON($("#prev_data").html());
                     old_data.studentIds[result[1]][0][result[0]] = response.changetext;
                     $("#prev_data").html(JSON.stringify(old_data));
                     inputField.hide();
-                    inputField.prev().html(response.changetext + ' <i class="glyphicon pencil-small"></i>').show();
+                    if (response.changetext == '') {
+                        inputField.prev().show();
+                    } else {
+                        inputField.prev().html(response.changetext + ' <i class="glyphicon pencil-small"></i>').show();
+                    }
                 } else {
                     alert(response.message);
                 }
@@ -446,7 +450,7 @@ function testFunc() {
                     $("#studentscr1-" + std_id).text(response.score);
                     if (inputField.hasClass('automatic_rating')) { // if automatic question update
                         inputField.hide();
-                        inputField.prev().html(marks).show();
+                        inputField.prev().html('<span class="score automatic">' + marks + '</span> <i class="glyphicon pencil-small"></i>').show();
                     } else {
                         var originalBackgroundColor = inputField.css('background-color'),
                         originalColor = inputField.css('color');

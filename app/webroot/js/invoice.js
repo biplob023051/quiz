@@ -27,6 +27,10 @@
         //console.profileEnd();
     });
 
+    $('#invoice-success-dialog').on('hidden.bs.modal', function () {
+        window.location.reload();
+    });
+
     $(document).on('change', '#quiz-filter select', function () {
         $('form#quiz-filter').submit();
     });

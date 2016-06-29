@@ -1,6 +1,6 @@
 <?php $othersQuestionType = array(6, 7, 8); // this categories for others type questions ?>
 <div id="answer-table">
-    <table class="table table-hover table-responsive table-striped">
+    <table class="table table-hover table-responsive table-striped table-fixed">
         <thead>
             <tr>
                 <th class="serial sortable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>

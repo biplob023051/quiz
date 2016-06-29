@@ -11,7 +11,27 @@ class UserController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('login', 'create', 'contact', 'password_recover', 'ajax_email_checking', 'reset_password', 'buy_create', 'ajax_user_checking');
+        $this->Auth->allow('login', 'create', 'contact', 'password_recover', 'ajax_email_checking', 'reset_password', 'buy_create', 'ajax_user_checking', 'admin_access');
+    }
+
+    public function admin_access() {
+        if ($this->request->is('post')) {
+            if ($this->Auth->login()) {
+                if ($this->Auth->user('account_level') != 51) {
+                   $this->Auth->logout();
+                   $this->Session->setFlash(__('Unauthorized access to this login area!'), 'error_form', array(), 'error');
+                    return $this->redirect(array('controller' => 'maintenance', 'action' => 'notice', 'admin' => false));
+                }
+                // save statistics data
+                $this->loadModel('Statistic');
+                $arrayToSave['Statistic']['user_id'] = $this->Auth->user('id');
+                $arrayToSave['Statistic']['type'] = 'user_login';
+                $this->Statistic->save($arrayToSave);
+                return $this->redirect(array('controller' => 'maintenance', 'action' => 'settings'));
+            }
+
+            $this->Session->setFlash($this->Auth->authError, 'error_form', array(), 'error');
+        }
     }
 
     public function create() {
@@ -272,9 +292,10 @@ class UserController extends AppController {
 
                 $date = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d'), date('Y') + 1));
 
-                // increate user account expired time
-                $this->User->id = $user['User']['id'];
-                $this->User->saveField('expired', $date);
+                $upgradeData['User']['id'] = $user['User']['id'];
+                $upgradeData['User']['account_level'] = 1;
+                $upgradeData['User']['expired'] = $date;
+                $this->User->save($upgradeData);
 
                 $Email = new CakeEmail();
                 $Email->viewVars(array('User' => $user['User'], 'package' => $this->request->data['User']['package']));

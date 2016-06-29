@@ -29,7 +29,7 @@
 }
 
 #answer-table-filter .nav-tabs li, #answer-table-filter .nav-tabs li.active {
-	border: 1px solid adadad;
+	border: 1px solid #adadad;
 }
 
 #answer-table-filter .nav>li>a {
@@ -197,6 +197,32 @@ span.score {
 .small-padding-true {
   padding-left: 12px;
 }
+
+
+/*New table look*/
+
+/*.table-fixed thead {
+  width: 4500px;
+}
+.table-fixed tbody {
+  height: 230px;
+  overflow-y: auto;
+  width: 4500px;
+}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td {
+  float: left;
+  border-bottom-width: 0;
+}
+
+.table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}*/
+
+/*End new table*/
 
 /*XXLarge screens*/
 @media only screen and (min-width: 120.063em) { 

@@ -501,6 +501,7 @@ class QuizController extends AppController {
     }
 
     public function ajax_update() {
+        $this->autoRender = false;
         // authenticate or not
         $checkPermission = $this->Quiz->checkPermission((int)$this->request->data['quizId'], $this->Auth->user('id'));
         if (empty($checkPermission)) {

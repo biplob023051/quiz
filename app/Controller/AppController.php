@@ -71,10 +71,15 @@ class AppController extends Controller {
         // $this->Cookie->domain = false;
         // $this->Cookie->secure = false;
         // $this->Cookie->httpOnly = true;
-
-        // if ($this->request->controller != 'maintenance' && $this->request->action != 'notice') {
-        //     $this->redirect(array('controller' => 'maintenance', 'action' => 'notice'));
-        // }
+        
+        $setting = $this->_getSettings();
+        $this->set(compact('setting'));
+       
+        if (!empty($setting['offline_status'])) {
+            if (($this->request->action != 'logout') && ($this->request->action != 'admin_access') && ($this->request->action != 'notice') && ($this->Auth->user('account_level') != 51)) {
+                $this->redirect(array('controller' => 'maintenance', 'action' => 'notice'));
+            }
+        } 
 
         // check user language, default language finish
         $language = $this->Auth->user('language');
@@ -200,6 +205,17 @@ class AppController extends Controller {
             $random.= substr($strset,(rand()%(strlen($strset))), 1);
         }
         return $random;
+    }
+
+    /**
+     * Get global site settings
+     * @return array
+     */
+    public function _getSettings() {
+        $this->loadModel('Setting');
+        $this->Setting->cacheQueries = true;
+        $settings = $this->Setting->find('list', array('fields' => array('field', 'value')));
+        return $settings;
     }
     
 }

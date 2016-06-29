@@ -15,6 +15,9 @@ echo json_encode(array(
 ?>
 </script>
 <td>
+    <div class="pull-right shorter-arrow">
+        <i class="glyphicon glyphicon-resize-vertical"></i>
+    </div>
     <div class="row">
         <div class="col-xs-12 col-md-6">            
             <p>

@@ -401,10 +401,14 @@ i.online {
 }
 
 .automatic {
-    cursor: pointer;
+    /*cursor: pointer;*/
     background-color: #6E889E !important;
     color: white !important;
     border: 1px solid #6E889E !important;
+}
+
+.automatic_rating_box {
+  cursor: pointer;
 }
 
 .header {
@@ -490,4 +494,8 @@ i.online {
 .quiz-name {
     font-weight: bolder;
     font-size: 15px;
+}
+
+.shorter-arrow, .choice-arrow {
+    display: none;
 }
