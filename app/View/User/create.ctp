@@ -43,7 +43,10 @@ echo $this->Session->flash('error');
 
         echo $this->Form->input('email', array(
             'default' => $form_data['User']['email'],
-            'placeholder' => __('Enter Valid Email')
+            'placeholder' => __('Enter Valid Email'),
+            'data-toggle' => 'tooltip',
+            'data-placement' => 'bottom',
+            'data-original-title' => __('We\'ll send a confirmation email there')
         ));
 
         echo $this->Form->input('password', array(
@@ -110,3 +113,10 @@ echo $this->Session->flash('error');
     <?php endif; ?>
 
 </script>
+
+<style type="text/css">
+    .form-group.required .control-label:after {
+        content:"*";
+        color:red;
+    }
+</style>

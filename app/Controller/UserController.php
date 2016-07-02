@@ -4,14 +4,15 @@ App::uses('CakeEmail', 'Network/Email');
 class UserController extends AppController {
 
     public $components = array(
-        'DebugKit.Toolbar'
+        'DebugKit.Toolbar',
+        'Email'
     );
 
     public $helpers = array('Form');
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('login', 'create', 'contact', 'password_recover', 'ajax_email_checking', 'reset_password', 'buy_create', 'ajax_user_checking', 'admin_access');
+        $this->Auth->allow('login', 'create', 'contact', 'password_recover', 'ajax_email_checking', 'reset_password', 'buy_create', 'ajax_user_checking', 'admin_access', 'confirmation', 'success');
     }
 
     public function admin_access() {
@@ -44,36 +45,23 @@ class UserController extends AppController {
         }
     
         if ($this->request->is('post')) {
+            // $this->request->data['User']['activation'] = $this->User->randText(16);
+            // pr($this->request->data);
+            // exit;
             if ($this->MathCaptcha->validate($this->request->data['User']['captcha'])) {
                 $this->request->data['User']['account_level'] = 22;
                 $this->request->data['User']['expired'] = date('Y-m-d H:i:s', mktime(0, 0, 0, date('m'), date('d')+30, date('Y')));
+                $this->request->data['User']['activation'] = $this->randText(16);
                 $this->User->set($this->request->data);
                 if ($this->User->validates()) {
                     $user = $this->User->save();
                     $this->Session->delete('UserCreateFormData');
-                    // auto login of the newly registered user to the site
-                    if ($this->Auth->login()) {
-                        // save statistics data
-                        $this->loadModel('Statistic');
-                        $arrayToSave['Statistic']['user_id'] = $this->Auth->user('id');
-                        $arrayToSave['Statistic']['type'] = 'user_login';
-                        $this->Statistic->save($arrayToSave);
-                        
-                        // send email to the admin
-                        $Email = new CakeEmail();
-                        $Email->viewVars(array('user' => $user));
-                        $Email->from(array('pietu.halonen@verkkotesti.fi' => 'WebQuiz.fi'));
-                        $Email->template('user_create');
-                        $Email->emailFormat('html');
-                        $Email->to(Configure::read('AdminEmail'));
-                        $Email->subject(__('[Verkkotesti] New User'));
-                        $Email->send();
-
-                        $this->Session->setFlash(__('Registration success'), 'notification_form', array(), 'notification');
-                        return $this->redirect($this->Auth->redirectUrl());
-                    } else {
-                        $this->Session->setFlash($this->Auth->authError, 'error_form', array(), 'error');    
-                    }
+                    // Send email to user for email confirmation
+                    $user_email = $this->Email->sendMail($user['User']['email'], __('[Verkkotesti Signup] Please confirm your email address!'), $user, 'user_email');
+                    // Send email to admin
+                    $admin_email = $this->Email->sendMail(Configure::read('AdminEmail'), __('[Verkkotesti] New User!'), $user, 'user_create');
+                    $this->Session->write('registration', true);
+                    $this->redirect(array('action' => 'success'));
                 } else {
                     $error = array();
                     foreach ($this->User->validationErrors as $_error) {
@@ -111,6 +99,50 @@ class UserController extends AppController {
             'order' => array('Help.id desc')
         ));
         $this->set(compact('create_video'));
+    }
+
+    public function success() {
+        if ($this->Session->check('registration')) {
+            $this->Session->setFlash(__('Thanks for your registration!'), 'success_form', array(), 'success');
+        } else {
+            $this->Session->setFlash(__('No direct access to this page!'), 'error_form', array(), 'error');
+            $this->redirect(array('action' => 'login'));
+        }
+    }
+
+    public function confirmation($code = null) {
+        if (empty($code)) {
+            $this->Session->setFlash(__('No direct access to this page!'), 'error_form', array(), 'error');
+            $this->redirect(array('action' => 'create'));
+        }
+        $response = explode('y-s', $code);
+        $user = $this->User->find('first', array(
+            'conditions' => array(
+                'User.id' => $response[0],
+                'User.activation' => $response[1]
+            ),
+            'recursive' => -1
+        ));
+        if (empty($user)) {
+            $this->Session->setFlash(__('This is embrassing, we didn\'t find you!'), 'error_form', array(), 'error');
+            $this->redirect(array('action' => 'create'));
+        }
+        $this->User->id = $user['User']['id'];
+        $this->User->saveField('activation', NULL);
+        
+        $user = $user['User'];
+        if ($this->Auth->login($user)) {
+            // save statistics data
+            $this->loadModel('Statistic');
+            $arrayToSave['Statistic']['user_id'] = $this->Auth->user('id');
+            $arrayToSave['Statistic']['type'] = 'user_login';
+            $this->Statistic->save($arrayToSave);
+
+            $this->Session->setFlash(__('Registration success'), 'notification_form', array(), 'notification');
+            return $this->redirect($this->Auth->redirectUrl());
+        } else {
+            $this->Session->setFlash($this->Auth->authError, 'error_form', array(), 'error');    
+        }
     }
 
     public function login() {

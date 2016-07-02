@@ -97,4 +97,5 @@ class AppModel extends Model {
 		App::uses('CakeTime', 'Utility');
 		return CakeTime::format('Y-m-d H:i:s',CakeTime::convert(time(),CakeTime::timezone()));
 	}
+	
 }

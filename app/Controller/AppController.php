@@ -52,6 +52,9 @@ class AppController extends Controller {
             'authenticate' => array(
                 'Form' => array(
                     'userModel' => 'User',
+                    'scope' =>  array(
+                        'User.activation' => null
+                    ),
                     'fields' => array('username' => 'email'),
                     'passwordHasher' => array(
                         'className' => 'Simple',
