@@ -9,6 +9,7 @@ echo json_encode(array(
     'text' => $text,
     'explanation' => $explanation,
     'max_allowed' => $max_allowed,
+    'case_sensitive' => $case_sensitive,
     'QuestionType' => $QuestionType,
     'Choice' => $Choice
 ));
@@ -40,6 +41,15 @@ echo json_encode(array(
                                 <?php echo __('Choose at most'); ?>
                             </strong>
                             <?php echo $max_allowed; ?>
+                        </span>
+                    </p>
+                <?php endif; ?>
+                <?php if (!empty($case_sensitive)) : ?>
+                    <p>
+                        <span class="text-muted">
+                            <strong>
+                                <?php echo __('Demand exact upper and lower case'); ?>
+                            </strong>
                         </span>
                     </p>
                 <?php endif; ?>

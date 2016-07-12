@@ -34,6 +34,15 @@
                             </span>
                         </p>
                     {{/if}}
+                    {{#if case_sensitive}}
+                        <p>
+                            <span class="text-muted">
+                                <strong>
+                                    <?php echo __('Demand exact upper and lower case'); ?>
+                                </strong>
+                            </span>
+                        </p>
+                    {{/if}}
                 </p>
                 {{#if warn_message}}
                     <p class="alert alert-warning" style="margin-bottom: 0px;">

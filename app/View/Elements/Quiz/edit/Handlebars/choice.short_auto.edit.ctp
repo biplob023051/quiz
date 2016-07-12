@@ -16,7 +16,20 @@
             </div>
             <br />
             <div class="row">
-                <div class="col-xs-7 col-md-4 col-xs-offset-5 col-md-offset-8">
+                <div class="col-xs-9 col-md-9">
+                    <?php
+                    echo $this->Form->input('Question.case_sensitive', array(
+                        'value' => 1,
+                        'label' => array('text' => __('Demand exact upper and lower case'), 'class' => 'control-label'),
+                        'type' => 'checkbox',
+                        'id' => 'case-sensivity',
+                        'div' => array(
+                            'id' => 'mainDiv'
+                        )
+                    ));
+                    ?>
+                </div>
+                <div class="col-xs-3 col-md-3">
                     <?php
                     echo $this->Form->input('Choice.{{id}}.points', array(
                         'default' => '{{points}}',

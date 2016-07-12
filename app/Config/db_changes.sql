@@ -19,3 +19,7 @@ ALTER TABLE `settings`
 
 ALTER TABLE `settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+ALTER TABLE `questions` ADD `case_sensitive` TINYINT(1) NULL DEFAULT NULL COMMENT '1 for case sensitive' AFTER `max_allowed`;
+
+ALTER TABLE `questions` CHANGE `case_sensitive` `case_sensitive` TINYINT(1) NULL DEFAULT NULL COMMENT '1 for case sensitive';

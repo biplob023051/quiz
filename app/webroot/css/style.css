@@ -499,3 +499,11 @@ i.online {
 .shorter-arrow, .choice-arrow {
     display: none;
 }
+
+#case-sensivity {
+    margin-left: 0px !important;
+}
+
+#mainDiv label {
+    margin: 0px !important;
+}

@@ -1,7 +1,7 @@
 <?php 
     $templateOptions = array('header', 'youtube_video', 'image_url');
     if (!in_array($QuestionType['template_name'], $templateOptions))
-    echo $this->Form->hidden("Answer.{$number}.question_id", array("value" => $id));
+    echo $this->Form->hidden("Answer.{$number}.question_id", array("value" => $id, 'data-case' => $case_sensitive));
 ?>
 <tr id="q<?php if (!in_array($QuestionType['template_name'], $templateOptions)) echo $number; ?>"<?php if (in_array($QuestionType['template_name'], $templateOptions)) : ?> class="others_type<?php if ($QuestionType['template_name'] == 'header') : ?> header_type<?php endif; ?>"<?php endif; ?>>
     <td>                    
@@ -27,6 +27,15 @@
                                     <?php echo __('Choose at most'); ?>
                                 </strong>
                                 <span class="max_allowed"><?php echo $max_allowed; ?></span>
+                            </span>
+                        </p>
+                    <?php endif; ?>
+                    <?php if (!empty($case_sensitive)) : ?>
+                        <p>
+                            <span class="text-muted">
+                                <strong>
+                                    <?php echo __('Demand exact upper and lower case'); ?>
+                                </strong>
                             </span>
                         </p>
                     <?php endif; ?>

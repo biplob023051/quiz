@@ -241,7 +241,9 @@ var webQuiz = {
                 if (response.success === true)
                 {
                     var tmp;
-
+                    if (response.Question.case_sensitive == 0) {
+                        delete response.Question.case_sensitive;
+                    }
                     tmp = response.Question;
                     tmp.Choice = response.Choice;
                     tmp.QuestionType = webQuiz.getQuestionType(tmp.question_type_id).value.QuestionType;

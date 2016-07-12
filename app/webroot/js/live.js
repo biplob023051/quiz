@@ -73,6 +73,7 @@
 	$(".form-input").change(function() {
 		var std_id = $('#studentId').val();
 		var question_id = $(this).closest('tr').prev().val();
+		var case_sensitive = $(this).closest('tr').prev().attr('data-case');
 		var answer_text = $(this).val();
 		var checkbox_record = [];
 		var checkBoxDelete = '';
@@ -101,7 +102,7 @@
             dataType: 'json',
             url: appData.baseUrl + 'student/update_answer',
             type: 'post',
-            data: {'student_id': std_id, 'question_id': question_id, 'text' : answer_text, 'checkbox_record' : checkbox_record, 'checkBoxDelete' : checkBoxDelete, 'checkbox_record_delete' : checkbox_record_delete, 'checkBox' : checkBox, 'random_id' : random_id},
+            data: {'student_id': std_id, 'question_id': question_id, 'text' : answer_text, 'checkbox_record' : checkbox_record, 'checkBoxDelete' : checkBoxDelete, 'checkbox_record_delete' : checkbox_record_delete, 'checkBox' : checkBox, 'random_id' : random_id, case_sensitive : case_sensitive},
             success: function (response)
             {
                 console.log(response);

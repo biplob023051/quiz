@@ -14,7 +14,8 @@ class StudentController extends AppController {
     public function update_answer() {
         $this->autoRender = false;
         $response = array('success' => true);
-        
+        // pr($this->request->data);
+        // exit;
         if (empty($this->request->data['student_id']) && !$this->Session->check('student_id')) { // check student record
             // student record new entry
             $this->request->data['fname'] = '';
@@ -93,14 +94,19 @@ class StudentController extends AppController {
 
 
             } elseif ($value2['Question']['question_type_id'] == 2) { // short automatic point
-                $student_answer = preg_replace('/\s+/', ' ', trim($this->request->data['text']));
+                $student_answer = $this->request->data['text'];
+                if (empty($this->request->data['case_sensitive'])) {
+                    $student_answer = strtolower($student_answer);
+                    $value2['Choice']['text'] = strtolower($value2['Choice']['text']);
+                }
+                $student_answer = preg_replace('/\s+/', ' ', trim($student_answer));
                 $ans_string = preg_replace('/\s+/', ' ', trim($value2['Choice']['text']));
 
                 if ($student_answer === $ans_string) { // Compare whole string
                     $data['Answer']['score'] = $value2['Choice']['points'];
                     $correct_answer = $correct_answer + $value2['Choice']['points'];
                 } else {
-                    $student_answer = preg_replace('/\s+/', '', $this->request->data['text']);
+                    $student_answer = preg_replace('/\s+/', '', $student_answer);
                     $ans_string = preg_replace('/\s+/', '', $value2['Choice']['text']);
                     $words = explode(';', $student_answer);
                     $matched_word = explode(';', $ans_string);
