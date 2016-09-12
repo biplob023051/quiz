@@ -102,6 +102,7 @@ class UserController extends AppController {
     }
 
     public function success() {
+        $this->set('title_for_layout', __('Registration Success'));
         if ($this->Session->check('registration')) {
             $this->Session->setFlash(__('Thanks for your registration!'), 'success_form', array(), 'success');
         } else {

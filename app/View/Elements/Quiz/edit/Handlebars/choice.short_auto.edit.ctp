@@ -20,7 +20,7 @@
                     <?php
                     echo $this->Form->input('Question.case_sensitive', array(
                         'value' => 1,
-                        'label' => array('text' => __('Demand exact upper and lower case'), 'class' => 'control-label'),
+                        'label' => array('text' => __('Demand exact upper- and lowercase letters'), 'class' => 'control-label'),
                         'type' => 'checkbox',
                         'id' => 'case-sensivity',
                         'div' => array(

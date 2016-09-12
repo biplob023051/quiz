@@ -1355,3 +1355,20 @@ msgstr "Monista testi"
 #: Controller/QuizController.php:641
 msgid "Student is online and giving test! "
 msgstr "Oppilas vastaa parhaillaan testiin! "
+
+#: 
+msgid "Demand exact upper- and lowercase letters"
+msgstr "Vaadi suuret kirjaimet oikein"
+
+#: View/User/success.ctp:5
+msgid "Thank you for creating a user account! We've sent a confirmation email to your given email address. Check your email and click the link in it to activate your account. If you need help, take contact"
+msgstr "Kiitos rekisteröitymisestäsi Verkkotestiin! Lähetimme sähköpostiisi linkin jota klikkaamalla käyttäjätilisi otetaan käyttöön. Jos tarvitset apua, ota yhteyttä."
+
+#: View/Emails/html/user_email.ctp:3
+msgid "Thanks for registering with us. To activate your account, please click the link below or simply copy paste the url to your browser."
+msgstr "kiitos rekisteröitymisestäsi Verkkotestiin. Ota tilisi käyttöön klikkaamalla alla olevaa linkkiä tai kopioi-liitä linkki selaimeesi."
+
+#: View/Emails/html/user_email.ctp:5
+msgid "If you didn't intend to register, simply ignore this email."
+msgstr "Jos et halua luoda tunnuksia Verkkotestiin, voit unohtaa tämän viestin."
+

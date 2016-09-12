@@ -38,7 +38,7 @@
                         <p>
                             <span class="text-muted">
                                 <strong>
-                                    <?php echo __('Demand exact upper and lower case'); ?>
+                                    <?php echo __('Demand exact upper- and lowercase letters'); ?>
                                 </strong>
                             </span>
                         </p>

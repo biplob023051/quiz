@@ -1,4 +1,4 @@
-<?php echo $this->Session->flash('success'); ?>
+<?php //echo $this->Session->flash('success'); ?>
 <div class="row">
 	<div class="col-md-12">
 		<?php 

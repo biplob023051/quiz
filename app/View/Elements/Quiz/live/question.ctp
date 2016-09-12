@@ -30,15 +30,6 @@
                             </span>
                         </p>
                     <?php endif; ?>
-                    <?php if (!empty($case_sensitive)) : ?>
-                        <p>
-                            <span class="text-muted">
-                                <strong>
-                                    <?php echo __('Demand exact upper and lower case'); ?>
-                                </strong>
-                            </span>
-                        </p>
-                    <?php endif; ?>
                 </p>
             </div>
         </div>
