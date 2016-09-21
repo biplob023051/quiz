@@ -1372,3 +1372,19 @@ msgstr "kiitos rekisteröitymisestäsi Verkkotestiin. Ota tilisi käyttöön kli
 msgid "If you didn't intend to register, simply ignore this email."
 msgstr "Jos et halua luoda tunnuksia Verkkotestiin, voit unohtaa tämän viestin."
 
+#: Controller/UserController.php:105
+msgid "Registration Success"
+msgstr "Tunnusten luonti onnistui"
+
+#: Controller/UserController.php:60
+msgid "[Verkkotesti Signup] Please confirm your email address!"
+msgstr "[Verkkotesti tunnukset] Sähköpostiosoitteen vahvistaminen"
+
+#: View/User/success.ctp:6
+msgid "here"
+msgstr "täällä"
+
+#: View/Emails/html/user_email.ctp:2
+msgid "Hi"
+msgstr "Hei"
+

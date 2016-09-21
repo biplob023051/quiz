@@ -2,6 +2,8 @@
 
 	var appData = $.parseJSON($("#app-data").text());
 
+	setTimeout(saveStudentRecord,500);
+
 	// right click disabled
 	$(document).on("contextmenu",function(e){
         e.preventDefault();
@@ -44,7 +46,6 @@
     });
 
 	$('#StudentFname, #StudentLname, #StudentClass').donetyping(function(){
-		var std_id = $('#studentId').val();
 		var fname = $('#StudentFname').val();
 		var lname = $('#StudentLname').val();
 		var std_class = $('#StudentClass').val();
@@ -57,21 +58,24 @@
 	            dataType: 'json',
 	            url: appData.baseUrl + 'student/update_student',
 	            type: 'post',
-	            data: {'student_id': std_id, 'fname': fname, 'lname' : lname, 'class' : std_class, 'random_id' : random_id},
+	            data: {'fname': fname, 'lname' : lname, 'class' : std_class, 'random_id' : random_id},
 	            success: function (response)
 	            {
-	                console.log(response);
-	                //var json = $.parseJSON(response);
-	                $('#studentId').attr('value', response.student_id);
-	                $(".form-input").attr('disabled', false);
-	                $(".ajax-loader").hide();
+	            	if (response.success) {
+	            		//$(".basic-info").not($(this)).attr('disabled', false);
+	                	$(".form-input").attr('disabled', false);
+	                	$(".ajax-loader").hide();
+	            	} else {
+	            		alert('Something went wrong, please try now');
+	            		window.location.reload();
+	            	}
 	            }
 	        });
 		}
 	});
 
 	$(".form-input").change(function() {
-		var std_id = $('#studentId').val();
+		$(".form-input").not('.max_allowed_disabled').attr('disabled', true);
 		var question_id = $(this).closest('tr').prev().val();
 		var case_sensitive = $(this).closest('tr').prev().attr('data-case');
 		var answer_text = $(this).val();
@@ -96,35 +100,41 @@
 			checkBox = 1;
 		}
 
-		console.log(checkbox_record);
+		var ele = $(this);
 
 		$.ajax({
             dataType: 'json',
             url: appData.baseUrl + 'student/update_answer',
             type: 'post',
-            data: {'student_id': std_id, 'question_id': question_id, 'text' : answer_text, 'checkbox_record' : checkbox_record, 'checkBoxDelete' : checkBoxDelete, 'checkbox_record_delete' : checkbox_record_delete, 'checkBox' : checkBox, 'random_id' : random_id, case_sensitive : case_sensitive},
+            data: {'question_id': question_id, 'text' : answer_text, 'checkbox_record' : checkbox_record, 'checkBoxDelete' : checkBoxDelete, 'checkbox_record_delete' : checkbox_record_delete, 'checkBox' : checkBox, 'random_id' : random_id, case_sensitive : case_sensitive},
             success: function (response)
             {
-                console.log(response);
-                //var json = $.parseJSON(response);
-                $('#studentId').attr('value', response.student_id);
+				if (response.success) {
+					$(".form-input").not('.max_allowed_disabled').attr('disabled', false);
+					maxAllowedCheckBoxControl(ele);
+				} else {
+					alert('Something went wrong, please try now');
+	            	window.location.reload();
+				}
             }
         });
 	});
 	
 	// if many correct, then checkbox
-	$(".checkbox").change(function() {
-		var choiceContainer = $(this).closest('.choices');
+	function maxAllowedCheckBoxControl(element) {
+		var choiceContainer = element.closest('.choices');
 		var max_allowed = parseInt(choiceContainer.prev().find('.max_allowed').text());
 		if (!isNaN(max_allowed)) {
 			var currentlyChecked = choiceContainer.find('input[type="checkbox"]:checked').length;
 			if (currentlyChecked >= max_allowed) {
 				choiceContainer.find('input[type="checkbox"]:not(:checked)').attr('disabled', true);
+				choiceContainer.find('input[type="checkbox"]:not(:checked)').addClass('max_allowed_disabled');
 			} else {
 				choiceContainer.find('input[type="checkbox"]:not(:checked)').attr('disabled', false);
+				choiceContainer.find('input[type="checkbox"]:not(:checked)').removeClass('max_allowed_disabled');
 			}
 		} 
-	});
+	}
 
 	function checkNetConnection(){
 		jQuery.ajaxSetup({async:false});
@@ -276,5 +286,24 @@
 	    }
 	    return false;
 	}
+
+	function saveStudentRecord() {
+		var fname = $('#StudentFname').val();
+		var lname = $('#StudentLname').val();
+		var std_class = $('#StudentClass').val();
+    	$.ajax({
+	        dataType: 'json',
+	        url: appData.baseUrl + 'student/update_student',
+	        type: 'post',
+	        data: {'fname': fname, 'lname' : lname, 'class' : std_class, 'random_id' : random_id},
+	        success: function (response)
+	        {
+	        	//$(".basic-info").not($(this)).attr('disabled', false);
+	            //var json = $.parseJSON(response);
+	            // $('#studentId').attr('value', response.student_id);
+	            $(".ajax-loader").hide();
+	        }
+	    });
+    }
     document.getElementById("StudentLiveForm").reset();
 })(jQuery);

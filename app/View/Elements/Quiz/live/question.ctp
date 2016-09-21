@@ -35,9 +35,13 @@
         </div>
         <div class="choices">
             <?php
+            $disabled = (!empty($max_allowed) && (count($given_answer) == $max_allowed)) ? true : false;
             foreach ($Choice as $c) {
                 $c['number'] = $number;
                 $c['given_answer'] = $given_answer;
+                $c['disabled'] = $disabled;
+                // echo '<pre>';
+                // print_r($c);
                 echo $this->element("Quiz/live/choice.{$QuestionType['template_name']}", $c);
             }
             ?>

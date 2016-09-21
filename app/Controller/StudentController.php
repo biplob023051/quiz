@@ -16,7 +16,7 @@ class StudentController extends AppController {
         $response = array('success' => true);
         // pr($this->request->data);
         // exit;
-        if (empty($this->request->data['student_id']) && !$this->Session->check('student_id')) { // check student record
+        if (!$this->Session->check('student_id')) { // check student record
             // student record new entry
             $this->request->data['fname'] = '';
             $this->request->data['lname'] = '';
@@ -24,7 +24,7 @@ class StudentController extends AppController {
             $response = $this->recordStudentData($this->request->data);
         } 
 
-        $this->request->data['student_id'] = !empty($this->request->data['student_id']) ? (int)$this->request->data['student_id'] : (int)$this->Session->read('student_id');
+        $this->request->data['student_id'] = (int)$this->Session->read('student_id');
         $student = $this->Student->findById($this->request->data['student_id']);
 
         $checkbox_record_delete = $this->request->data['checkbox_record_delete'];
