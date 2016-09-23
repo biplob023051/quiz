@@ -8,12 +8,14 @@
     </button>
     <span class="ajax-loader"><img src="<?php echo $this->request->webroot; ?>img/ajax-loader.gif" /></span>
 </td>
-<td><?php echo $value1['submitted'] ?></td>
 <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
     <td>
         <?php echo $value1['lname']; ?>
         <?php echo $value1['fname']; ?> 
     </td>
+<?php endif; ?>
+<td><?php echo $value1['submitted'] ?></td>
+<?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
     <td><?php echo $value1['class']; ?></td>
 <?php endif; ?>
 <?php foreach ($quizDetails['Ranking'] as $key2 => $value2) : ?>

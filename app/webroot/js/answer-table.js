@@ -103,6 +103,13 @@ function updateIndividulaStudent(student_id) {
 }
 
 $(document).ready(function(){ 
+    //alert($('.navbar').height());
+    // Window height calculation
+    var windowHeight = parseInt($(window).height()) - (parseInt($('.navbar').height())+parseInt($('.page-header').height())+parseInt($('#answer-table-filter').height())+50);
+    $('#answer-table').css({'height' : windowHeight});
+
+    // end of height calculation
+
     interval = setInterval(getUpdated, 2000);
     testFunc();
     $(".table").tablesorter({ selectorHeaders: 'thead th.sortable' }); 
