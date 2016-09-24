@@ -1,6 +1,6 @@
 <?php $othersQuestionType = array(6, 7, 8); // this categories for others type questions ?>
 <div id="answer-table">
-    <table class="table table-hover table-responsive table-striped table-fixed">
+    <table class="table table-hover table-responsive table-striped table-fixed" id="fixTable">
         <thead>
             <tr>
                 <th class="serial sortable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -47,11 +47,11 @@
                         <?php endif; ?>
                         <td><?php echo $value1['submitted'] ?></td>
                         <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
-                            <td><span class="std-info"><?php echo !empty($value1['class']) ? $value1['class'] : __('Class'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter class'); ?>" class="form-control update-std" name="class" data-rel="class-<?php echo $value1['id']; ?>" value="<?php echo $value1['class']; ?>"></td>
+                            <td class="class-th"><span class="std-info"><?php echo !empty($value1['class']) ? $value1['class'] : __('Class'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter class'); ?>" class="form-control update-std" name="class" data-rel="class-<?php echo $value1['id']; ?>" value="<?php echo $value1['class']; ?>"></td>
                         <?php endif; ?>
                         <?php foreach ($quizDetails['Ranking'] as $key2 => $value2) : ?>
                             <?php if ($value1['id'] == $value2['student_id']) : ?>
-                                <td>
+                                <td class="point-th">
                                     <span id="studentscr1-<?php echo $value1['id']; ?>"><?php echo ($value2['score']+0); ?></span>/<?php echo ($value2['total']+0); ?>
                                 </td>
                             <?php endif; ?>

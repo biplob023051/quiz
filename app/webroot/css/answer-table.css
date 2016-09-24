@@ -1,6 +1,16 @@
+#answer-table table {
+    border-collapse: collapse;
+}
+#answer-table thead {
+    background-color: #EFEFEF;
+}
+#answer-table thead, #answer-table tbody {
+    display: block;
+}
+
 #answer-table {
     overflow-x: auto;
-    max-width: 2500px;
+    max-width: auto;
     width: 100%;
 }
 
@@ -25,20 +35,20 @@
 }
 
 #answer-table-filter .nav-tabs {
-	margin-top: 0px; 
+  margin-top: 0px; 
 }
 
 #answer-table-filter .nav-tabs li, #answer-table-filter .nav-tabs li.active {
-	border: 1px solid #adadad;
+  border: 1px solid #adadad;
 }
 
 #answer-table-filter .nav>li>a {
-	padding: 5px;
-	color: #d9534f;
+  padding: 5px;
+  color: #d9534f;
 }
 
 #answer-table-filter .nav-tabs>li.active>a, #answer-table-filter .nav-tabs>li.active>a:hover, #answer-table-filter .nav-tabs>li.active>a:focus {
-	color: #d9534f;
+  color: #d9534f;
 }
 
 #details .table tbody tr td .label {
@@ -177,8 +187,8 @@ span.score {
   /*box-shadow: 1px 1px #cccccc;*/
 }
 
-#answer-table table th {
-    min-width: 210px !important;
+#answer-table table th, #answer-table table td {
+    min-width: 260px !important;
     width: auto !important;
 }
 
@@ -197,32 +207,6 @@ span.score {
 .small-padding-true {
   padding-left: 12px;
 }
-
-
-/*New table look*/
-
-/*.table-fixed thead {
-  width: 4500px;
-}
-.table-fixed tbody {
-  height: 230px;
-  overflow-y: auto;
-  width: 4500px;
-}
-.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
-  display: block;
-}
-.table-fixed tbody td {
-  float: left;
-  border-bottom-width: 0;
-}
-
-.table-fixed thead > tr> th {
-  float: left;
-  border-bottom-width: 0;
-}*/
-
-/*End new table*/
 
 /*XXLarge screens*/
 @media only screen and (min-width: 120.063em) { 

@@ -97,6 +97,7 @@ function updateIndividulaStudent(student_id) {
             }
             testFunc();
             $(".table").trigger("update");
+            $("#fixTable").tableHeadFixer({"head" : true, "left" : 2});
             //$(".table").tablesorter({ selectorHeaders: 'thead th.sortable' });
         }
     });
@@ -105,10 +106,16 @@ function updateIndividulaStudent(student_id) {
 $(document).ready(function(){ 
     //alert($('.navbar').height());
     // Window height calculation
-    var windowHeight = parseInt($(window).height()) - (parseInt($('.navbar').height())+parseInt($('.page-header').height())+parseInt($('#answer-table-filter').height())+50);
-    $('#answer-table').css({'height' : windowHeight});
-
+    //var windowHeight = parseInt($(window).height()) - (parseInt($('.navbar').height())+parseInt($('.page-header').height())+parseInt($('#answer-table-filter').height())+50);
+    var windowHeight = parseInt($(window).height()) - (parseInt($('.navbar').height())+parseInt($('.page-header').height())+parseInt($('#answer-table-filter').height())+180);
+    $('#answer-table tbody').css({'height' : windowHeight});
     // end of height calculation
+
+    // $('table').on('scroll', function () {
+    //     $("table > *").width($("table").width() + $("table").scrollLeft());
+    // });
+
+    $("#fixTable").tableHeadFixer({"head" : true, "left" : 2});
 
     interval = setInterval(getUpdated, 2000);
     testFunc();

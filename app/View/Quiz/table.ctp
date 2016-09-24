@@ -1,5 +1,5 @@
 <?php
-$this->Html->script(array('answer-table', 'jquery.tablesorter.min'), array(
+$this->Html->script(array('tableHeadFixer', 'answer-table', 'jquery.tablesorter.min'), array(
     'inline' => false
 ));
 

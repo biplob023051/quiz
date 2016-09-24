@@ -16,11 +16,11 @@
 <?php endif; ?>
 <td><?php echo $value1['submitted'] ?></td>
 <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
-    <td><?php echo $value1['class']; ?></td>
+    <td class="class-th"><?php echo $value1['class']; ?></td>
 <?php endif; ?>
 <?php foreach ($quizDetails['Ranking'] as $key2 => $value2) : ?>
     <?php if ($value1['id'] == $value2['student_id']) : ?>
-        <td>
+        <td class="point-th">
             <span id="studentscr1-<?php echo $value1['id']; ?>"><?php echo ($value2['score']+0); ?></span>/<?php echo ($value2['total']+0); ?>
         </td>
     <?php endif; ?>
