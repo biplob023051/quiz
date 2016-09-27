@@ -188,7 +188,7 @@ span.score {
 }
 
 #answer-table table th, #answer-table table td {
-    min-width: 260px !important;
+    min-width: 270px !important;
     width: auto !important;
 }
 
@@ -204,8 +204,16 @@ span.score {
   max-width: 115px !important; 
 }
 
+.std-name {
+  max-width: 240px !important;
+}
+
 .small-padding-true {
   padding-left: 12px;
+}
+
+.std-name, .serial {
+  background: #e6e6e6;
 }
 
 /*XXLarge screens*/

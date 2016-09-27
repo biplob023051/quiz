@@ -9,7 +9,7 @@
     <span class="ajax-loader"><img src="<?php echo $this->request->webroot; ?>img/ajax-loader.gif" /></span>
 </td>
 <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
-    <td>
+    <td class="std-name">
         <?php echo $value1['lname']; ?>
         <?php echo $value1['fname']; ?> 
     </td>

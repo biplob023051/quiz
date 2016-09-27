@@ -5,7 +5,7 @@
             <tr>
                 <th class="serial sortable">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                 <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
-                    <th class="sortable"><?php echo __('Name'); ?></th>
+                    <th class="sortable std-name"><?php echo __('Name'); ?></th>
                 <?php endif; ?>
                 <th class="sortable"><?php echo __('Timestamp'); ?></th>
                 <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
@@ -39,7 +39,7 @@
                             <span class="ajax-loader"><img src="<?php echo $this->request->webroot; ?>img/ajax-loader.gif" /></span>
                         </td>
                         <?php if (empty($quizDetails['Quiz']['anonymous'])) : ?>
-                            <td>
+                            <td class="std-name">
                                 <span class="std-info" style="margin-right: 5px;"><?php echo !empty($value1['lname']) ? $value1['lname'] : __('Last Name'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter last name'); ?>" class="form-control update-std" name="lname" data-rel="lname-<?php echo $value1['id']; ?>" value="<?php echo $value1['lname']; ?>">
                                 
                                 <span class="std-info"><?php echo !empty($value1['fname']) ? $value1['fname'] : __('First Name'); ?> <i class="glyphicon pencil-small"></i></span><input type="text" placeholder="<?php echo __('Enter first name'); ?>" class="form-control update-std" name="fname" data-rel="fname-<?php echo $value1['id']; ?>" value="<?php echo $value1['fname']; ?>">

@@ -147,6 +147,9 @@ class UserController extends AppController {
     }
 
     public function login() {
+        if ($this->Auth->user()) { // Redirect user if logged in already
+            $this->redirect($this->Auth->redirectUrl());
+        }
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 // save statistics data

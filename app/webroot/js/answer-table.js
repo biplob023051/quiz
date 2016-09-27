@@ -107,7 +107,7 @@ $(document).ready(function(){
     //alert($('.navbar').height());
     // Window height calculation
     //var windowHeight = parseInt($(window).height()) - (parseInt($('.navbar').height())+parseInt($('.page-header').height())+parseInt($('#answer-table-filter').height())+50);
-    var windowHeight = parseInt($(window).height()) - (parseInt($('.navbar').height())+parseInt($('.page-header').height())+parseInt($('#answer-table-filter').height())+180);
+    var windowHeight = parseInt($(window).height()) - (parseInt($('.navbar').height())+parseInt($('.page-header').height())+parseInt($('#answer-table-filter').height())+150);
     $('#answer-table tbody').css({'height' : windowHeight});
     // end of height calculation
 
