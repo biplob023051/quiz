@@ -36,26 +36,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($subjects as $subject): ?>
-                        <tr>
-                            <td class="text-center"><?php echo h($subject['Subject']['id']); ?></td>
-                            <td class="text-center"><?php echo h($subject['Subject']['title']); ?></td>
-                            <td class="text-center"><?php echo h($subject['Subject']['created']); ?></td>
-                             <td class="text-center" nowrap="nowrap">
-                                <?php if($subject['Subject']['isactive']):?>
-                                    <?php echo $this->Form->postLink('<div class="btn-group"><button type="button" class="btn btn-default btn-xs active">'.__('On').'</button><button type="button" class="btn btn-default btn-xs inactive">'.__('Off').'</button></div>', array('action' => 'active', $subject['Subject']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('escape'=>false), __('Confirm inactive subject %s?', h($subject['Subject']['title']))); ?>
-                                <?php else :?>
-                                    <?php echo $this->Form->postLink('<div class="btn-group"><button type="button" class="btn btn-default btn-xs inactive">'.__('On').'</button><button type="button" class="btn btn-default btn-xs active">'.__('Off').'</button></div>', array('action' => 'active', $subject['Subject']['id'],1,'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('escape'=>false), __('Confirm active subject %s?', h($subject['Subject']['title']))); ?>
-                                <?php endif;?>
-                            </td>
-                            <td class="text-center" nowrap="nowrap">
-                                <?php echo $this->Html->link(__('Edit'), array('action' => 'insert', $subject['Subject']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('class'=>'btn btn-primary btn-xs','escape'=>false)); ?>
-                                <?php if(!$subject['Subject']['isactive']):?>
-                                    <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $subject['Subject']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('class'=>'btn btn-danger btn-xs','escape'=>false), __('Confirm delete of subject %s?', trim($subject['Subject']['id']))); ?>
-                                <?php endif;?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
+                    <?php if (empty($subjects)) : ?>
+                        <tr><td colspan="5"><?php echo __('Subjects not found'); ?></td></tr>
+                    <?php else : ?>
+                        <?php foreach ($subjects as $subject): ?>
+                            <tr>
+                                <td class="text-center"><?php echo h($subject['Subject']['id']); ?></td>
+                                <td class="text-center"><?php echo h($subject['Subject']['title']); ?></td>
+                                <td class="text-center"><?php echo h($subject['Subject']['created']); ?></td>
+                                 <td class="text-center" nowrap="nowrap">
+                                    <?php if($subject['Subject']['isactive']):?>
+                                        <?php echo $this->Form->postLink('<div class="btn-group"><button type="button" class="btn btn-default btn-xs active">'.__('On').'</button><button type="button" class="btn btn-default btn-xs inactive">'.__('Off').'</button></div>', array('action' => 'active', $subject['Subject']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('escape'=>false), __('Confirm inactive subject %s?', h($subject['Subject']['title']))); ?>
+                                    <?php else :?>
+                                        <?php echo $this->Form->postLink('<div class="btn-group"><button type="button" class="btn btn-default btn-xs inactive">'.__('On').'</button><button type="button" class="btn btn-default btn-xs active">'.__('Off').'</button></div>', array('action' => 'active', $subject['Subject']['id'],1,'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('escape'=>false), __('Confirm active subject %s?', h($subject['Subject']['title']))); ?>
+                                    <?php endif;?>
+                                </td>
+                                <td class="text-center" nowrap="nowrap">
+                                    <?php echo $this->Html->link(__('Edit'), array('action' => 'insert', $subject['Subject']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('class'=>'btn btn-primary btn-xs','escape'=>false)); ?>
+                                    <?php if(!$subject['Subject']['isactive']):?>
+                                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $subject['Subject']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('class'=>'btn btn-danger btn-xs','escape'=>false), __('Confirm delete of subject %s?', trim($subject['Subject']['id']))); ?>
+                                    <?php endif;?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>

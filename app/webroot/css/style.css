@@ -515,3 +515,7 @@ i.online {
 .font-bold {
     font-weight: bold;
 }
+
+.no-border {
+    border: none !important;
+}

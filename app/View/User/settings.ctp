@@ -5,6 +5,8 @@ $this->Html->script(array(
     'inline' => false
 ));
 $this->assign('title', __('Settings'));
+
+$userSubjects = !empty($data['User']['subjects']) ? json_decode($data['User']['subjects'], true) : array();
 ?>
 
 <?php echo $this->Session->flash('notification'); ?>
@@ -72,6 +74,21 @@ echo $this->Form->create('User', array(
             'default' => $data['User']['language'],
             'div' => array('class' => 'form-group'),
             'class' => 'form-control'
+        ));
+        ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-5 col-md-offset-3 col-xs-12 col-sm-12">
+        <?php
+        echo $this->Form->input('subjects', array(
+            'options' => $data['subjects'],
+            'default' => $data['User']['language'],
+            'div' => array('class' => 'form-group'),
+            'class' => 'form-control no-border',
+            'type' => 'select',
+            'multiple' => 'checkbox',
+            'selected' => $userSubjects
         ));
         ?>
     </div>

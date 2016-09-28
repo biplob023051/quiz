@@ -174,13 +174,14 @@ class UserController extends AppController {
         $this->User->id = $this->Auth->user('id');
 
         if ($this->request->is('post')) {
+            if (!empty($data['User']['subjects'])) {
+                $data['User']['subjects'] = json_encode($data['User']['subjects']);
+            }
             $this->User->set($data);
-            
             if (empty($data['User']['password'])) {
                 $this->User->validator()->remove('password');
                 unset($data['User']['password']);
             }
-
             if ($this->User->validates()) {
                 $this->User->save();
                 $this->Session->write('Auth.User.language', $data['User']['language']);
@@ -197,7 +198,16 @@ class UserController extends AppController {
             }
         }
         $data = $this->User->getUser();
+        // pr($data);
+        // exit;
         $data['canCreateQuiz'] = $this->User->canCreateQuiz();
+        $this->loadModel('Subject');
+        $data['subjects'] = $this->Subject->find('list', array(
+            'conditions' => array(
+                'Subject.isactive' => 1,
+                'Subject.is_del' => NULL
+            )
+        ));
         $this->set(compact('data'));
     }
 
