@@ -186,7 +186,7 @@ class UserController extends AppController {
                 $this->User->save();
                 $this->Session->write('Auth.User.language', $data['User']['language']);
                 $this->Session->write('Auth.User.name', $data['User']['name']);
-                $this->Session->setFlash(__('Settings has been saved'), 'notification_form', array(), 'notification');
+                $this->Session->setFlash(__('Settings has been saved'), 'success_form', array(), 'success');
                 return $this->redirect(array('controller' => 'quiz'));
             } else {
                 $error = array();
@@ -205,7 +205,8 @@ class UserController extends AppController {
         $data['subjects'] = $this->Subject->find('list', array(
             'conditions' => array(
                 'Subject.isactive' => 1,
-                'Subject.is_del' => NULL
+                'Subject.is_del' => NULL,
+                'Subject.type' => NULL
             )
         ));
         $this->set(compact('data'));

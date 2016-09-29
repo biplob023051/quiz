@@ -6,6 +6,7 @@ $this->assign('title', __('My Quizzes'));
 ?>
 
 <?php echo $this->Session->flash('notification'); ?>
+<?php echo $this->Session->flash('success'); ?>
 
 <div class="row notice">
 <?php 

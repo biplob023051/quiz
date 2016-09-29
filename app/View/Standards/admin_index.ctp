@@ -3,8 +3,8 @@
 <div class="row">
     <div class="col-sm-12">
         <ul class="nav nav-pills">
-            <li><?php echo $this->Html->link(__('Subject List'),array('controller'=>'subjects','action'=>'index'),array("role"=>"button", "class"=>"btn btn-link"));?></li> 
-            <li><?php echo $this->Html->link(__('New Subject'),array('controller'=>'subjects','action'=>'insert'),array("role"=>"button", "class"=>"btn btn-link"));?></li> 
+            <li><?php echo $this->Html->link(__('Class List'),array('controller'=>'standards','action'=>'index'),array("role"=>"button", "class"=>"btn btn-link"));?></li> 
+            <li><?php echo $this->Html->link(__('New Class'),array('controller'=>'standards','action'=>'insert'),array("role"=>"button", "class"=>"btn btn-link"));?></li> 
         </ul>
     </div>
 </div>
@@ -36,25 +36,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (empty($subjects)) : ?>
-                        <tr><td colspan="5"><?php echo __('Subjects not found'); ?></td></tr>
+                    <?php if (empty($standards)) : ?>
+                        <tr><td colspan="5"><?php echo __('Class not found'); ?></td></tr>
                     <?php else : ?>
-                        <?php foreach ($subjects as $subject): ?>
+                        <?php foreach ($standards as $standard): ?>
                             <tr>
-                                <td class="text-center"><?php echo h($subject['Subject']['id']); ?></td>
-                                <td class="text-center"><?php echo h($subject['Subject']['title']); ?></td>
-                                <td class="text-center"><?php echo h($subject['Subject']['created']); ?></td>
+                                <td class="text-center"><?php echo h($standard['Standard']['id']); ?></td>
+                                <td class="text-center"><?php echo h($standard['Standard']['title']); ?></td>
+                                <td class="text-center"><?php echo h($standard['Standard']['created']); ?></td>
                                  <td class="text-center" nowrap="nowrap">
-                                    <?php if($subject['Subject']['isactive']):?>
-                                        <?php echo $this->Form->postLink('<div class="btn-group"><button type="button" class="btn btn-default btn-xs active">'.__('On').'</button><button type="button" class="btn btn-default btn-xs inactive">'.__('Off').'</button></div>', array('action' => 'active', $subject['Subject']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('escape'=>false), __('Confirm inactive subject %s?', h($subject['Subject']['title']))); ?>
+                                    <?php if($standard['Standard']['isactive']):?>
+                                        <?php echo $this->Form->postLink('<div class="btn-group"><button type="button" class="btn btn-default btn-xs active">'.__('On').'</button><button type="button" class="btn btn-default btn-xs inactive">'.__('Off').'</button></div>', array('action' => 'active', $standard['Standard']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('escape'=>false), __('Confirm inactive class %s?', h($standard['Standard']['title']))); ?>
                                     <?php else :?>
-                                        <?php echo $this->Form->postLink('<div class="btn-group"><button type="button" class="btn btn-default btn-xs inactive">'.__('On').'</button><button type="button" class="btn btn-default btn-xs active">'.__('Off').'</button></div>', array('action' => 'active', $subject['Subject']['id'],1,'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('escape'=>false), __('Confirm active subject %s?', h($subject['Subject']['title']))); ?>
+                                        <?php echo $this->Form->postLink('<div class="btn-group"><button type="button" class="btn btn-default btn-xs inactive">'.__('On').'</button><button type="button" class="btn btn-default btn-xs active">'.__('Off').'</button></div>', array('action' => 'active', $standard['Standard']['id'],1,'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('escape'=>false), __('Confirm active class %s?', h($standard['Standard']['title']))); ?>
                                     <?php endif;?>
                                 </td>
                                 <td class="text-center" nowrap="nowrap">
-                                    <?php echo $this->Html->link(__('Edit'), array('action' => 'insert', $subject['Subject']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('class'=>'btn btn-primary btn-xs','escape'=>false)); ?>
-                                    <?php if(!$subject['Subject']['isactive']):?>
-                                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $subject['Subject']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('class'=>'btn btn-danger btn-xs','escape'=>false), __('Confirm delete of subject %s?', trim($subject['Subject']['id']))); ?>
+                                    <?php echo $this->Html->link(__('Edit'), array('action' => 'insert', $standard['Standard']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('class'=>'btn btn-primary btn-xs','escape'=>false)); ?>
+                                    <?php if(!$standard['Standard']['isactive']):?>
+                                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $standard['Standard']['id'],'?'=>array('redirect_url'=>urlencode(Router::reverse($this->request, true)))),array('class'=>'btn btn-danger btn-xs','escape'=>false), __('Confirm delete of class %s?', trim($standard['Standard']['id']))); ?>
                                     <?php endif;?>
                                 </td>
                             </tr>

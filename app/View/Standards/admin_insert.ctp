@@ -3,8 +3,8 @@
 <div class="row">
     <div class="col-sm-12">
         <ul class="nav nav-pills">
-            <li><?php echo $this->Html->link(__('Subject List'),array('controller'=>'subjects','action'=>'index'),array("role"=>"button", "class"=>"btn btn-link"));?></li> 
-            <li><?php echo $this->Html->link(__('New Subject'),array('controller'=>'subjects','action'=>'insert'),array("role"=>"button", "class"=>"btn btn-link"));?></li> 
+            <li><?php echo $this->Html->link(__('Class List'),array('controller'=>'standards','action'=>'index'),array("role"=>"button", "class"=>"btn btn-link"));?></li> 
+            <li><?php echo $this->Html->link(__('New Class'),array('controller'=>'standards','action'=>'insert'),array("role"=>"button", "class"=>"btn btn-link"));?></li> 
         </ul>
     </div>
 </div>
@@ -13,7 +13,7 @@
         <h3 class="panel-title"><span class="glyphicon glyphicon-th"></span> <b><?php echo $title_for_layout;?></b></h3>
     </div>
     <div class="panel-body"> 
-        <?php echo $this->Form->create('Subject', array(
+        <?php echo $this->Form->create('Standard', array(
             'inputDefaults' => array(
                 'div' => 'form-group',
                 'label' => array(
@@ -28,12 +28,12 @@
     
             <?php
                 echo $this->Form->input('id');
-                echo $this->Form->input('title', array('label'=>array('text'=>__('Title'), 'class' => 'col-md-3'), 'placeholder' => __('Please enter subject name')));
+                echo $this->Form->input('title', array('label'=>array('text'=>__('Title'), 'class' => 'col-md-3'), 'placeholder' => __('Please enter class name')));
             ?>
             <div class="form-group">
                 <div class="col col-sm-7 col-sm-offset-3">
                     <?php if(empty($this->params['url']['redirect_url'])) : ?>
-                        <?php echo $this->Html->link(__('BACK'),array('controller'=>'subjects','action'=>'index', 'admin' => true),array('class'=>'btn btn-danger'));?>
+                        <?php echo $this->Html->link(__('BACK'),array('controller'=>'standards','action'=>'index', 'admin' => true),array('class'=>'btn btn-danger'));?>
                     <?php else : ?>
                         <?php echo $this->Html->link(__('BACK'),urldecode($this->params['url']['redirect_url']),array('class'=>'btn btn-danger'));?>
                     <?php endif; ?>

@@ -38,6 +38,10 @@
             array('controller' => 'quiz', 'action' => 'live'),
             array('pass' => array('id'), 'id' => "[0-9]+")
         );
+
+        Router::connect(
+		    '/admin/classes/:action/*', array('controller' => 'standards', 'admin' => true)
+		);
         
 /**
  * Load all plugin routes. See the CakePlugin documentation on

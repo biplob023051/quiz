@@ -1,43 +1,43 @@
 <?php
 
-class SubjectsController extends AppController {
+class StandardsController extends AppController {
 
 	public $components = array('Paginator');
 	public $paginate = array(
         'limit' => RESULT_LIMIT
     );
 
-	// Method for displaying all subjects
+	// Method for displaying all standards
 	public function admin_index() {
 		if ($this->Auth->user('account_level') != 51)
             throw new ForbiddenException;
-        $this->set('title_for_layout', __('All Subject'));
+        $this->set('title_for_layout', __('All Class'));
 		$this->Paginator->settings = $this->paginate;
 		$this->Paginator->settings['conditions'] = array(
-			'Subject.is_del' => NULL,
-			'Subject.type' => NULL 
+			'Standard.is_del' => NULL,
+			'Standard.type' => 1 
 		);
-	    $subjects = $this->Paginator->paginate();
-	    $this->set(compact('subjects'));
+	    $standards = $this->Paginator->paginate();
+	    $this->set(compact('standards'));
 	}
 
-	// Method for active deactive subjects
-	public function admin_active($subject_id, $active=NULL) {
+	// Method for active deactive standards
+	public function admin_active($standard_id, $active=NULL) {
 		if ($this->Auth->user('account_level') != 51)
             throw new ForbiddenException;
 		
 		$conditions = array(
-			'Subject.id' => $subject_id,
+			'Standard.id' => $standard_id,
 		);
 		
-		if ($this->Subject->hasAny($conditions)){
-			$this->Subject->updateAll(
+		if ($this->Standard->hasAny($conditions)){
+			$this->Standard->updateAll(
 				array(
-					'Subject.isactive' =>$active
+					'Standard.isactive' =>$active
 				),
 				$conditions
 			);
-			$this->Subject->afterSave(false);
+			$this->Standard->afterSave(false);
 			$message = empty($active) ? __('You have successfully deactivated!') : __('You have successfully activated');
 			$this->Session->setFlash($message, 'success_form', array(), 'success');
 		} else {
@@ -52,27 +52,27 @@ class SubjectsController extends AppController {
 	}
 
 	/**
-	* method of subject soft delete from admin
+	* method of standard soft delete from admin
 	*/
-	public function admin_delete($subject_id) {
+	public function admin_delete($standard_id) {
 		if ($this->Auth->user('account_level') != 51)
             throw new ForbiddenException;
 		$this->autoRender=false;
 		
 		$conditions = array(
-			'Subject.id' => $subject_id,
-			'Subject.isactive' => NULL,
-			'Subject.is_del'=> NULL,
+			'Standard.id' => $standard_id,
+			'Standard.isactive' => NULL,
+			'Standard.is_del'=> NULL,
 		);
 		
-		if ($this->Subject->hasAny($conditions)){
-			$this->Subject->updateAll(
+		if ($this->Standard->hasAny($conditions)){
+			$this->Standard->updateAll(
 				array(
-					'Subject.is_del' => 1
+					'Standard.is_del' => 1
 				),
 				$conditions
 			);
-			$this->Subject->afterSave(false);
+			$this->Standard->afterSave(false);
 			$this->Session->setFlash(__('You have successfully deleted.'), 'success_form', array(), 'success');
 		} else {
 			$this->Session->setFlash(__('Can not delete'), 'error_form', array(), 'error');
@@ -87,47 +87,50 @@ class SubjectsController extends AppController {
 	}
 
 	/*
-	* Method for subject create / edit
+	* Method for standard create / edit
 	*/
-	public function admin_insert($subject_id = null) {
+	public function admin_insert($standard_id = null) {
 		if ($this->Auth->user('account_level') != 51)
             throw new ForbiddenException;
-		if(empty($subject_id)){
-			$this->set('title_for_layout',__('New Subject'));
+		if(empty($standard_id)){
+			$this->set('title_for_layout',__('New Class'));
 		} else {
-			$this->set('title_for_layout',__('Edit Subject'));
+			$this->set('title_for_layout',__('Edit Class'));
 		}
 		
-		if ($this->request->is(array('post','put'))) {			
-			if ($this->Subject->saveAll($this->request->data)) {
-				$this->Session->setFlash(__('Subject saved successfully'), 'success_form', array(), 'success');
+		if ($this->request->is(array('post','put'))) {
+			if (empty($this->request->data['Standard']['id'])) {
+				$this->request->data['Standard']['type'] = 1;
+			}	
+			if ($this->Standard->saveAll($this->request->data)) {
+				$this->Session->setFlash(__('Class saved successfully'), 'success_form', array(), 'success');
 				if(isset($this->params['url']['redirect_url'])){			
 					return $this->redirect(urldecode($this->params['url']['redirect_url']));
 				} else {
-					return $this->redirect(array('controller' => 'subjects', 'action' => 'index', 'admin' => true));
+					return $this->redirect(array('controller' => 'standards', 'action' => 'index', 'admin' => true));
 				}
 			} else {
-				$this->Session->setFlash(__('Subject saved failed'), 'error_form', array(), 'error');
+				$this->Session->setFlash(__('Class saved failed'), 'error_form', array(), 'error');
 			}
-		} elseif(!empty($subject_id)) {
+		} elseif(!empty($standard_id)) {
 			$conditions = array(
-				'Subject.id' => $subject_id,
-				'Subject.isactive' => 1,
-				'Subject.is_del'=> NULL,
-				'Subject.type' => NULL
+				'Standard.id' => $standard_id,
+				'Standard.isactive' => 1,
+				'Standard.is_del'=> NULL,
+				'Standard.type' => 1
 			);
 			
-			if ($this->Subject->hasAny($conditions)){				
+			if ($this->Standard->hasAny($conditions)){				
 				$options = array(
 					'conditions'=>$conditions
 				);
-				$this->request->data=$this->Subject->find('first',$options);
+				$this->request->data=$this->Standard->find('first',$options);
 			} else {
-				$this->Session->setFlash(__('Subject not found'), 'error_form', array(), 'error');
+				$this->Session->setFlash(__('Class not found'), 'error_form', array(), 'error');
 				if(isset($this->params['url']['redirect_url'])){			
 					return $this->redirect(urldecode($this->params['url']['redirect_url']));
 				} else {
-					return $this->redirect(array('controller' => 'subjects', 'action' => 'index', 'admin' => true));
+					return $this->redirect(array('controller' => 'standards', 'action' => 'index', 'admin' => true));
 				}
 			}
 
