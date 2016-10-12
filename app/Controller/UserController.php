@@ -176,7 +176,7 @@ class UserController extends AppController {
         if ($this->request->is('post')) {
             if (!empty($data['User']['subjects'])) {
                 $data['User']['subjects'] = json_encode($data['User']['subjects']);
-            }
+            } 
             $this->User->set($data);
             if (empty($data['User']['password'])) {
                 $this->User->validator()->remove('password');
@@ -186,6 +186,7 @@ class UserController extends AppController {
                 $this->User->save();
                 $this->Session->write('Auth.User.language', $data['User']['language']);
                 $this->Session->write('Auth.User.name', $data['User']['name']);
+                $this->Session->write('Auth.User.subjects', $data['User']['subjects']);
                 $this->Session->setFlash(__('Settings has been saved'), 'success_form', array(), 'success');
                 return $this->redirect(array('controller' => 'quiz'));
             } else {

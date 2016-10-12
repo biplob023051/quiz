@@ -178,4 +178,25 @@ class Quiz extends AppModel {
         return $random;
     }
 
+    // Find individual quiz
+    // params $id, $user_id, $contain array
+    public function getAQuizRel($id, $user_id, $contain = array()) {
+        
+        $this->virtualFields = array(
+            'question_count' => 'SELECT count(*) FROM questions AS Question WHERE Question.quiz_id = Quiz.id'
+        );
+        // pr($fields);
+        // exit;
+        $this->Behaviors->load('Containable');
+        $result = $this->find('first', array(
+            'conditions' => array(
+                'Quiz.id' => $id,
+                'Quiz.user_id' => $user_id
+            ),
+            'contain' => $contain,
+            'recursive' => -1
+        ));
+        return $result;
+    }
+
 }

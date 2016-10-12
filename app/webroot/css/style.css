@@ -519,3 +519,11 @@ i.online {
 .no-border {
     border: none !important;
 }
+
+.no-margin {
+    margin-right: -5px;
+}
+
+#alert-box {
+    display: none;
+}

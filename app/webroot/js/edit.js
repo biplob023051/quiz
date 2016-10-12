@@ -335,8 +335,39 @@ var debugVar;
 
     // settings show hide
     $(document).on('click', '#show-settings', function () {
-        $('#settings-options').toggle();
+        $('.settings-options').toggle();
     });
+
+    $("#QuizSubjects0").change(function(){  //"select all" change 
+        $(".subjects").find('input').prop('checked', $(this).prop("checked")); //change all ".checkbox" checked status
+    });
+    //".subjects" change 
+    $('.subjects input').change(function(){ 
+        //uncheck "select all", if one of the listed checkbox item is unchecked
+        if(false == $(this).prop("checked")){ //if this item is unchecked
+            $("#QuizSubjects0").prop('checked', false); //change "select all" checked status to false
+        }
+        //check "select all" if all checkbox items are checked
+        if ($('.subjects input:checked').length == ($('.subjects input').length-1) ){
+            $("#QuizSubjects0").prop('checked', true);
+        }
+    });
+
+    $("#QuizClasses0").change(function(){  //"select all" change 
+        $(".classes").find('input').prop('checked', $(this).prop("checked")); //change all ".checkbox" checked status
+    });
+    //".subjects" change 
+    $('.classes input').change(function(){ 
+        //uncheck "select all", if one of the listed checkbox item is unchecked
+        if(false == $(this).prop("checked")){ //if this item is unchecked
+            $("#QuizClasses0").prop('checked', false); //change "select all" checked status to false
+        }
+        //check "select all" if all checkbox items are checked
+        if ($('.classes input:checked').length == ($('.classes input').length-1) ){
+            $("#QuizClasses0").prop('checked', true);
+        }
+    });
+
 
     // Return a helper with preserved width of cells
     var fixHelper = function(e, ui) {

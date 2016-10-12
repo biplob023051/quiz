@@ -1,5 +1,5 @@
 <?php
-$this->Html->script('invoice', array(
+$this->Html->script(array('invoice', 'quiz-bank'), array(
     'inline' => false
 ));
 $this->assign('title', __('My Quizzes'));
@@ -7,6 +7,7 @@ $this->assign('title', __('My Quizzes'));
 
 <?php echo $this->Session->flash('notification'); ?>
 <?php echo $this->Session->flash('success'); ?>
+<?php echo $this->Session->flash('error'); ?>
 
 <div class="row notice">
 <?php 
@@ -109,14 +110,20 @@ $this->assign('title', __('My Quizzes'));
         <?php if (!empty($data['quizzes'])) : ?>
             <!-- show quiz list -->
             <table class="table">
-                <tbody>
+                <tbody id="quiz-list">
                     <?php foreach ($data['quizzes'] as $id => $quiz): ?> 
                         <?php $class = empty($quiz['Quiz']['status']) ? 'incativeQuiz' : 'activeQuiz'; ?>
                         <tr class="<?php echo $class; ?>">
                             <td style="vertical-align:middle">
                                 
                                 <div style="width: 40%; float: left">
-                                    <?php echo $this->Html->link($quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id']), array('class' => 'quiz-name')); ?>
+                                    <?php 
+                                        if (empty($quiz['Quiz']['shared'])) {
+                                            echo $this->Html->link($quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id']) ,array('escape'=>false,'class'=>'quiz-name'));
+                                        } else {
+                                            echo $this->Html->link('<i class="glyphicon glyphicon-share text-success"></i>&nbsp;' . $quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id']) ,array('escape'=>false, 'title' => __('Publicly shared') ,'class'=>'quiz-name'));
+                                        }
+                                    ?>
                                 </div>
                                 <div style="width: 60%; float: left">
                                     <?php if ($quiz['Quiz']['status']) : ?>
@@ -127,21 +134,38 @@ $this->assign('title', __('My Quizzes'));
                                
                             </td>
                             <td align="right">
-                                <button type="button" class="btn btn-danger btn-sm delete-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Remove quiz'); ?>">
-                                    <i class="glyphicon trash"></i>
-                                </button>
-                                <?php if ($quiz['Quiz']['status']) : ?>
-                                    <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Archive quiz'); ?>">
-                                        <i class="glyphicon archive"></i>
-                                    </button>
-                                <?php else: ?>
-                                    <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Activate quiz'); ?>">
-                                        <i class="glyphicon recycle"></i>
-                                    </button>
-                                <?php endif; ?>
-                                <button type="button" class="btn btn-success btn-sm duplicate-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Duplicate quiz'); ?>">
-                                    <i class="glyphicon duplicate"></i>
-                                </button>
+                            <ul class="nav navbar-nav navbar-right no-margin">
+                                <li class="dropdown">
+                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
+                                        <?php echo __('Actions'); ?> 
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <?php if (!empty($quiz['Quiz']['question_count'])) : ?>
+                                            <li>
+                                                <?php if (empty($quiz['Quiz']['shared'])) : ?>
+                                                    <button type="button" class="btn btn-success btn-sm share-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" quiz-name="<?php echo $quiz['Quiz']['name']; ?>" title="<?php echo __('Share quiz'); ?>"><i class="glyphicon glyphicon-share"></i> <?php echo __('Share quiz'); ?></button>
+                                                <?php else : ?>
+                                                    <button type="button" class="btn btn-success btn-sm remove-share" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" quiz-name="<?php echo $quiz['Quiz']['name']; ?>" title="<?php echo __('Remove share'); ?>"><i class="glyphicon glyphicon-share"></i> <?php echo __('Remove share'); ?></button>
+                                                <?php endif; ?>
+                                            </li>
+                                        <?php endif; ?>
+                                        <li>
+                                            <button type="button" class="btn btn-danger btn-sm delete-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Remove quiz'); ?>"><i class="glyphicon trash"></i> <?php echo __('Remove quiz'); ?></button>
+                                        </li>
+                                        <li>
+                                            <?php if ($quiz['Quiz']['status']) : ?>
+                                                <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Archive quiz'); ?>"><i class="glyphicon archive"></i> <?php echo __('Archive quiz'); ?></button>
+                                            <?php else: ?>
+                                                <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Activate quiz'); ?>"><i class="glyphicon recycle"></i> <?php echo __('Activate quiz'); ?></button>
+                                            <?php endif; ?>
+                                        </li>
+                                         <li>
+                                            <button type="button" class="btn btn-success btn-sm duplicate-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Duplicate quiz'); ?>"><i class="glyphicon duplicate"></i> <?php echo __('Duplicate quiz'); ?></button>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -166,6 +190,12 @@ $this->assign('title', __('My Quizzes'));
                 </div>
             <?php endif; ?>
         <?php endif; ?>
+        
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="btn btn-success btn-sm pull-right quiz-bank"  title="<?php echo __('Expolre quiz bank'); ?>"><i class="glyphicon glyphicon-briefcase"></i> <?php echo __('Quiz Bank'); ?></button>
+        </div>
     </div>
 <?php endif; ?>
 
@@ -174,6 +204,12 @@ $this->assign('title', __('My Quizzes'));
 <?php echo $this->element('Invoice/invoice_error_dialog'); ?>
 <?php echo $this->element('Invoice/delete_confirm'); ?>
 <?php echo $this->element('Invoice/demo_dialog'); ?>
+
+<div class="modal fade" id="public-quiz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
+
+<div class="modal fade" id="preview-quiz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
 
 
 <script id="app-data" type="application/json">
@@ -187,3 +223,12 @@ $this->assign('title', __('My Quizzes'));
 <script type="text/javascript">
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
 </script>
+
+<style type="text/css">
+    @media (min-width: 992px) {
+        .modal-v-lg {
+            width: 1100px;
+            height: 900px; /* control height here */
+        }
+    }
+</style>

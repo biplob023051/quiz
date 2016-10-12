@@ -17,6 +17,18 @@ $this->Html->css(array(
         ), array('inline' => false)
 );
 $this->assign('title', __('Edit Quiz'));
+
+if (!empty($data['Quiz']['subjects'])) {
+    $selectedSubjects = json_decode($data['Quiz']['subjects'], true);
+} else {
+    $selectedSubjects = array_keys($subjectOptions); // By default all subjects
+}
+
+if (!empty($data['Quiz']['classes'])) {
+    $selectedClasses = json_decode($data['Quiz']['classes'], true);
+} else {
+    $selectedClasses = array_keys($classOptions); // By default all classes
+}
 ?>
 
 <?php echo $this->Session->flash('error'); ?>
@@ -39,7 +51,7 @@ echo $this->Form->create('Quiz', array(
             <?php echo __('Quiz Settings'); ?>
         </a>
     </div>
-    <div class="col-xs-12 col-md-12" id="settings-options" style="display: none;">
+    <div class="col-xs-4 col-md-6 settings-options" style="display: none;">
         <div class="form-group">
             <?php 
                 echo $this->Form->checkbox('show_result', array('default' => $data['Quiz']['show_result'])); 
@@ -52,6 +64,32 @@ echo $this->Form->create('Quiz', array(
                 echo $this->Form->label('anonymous', __('Anonymous participation?'));
             ?>
         </div>
+    </div>
+    <div class="col-md-3 settings-options" style="display: none;">
+        <?php
+            echo $this->Form->input('subjects', array(
+                'options' => $subjectOptions,
+                'div' => array('class' => 'form-group'),
+                'class' => 'form-control subjects no-border',
+                'type' => 'select',
+                'multiple' => 'checkbox',
+                'selected' => $selectedSubjects,
+                'label' => false
+            ));
+        ?>
+    </div>
+    <div class="col-md-3 settings-options" style="display: none;">
+        <?php
+            echo $this->Form->input('classes', array(
+                'options' => $classOptions,
+                'div' => array('class' => 'form-group'),
+                'class' => 'form-control classes no-border',
+                'type' => 'select',
+                'multiple' => 'checkbox',
+                'selected' => $selectedClasses,
+                'label' => false
+            ));
+        ?>
     </div>
 </div>
 <div class="panel panel-primary">
@@ -199,13 +237,13 @@ echo json_encode(array(
     padding: 0;
     margin: 0;
 } 
-#settings-options {
+.settings-options {
     padding: 0px 50px !important;
 }
-#settings-options label {
+.settings-options label {
     padding: 0 5px !important;
 }
-#settings-options .form-group {
+.settings-options .form-group {
     margin-bottom: 0px;
 }
 </style>

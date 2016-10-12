@@ -25,3 +25,10 @@ ALTER TABLE  `questions` ADD  `case_sensitive` TINYINT( 1 ) NOT NULL DEFAULT  '0
 
 -- New works
 ALTER TABLE `users` ADD `subjects` TEXT NULL AFTER `language`;
+ALTER TABLE `quizzes` ADD `subjects` TEXT NULL AFTER `anonymous`;
+ALTER TABLE `quizzes` ADD `classes` TEXT NULL AFTER `subjects`;
+
+ALTER TABLE `quizzes` ADD `shared` TINYINT(1) NULL DEFAULT NULL COMMENT '1 for shared' AFTER `classes`;
+
+ALTER TABLE `quizzes` ADD `is_appove` TINYINT(2) NULL DEFAULT NULL COMMENT '1 for approve, 2 for declined' AFTER `shared`;
+

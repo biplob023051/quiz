@@ -83,7 +83,6 @@ echo $this->Form->create('User', array(
         <?php
         echo $this->Form->input('subjects', array(
             'options' => $data['subjects'],
-            'default' => $data['User']['language'],
             'div' => array('class' => 'form-group'),
             'class' => 'form-control no-border',
             'type' => 'select',

@@ -1388,3 +1388,7 @@ msgstr "täällä"
 msgid "Hi"
 msgstr "Hei"
 
+#: View/Quiz/edit.ctp:64
+msgid "Anonymous participation?"
+msgstr "Osallistu nimettömästi."
+
