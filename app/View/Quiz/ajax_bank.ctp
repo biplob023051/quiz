@@ -4,7 +4,7 @@
             <?php echo __('Public Quizzes'); ?>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="quiz-bank">
             <div class="row">
                 <div class="col-md-6">
                     <?php 
@@ -50,3 +50,18 @@
         </div>
     </div>
 </div>
+
+<style type="text/css">
+    #quiz-bank {
+        padding: 20px;
+    }
+    .pbutton {
+        max-width: 25px !important;
+        width: auto;
+    }
+
+    .action-box {
+        max-width: 100px !important;
+        width: auto;
+    } 
+</style>

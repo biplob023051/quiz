@@ -58,11 +58,38 @@ class QuizController extends AppController {
             }
         }
 
-        if ($filter != 'all') {
-            $options['Quiz.status'] = $filter;
-            $orders = array();
-        } else {
-            $orders = array('Quiz.status DESC');
+        $orders = array();
+
+        switch ($filter) {
+            case 'all':
+                $orders = array('Quiz.status DESC');
+                break;
+            case 'shared':
+                $options[] = array(
+                    'Quiz.shared' => 1,
+                    'Quiz.is_approve' => 1
+                );
+                break;
+            case 'pending':
+                $options[] = array(
+                    'Quiz.shared' => 1,
+                    'Quiz.is_approve' => NULL
+                );
+                break;
+            case 'decline':
+                $options[] = array(
+                    'Quiz.shared' => 1,
+                    'Quiz.is_approve' => 2
+                );
+                break;
+            case 'private':
+                $options[] = array(
+                    'Quiz.shared' => NULL
+                );
+                break;
+            default:
+                $options['Quiz.status'] = $filter;
+                break;
         }
 
         $options['Quiz.user_id'] = $userId;
@@ -74,7 +101,7 @@ class QuizController extends AppController {
         $quizzes = $this->Quiz->find('all', array(
             'conditions' => $options,
             'fields' => array(
-                'Quiz.name', 'Quiz.student_count', 'Quiz.id', 'Quiz.status', 'Quiz.shared', 'Quiz.is_appove', 'Quiz.question_count'
+                'Quiz.name', 'Quiz.student_count', 'Quiz.id', 'Quiz.status', 'Quiz.shared', 'Quiz.is_approve', 'Quiz.question_count'
             ),
             'order' => $orders,
             'recursive' => -1
@@ -211,17 +238,21 @@ class QuizController extends AppController {
             'recursive' => -1
         ));
 
-        $subjectOptions = array();
+        $subject_cond[] = array(
+            'Subject.isactive' => 1,
+            'Subject.is_del' => NULL,
+            'Subject.type' => NULL
+        );
         $c_user = $this->Session->read('Auth.User');
         if (!empty($c_user['subjects'])) {
-            $subjectOptions = json_decode($c_user['subjects'], true);
-            $subjectOptions = $this->Subject->find('list', array(
-                'conditions' => array(
-                    'Subject.id' => $subjectOptions
-                ),
-                'recursive' => -1
-            ));
+            $selectedSubjects = json_decode($c_user['subjects'], true);
+            $subject_cond[] = array('Subject.id' => $selectedSubjects);
         }
+
+        $subjectOptions = $this->Subject->find('list', array(
+            'conditions' => $subject_cond,
+            'recursive' => -1
+        ));
 
         if (!empty($subjectOptions)) {
             $subjectOptions = array(0 => __('All Subject')) + $subjectOptions;
@@ -243,8 +274,8 @@ class QuizController extends AppController {
         $this->accountStatus(); 
 
         $userId = $this->Auth->user('id');
-        if (!$this->User->canCreateQuiz($userId))
-            return $this->redirect(array('action' => 'index'));  
+        // if (!$this->User->canCreateQuiz($userId))
+        //     return $this->redirect(array('action' => 'index'));  
 
         $this->Quiz->create();
         $this->Quiz->save(array(
@@ -826,11 +857,11 @@ class QuizController extends AppController {
             throw new ForbiddenException;
         }   
 
-        if (empty($shared) && ($quiz['Quiz']['shared'] == 1) && empty($quiz['Quiz']['is_appove'])) {
+        if (empty($shared) && ($quiz['Quiz']['shared'] == 1) && empty($quiz['Quiz']['is_approve'])) {
             $message = __('You had already shared this quiz. Please wait for admin approval!');
-        } else if (empty($shared) && ($quiz['Quiz']['shared'] == 1) && ($quiz['Quiz']['is_appove'] == 1)) {
+        } else if (empty($shared) && ($quiz['Quiz']['shared'] == 1) && ($quiz['Quiz']['is_approve'] == 1)) {
             $message = __('Your quiz already shared and approved!');
-        } else if (empty($shared) && ($quiz['Quiz']['shared'] == 1) && ($quiz['Quiz']['is_appove'] == 2)) {
+        } else if (empty($shared) && ($quiz['Quiz']['shared'] == 1) && ($quiz['Quiz']['is_approve'] == 2)) {
             $message = __('Sorry, your sharing has been declined by admin.');
         } else {
             // Proceed to next
@@ -877,7 +908,7 @@ class QuizController extends AppController {
 
     public function temp_common() {
         $this->layout = 'ajax';
-        $this->accountStatus();
+        $this->hasQuizBankAccess();
         $this->loadModel('Subject');
         $subjectOptions = $this->Subject->find('list', array(
             'conditions' => array(
@@ -916,6 +947,7 @@ class QuizController extends AppController {
         // Get pagination
         $this->Paginator->settings['conditions'][] = array(
             'Quiz.shared' => 1,
+            'Quiz.is_approve' => 1
         );
 
         $this->Paginator->settings['recursive'] = -1;
@@ -948,7 +980,7 @@ class QuizController extends AppController {
     // Test method 
     public function test_link() {
         $this->layout = 'ajax';
-        $this->accountStatus();
+        $this->hasQuizBankAccess();
         $this->loadModel('Subject');
         $subjectOptions = $this->Subject->find('list', array(
             'conditions' => array(
@@ -1006,6 +1038,7 @@ class QuizController extends AppController {
         // Get pagination
         $this->Paginator->settings['conditions'][2] = array(
             'Quiz.shared' => 1,
+            'Quiz.is_approve' => 1
         );
 
         $this->Paginator->settings['recursive'] = -1;

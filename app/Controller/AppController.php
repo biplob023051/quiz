@@ -122,11 +122,35 @@ class AppController extends Controller {
                 $access = true;
             }
             
+        } elseif($c_user['User']['account_level'] == 2) { // if new user unpaid 
+            $access = true;
         } elseif($c_user['User']['account_level'] == 0) { // for old user
             $access = true;
         }
+
         if (empty($access)) {
             $this->redirect(array('controller' => 'quiz', 'action' => 'index'));
+        }
+    }
+
+
+    // Method for accessing of quiz bank
+    public function hasQuizBankAccess() {
+        $this->loadModel('User');
+        $c_user = $this->User->find('first', array(
+            'conditions' => array(
+                'User.id' => $this->Auth->user('id'),
+            ),
+            'recursive' => -1
+        ));
+
+        if (!in_array($c_user['User']['account_level'], array(2, 22, 51))) {
+            if ($this->request->is('ajax')) {
+                echo $this->render('/Elements/no_permission_modal');
+                exit;
+            } else {
+                $this->redirect(array('controller' => 'quiz', 'action' => 'index'));
+            }
         }
     }
 
@@ -162,6 +186,7 @@ class AppController extends Controller {
             $permissions['access'] = true;
             $permissions['canCreateQuiz'] = true;
             $permissions['upgraded'] = true;
+            $permissions['quiz_bank_access'] = true;
         } elseif(($c_user['User']['account_level'] == 1) && ($days_left >= 0)) { // for paid users
             $permissions['access'] = true;
             $permissions['canCreateQuiz'] = true;
@@ -175,8 +200,14 @@ class AppController extends Controller {
             if ($days_left_created >= -30) {
                 $permissions['access'] = true;
                 $permissions['canCreateQuiz'] = true;
+                $permissions['quiz_bank_access'] = true;
             }
             
+        } elseif($c_user['User']['account_level'] == 2) { // if new user unpaid 
+            $permissions['access'] = true;
+            $permissions['canCreateQuiz'] = true;
+            $permissions['upgraded'] = true;
+            $permissions['quiz_bank_access'] = true;
         } elseif($c_user['User']['account_level'] == 0) { // for old user
             $this->loadModel('Quiz');
             $quiz = $this->Quiz->find('first', array(

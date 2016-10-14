@@ -34,7 +34,7 @@
                     <?php endif; ?>
                     
                 </th>
-                <th class="text-center"><?php echo __('Actions'); ?></th>
+                <th class="text-center action-box"><?php echo __('Actions'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -68,7 +68,7 @@
                         ?>
                         <td class="text-center"><?php echo rtrim($related_classes, ', '); ?></td>
                         <td class="text-center"><?php echo $quiz['Quiz']['created']; ?></td>
-                        <td class="text-center">
+                        <td class="text-center action-box">
                             <button type="button" class="btn btn-success btn-sm import-quiz" random-id="<?php echo $quiz['Quiz']['random_id']; ?>" title="<?php echo __('Import Quiz'); ?>"><i class="glyphicon glyphicon-save"></i></button>
                             <button type="button" class="btn btn-success btn-sm view-quiz" random-id="<?php echo $quiz['Quiz']['random_id']; ?>" title="<?php echo __('Please stay right there, preview is loading...'); ?>"><i class="glyphicon glyphicon-fullscreen"></i></button>
                         </td>

@@ -8,7 +8,15 @@ class Quiz extends AppModel {
     public function __construct($id = false , $table = null , $ds = null ) {
         parent::__construct($id,$table,$ds);
         // initialize quizTypes constant
-        $this->quizTypes = array('1' => __('Active Quizzes'), '0' => __('Archived Quizzes'), 'all' => __('All Quizzes'));
+        $this->quizTypes = array(
+            '1' => __('Active Quizzes'), 
+            '0' => __('Archived Quizzes'), 
+            'all' => __('All Quizzes'),
+            'shared' => __('Shared'),
+            'pending' => __('Pending'),
+            'decline' => __('Decline'),
+            'private' => __('Private') 
+        );
     }
 
     public $hasMany = array('Question', 'Student', 'Ranking');

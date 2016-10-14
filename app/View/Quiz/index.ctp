@@ -144,9 +144,9 @@ $this->assign('title', __('My Quizzes'));
                                         <?php if (!empty($quiz['Quiz']['question_count'])) : ?>
                                             <li>
                                                 <?php if (empty($quiz['Quiz']['shared'])) : ?>
-                                                    <button type="button" class="btn btn-success btn-sm share-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" quiz-name="<?php echo $quiz['Quiz']['name']; ?>" title="<?php echo __('Share quiz'); ?>"><i class="glyphicon glyphicon-share"></i> <?php echo __('Share quiz'); ?></button>
+                                                    <button type="button" class="btn btn-success btn-sm share-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" quiz-name="<?php echo $quiz['Quiz']['name']; ?>" title="<?php echo __('Share quiz'); ?>"><i class="glyphicon share"></i> <?php echo __('Share quiz'); ?></button>
                                                 <?php else : ?>
-                                                    <button type="button" class="btn btn-success btn-sm remove-share" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" quiz-name="<?php echo $quiz['Quiz']['name']; ?>" title="<?php echo __('Remove share'); ?>"><i class="glyphicon glyphicon-share"></i> <?php echo __('Remove share'); ?></button>
+                                                    <button type="button" class="btn btn-success btn-sm remove-share" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" quiz-name="<?php echo $quiz['Quiz']['name']; ?>" title="<?php echo __('Remove share'); ?>"><i class="glyphicon share"></i> <?php echo __('Remove share'); ?></button>
                                                 <?php endif; ?>
                                             </li>
                                         <?php endif; ?>
@@ -192,11 +192,13 @@ $this->assign('title', __('My Quizzes'));
         <?php endif; ?>
         
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-success btn-sm pull-right quiz-bank"  title="<?php echo __('Expolre quiz bank'); ?>"><i class="glyphicon glyphicon-briefcase"></i> <?php echo __('Quiz Bank'); ?></button>
+    <?php if (!empty($userPermissions['quiz_bank_access'])) : ?>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-success btn-sm pull-right quiz-bank"  title="<?php echo __('Expolre quiz bank'); ?>"><i class="glyphicon glyphicon-briefcase"></i> <?php echo __('Quiz Bank'); ?></button>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
 <?php endif; ?>
 
 <?php echo $this->element('Invoice/invoice_send_dialog'); ?>
@@ -231,4 +233,18 @@ $this->assign('title', __('My Quizzes'));
             height: 900px; /* control height here */
         }
     }
+
+    #quiz-bank {
+        padding: 20px;
+    }
+    .pbutton {
+        max-width: 25px !important;
+        width: auto;
+    }
+
+    .action-box {
+        max-width: 100px !important;
+        width: auto;
+        min-width: 90px !important;
+    } 
 </style>

@@ -370,6 +370,14 @@ i.online {
     width: 8px;
 }
 
+i.share {
+    background-image:url(../img/icons/16x16/share.png); 
+    background-position: center center;
+    height: 16px;
+    line-height: 16px;
+    width: 16px;
+}
+
 .btn-danger {
   color: #fff;
   background-color: #F0BAB9;

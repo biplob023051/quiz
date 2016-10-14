@@ -92,4 +92,8 @@ echo $this->Form->create('Student', array(
     #small-margin {
         margin: 10px 20px;
     }
+
+    .modal-backdrop {
+       background-color: #fff;
+    }
 </style>
