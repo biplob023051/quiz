@@ -4,6 +4,6 @@
 <p><?php echo __('Name: ') . $data['User']['name']; ?></p>
 <p><?php echo __('Email: ') . $data['User']['email']; ?></p>
 <p><?php echo __('To view, approve or decline sharing, please clik the quiz name or copy paste the bellow link'); ?></p>
-<a href="<?php echo Router::url('/', true) . 'quiz/view/' . $data['Quiz']['random_id']; ?>"><?php echo $data['Quiz']['name']; ?></a>
+<a href="<?php echo Router::url('/', true) . 'admin/quiz/preview/' . $data['Quiz']['id']; ?>"><?php echo $data['Quiz']['name']; ?></a>
 
-<?php echo Router::url('/', true) . 'quiz/view/' . $data['Quiz']['random_id']; ?>
+<?php echo Router::url('/', true) . 'admin/quiz/preview/' . $data['Quiz']['id']; ?>

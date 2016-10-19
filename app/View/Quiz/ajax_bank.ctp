@@ -50,18 +50,3 @@
         </div>
     </div>
 </div>
-
-<style type="text/css">
-    #quiz-bank {
-        padding: 20px;
-    }
-    .pbutton {
-        max-width: 25px !important;
-        width: auto;
-    }
-
-    .action-box {
-        max-width: 100px !important;
-        width: auto;
-    } 
-</style>

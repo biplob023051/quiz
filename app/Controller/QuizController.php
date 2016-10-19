@@ -4,7 +4,7 @@ class QuizController extends AppController {
     // Paginator property
     public $components = array('RequestHandler', 'Paginator', 'Email');
     public $paginate = array(
-        'limit' => 3
+        'limit' => 10
     );
     // End of pagination
 
@@ -101,7 +101,7 @@ class QuizController extends AppController {
         $quizzes = $this->Quiz->find('all', array(
             'conditions' => $options,
             'fields' => array(
-                'Quiz.name', 'Quiz.student_count', 'Quiz.id', 'Quiz.status', 'Quiz.shared', 'Quiz.is_approve', 'Quiz.question_count'
+                'Quiz.name', 'Quiz.student_count', 'Quiz.id', 'Quiz.status', 'Quiz.shared', 'Quiz.is_approve', 'Quiz.question_count', 'Quiz.comment'
             ),
             'order' => $orders,
             'recursive' => -1
@@ -349,7 +349,8 @@ class QuizController extends AppController {
         $data = $this->Quiz->find('first', array(
             'conditions' => array(
                 'Quiz.random_id = ' => $this->request->data['random_id'],
-                'Quiz.shared' => 1
+                'Quiz.shared' => 1,
+                'Quiz.is_approve' => 1
             ),
             'contain' => array(
                 'Question' => array(
@@ -883,16 +884,16 @@ class QuizController extends AppController {
                 $subject = __('A quiz has been shared!');
                 $template = 'quiz_shared';
                 $message = __('You have successfully shared quiz');
+
+                $admin_email = $this->Email->sendMail(Configure::read('AdminEmail'), $subject, $quiz, $template);
+
+                pr($admin_email);
+                exit;
             } else {
                 $subject = __('Sharing removed!');
                 $template = 'remove_sharing';
                 $message = __('You have successfully remove sharing');
             }
-
-            $admin_email = $this->Email->sendMail(Configure::read('AdminEmail'), $subject, $quiz, $template);
-
-            pr($admin_email);
-            exit;
 
             $this->Session->setFlash($message, 'success_form', array(), 'success');
         } else {
@@ -1122,6 +1123,210 @@ class QuizController extends AppController {
         echo json_encode($response);
         exit;
 
+    }
+
+    // List of shared quiz
+    public function admin_shared() {
+        if ($this->Auth->user('account_level') != 51)
+            throw new ForbiddenException;
+        $this->set('title_for_layout',__('Shared Quiz List'));
+
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            if (isset($data['Quiz'])) {
+                $filter = $data['Quiz']['is_approve'];
+                $this->Session->write('Quiz.is_approve', $filter);
+            }
+            $this->redirect(array('controller' => 'quiz', 'action' => 'shared', 'admin' => true));
+        } else {
+            if (!$this->Session->check('Quiz.is_approve')) {
+                $filter = 'all';
+                $this->Session->write('Quiz.is_approve', $filter);
+            } else {
+                $filter = $this->Session->read('Quiz.is_approve');
+            }
+        }
+
+        $this->set(compact('filter'));
+        $this->Paginator->settings = $this->paginate;
+        if ($filter == 'all') {
+            // Do nothing
+            $this->Paginator->settings['order'] = 'Quiz.is_approve ASC';
+        } else {    
+            // pr($filter);
+            $this->Paginator->settings['conditions'][] = array(
+                'Quiz.is_approve' => ($filter == 3) ? NULL : $filter,
+            );
+            $this->Paginator->settings['order'] = 'Quiz.created ASC';
+        }
+
+        $this->Quiz->Behaviors->load('Containable');
+
+        $this->Paginator->settings['conditions'][] = array(
+            'Quiz.shared' => 1,
+        );
+
+        $this->Paginator->settings['contain'] = array(
+            'User'
+        );
+
+        // pr($this->Paginator->settings);
+
+        // pr($this->Paginator->paginate('Quiz'));
+        // exit;
+
+        try {
+            $this->set('quizzes', $this->Paginator->paginate('Quiz'));
+        } catch (NotFoundException $e) { 
+            // when pagination error found redirect to first page e.g. paging page not found
+            return $this->redirect(array('controller' => 'quiz', 'action' => 'shared', 'admin' => true));
+        }
+
+        // Language strings
+        $lang_strings['decline_question'] = __('Decline the quiz');
+        $lang_strings['cancel'] = __('Cancel');
+        $lang_strings['submit'] = __('Submit');
+        $lang_strings['decline_reason'] = __('Enter decline reason if any!');
+        $lang_strings['approve_question'] = __('Approve the quiz');
+        $lang_strings['approve_body'] = __('If you approve the quiz, you have always option to decline sharing!');
+
+        $this->set(compact('lang_strings'));
+
+    }
+
+    // Admin decline method
+    public function admin_manage_share() {
+        if ($this->Auth->user('account_level') != 51)
+            throw new ForbiddenException;
+
+        if ($this->request->is('post')) {
+            $quiz = $this->Quiz->find('first', array(
+                'conditions' => array(
+                    'Quiz.random_id' => $this->request->data['Quiz']['random_id'],
+                    'Quiz.shared' => 1
+                ),
+                'recursive' => -1,
+                'fields' => array('Quiz.id')
+            ));
+
+            if (empty($quiz)) {
+                $this->Session->setFlash(__('Something went wrong, please try again later!'), 'error_form', array(), 'error');
+            } else {
+                unset($this->request->data['Quiz']['random_id']);
+                $this->request->data['Quiz']['id'] = $quiz['Quiz']['id'];
+                $message = ($this->request->data['Quiz']['is_approve'] == 1) ? __('You have successfully approved!') : __('You have successfully declined!');
+                // pr($this->request->data);
+                // exit;
+                $this->Quiz->validator()->remove('name');
+                if ($this->Quiz->save($this->request->data)) {
+                     $this->Session->setFlash($message, 'success_form', array(), 'success');
+                } else {
+                     $this->Session->setFlash(__('Something went wrong, please try again later!'), 'error_form', array(), 'error');
+                }
+            }
+        }
+        $this->redirect($this->referer());
+    }
+
+    // Admin preview quiz
+    public function admin_preview($quiz_id = null) {
+        if ($this->Auth->user('account_level') != 51)
+            throw new ForbiddenException;
+        if (empty($quiz_id)) {
+            $this->Session->setFlash(__('No direct access to this location!'), 'error_form', array(), 'error');
+            $this->redirect(array('controller' => 'quiz', 'action' => 'shared', 'admin' => true));
+        }
+
+        $this->Quiz->Behaviors->load('Containable');
+        $data = $this->Quiz->find('first', array(
+            'conditions' => array(
+                'Quiz.id = ' => $quiz_id
+            ),
+            'contain' => array(
+                'Question' => array(
+                    'Choice' => array('order' => array('Choice.weight DESC', 'Choice.id ASC')),
+                    'QuestionType' => array(
+                        'fields' => array('template_name', 'id', 'multiple_choices')
+                    ),
+                    'order' => array('Question.weight DESC', 'Question.id ASC')
+                ),
+                'User'
+            )
+        ));
+
+        if (empty($data))
+            throw new NotFoundException;
+
+        $this->QuestionType->Behaviors->load('Containable');
+        $this->QuestionType->contain();
+        $data['QuestionTypes'] = $this->QuestionType->find('all', array(
+            'fields' => array('name', 'template_name', 'multiple_choices', 'id', 'type')
+        ));
+
+        if (empty($data['Question'])) {
+            $this->set('no_question', true);
+        }
+
+        $lang_strings['empty_question'] = __('Empty Question Is Not Permit');
+        $lang_strings['same_choice'] = __('Empty or Same Choices Are Not Permit');
+        $lang_strings['single_greater'] = __('At least a point should be greater than 0');
+        $lang_strings['correct_answer'] = __('Enter correct answers, if multiple answers comma separated');
+        $lang_strings['point_greater'] = __('At least point should be greater than 0');
+        $lang_strings['two_greater'] = __('At least 2 points should be greater than 0');
+        $lang_strings['insert_another'] = __('You put only one correct answers, please choose another point greater than 0!!!');
+        $lang_strings['youtube_url'] = __('Please enter Youtube url');
+        $lang_strings['image_url'] = __('Please enter image url');
+        $lang_strings['header_q_title'] = __('Enter the header');
+        $lang_strings['other_q_title'] = __('Enter the question');
+
+        $lang_strings['youtube_exp_text'] = __('Video explanation text');
+        $lang_strings['image_exp_text'] = __('Image explanation text');
+        $lang_strings['other_exp_text'] = __('Explanation text');
+        $lang_strings['empty_header'] = __('Please enter Header text');
+
+        // Load available classes (created by admin)
+        $this->loadModel('Subject');
+        $classOptions = $this->Subject->find('list', array(
+            'conditions' => array(
+                'Subject.isactive' => 1,
+                'Subject.is_del' => NULL,
+                'Subject.type' => 1
+            ),
+            'recursive' => -1
+        ));
+
+        $subject_cond[] = array(
+            'Subject.isactive' => 1,
+            'Subject.is_del' => NULL,
+            'Subject.type' => NULL
+        );
+
+        if (!empty($data['User']['subjects'])) {
+            $selectedSubjects = json_decode($data['User']['subjects'], true);
+            $subject_cond[] = array('Subject.id' => $selectedSubjects);
+        }
+
+        $subjectOptions = $this->Subject->find('list', array(
+            'conditions' => $subject_cond,
+            'recursive' => -1
+        ));
+
+        if (!empty($subjectOptions)) {
+            $subjectOptions = array(0 => __('All Subject')) + $subjectOptions;
+        }
+        
+        if (!empty($classOptions)) {
+            $classOptions = array(0 => __('All Class')) + $classOptions;
+        }
+
+        // pr($this->Session->read('Auth.User'));
+        // exit;
+
+        // pr($data);
+        // exit;
+
+        $this->set('data', $data);
+        $this->set(compact('lang_strings', 'classOptions', 'subjectOptions'));
     }
 
 }

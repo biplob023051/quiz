@@ -121,7 +121,13 @@ $this->assign('title', __('My Quizzes'));
                                         if (empty($quiz['Quiz']['shared'])) {
                                             echo $this->Html->link($quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id']) ,array('escape'=>false,'class'=>'quiz-name'));
                                         } else {
-                                            echo $this->Html->link('<i class="glyphicon glyphicon-share text-success"></i>&nbsp;' . $quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id']) ,array('escape'=>false, 'title' => __('Publicly shared') ,'class'=>'quiz-name'));
+                                            if ($quiz['Quiz']['is_approve'] == 2) {
+                                                echo $this->Html->link('<i class="glyphicon glyphicon-ban-circle text-danger"></i>&nbsp;' . $quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id']) ,array('escape'=>false, 'title' => __('Share declined') ,'class'=>'quiz-name'));
+                                            } elseif ($quiz['Quiz']['is_approve'] == 1) {
+                                                echo $this->Html->link('<i class="glyphicon glyphicon-share-alt text-success"></i>&nbsp;' . $quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id']) ,array('escape'=>false, 'title' => __('Publicly shared') ,'class'=>'quiz-name'));
+                                            } else {
+                                                echo $this->Html->link('<i class="glyphicon glyphicon-warning-sign text-warning"></i>&nbsp;' . $quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id']) ,array('escape'=>false, 'title' => __('Share pending') ,'class'=>'quiz-name'));
+                                            } 
                                         }
                                     ?>
                                 </div>
@@ -134,40 +140,46 @@ $this->assign('title', __('My Quizzes'));
                                
                             </td>
                             <td align="right">
-                            <ul class="nav navbar-nav navbar-right no-margin">
-                                <li class="dropdown">
-                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
-                                        <?php echo __('Actions'); ?> 
-                                        <b class="caret"></b>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <?php if (!empty($quiz['Quiz']['question_count'])) : ?>
+                                <ul class="nav navbar-nav navbar-right no-margin">
+                                    <li class="dropdown">
+                                        <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
+                                            <?php echo __('Actions'); ?> 
+                                            <b class="caret"></b>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <?php if (!empty($quiz['Quiz']['question_count'])) : ?>
+                                                <li>
+                                                    <?php if (empty($quiz['Quiz']['shared'])) : ?>
+                                                        <button type="button" class="btn btn-success btn-sm share-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" quiz-name="<?php echo $quiz['Quiz']['name']; ?>" title="<?php echo __('Share quiz'); ?>"><i class="glyphicon share"></i> <?php echo __('Share quiz'); ?></button>
+                                                    <?php else : ?>
+                                                        <button type="button" class="btn btn-success btn-sm remove-share" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" quiz-name="<?php echo $quiz['Quiz']['name']; ?>" title="<?php echo __('Remove share'); ?>"><i class="glyphicon share"></i> <?php echo __('Remove share'); ?></button>
+                                                    <?php endif; ?>
+                                                </li>
+                                            <?php endif; ?>
                                             <li>
-                                                <?php if (empty($quiz['Quiz']['shared'])) : ?>
-                                                    <button type="button" class="btn btn-success btn-sm share-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" quiz-name="<?php echo $quiz['Quiz']['name']; ?>" title="<?php echo __('Share quiz'); ?>"><i class="glyphicon share"></i> <?php echo __('Share quiz'); ?></button>
-                                                <?php else : ?>
-                                                    <button type="button" class="btn btn-success btn-sm remove-share" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" quiz-name="<?php echo $quiz['Quiz']['name']; ?>" title="<?php echo __('Remove share'); ?>"><i class="glyphicon share"></i> <?php echo __('Remove share'); ?></button>
+                                                <button type="button" class="btn btn-danger btn-sm delete-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Remove quiz'); ?>"><i class="glyphicon trash"></i> <?php echo __('Remove quiz'); ?></button>
+                                            </li>
+                                            <li>
+                                                <?php if ($quiz['Quiz']['status']) : ?>
+                                                    <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Archive quiz'); ?>"><i class="glyphicon archive"></i> <?php echo __('Archive quiz'); ?></button>
+                                                <?php else: ?>
+                                                    <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Activate quiz'); ?>"><i class="glyphicon recycle"></i> <?php echo __('Activate quiz'); ?></button>
                                                 <?php endif; ?>
                                             </li>
-                                        <?php endif; ?>
-                                        <li>
-                                            <button type="button" class="btn btn-danger btn-sm delete-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Remove quiz'); ?>"><i class="glyphicon trash"></i> <?php echo __('Remove quiz'); ?></button>
-                                        </li>
-                                        <li>
-                                            <?php if ($quiz['Quiz']['status']) : ?>
-                                                <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Archive quiz'); ?>"><i class="glyphicon archive"></i> <?php echo __('Archive quiz'); ?></button>
-                                            <?php else: ?>
-                                                <button type="button" class="btn btn-default btn-sm active-quiz" status="<?php echo $quiz['Quiz']['status']; ?>" id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Activate quiz'); ?>"><i class="glyphicon recycle"></i> <?php echo __('Activate quiz'); ?></button>
+                                             <li>
+                                                <button type="button" class="btn btn-success btn-sm duplicate-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Duplicate quiz'); ?>"><i class="glyphicon duplicate"></i> <?php echo __('Duplicate quiz'); ?></button>
+                                            </li>
+                                            <?php if (($quiz['Quiz']['shared'] == 1) && ($quiz['Quiz']['is_approve'] == 2)) : ?>
+                                                <li>
+                                                    <button type="button" class="btn btn-danger btn-sm view-reason" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('View decline reason'); ?>"><i class="glyphicon glyphicon-ban-circle"></i> <?php echo __('View Decline Reason'); ?></button>
+                                                </li>
                                             <?php endif; ?>
-                                        </li>
-                                         <li>
-                                            <button type="button" class="btn btn-success btn-sm duplicate-quiz" quiz-id="<?php echo $quiz['Quiz']['id']; ?>" title="<?php echo __('Duplicate quiz'); ?>"><i class="glyphicon duplicate"></i> <?php echo __('Duplicate quiz'); ?></button>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </td>
                         </tr>
+                        <?php echo $this->element('Quiz/decline_reason', array('quiz' => $quiz)); ?>
                     <?php endforeach; ?>
                     <!--nocache-->
                 </tbody>

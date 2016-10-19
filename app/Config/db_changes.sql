@@ -32,3 +32,5 @@ ALTER TABLE `quizzes` ADD `shared` TINYINT(1) NULL DEFAULT NULL COMMENT '1 for s
 
 ALTER TABLE `quizzes` ADD `is_approve` TINYINT(2) NULL DEFAULT NULL COMMENT '1 for approve, 2 for declined' AFTER `shared`;
 
+ALTER TABLE `quizzes` ADD `comment` TEXT NULL AFTER `is_approve`;
+

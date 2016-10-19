@@ -148,5 +148,11 @@
         window.location.assign(appData.baseUrl + "maintenance/load_dummy_data");  
     });
 
+    // Open sharing decline reason modal
+    $(document).on('click', '.view-reason', function() {
+        var quiz_id = $(this).attr('quiz-id');
+        $('#reason_' + quiz_id).modal('show');
+    });
+
 
 })(jQuery);
