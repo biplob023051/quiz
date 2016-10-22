@@ -40,7 +40,7 @@
         <tbody>
             <?php if (empty($quizzes)) : ?>
                 <tr>
-                    <td colspan="5"><?php echo __('Quiz not found. You can filter the list by choosing subjects and classes.'); ?></td>
+                    <td colspan="5"><?php echo __('Public quiz has not found. You can filter the list by choosing subjects and classes.'); ?></td>
                 </tr>
             <?php else : ?>
                 <?php foreach ($quizzes as $quiz): ?>
@@ -56,7 +56,7 @@
                                 }
                             }
                         ?>
-                        <td class="text-center"><?php echo rtrim($related_subjects, ', '); ?></td>
+                        <td class="text-center"><?php echo !empty($related_subjects) ? rtrim($related_subjects, ', ') : __('Undefined!'); ?></td>
                         <?php
                             $related_classes = '';
                             if ($quiz['Quiz']['classes']) {
@@ -66,11 +66,11 @@
                                 }
                             }
                         ?>
-                        <td class="text-center"><?php echo rtrim($related_classes, ', '); ?></td>
+                        <td class="text-center"><?php echo !empty($related_classes) ? rtrim($related_classes, ', ') : __('Undefined'); ?></td>
                         <td class="text-center"><?php echo $quiz['Quiz']['created']; ?></td>
                         <td class="text-center action-box">
                             <button type="button" class="btn btn-success btn-sm import-quiz" random-id="<?php echo $quiz['Quiz']['random_id']; ?>" title="<?php echo __('Import Quiz'); ?>"><i class="glyphicon glyphicon-save"></i></button>
-                            <button type="button" class="btn btn-success btn-sm view-quiz" random-id="<?php echo $quiz['Quiz']['random_id']; ?>" title="<?php echo __('Please stay right there, preview is loading...'); ?>"><i class="glyphicon glyphicon-fullscreen"></i></button>
+                            <button type="button" class="btn btn-success btn-sm view-quiz" random-id="<?php echo $quiz['Quiz']['random_id']; ?>" title="<?php echo __('View Quiz'); ?>"><i class="glyphicon glyphicon-fullscreen"></i></button>
                         </td>
                     </tr>
                 <?php endforeach; ?>

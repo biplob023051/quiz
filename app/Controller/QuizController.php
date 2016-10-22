@@ -886,9 +886,10 @@ class QuizController extends AppController {
                 $message = __('You have successfully shared quiz');
 
                 $admin_email = $this->Email->sendMail(Configure::read('AdminEmail'), $subject, $quiz, $template);
+                //$admin_email = $this->Email->sendMail('biplob.weblancer@gmail.com', $subject, $quiz, $template);
 
-                pr($admin_email);
-                exit;
+                // pr($admin_email);
+                // exit;
             } else {
                 $subject = __('Sharing removed!');
                 $template = 'remove_sharing';

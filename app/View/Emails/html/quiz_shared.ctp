@@ -5,5 +5,6 @@
 <p><?php echo __('Email: ') . $data['User']['email']; ?></p>
 <p><?php echo __('To view, approve or decline sharing, please clik the quiz name or copy paste the bellow link'); ?></p>
 <a href="<?php echo Router::url('/', true) . 'admin/quiz/preview/' . $data['Quiz']['id']; ?>"><?php echo $data['Quiz']['name']; ?></a>
+<br/>
 
 <?php echo Router::url('/', true) . 'admin/quiz/preview/' . $data['Quiz']['id']; ?>

@@ -126,7 +126,7 @@ $this->assign('title', __('My Quizzes'));
                                             } elseif ($quiz['Quiz']['is_approve'] == 1) {
                                                 echo $this->Html->link('<i class="glyphicon glyphicon-share-alt text-success"></i>&nbsp;' . $quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id']) ,array('escape'=>false, 'title' => __('Publicly shared') ,'class'=>'quiz-name'));
                                             } else {
-                                                echo $this->Html->link('<i class="glyphicon glyphicon-warning-sign text-warning"></i>&nbsp;' . $quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id']) ,array('escape'=>false, 'title' => __('Share pending') ,'class'=>'quiz-name'));
+                                                echo $this->Html->link('<i class="glyphicon glyphicon-warning-sign text-warning"></i>&nbsp;' . $quiz['Quiz']['name'], array('action' => 'edit', $quiz['Quiz']['id']) ,array('escape'=>false, 'title' => __('Share pending, waiting for admin approval') ,'class'=>'quiz-name'));
                                             } 
                                         }
                                     ?>

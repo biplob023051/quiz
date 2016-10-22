@@ -55,15 +55,29 @@
         <div id="footer">
             <div class="container"></div>
         </div>
-
+        <?php 
+        if ($this->Session->check('Auth.User.name')): // Add these modal if logged in user
+            echo $this->element('logout-warning'); 
+        endif;
+        ?>
         <?php
+        echo $this->Html->scriptBlock('
+            var projectBaseUrl = "'.Router::url('/', true).'";
+            ', array('inline' => true)
+        );
         echo $this->Html->script(array(
             /* production */
             //'https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js',
             //'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js'
             'jquery.min.js',
-            'bootstrap.min.js'
+            'bootstrap.min.js',
         ));
+        if ($this->Session->check('Auth.User.name')): // Add these script if logged in user
+            echo $this->Html->script(array(
+                'jquery.countdownTimer.min',
+                'user-idle.js',
+            ));
+        endif;
         ?>
         <?php echo $this->fetch('script'); ?>
         <?php echo $this->element('google-analytics'); ?>

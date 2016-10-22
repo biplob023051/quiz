@@ -78,20 +78,22 @@ echo $this->Form->create('User', array(
         ?>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-5 col-md-offset-3 col-xs-12 col-sm-12">
-        <?php
-        echo $this->Form->input('subjects', array(
-            'options' => $data['subjects'],
-            'div' => array('class' => 'form-group'),
-            'class' => 'form-control no-border',
-            'type' => 'select',
-            'multiple' => 'checkbox',
-            'selected' => $userSubjects
-        ));
-        ?>
+<?php if (!empty($data['subjects'])) : ?>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-3 col-xs-12 col-sm-12">
+            <?php
+            echo $this->Form->input('subjects', array(
+                'options' => $data['subjects'],
+                'div' => array('class' => 'form-group'),
+                'class' => 'form-control no-border',
+                'type' => 'select',
+                'multiple' => 'checkbox',
+                'selected' => $userSubjects
+            ));
+            ?>
+        </div>
     </div>
-</div>
+<?php endif; ?>
 
 <div class="row">
     <div class="col-xs-12 col-md-2 col-md-offset-3">
