@@ -60,7 +60,19 @@
     $(document).on('click', '.pagination a', function (e) {
         e.preventDefault();
         // alert($(this).text());
-        page_no = parseInt($(this).text());
+        if ($(this).parent().hasClass('disabled') || $(this).parent().hasClass('active')) {
+            return false;
+        }
+        c_page_no = parseInt($(this).text());
+        if (isNaN(c_page_no)) {
+            if($(this).parent().hasClass('prev')) {
+                page_no = page_no - 1;
+            } else if($(this).parent().hasClass('next')) {
+                page_no = page_no + 1;
+            }
+        } else {
+            page_no = c_page_no;
+        }
         $.ajax({
             data: {page_no : page_no, subject_list : subject_list, class_list : class_list},
             type: 'post',
