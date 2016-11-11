@@ -27,7 +27,7 @@ $(function(){
 
 function timerIncrement() {
     idleTime = idleTime + 1;
-    if (idleTime > 14) { // 20 minutes
+    if (idleTime > 14) { // 15 minutes
         // $('#logout-warn').modal('show');
         $('#logout-warn').modal({backdrop: 'static', keyboard: false});
         clearInterval(idleInterval);

@@ -130,3 +130,4 @@ define('VIDEO_AVATAR_HEIGHT', 399);
 define('THUMB_WIDTH', 170);
 define('THUMB_HEIGHT', 170);
 define('RESULT_LIMIT', 10);
+define('DOWNLOAD_LIMIT', 3);

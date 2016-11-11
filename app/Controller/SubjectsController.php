@@ -11,7 +11,7 @@ class SubjectsController extends AppController {
 	public function admin_index() {
 		if ($this->Auth->user('account_level') != 51)
             throw new ForbiddenException;
-        $this->set('title_for_layout', __('All Subject'));
+        $this->set('title_for_layout', __('All Subjects'));
 		$this->Paginator->settings = $this->paginate;
 		$this->Paginator->settings['conditions'] = array(
 			'Subject.is_del' => NULL,

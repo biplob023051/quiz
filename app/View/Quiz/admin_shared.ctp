@@ -18,7 +18,7 @@ $this->assign('title', __('Shared Quizzes'));
                 <form class="form" id="quiz-filter" method="post">
                     <?php
                     echo $this->Form->input('Quiz.is_approve', array(
-                        'options' => array('all' => __('All'), '3' => __('Pending'), '1' => __('Approved'), '2' => __('Declined')),
+                        'options' => array('all' => __('All'), '3' => __('Pending Quizzes'), '1' => __('Approved Quizzes'), '2' => __('Decline Quizzes')),
                         'div' => array('class' => 'form-group'),
                         'default' => $filter,
                         'class' => 'form-control',
@@ -45,7 +45,7 @@ $this->assign('title', __('Shared Quizzes'));
                 <thead>
                     <tr>
                         <th class="sl-no"><?php echo __('Sl No');?></th>
-                        <th class="text-center"><?php echo $this->Paginator->sort('name', __('Quiz Name')); ?></th>
+                        <th class="text-center"><?php echo $this->Paginator->sort('name', __('Name')); ?></th>
                         <th class="text-center"><?php echo $this->Paginator->sort('User.name', __('Created By')); ?></th>
                         <th class="text-center"><?php echo $this->Paginator->sort('created', __('Created')); ?></th>
                         <th class="text-center"><?php echo $this->Paginator->sort('is_approve', __('Status')); ?></th>                

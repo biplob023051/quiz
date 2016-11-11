@@ -47,11 +47,14 @@ echo $this->Form->create('Quiz', array(
 <div class="row" id="settings">
     <div class="col-xs-12 col-md-12">
         <a href="javascript:void(0)" class="btn btn-default btn-block" id="show-settings">
-            <b class="caret"></b>
+            <span class="caret-down caret-icon">
+                <span class="caret"></span>
+            </span>
+            <span class="caret caret-right caret-icon"></span>
             <?php echo __('Quiz Settings'); ?>
         </a>
     </div>
-    <div class="col-xs-4 col-md-6 settings-options" style="display: none;">
+    <div class="col-xs-12 col-md-12 settings-options" style="display: none;">
         <div class="form-group">
             <?php 
                 echo $this->Form->checkbox('show_result', array('default' => $data['Quiz']['show_result'])); 
@@ -65,12 +68,15 @@ echo $this->Form->create('Quiz', array(
             ?>
         </div>
     </div>
-    <div class="col-md-3 settings-options" style="display: none;">
+    <div class="col-xs-12 col-md-12 settings-options" style="display: none;">
+        <hr>
+    </div>
+    <div class="col-md-12 settings-options" style="display: none;">
         <?php
             echo $this->Form->input('subjects', array(
                 'options' => $subjectOptions,
                 'div' => array('class' => 'form-group'),
-                'class' => 'form-control subjects no-border',
+                'class' => 'subjects no-border',
                 'type' => 'select',
                 'multiple' => 'checkbox',
                 'selected' => $selectedSubjects,
@@ -78,12 +84,15 @@ echo $this->Form->create('Quiz', array(
             ));
         ?>
     </div>
-    <div class="col-md-3 settings-options" style="display: none;">
+    <div class="col-xs-12 col-md-12 settings-options" style="display: none;">
+        <hr>
+    </div>
+    <div class="col-md-12 settings-options" style="display: none;">
         <?php
             echo $this->Form->input('classes', array(
                 'options' => $classOptions,
                 'div' => array('class' => 'form-group'),
-                'class' => 'form-control classes no-border',
+                'class' => 'classes no-border',
                 'type' => 'select',
                 'multiple' => 'checkbox',
                 'selected' => $selectedClasses,
@@ -246,4 +255,34 @@ echo json_encode(array(
 .settings-options .form-group {
     margin-bottom: 0px;
 }
+.no-border {
+    float: left;
+    padding-right: 10px;
+}
+.caret-down {
+    display: none;
+}
+
+.caret {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #000000;
+    display: inline-block;
+    height: 0;
+    opacity: 0.3;
+    vertical-align: middle;
+    width: 0;
+}
+
+.caret-right {
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid #000000;
+    display: inline-block;
+    height: 0;
+    opacity: 0.3;
+    vertical-align: middle;
+    width: 0;
+}
+
 </style>

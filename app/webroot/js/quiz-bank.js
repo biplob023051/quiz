@@ -114,28 +114,6 @@
         });
     });
 
-    // View quiz
-    // $(document).on('mouseover', '.view-quiz1', function() {
-    //     $(this).addClass('remove-view').removeClass('view-quiz');
-    //     var random_id = $(this).attr('random-id');
-    //     $.ajax({
-    //         data: {random_id : random_id},
-    //         type: 'post',
-    //         url: appData.baseUrl + 'quiz/ajax_preview',
-    //         dataType: 'html',
-    //         success: function (data)
-    //         {
-    //             $('#preview-quiz').html(data).modal('show');
-    //             // $('#preview-quiz').css({'background-color' : '#ffffff'});
-    //         }
-    //     });
-    // });
-
-    // $(document).on('mouseleave', '.remove-view', function() {
-    //     $(this).addClass('view-quiz').removeClass('remove-view');
-    //     $('#preview-quiz').html('').modal('hide');
-    // });
-
 
     $(document).on('click', '.view-quiz', function() {
         // $(this).addClass('remove-view').removeClass('view-quiz');
@@ -157,7 +135,7 @@
     $(document).on('click', '.import-quiz' , function(e){
         e.preventDefault();
         var random_id = $(this).attr('random-id');
-        importQuiz(random_id);
+        importQuiz(random_id, $(this));
     });
 
     $(document).on('click', '.close', function(e){
@@ -171,7 +149,7 @@
             random_id.push($(this).val());
         });
         if (random_id.length < 1) {
-            $("#alert-box").html('<div class="alert alert-danger"><span class="close">&times;</span>Please choose at least one quiz to import!</div>').show();
+            $("#alert-box").html('<div class="alert alert-danger"><span class="close">&times;</span>'+lang_strings['check_select']+'</div>').show();
             setTimeout(function() {
                 $("#alert-box").fadeOut(1000);
             },2000);
@@ -180,7 +158,7 @@
         importQuiz(random_id);
     });
 
-    function importQuiz(random_id) {
+    function importQuiz(random_id, element) {
         $.ajax({
             data: {random_id : random_id},
             type: 'post',
@@ -188,18 +166,27 @@
             dataType: 'json',
             success: function (response)
             {
-
                 if (response.result) {
-                    $("#alert-box").html('<div class="alert alert-success"><span class="close">&times;</span>Quiz imported successfully</div>').show();
+                    if (typeof element !== 'undefined') { // Single
+                        element.attr('disabled', true);
+                        element.closest('tr').find('.chkselect').attr('disabled', true);
+                        element.closest('tr').find('.text-center').css({'color' : '#ddd'});
+                        element.closest('tr').find('.chkselect').prop('checked', false);
+                    } else { // Multiple
+                        $('.chkselect:checked').each(function() {
+                            $(this).prop('checked', false);
+                            $(this).attr('disabled', true);
+                            $(this).closest('tr').find('.text-center').css({'color' : '#ddd'});
+                            $(this).closest('tr').find('.import-quiz').attr('disabled', true);
+                        });
+                    }
+
+                    $("#alert-box").html('<div class="alert alert-success"><span class="close">&times;</span>'+lang_strings['import_success']+'</div>').show();
                     setTimeout(function() {
                         $("#alert-box").fadeOut(1000);
                     },2000);
-
                     var json = response.Quiz;
-                    console.log(json);
-                    
                     var html = '';
-
                     $.each(json, function(key, val) {
                         html += '<tr class="activeQuiz">';
                         html +=  '<td style="vertical-align:middle">';
@@ -221,9 +208,17 @@
                         html +=  '<li><button type="button" class="btn btn-success btn-sm duplicate-quiz" quiz-id="'+val.id+'" title="Duplicate quiz"><i class="glyphicon duplicate"></i> Duplicate quiz</button></li>';
                         html +=  '</ul></li></ul></td></tr>'; 
                     });
-                    $('#quiz-list').append(html);
+                    if ($('#demo-data').length > 0) {
+                        $('#demo-data').closest('.row').remove();
+                        $('#user-quizzes').prepend('<table class="table"><tbody id="quiz-list">' + html + '</tbody></table');
+                    } else {
+                        $('#quiz-list').append(html);
+                    }
                  } else {
-                    alert(response.message);
+                    $("#alert-box").html('<div class="alert alert-danger"><span class="close">&times;</span>'+response.message+'</div>').show();
+                    setTimeout(function() {
+                        $("#alert-box").fadeOut(1000);
+                    },2000);
                  }
             }
         });

@@ -4,7 +4,7 @@ App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 
 class User extends AppModel {
 
-    public $hasMany = array('Quiz');
+    public $hasMany = array('Quiz', 'ImportedQuiz');
     public $validate = array(
         'name' => array(
             'alphaNumericWithSpace' => array(

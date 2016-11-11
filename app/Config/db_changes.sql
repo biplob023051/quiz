@@ -34,3 +34,5 @@ ALTER TABLE `quizzes` ADD `is_approve` TINYINT(2) NULL DEFAULT NULL COMMENT '1 f
 
 ALTER TABLE `quizzes` ADD `comment` TEXT NULL AFTER `is_approve`;
 
+-- Modification work
+ALTER TABLE `users` ADD `imported_ids` TEXT NULL AFTER `activation`;

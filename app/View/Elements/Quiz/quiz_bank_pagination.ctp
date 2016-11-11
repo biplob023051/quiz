@@ -1,22 +1,15 @@
-<?php
-    // // Inside the view
-    // // If necessary, set the jQuery object for noconflict
-    // $this->Js->JqueryEngine->jQueryObject = 'jQuery';
-
-    // // Paginator options
-    // $this->Paginator->options(array(
-    //   'update' => '#pagination_content',
-    //   'evalScripts' => true, 
-    // )); 
-
-    // $this->Paginator->options['url'] = array('controller' => 'quiz', 'action' => 'quiz_bank_pagination');
-?>
-
+<?php $no_access = $this->Quiz->downloadCount(); ?>
 <div class="table-responsive">
+    <?php if(!empty($no_access)) : ?>
+        <div class="col-md-12" id="import-error">
+            <h5 class="alert alert-danger"><?php echo __('Sorry, you have exceeded maximum limit of import quiz. Please upgrade your account to get unlimited access on quiz bank!'); ?></h5>
+        </div>
+    <?php endif; ?>
+   
     <table cellpadding="0" cellspacing="0"  class="table table-bordered">
         <thead>
             <tr>
-                <th class="pbutton text-center"><?php echo $this->Form->checkbox('checkbox', array('value'=>'deleteall','name'=>'selectAll','label'=>false,'id'=>'selectAll','hiddenField'=>false));?></th>
+                <th class="pbutton text-center"><?php echo !empty($no_access) ? $this->Form->checkbox('checkbox', array('value'=>'deleteall','name'=>'selectAll','label'=>false,'id'=>'selectAll','hiddenField'=>false, 'disabled' => true)) : $this->Form->checkbox('checkbox', array('value'=>'deleteall','name'=>'selectAll','label'=>false,'id'=>'selectAll','hiddenField'=>false));?></th>
                 <th class="text-center" id="name-sort">
                     <?php if (!empty($order_field) && ($order_field == 'name') && !empty($order_type)) : ?>
                         <a href="javascript:void(0)" data-rel="<?php echo $order_type; ?>"><?php echo __('Name'); ?></a>
@@ -40,37 +33,47 @@
         <tbody>
             <?php if (empty($quizzes)) : ?>
                 <tr>
-                    <td colspan="5"><?php echo __('Public quiz has not found. You can filter the list by choosing subjects and classes.'); ?></td>
+                    <td colspan="5"><?php echo __('Shared quizzes not found. Filter the list by choosing subjects and classes.'); ?></td>
                 </tr>
             <?php else : ?>
                 <?php foreach ($quizzes as $quiz): ?>
                     <tr>
-                        <td class="pbutton"><?php echo $this->Form->checkbox(false, array('value' => $quiz['Quiz']['random_id'],'name'=>'data[Quiz][id][]', 'class'=>'chkselect'));?></td>
+                        <td class="pbutton"><?php echo !empty($no_access) ? $this->Form->checkbox(false, array('value' => $quiz['Quiz']['random_id'],'name'=>'data[Quiz][id][]', 'class'=>'chkselect', 'disabled' => true)) : $this->Form->checkbox(false, array('value' => $quiz['Quiz']['random_id'],'name'=>'data[Quiz][id][]', 'class'=>'chkselect'));?></td>
                         <td class="text-center"><?php echo h($quiz['Quiz']['name']); ?></td>
                         <?php
                             $related_subjects = '';
                             if ($quiz['Quiz']['subjects']) {
                                 $subjects = json_decode($quiz['Quiz']['subjects'], true);
                                 foreach ($subjects as $key => $subject) {
-                                    $related_subjects .= !empty($subjectOptions[$subject]) ? $subjectOptions[$subject] . ', ' : '';
+                                    if ($subject == 0) {
+                                        $related_subjects .= !empty($subjectOptions[$subject]) ? $subjectOptions[$subject] : '';
+                                        break;
+                                    } else {
+                                        $related_subjects .= !empty($subjectOptions[$subject]) ? $subjectOptions[$subject] . ', ' : '';
+                                    }
                                 }
                             }
                         ?>
-                        <td class="text-center"><?php echo !empty($related_subjects) ? rtrim($related_subjects, ', ') : __('Undefined!'); ?></td>
+                        <td class="text-center"><?php echo !empty($related_subjects) ? rtrim($related_subjects, ', ') : __('Undefined'); ?></td>
                         <?php
                             $related_classes = '';
                             if ($quiz['Quiz']['classes']) {
                                 $classes = json_decode($quiz['Quiz']['classes'], true);
                                 foreach ($classes as $key => $class) {
-                                    $related_classes .= !empty($classOptions[$class]) ? $classOptions[$class]  . ', ' : '';
+                                    if ($class == 0) {
+                                        $related_classes .= !empty($classOptions[$class]) ? $classOptions[$class] : '';
+                                        break;
+                                    } else {
+                                        $related_classes .= !empty($classOptions[$class]) ? $classOptions[$class]  . ', ' : '';
+                                    }
                                 }
                             }
                         ?>
                         <td class="text-center"><?php echo !empty($related_classes) ? rtrim($related_classes, ', ') : __('Undefined'); ?></td>
                         <td class="text-center"><?php echo $quiz['Quiz']['created']; ?></td>
                         <td class="text-center action-box">
-                            <button type="button" class="btn btn-success btn-sm import-quiz" random-id="<?php echo $quiz['Quiz']['random_id']; ?>" title="<?php echo __('Import Quiz'); ?>"><i class="glyphicon glyphicon-save"></i></button>
-                            <button type="button" class="btn btn-success btn-sm view-quiz" random-id="<?php echo $quiz['Quiz']['random_id']; ?>" title="<?php echo __('View Quiz'); ?>"><i class="glyphicon glyphicon-fullscreen"></i></button>
+                            <button type="button" class="btn btn-success btn-sm import-quiz"<?php echo !empty($no_access) ? '  disabled' : ''; ?> random-id="<?php echo $quiz['Quiz']['random_id']; ?>" title="<?php echo __('Import Quiz'); ?>"><i class="glyphicon glyphicon-save"></i></button>
+                            <button type="button" class="btn btn-success btn-sm view-quiz" random-id="<?php echo $quiz['Quiz']['random_id']; ?>" title="<?php echo __('Preview Quiz'); ?>"><i class="glyphicon glyphicon-search"></i></button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -81,7 +84,7 @@
 <?php if (!empty($quizzes)) : ?>
     <div class="row">
         <div class="col-md-10 col-offset-md-2">
-            <button type="button" class="btn btn-success btn-sm multiple-import-quiz" title="<?php echo __('Import'); ?>"><i class="glyphicon glyphicon-save"></i><?php echo __('Import Selcted'); ?></button>
+            <button type="button" class="btn btn-success btn-sm multiple-import-quiz"<?php echo !empty($no_access) ? '  disabled' : ''; ?> title="<?php echo __('Import Selected'); ?>"><i class="glyphicon glyphicon-save"></i><?php echo __('Import Selected'); ?></button>
         </div>
     </div>
 <?php endif; ?>
@@ -94,4 +97,3 @@
         </ul>
     </div>
 </div>
-<?php echo $this->Js->writeBuffer(); ?>

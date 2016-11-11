@@ -114,7 +114,7 @@
         var quiz_id = $(this).attr('quiz-id'),
             quiz_name = $(this).attr('quiz-name');
         $('#confirm-delete').find('.modal-body').html(lang_strings['share_quiz_question']);
-        $('#confirm-delete').find('.modal-header').html(lang_strings['share_quiz'] + ' ' + quiz_name + '?');
+        $('#confirm-delete').find('.modal-header').html(lang_strings['share_quiz'] + ': <b>' + quiz_name + '</b>?');
         $('#confirm-delete').find('.modal-footer a').attr('href', appData.baseUrl + 'quiz/share/' + quiz_id).removeClass('btn-danger').addClass('btn-success').html(lang_strings['share_quiz']);
         $('#confirm-delete').modal('show');
     });

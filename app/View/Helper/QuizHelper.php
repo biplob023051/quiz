@@ -36,4 +36,25 @@ class QuizHelper extends AppHelper {
 		return $points;
 	}
 
+	// Quiz bank download
+	public function downloadCount() {
+		$account_level = AuthComponent::user('account_level');
+		if ($account_level != 22) {
+			return false;
+		}
+		$user_id = AuthComponent::user('id');
+		App::import('Model', 'ImportedQuiz');
+        $imported_quizzes = new ImportedQuiz();
+        $download = $imported_quizzes->find('count', array(
+        	'conditions' => array(
+        		'ImportedQuiz.user_id' => $user_id,
+        	)
+        )); 
+        if ($download >= DOWNLOAD_LIMIT) {
+        	return true;
+        } else {
+        	return false;
+        }
+	}
+
 }

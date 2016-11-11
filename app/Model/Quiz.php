@@ -4,6 +4,8 @@ class Quiz extends AppModel {
 
     // declaration of quizTypes constant
     public $quizTypes;
+    // declaration of quizSharedType constant
+    public $quizSharedType;
     
     public function __construct($id = false , $table = null , $ds = null ) {
         parent::__construct($id,$table,$ds);
@@ -12,14 +14,17 @@ class Quiz extends AppModel {
             '1' => __('Active Quizzes'), 
             '0' => __('Archived Quizzes'), 
             'all' => __('All Quizzes'),
-            'shared' => __('Shared'),
-            'pending' => __('Pending'),
-            'decline' => __('Decline'),
-            'private' => __('Private') 
+        );
+        // initialize quizSharedType constant
+        $this->quizSharedType = array(
+            'shared' => __('Shared Quizzes'),
+            'pending' => __('Pending Quizzes'),
+            'decline' => __('Decline Quizzes'),
+            'private' => __('Private Quizzes') 
         );
     }
 
-    public $hasMany = array('Question', 'Student', 'Ranking');
+    public $hasMany = array('Question', 'Student', 'Ranking', 'ImportedQuiz');
     public $belongsTo = array('User');
     public $validate = array(
         'name' => array(

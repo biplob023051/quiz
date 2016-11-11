@@ -4,7 +4,7 @@ class QuizController extends AppController {
     // Paginator property
     public $components = array('RequestHandler', 'Paginator', 'Email');
     public $paginate = array(
-        'limit' => 10
+        'limit' => 4
     );
     // End of pagination
 
@@ -36,9 +36,9 @@ class QuizController extends AppController {
     }
 
     public function index() {
-
         $userId = $this->Auth->user('id');
-        $quizTypes = $this->Quiz->quizTypes;
+        $this->set('quizTypes', $this->Quiz->quizTypes);
+        $this->set('quizSharedType', $this->Quiz->quizSharedType);
 
         $userPermissions = $this->userPermissions();
         $this->set(compact('userPermissions'));
@@ -123,11 +123,13 @@ class QuizController extends AppController {
         $lang_strings['request_sent'] = __('Upgrade Pending');
         $lang_strings['share_quiz'] = __('Share quiz');
         $lang_strings['share_quiz_question'] = __('Do you want to share the quiz?');
-        $lang_strings['remove_share'] = __('Remove share quiz');
+        $lang_strings['remove_share'] = __('Cancel share quiz');
         $lang_strings['remove_share_question'] = __('Do you want to remove sharing the quiz?');
-        $lang_strings['remove_shared_quiz'] = __('Remove share');
+        $lang_strings['remove_shared_quiz'] = __('Cancel share');
+        $lang_strings['check_select'] = __('Please choose at least one quiz to import!');
+        $lang_strings['import_success'] = __('Quiz imported successfully');
 
-        $this->set(compact('data', 'quizTypes', 'filter', 'lang_strings'));
+        $this->set(compact('data', 'filter', 'lang_strings'));
     }
 
     public function edit($quizId, $initial = '') {
@@ -255,11 +257,11 @@ class QuizController extends AppController {
         ));
 
         if (!empty($subjectOptions)) {
-            $subjectOptions = array(0 => __('All Subject')) + $subjectOptions;
+            $subjectOptions = array(0 => __('All Subjects')) + $subjectOptions;
         }
         
         if (!empty($classOptions)) {
-            $classOptions = array(0 => __('All Class')) + $classOptions;
+            $classOptions = array(0 => __('All Classes')) + $classOptions;
         }
 
         // pr($this->Session->read('Auth.User'));
@@ -881,9 +883,9 @@ class QuizController extends AppController {
         if ($this->Quiz->saveField('shared', empty($shared) ? 1 : NULL)) {
             // Send email to the admin
             if (empty($shared)) {
-                $subject = __('A quiz has been shared!');
+                $subject = __('[Verkkotesti] A quiz has been shared!');
                 $template = 'quiz_shared';
-                $message = __('You have successfully shared quiz');
+                $message = __('You have successfully shared the quiz. Please hold for admin approval.');
 
                 $admin_email = $this->Email->sendMail(Configure::read('AdminEmail'), $subject, $quiz, $template);
                 //$admin_email = $this->Email->sendMail('biplob.weblancer@gmail.com', $subject, $quiz, $template);
@@ -946,13 +948,18 @@ class QuizController extends AppController {
             }
         }
 
+        $user_id = $this->Auth->user('id');
+
+        $this->Quiz->virtualFields['imported'] = 'SELECT count(*) FROM imported_quizzes AS ImportedQuiz WHERE (ImportedQuiz.user_id = '.$user_id.' AND ImportedQuiz.quiz_id = Quiz.id)';
+
+        $this->Paginator->settings['recursive'] = -1;
+
         // Get pagination
         $this->Paginator->settings['conditions'][] = array(
             'Quiz.shared' => 1,
-            'Quiz.is_approve' => 1
+            'Quiz.is_approve' => 1,
+            'Quiz.imported' => 0
         );
-
-        $this->Paginator->settings['recursive'] = -1;
 
         // pr($this->Paginator->settings);
         // exit;
@@ -962,12 +969,13 @@ class QuizController extends AppController {
 
         // pr($quizzes);
         // exit;
+
         if (!empty($subjectOptions)) {
-            $subjectOptions = array(0 => __('All Subject')) + $subjectOptions;
+            $subjectOptions = array(0 => __('All Subjects')) + $subjectOptions;
         }
         
         if (!empty($classOptions)) {
-            $classOptions = array(0 => __('All Class')) + $classOptions;
+            $classOptions = array(0 => __('All Classes')) + $classOptions;
         }
 
         $this->set(compact('subjectOptions', 'classOptions', 'selectedSubjects', 'quizzes'));
@@ -1037,10 +1045,14 @@ class QuizController extends AppController {
             }
         }
 
+        $user_id = $this->Auth->user('id');
+        $this->Quiz->virtualFields['imported'] = 'SELECT count(*) FROM imported_quizzes AS ImportedQuiz WHERE (ImportedQuiz.user_id = '.$user_id.' AND ImportedQuiz.quiz_id = Quiz.id)';
+
         // Get pagination
         $this->Paginator->settings['conditions'][2] = array(
             'Quiz.shared' => 1,
-            'Quiz.is_approve' => 1
+            'Quiz.is_approve' => 1,
+            'Quiz.imported' => 0
         );
 
         $this->Paginator->settings['recursive'] = -1;
@@ -1055,7 +1067,13 @@ class QuizController extends AppController {
         // pr($this->Paginator->settings);
         // exit;
 
-        $quizzes = $this->Paginator->paginate('Quiz');
+        try {
+            $quizzes = $this->Paginator->paginate('Quiz');
+        } catch (NotFoundException $e) { 
+            $this->request->params['named']['page'] = 1;
+            $quizzes = $this->Paginator->paginate('Quiz');
+        }
+
         $this->set(compact('quizzes', 'subjectOptions', 'classOptions'));
         $this->render('/Elements/Quiz/quiz_bank_pagination');
     }
@@ -1067,6 +1085,26 @@ class QuizController extends AppController {
         $this->autoRender = false;
         $this->accountStatus();
         $response['result'] = 0;
+
+        // Check maximum import permission
+        if ($this->Auth->user('account_level') == 22) {
+            $imported_quiz_count = $this->Quiz->User->ImportedQuiz->find('count', array(
+                'conditions' => array(
+                    'ImportedQuiz.user_id' => $this->Auth->user('id')
+                )
+            ));
+            if ($imported_quiz_count >= DOWNLOAD_LIMIT) {
+                $response['message'] = __('Sorry, you have exceeded maximum limit of import quiz. Please upgrade your account to get unlimited access on quiz bank!');
+            } else {
+                if ((count($this->request->data['random_id'])+$imported_quiz_count) > DOWNLOAD_LIMIT) {
+                    $response['message'] = __('Sorry, we can\'t process your request! You have left only import') . ' ' . (DOWNLOAD_LIMIT - $imported_quiz_count);
+                }
+            }
+        }
+        if (!empty($response['message'])) {
+            echo json_encode($response);
+            exit;
+        }
 
         $this->Quiz->Behaviors->load('Containable');
         $quizInfo = $this->Quiz->find('all', array(
@@ -1086,34 +1124,55 @@ class QuizController extends AppController {
 
         if (!empty($quizInfo) && (count($quizInfo) == count($this->request->data['random_id']))) {
             foreach ($quizInfo as $key => $quiz) {
-                $quiz['Quiz']['id'] = '';
-                $quiz['Quiz']['status'] = 1;
-                $quiz['Quiz']['shared'] = NULL;
-                $quiz['Quiz']['user_id'] = $this->Auth->user('id');
-                $quiz['Quiz']['name'] = __('Copy of:') . ' ' . $quiz['Quiz']['name'];
-                unset($quiz['Quiz']['created']);
-                unset($quiz['Quiz']['modified']);
-                unset($quiz['Quiz']['student_count']);
-                unset($quiz['Quiz']['random_id']);
+                // Check if already imported
+                $is_imported = $this->Quiz->User->ImportedQuiz->find('count', array(
+                    'conditions' => array(
+                        'ImportedQuiz.quiz_id' => $quiz['Quiz']['id'],
+                        'ImportedQuiz.user_id' => $this->Auth->user('id')
+                    )
+                ));
+                // End of checking
+                if (empty($is_imported)) { // if Not imported before
+                    // Imported quiz data
+                    $saveImportedQuiz['ImportedQuiz']['user_id'] = $this->Auth->user('id');
+                    $saveImportedQuiz['ImportedQuiz']['quiz_id'] = $quiz['Quiz']['id'];
 
-                foreach ($quiz['Question'] as $key1 => $question) {
-                    $quiz['Question'][$key1]['id'] = '';
-                    $quiz['Question'][$key1]['quiz_id'] = '';
-                    unset($quiz['Question'][$key1]['created']);
-                    unset($quiz['Question'][$key1]['modified']);
-                    foreach ($question['Choice'] as $key2 => $choice) {
-                        $quiz['Question'][$key1]['Choice'][$key2]['id'] = '';
-                        $quiz['Question'][$key1]['Choice'][$key2]['question_id'] = '';
+                    $quiz['Quiz']['id'] = '';
+                    $quiz['Quiz']['status'] = 1;
+                    $quiz['Quiz']['shared'] = NULL;
+                    $quiz['Quiz']['user_id'] = $this->Auth->user('id');
+                    $quiz['Quiz']['name'] = __('Copy of:') . ' ' . $quiz['Quiz']['name'];
+                    unset($quiz['Quiz']['created']);
+                    unset($quiz['Quiz']['modified']);
+                    unset($quiz['Quiz']['student_count']);
+                    unset($quiz['Quiz']['random_id']);
+
+                    foreach ($quiz['Question'] as $key1 => $question) {
+                        $quiz['Question'][$key1]['id'] = '';
+                        $quiz['Question'][$key1]['quiz_id'] = '';
+                        unset($quiz['Question'][$key1]['created']);
+                        unset($quiz['Question'][$key1]['modified']);
+                        if (!empty($question['Choice'])) {
+                            foreach ($question['Choice'] as $key2 => $choice) {
+                                $quiz['Question'][$key1]['Choice'][$key2]['id'] = '';
+                                $quiz['Question'][$key1]['Choice'][$key2]['question_id'] = '';
+                            }
+                        }
                     }
-                }
 
-                if ($this->Quiz->saveAll($quiz, array('deep' => true))) {
-                    $random_id = $this->Quiz->id . $this->Quiz->randText(2);
-                    $this->Quiz->saveField('random_id', $random_id);
-                    $response['Quiz'][$key]['id'] = $this->Quiz->id;
-                    $response['Quiz'][$key]['name'] = $quiz['Quiz']['name'];
-                } else {
-                    $response['message'] = __('Something went wrong, please try again later!');
+                    // pr($quiz);
+                    // exit;
+
+                    if ($this->Quiz->saveAll($quiz, array('deep' => true))) {
+                        $random_id = $this->Quiz->id . $this->Quiz->randText(2);
+                        $this->Quiz->saveField('random_id', $random_id);
+                        $response['Quiz'][$key]['id'] = $this->Quiz->id;
+                        $response['Quiz'][$key]['name'] = $quiz['Quiz']['name'];
+                        $this->Quiz->User->ImportedQuiz->create();
+                        $this->Quiz->User->ImportedQuiz->save($saveImportedQuiz); 
+                    } else {
+                        $response['message'] = __('Something went wrong, please try again later!');
+                    }
                 }
             }
             $response['message'] = __('Imported Successfully');

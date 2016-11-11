@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-sm-12">
         <ul class="nav nav-pills">
-            <li><?php echo $this->Html->link(__('Subject List'),array('controller'=>'subjects','action'=>'index'),array("role"=>"button", "class"=>"btn btn-link"));?></li> 
+            <li><?php echo $this->Html->link(__('All Subjects'),array('controller'=>'subjects','action'=>'index'),array("role"=>"button", "class"=>"btn btn-link"));?></li> 
             <li><?php echo $this->Html->link(__('New Subject'),array('controller'=>'subjects','action'=>'insert'),array("role"=>"button", "class"=>"btn btn-link"));?></li> 
         </ul>
     </div>

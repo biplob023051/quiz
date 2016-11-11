@@ -6,7 +6,7 @@
         </div>
         <div class="modal-body" id="quiz-bank">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <?php 
                         echo $this->Form->input('subjects', array(
                             'options' => $subjectOptions,
@@ -19,7 +19,7 @@
                         ));
                     ?>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <?php 
                         echo $this->Form->input('classes', array(
                             'options' => $classOptions,
@@ -36,8 +36,8 @@
 
             <div class="row" id="alert-box" style="display: none;">
                 <div class="alert alert-success">
-                    <span class="close" onclick="this.parentElement.style.display='none';">&times;</span> 
-                    Quiz imported successfully
+                    <span class="close">&times;</span> 
+                    <?php echo __('Quiz imported successfully'); ?>
                 </div>
             </div>
         
@@ -50,3 +50,10 @@
         </div>
     </div>
 </div>
+
+<style type="text/css">
+    .no-border {
+        float: left;
+        padding-right: 10px;
+    }
+</style>

@@ -724,10 +724,6 @@ msgstr "Olet kirjautunut ulos"
 msgid "All Time"
 msgstr "Kaikki ajat"
 
-#: added - 
-msgid "All Classes"
-msgstr "Kaikki luokat"
-
 #: View/Elements/page-navbar.ctp:9
 msgid "Navigation"
 msgstr "Valikko"
@@ -1391,4 +1387,232 @@ msgstr "Hei"
 #: View/Quiz/edit.ctp:64
 msgid "Anonymous participation?"
 msgstr "Osallistu nimettömästi."
+
+#: Controller/QuizController.php:258
+msgid "All Subjects"
+msgstr "Kaikki oppiaineet"
+
+#: Controller/QuizController.php:262
+msgid "All Classes"
+msgstr "Kaikki luokka-asteet"
+
+#: Controller/QuizController.php:127
+msgid "Cancel share"
+msgstr "Peruuta jako"
+
+#: View/Quiz/edit.ctp:127
+msgid "Publicly shared"
+msgstr "Testi jaettu julkisesti"
+
+#: Controller/QuizController.php:885
+msgid "You have successfully shared the quiz. Please hold for admin approval."
+msgstr "Testi on jaettu. Testi odottaa ylläpitäjän tarkastusta."
+
+#: View/Quiz/edit.ctp:129
+msgid "Share pending, waiting for admin approval"
+msgstr "Testin jako odottaa ylläpitäjän tarkastusta"
+
+#: Controller/QuizController.php:883
+msgid "[Verkkotesti] A quiz has been shared!"
+msgstr "[Verkkotesti] A quiz has been shared!"
+
+#: Controller/QuizController.php:124
+msgid "Do you want to share the quiz?"
+msgstr "Haluatko jakaa testin?"
+
+#: View/Elements/logut-warning.ctp:12
+msgid "Keep working"
+msgstr "Jatka työskentelyä"
+
+#: View/Elements/logut-warning.ctp:8
+msgid "You haven't been active in 15 minutes. For your security you'll be logged out in"
+msgstr "Et ole työskennellyt 15 minuuttiin. Kirjaudut automaattisesti ulos"
+
+#: View/Quiz/logut-warning.ctp:8
+msgid "seconds."
+msgstr "sekunnin kuluttua."
+
+#: View/Quiz/index.ctp:210
+msgid "Quiz Bank"
+msgstr "Testipankki"
+
+#: View/Elements/Quiz/quiz_bank_pagination.ctp:84
+msgid "Import Selected"
+msgstr "Ota valitut käyttöön"
+
+#: View/Elements/Quiz/quiz_bank_pagination.ctp:59
+msgid "Undefined"
+msgstr "Ei määritelty"
+
+#: View/Elements/Quiz/quiz_bank_pagination.ctp:73
+msgid "Preview Quiz"
+msgstr "Esikatsele testi"
+
+#: View/Elements/Quiz/quiz_bank_pagination.ctp:73
+msgid "Actions"
+msgstr "Toiminnot"
+
+#: View/Quiz/index.ctp:97
+msgid "QUIZ ARCHIVING"
+msgstr "TESTIEN ARKISTOINTI"
+
+#: View/Quiz/index.ctp:97
+msgid "QUIZ SHARING"
+msgstr "TESTIEN JAKAMINEN"
+
+#: Model/Quiz.php:construct
+msgid "Shared Quizzes"
+msgstr "Jaetut testit"
+
+#: Model/Quiz.php:construct
+msgid "Pending Quizzes"
+msgstr "Tarkastettavat testit"
+
+#: Model/Quiz.php:construct
+msgid "Decline Quizzes"
+msgstr "Hylätyt testit"
+
+#: Model/Quiz.php:construct
+msgid "Private Quizzes"
+msgstr "Yksityiset testit"
+
+#: 
+msgid "Subjects"
+msgstr "Oppiaineet"
+
+#: 
+msgid "Classes"
+msgstr "Luokka-asteet"
+
+#: 
+msgid "Quiz imported successfully"
+msgstr "Testi otettu käyttöön"
+
+#: 
+msgid "Previous"
+msgstr "Edellinen"
+
+#: 
+msgid "Next"
+msgstr "Seuraava"
+
+#: View/Elements/logut-warning.ctp:5
+msgid "You are going to be logout...?"
+msgstr "Kirjaudut pian automaattisesti ulos..."
+
+#: View/Quiz/index.ctp:230
+msgid "Explore Quiz Bank"
+msgstr "Tarkastele Testipankkia"
+
+#: Controller/QuizController.php:130
+msgid "Quiz imported successfully"
+msgstr "Testi otettu käyttöön"
+
+#: View/Quiz/admin_shared.ctp:21
+msgid "Approved Quizzes"
+msgstr "Hyväksytyt testit"
+
+#: Controller/QuizController.php:1192
+msgid "Shared Quiz List"
+msgstr "Jaettujen testien lista"
+
+#: View/Quiz/admin_shared.ctp:51
+msgid "Status"
+msgstr "Tila"
+
+#: Controller/QuizController.php:1246
+msgid "Decline the quiz"
+msgstr "Hylkää testi"
+
+#: Controller/QuizController.php:1249
+msgid "Enter decline reason if any!"
+msgstr "Kirjoita hylkäyksen syy"
+
+#: Controller/QuizController.php:1249
+msgid "Approve the quiz"
+msgstr "Hyväksy testi"
+
+#: Controller/QuizController.php:1251
+msgid "If you approve the quiz, you have always option to decline sharing!"
+msgstr "Jos hyväksyt testin, voit hylätä sen myös myöhemmin."
+
+#: View/Quiz/ajax_bank.ctp:4
+msgid "Public Quizzes"
+msgstr "Jaetut testit"
+
+#: Controller/StandardsController.php:96
+msgid "New Class"
+msgstr "Uusi luokka-aste"
+
+#: View/Standards/admin_insert.ctp:31
+msgid "Please enter class name"
+msgstr "Kirjoita luokka-asteen nimi"
+
+#: Controller/SubjectsController.php:96
+msgid "New Subject"
+msgstr "Uusi oppiaine"
+
+#: View/Subjeects/admin_insert.ctp:31
+msgid "Please enter subject name"
+msgstr "Kirjoita oppiaineen nimi"
+
+#: Controller/QuizController.php:126
+msgid "Cancel share quiz"
+msgstr "Peruuta testin jako"
+
+#: Controller/QuizController.php:127
+msgid "Do you want to remove sharing the quiz?"
+msgstr "Haluatko perua testin jakamisen?"
+
+#: Controller/QuizController.php:124
+msgid "Share quiz"
+msgstr "Jaa testi"
+
+#: View/Quiz/ajax_preview.ctp:17
+msgid "Quiz student view"
+msgstr "Testin oppilasnäkymä"
+
+#: View/Quiz/index.ctp:194
+msgid "View decline reason"
+msgstr "Näytä hylkäyksen syy"
+
+#: View/Elements/Quiz/quiz_bank_pagination.ctp:84
+msgid "Shared quizzes not found. Filter the list by choosing subjects and classes."
+msgstr "Jaettuja testejä ei löytynyt. Suodata listaa valitsemalla oppiaineita ja luokka-asteita."
+
+#: View/Elements/navbar.ctp:24
+msgid "Admin Settings"
+msgstr "Pääkäyttäjän asetukset"
+
+#: View/Elements/navbar.ctp:32
+msgid "Maintenance"
+msgstr "Huolto"
+
+#: Controller/StandardsController.php:113
+msgid "Class saved failed"
+msgstr "Luokkatason tallentaminen epäonnistui"
+
+#: Model/Standard.php:validation for field name
+msgid "Class already created"
+msgstr "Luokkataso on jo olemassa"
+
+#: Controller/SubjectsController.php:113
+msgid "Subject saved failed"
+msgstr "Oppiaineen tallentaminen epäonnistui"
+
+#: Model/Subject.php:validation for field name
+msgid "Subject already created"
+msgstr "Oppiaine on jo olemassa"
+
+#: Controller/QuizController.php:1097
+msgid "Sorry, you have exceeded maximum limit of import quiz. Please upgrade your account to get unlimited access on quiz bank!"
+msgstr "Olet ottanut käyttöön maksimimäärän Testipankin testejä. Päivitä käyttäjätilisi (49 €/v) niin saat rajattoman pääsyn Testipankkiin."
+
+#: Controller/QuizController.php:1097
+msgid "Sorry, you have exceeded maximum limit of import quiz. Please upgrade your account to get unlimited access on quiz bank!"
+msgstr "Olet ottanut käyttöön maksimimäärän Testipankin testejä. Päivitä käyttäjätilisi (49 €/v) niin saat rajattoman pääsyn Testipankkiin."
+
+#: Controller/QuizController.php:1100
+msgid "Sorry, we can't process your request! You have left only import"
+msgstr "Pyyntöäsi ei voida toteuttaa. Ladattavien testien jäljellä oleva määräsi on"
 

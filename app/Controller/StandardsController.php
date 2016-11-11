@@ -11,7 +11,7 @@ class StandardsController extends AppController {
 	public function admin_index() {
 		if ($this->Auth->user('account_level') != 51)
             throw new ForbiddenException;
-        $this->set('title_for_layout', __('All Class'));
+        $this->set('title_for_layout', __('All Classes'));
 		$this->Paginator->settings = $this->paginate;
 		$this->Paginator->settings['conditions'] = array(
 			'Standard.is_del' => NULL,

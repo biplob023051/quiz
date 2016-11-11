@@ -65,6 +65,7 @@
 	            		//$(".basic-info").not($(this)).attr('disabled', false);
 	                	$(".form-input").attr('disabled', false);
 	                	$(".ajax-loader").hide();
+	                	$('#studentId').attr('value', response.student_id);
 	            	} else {
 	            		alert('Something went wrong, please try now');
 	            		window.location.reload();
@@ -111,6 +112,7 @@
             {
 				if (response.success) {
 					$(".form-input").not('.max_allowed_disabled').attr('disabled', false);
+					$('#studentId').attr('value', response.student_id);
 					maxAllowedCheckBoxControl(ele);
 				} else {
 					alert('Something went wrong, please try now');
