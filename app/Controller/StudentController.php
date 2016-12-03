@@ -11,6 +11,7 @@ class StudentController extends AppController {
         $this->Auth->allow('submit', 'success', 'update_student', 'update_answer');
     }
 
+    // Update answer
     public function update_answer() {
         $this->autoRender = false;
         $response = array('success' => true);

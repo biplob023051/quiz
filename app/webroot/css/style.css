@@ -535,3 +535,7 @@ i.share {
 #alert-box {
     display: none;
 }
+
+.no-internet, .connecting-internet, .connected-internet {
+    display: none;
+}

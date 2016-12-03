@@ -1,30 +1,39 @@
+<?php if (!empty($this->request->data['Student']['id'])) : ?>
+    <script type="text/javascript">
+        var student_id = '<?php echo $this->request->data['Student']['id']; ?>';
+    </script>
+<?php else : ?>
+    <script type="text/javascript">
+        var student_id = '';
+    </script>
+<?php endif; ?>
 <?php
-$this->Html->script(array(
-    'webquiz',
-    'live',
-        ), array('inline' => false)
-);
+    $this->Html->script(array(
+        'webquiz',
+        'live',
+            ), array('inline' => false)
+    );
 
-$this->assign('title', __('Quiz: ') . $data['Quiz']['name']);
-?>
+    $this->assign('title', __('Quiz: ') . $data['Quiz']['name']);
 
-<?php echo $this->Session->flash('error'); ?>
+    echo $this->Session->flash('error'); 
 
-<?php
-echo $this->Form->create('Student', array(
-    'inputDefaults' => array(
-        'label' => array('class' => 'sr-only'),
-        'div' => array('class' => 'form-group'),
-        'class' => 'form-control input-lg basic-info',
-    ),
-    'novalidate' => true,
-    'url' => array('controller' => 'student', 'action' => 'submit', $data['Quiz']['random_id'])
-));
+    echo $this->Form->create('Student', array(
+        'inputDefaults' => array(
+            'label' => array('class' => 'sr-only'),
+            'div' => array('class' => 'form-group'),
+            'class' => 'form-control input-lg basic-info',
+        ),
+        'novalidate' => true,
+        'url' => array('controller' => 'student', 'action' => 'submit', $data['Quiz']['random_id'])
+    ));
+
 ?>
 
 <div class="panel panel-primary">
     <div class="panel-heading">
         <?php if (empty($data['Quiz']['anonymous'])) : ?>
+            <?php // pr($this->request->data); ?>
             <div class="alert alert-danger" id="error-message" style="display: none;"></div>
             <div class="row">
                 <div class="col-xs-12 col-md-4">
@@ -33,6 +42,11 @@ echo $this->Form->create('Student', array(
                         'placeholder' => __('First Name')
                     ));
                     ?>
+                    <?php if (!empty($this->request->data['Student']['fname'])) : ?>
+                        <span id="std-fname" class="glyphicon glyphicon-ok-sign text-success std-basic-info"></span>
+                    <?php else : ?>
+                        <span id="std-fname" class="glyphicon std-basic-info"></span>
+                    <?php endif; ?>
                 </div>
                 <div class="col-xs-12 col-md-4">
                     <?php
@@ -40,6 +54,11 @@ echo $this->Form->create('Student', array(
                         'placeholder' => __('Last Name')
                     ));
                     ?>
+                    <?php if (!empty($this->request->data['Student']['lname'])) : ?>
+                        <span id="std-lname" class="glyphicon glyphicon-ok-sign text-success std-basic-info"></span>
+                    <?php else : ?>
+                        <span id="std-lname" class="glyphicon std-basic-info"></span>
+                    <?php endif; ?>
                 </div>
                 <div class="col-xs-12 col-md-4">
                     <?php
@@ -47,6 +66,11 @@ echo $this->Form->create('Student', array(
                         'placeholder' => __('Class')
                     ));
                     ?>
+                    <?php if (!empty($this->request->data['Student']['class'])) : ?>
+                        <span id="std-class" class="glyphicon glyphicon-ok-sign text-success std-basic-info"></span>
+                    <?php else : ?>
+                        <span id="std-class" class="glyphicon std-basic-info"></span>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
@@ -121,7 +145,8 @@ echo $this->Form->create('Student', array(
 <?php echo $this->element('Quiz/confirm_submit'); ?>
 <div class="row">
     <div class="col-xs-12 col-md-3 pull-right">
-        <button type="submit" class="btn btn-primary btn-lg btn-block"><?php echo __('Turn in your quiz') ?></button>
+        <span class="text-danger no-internet"><?php echo __('Sorry, you lost your internet connection.'); ?></span>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><?php echo __('Turn in your quiz') ?></button>
     </div>
 </div>
 
@@ -130,8 +155,6 @@ echo $this->Form->create('Student', array(
 </div>
 
 <?php echo $this->Form->end(); ?>
-
-
 
 <script id="app-data" type="application/json">
     <?php
@@ -199,5 +222,26 @@ echo $this->Form->create('Student', array(
   display: inline-block;
   text-align: left;
   vertical-align: middle;
+}
+
+.glyphicon.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+    color: red;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg); }
+    to { transform: scale(1) rotate(360deg); }
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+
+.std-basic-info {
+    top: -32px;
+    float: right;
 }
 </style>

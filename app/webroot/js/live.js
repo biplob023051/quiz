@@ -1,14 +1,93 @@
 (function($) {
-
-	var appData = $.parseJSON($("#app-data").text());
-
-	setTimeout(saveStudentRecord,500);
-
 	// right click disabled
 	$(document).on("contextmenu",function(e){
         e.preventDefault();
         alert(lang_strings['right_click_disabled']);
     });
+	var appData = $.parseJSON($("#app-data").text());
+	if (!student_id || student_id == '') {
+		setTimeout(saveStudentRecord,500);
+	}
+	var interval;
+	var answered = {};
+ 	var std_updated = false;
+ 	interval = setInterval(checkInternetConnection, 300);
+ 	function checkInternetConnection() {
+ 		if (!navigator.onLine) {
+ 			$('#submit').attr('disabled', true);
+ 			$('#confirmed').attr('disabled', true);
+ 			$('.no-internet').show();
+ 		} else {
+ 			if (std_updated) {
+ 				updateStudentBasicInfo();
+ 				std_updated = false;
+ 			}
+
+ 			if (!$.isEmptyObject(answered) && !std_updated) {
+ 				// updateOffineAnswer();
+ 				clearInterval(interval);
+ 				runAjaxCall(0);
+ 			} 
+ 		}
+ 	}
+
+ 	function runAjaxCall(index) {
+ 		var question = answered[index];
+ 		console.log('question', question);
+ 		$.ajax({
+            dataType: 'json',
+            url: appData.baseUrl + 'student/update_answer',
+            type: 'post',
+            data: {'question_id': question.question_id, 'text' : question.answer_text, 'checkbox_record' : question.checkbox_record, 'checkBoxDelete' : question.checkBoxDelete, 'checkbox_record_delete' : question.checkbox_record_delete, 'checkBox' : question.checkBox, 'random_id' : question.random_id, 'case_sensitive' : question.case_sensitive},
+            success: function (response)
+            {
+				if (response.success) {
+					$('#quest-' + question.question_id).removeClass('glyphicon-refresh spinning').addClass('glyphicon-ok-sign text-success');
+					index++;
+					if (index < Object.keys(answered).length) {
+						runAjaxCall(index);
+						//console.log('current_index', index);
+					} else {
+						answered = {};
+						interval = setInterval(checkInternetConnection, 500);
+						updateConnection();
+					}
+				} else {
+					alert('Something went wrong, please try now');
+	            	window.location.reload();
+				}
+            }
+        });
+ 	}
+
+ 	function updateOffineAnswer() {
+ 		$.each(answered, function( question_id, question ){
+		    $.ajax({
+		    	//async: false,
+	            dataType: 'json',
+	            url: appData.baseUrl + 'student/update_answer',
+	            type: 'post',
+	            data: {'question_id': question.question_id, 'text' : question.answer_text, 'checkbox_record' : question.checkbox_record, 'checkBoxDelete' : question.checkBoxDelete, 'checkbox_record_delete' : question.checkbox_record_delete, 'checkBox' : question.checkBox, 'random_id' : question.random_id, 'case_sensitive' : question.case_sensitive},
+	            success: function (response)
+	            {
+					if (response.success) {
+						$('#quest-' + question.question_id).removeClass('glyphicon-refresh spinning').addClass('glyphicon-ok-sign text-success');
+					} else {
+						alert('Something went wrong, please try now');
+		            	window.location.reload();
+					}
+	            }
+	        });
+		});
+		answered = {};
+		console.log('answered', answered);
+ 	}
+
+ 	function updateConnection() {
+		$('#submit').attr('disabled', false);
+		$('#confirmed').attr('disabled', false);
+		$('.no-internet').hide();
+ 	}
 
 	$.fn.extend({
         donetyping: function(callback,timeout){
@@ -46,14 +125,22 @@
     });
 
 	$('#StudentFname, #StudentLname, #StudentClass').donetyping(function(){
+		$(this).parent().next().removeClass('glyphicon-ok-sign text-success').addClass('glyphicon-refresh spinning'); // Upload failed indicator
+		if (navigator.onLine) {
+			$('#submit').attr('disabled', true);
+			updateStudentBasicInfo();
+		} else {
+			std_updated = true;
+		}
+	});
+
+	function updateStudentBasicInfo() {
 		var fname = $('#StudentFname').val();
 		var lname = $('#StudentLname').val();
 		var std_class = $('#StudentClass').val();
-		if ((fname != '') || (fname != '') || (std_class != '')) { // only save if 3 basic information exist
+		if ((fname != '') || (lname != '') || (std_class != '')) { // only save if 3 basic information exist
 			// Execute for student information save
 			//$(".basic-info").not($(this)).attr('disabled', true);
-			$(".form-input").attr('disabled', true);
-			$(".ajax-loader").show();
 			$.ajax({
 	            dataType: 'json',
 	            url: appData.baseUrl + 'student/update_student',
@@ -63,32 +150,41 @@
 	            {
 	            	if (response.success) {
 	            		//$(".basic-info").not($(this)).attr('disabled', false);
-	                	$(".form-input").attr('disabled', false);
-	                	$(".ajax-loader").hide();
 	                	$('#studentId').attr('value', response.student_id);
+	                	//console.log('count', $('#student-information').find('.std-basic-info').length);
+	                	if (fname != '') {
+	                		$('#std-fname').removeClass('glyphicon-refresh spinning').addClass('glyphicon-ok-sign text-success');
+	                	}
+	                	if (lname != '') {
+	                		$('#std-lname').removeClass('glyphicon-refresh spinning').addClass('glyphicon-ok-sign text-success');
+	                	}
+	                	if (std_class != '') {
+	                		$('#std-class').removeClass('glyphicon-refresh spinning').addClass('glyphicon-ok-sign text-success');
+	                	}	    
+	                	$('#submit').attr('disabled', false);            	
 	            	} else {
 	            		alert('Something went wrong, please try now');
 	            		window.location.reload();
 	            	}
 	            }
 	        });
-		}
-	});
+		}	
+	}
 
-	$(".form-input").change(function() {
-		$(".form-input").not('.max_allowed_disabled').attr('disabled', true);
+	$(".form-input").change(function() { 
+		$('#submit').attr('disabled', true);
 		var question_id = $(this).closest('tr').prev().val();
-		var case_sensitive = $(this).closest('tr').prev().attr('data-case');
-		var answer_text = $(this).val();
 		var checkbox_record = [];
 		var checkBoxDelete = '';
 		var checkbox_record_delete = 1;
 		var checkBox = '';
+		// temp
+		var checkBoxName = '';
 		if ($(this).is(':checkbox')) {
 			if ($(this).is(':checked')) {
 				checkbox_record_delete = ''; // New Record
 			} 
-			var checkBoxName = $(this).attr('name');
+			checkBoxName = $(this).attr('name');
 			$("input[name='"+checkBoxName+"']").each( function (i) {
 				if ($(this).is(':checked')) {
 					checkbox_record[i] = $(this).val();
@@ -100,26 +196,23 @@
 			}
 			checkBox = 1;
 		}
-
 		var ele = $(this);
+    	$('#quest-' + question_id).removeClass('glyphicon-ok-sign text-success').addClass('glyphicon-refresh spinning');
+		//$('#studentId').attr('value', response.student_id);
+		var obj_index = Object.keys(answered).length;
+		console.log('obj_index', obj_index);
+		answered[obj_index] = {
+			'question_id' : question_id,
+			'case_sensitive' : $(this).closest('tr').prev().attr('data-case'),
+			'answer_text' : $(this).val(),
+			'checkbox_record' : checkbox_record,
+			'checkBoxDelete' : checkBoxDelete,
+			'checkbox_record_delete' : checkbox_record_delete,
+			'checkBox' : checkBox,
+			'random_id' : random_id
+		}
+		maxAllowedCheckBoxControl(ele);
 
-		$.ajax({
-            dataType: 'json',
-            url: appData.baseUrl + 'student/update_answer',
-            type: 'post',
-            data: {'question_id': question_id, 'text' : answer_text, 'checkbox_record' : checkbox_record, 'checkBoxDelete' : checkBoxDelete, 'checkbox_record_delete' : checkbox_record_delete, 'checkBox' : checkBox, 'random_id' : random_id, case_sensitive : case_sensitive},
-            success: function (response)
-            {
-				if (response.success) {
-					$(".form-input").not('.max_allowed_disabled').attr('disabled', false);
-					$('#studentId').attr('value', response.student_id);
-					maxAllowedCheckBoxControl(ele);
-				} else {
-					alert('Something went wrong, please try now');
-	            	window.location.reload();
-				}
-            }
-        });
 	});
 	
 	// if many correct, then checkbox
@@ -293,16 +386,16 @@
 		var fname = $('#StudentFname').val();
 		var lname = $('#StudentLname').val();
 		var std_class = $('#StudentClass').val();
+		$(".ajax-loader").show();
     	$.ajax({
+    		async: false,
 	        dataType: 'json',
 	        url: appData.baseUrl + 'student/update_student',
 	        type: 'post',
 	        data: {'fname': fname, 'lname' : lname, 'class' : std_class, 'random_id' : random_id},
 	        success: function (response)
 	        {
-	        	//$(".basic-info").not($(this)).attr('disabled', false);
-	            //var json = $.parseJSON(response);
-	            // $('#studentId').attr('value', response.student_id);
+	            $('#studentId').attr('value', response.student_id);
 	            $(".ajax-loader").hide();
 	        }
 	    });

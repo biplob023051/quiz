@@ -8,6 +8,7 @@
                 <?php echo __('All questions answered. Turn in your quiz?'); ?>
             </div>
             <div class="modal-footer" style="padding-top: 3px; padding-bottom: 3px;">
+                <span class="text-danger no-internet"><?php echo __('Sorry, you lost your internet connection.'); ?></span>
                 <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo __('Cancel'); ?></button>
                 <button type="button" class="btn btn-danger btn-ok" id="confirmed"><?php echo __('Confirm'); ?></button>
             </div>
