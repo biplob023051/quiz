@@ -1,4 +1,7 @@
 <?php 
+	if (!empty($student_result)){
+		$this->Html->script(array('success'), array('inline' => false));
+	}
 	$otherQuestionType = array(6,7,8);
 	$this->assign('title', __('Success')); 
 ?>
@@ -8,7 +11,7 @@
 </div>
 
 <?php if (!empty($student_result)) : ?>
-	<div class="row">
+	<div class="row" id="result">
 		<?php 
 			$i = 1;
 			$pending = 0;

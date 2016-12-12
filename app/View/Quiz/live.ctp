@@ -25,7 +25,8 @@
             'class' => 'form-control input-lg basic-info',
         ),
         'novalidate' => true,
-        'url' => array('controller' => 'student', 'action' => 'submit', $data['Quiz']['random_id'])
+        'url' => array('controller' => 'student', 'action' => 'submit', $data['Quiz']['random_id']),
+        'name' => 'student_form'
     ));
 
 ?>
@@ -146,7 +147,7 @@
 <div class="row">
     <div class="col-xs-12 col-md-3 pull-right">
         <span class="text-danger no-internet"><?php echo __('Sorry, you lost your internet connection.'); ?></span>
-        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><?php echo __('Turn in your quiz') ?></button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="std_form_submit"><?php echo __('Turn in your quiz') ?></button>
     </div>
 </div>
 

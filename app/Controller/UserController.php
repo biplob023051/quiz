@@ -198,6 +198,10 @@ class UserController extends AppController {
                 return $this->redirect(array('action' => 'settings'));
             }
         }
+
+        $userPermissions = $this->userPermissions();
+        $this->set(compact('userPermissions'));
+        
         $data = $this->User->getUser();
         // pr($data);
         // exit;
@@ -321,44 +325,49 @@ class UserController extends AppController {
     }
 
     public function buy_create() {
+        $this->request->data['User']['activation'] = $this->randText(16);
+
+        $date = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d'), date('Y') + 1));
+
+        if ($this->request->data['User']['package'] == 29) {
+            $package =  __('29 E/Y');
+            $this->request->data['User']['account_level'] = 1;
+        } else {
+            $package = __('49 E/Y');
+            $this->request->data['User']['account_level'] = 2;
+        }
+
+        unset($this->request->data['User']['package']);
+        $this->request->data['User']['expired'] = $date;
+
+        // pr($this->request->data);
+        // exit;
+
         $this->User->set($this->request->data);
         if ($this->User->validates()) {
-            $this->User->save();
-            // auto login of the newly registered user to the site
-            if ($this->Auth->login()) {
-                // save statistics data
-                $this->loadModel('Statistic');
-                $arrayToSave['Statistic']['user_id'] = $this->Auth->user('id');
-                $arrayToSave['Statistic']['type'] = 'user_login';
-                $this->Statistic->save($arrayToSave);
+            $user = $this->User->save();
+            
+            // Send email to user for email confirmation
+            $user_email = $this->Email->sendMail($user['User']['email'], __('[Verkkotesti Signup] Please confirm your email address!'), $user, 'user_email');
+            // Send email to admin
+            $admin_email = $this->Email->sendMail(Configure::read('AdminEmail'), __('[Verkkotesti] New User!'), $user, 'user_create');
+            
+            // Send email for upgrade notice to the admin 
+            $Email = new CakeEmail();
+            $Email->viewVars(array('User' => $user['User'], 'package' => $package));
+            $Email->from(array('admin@webquiz.fi' => 'WebQuiz.fi'));
+            $Email->template('invoice');
+            $Email->emailFormat('html');
+            $Email->to(Configure::read('AdminEmail'));
+            $Email->subject(__('Upgrade Account'));
+            $Email->send();
 
-                // send upgrade email request
-                $user = $this->User->getUser($this->Auth->user('id'));
+            $this->Session->write('registration', true);
+            $this->redirect(array('action' => 'success'));
 
-                if (empty($user))
-                    throw new NotFoundException;
-
-                $date = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d'), date('Y') + 1));
-
-                $upgradeData['User']['id'] = $user['User']['id'];
-                $upgradeData['User']['account_level'] = 1;
-                $upgradeData['User']['expired'] = $date;
-                $this->User->save($upgradeData);
-
-                $Email = new CakeEmail();
-                $Email->viewVars(array('User' => $user['User'], 'package' => $this->request->data['User']['package']));
-                $Email->from(array('admin@webquiz.fi' => 'WebQuiz.fi'));
-                $Email->template('invoice');
-                $Email->emailFormat('html');
-                $Email->to(Configure::read('AdminEmail'));
-                $Email->subject(__('Upgrade Account'));
-                $Email->send();
-
-                $this->Session->setFlash(__('Registration success and we will contact you soon to upgrade your account'), 'notification_form', array(), 'notification');
-                return $this->redirect($this->Auth->redirectUrl());
-            } else {
-                $this->Session->setFlash($this->Auth->authError, 'error_form', array(), 'error');    
-            }
+                // $this->Session->setFlash(__('Registration success and we will contact you soon to upgrade your account'), 'notification_form', array(), 'notification');
+                // return $this->redirect($this->Auth->redirectUrl());
+            
         } else {
             $error = array();
             foreach ($this->User->validationErrors as $_error) {

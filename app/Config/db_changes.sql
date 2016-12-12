@@ -24,6 +24,27 @@ ALTER TABLE  `questions` ADD  `case_sensitive` TINYINT( 1 ) NOT NULL DEFAULT  '0
 
 
 -- New works
+CREATE TABLE IF NOT EXISTS `subjects` (
+  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `type` tinyint(1) DEFAULT NULL COMMENT 'null for subject, 1 for class',
+  `isactive` tinyint(1) DEFAULT '1',
+  `is_del` tinyint(1) DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `imported_quizzes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `quiz_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ;
+
+
 ALTER TABLE `users` ADD `subjects` TEXT NULL AFTER `language`;
 ALTER TABLE `quizzes` ADD `subjects` TEXT NULL AFTER `anonymous`;
 ALTER TABLE `quizzes` ADD `classes` TEXT NULL AFTER `subjects`;

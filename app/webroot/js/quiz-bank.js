@@ -151,8 +151,8 @@
         if (random_id.length < 1) {
             $("#alert-box").html('<div class="alert alert-danger"><span class="close">&times;</span>'+lang_strings['check_select']+'</div>').show();
             setTimeout(function() {
-                $("#alert-box").fadeOut(1000);
-            },2000);
+                $("#alert-box").fadeOut(3000);
+            },3000);
             return false;
         }
         importQuiz(random_id);
@@ -183,8 +183,8 @@
 
                     $("#alert-box").html('<div class="alert alert-success"><span class="close">&times;</span>'+lang_strings['import_success']+'</div>').show();
                     setTimeout(function() {
-                        $("#alert-box").fadeOut(1000);
-                    },2000);
+                        $("#alert-box").fadeOut(3000);
+                    },3000);
                     var json = response.Quiz;
                     var html = '';
                     $.each(json, function(key, val) {
@@ -217,7 +217,7 @@
                  } else {
                     $("#alert-box").html('<div class="alert alert-danger"><span class="close">&times;</span>'+response.message+'</div>').show();
                     setTimeout(function() {
-                        $("#alert-box").fadeOut(1000);
+                        $("#alert-box").fadeOut(3000);
                     },2000);
                  }
             }

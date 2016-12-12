@@ -233,7 +233,7 @@ $this->assign('title', __('My Quizzes'));
     <?php endif; ?>
 <?php endif; ?>
 
-<?php echo $this->element('Invoice/invoice_send_dialog'); ?>
+<?php echo $this->element('Invoice/invoice'); ?>
 <?php echo $this->element('Invoice/invoice_success_dialog'); ?>
 <?php echo $this->element('Invoice/invoice_error_dialog'); ?>
 <?php echo $this->element('Invoice/delete_confirm'); ?>

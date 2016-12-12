@@ -86,6 +86,8 @@ class PagesController extends AppController {
         	$lang_strings['empty_password'] = __('Require Password');
             $lang_strings['varify_password'] = __('Password did not match, please try again');
             $lang_strings['character_count'] = __('Password must be 8 characters long');
+            $lang_strings['package_29'] = __('Create Account And Buy 29 E/Y');
+            $lang_strings['package_49'] = __('Create Account And Buy 49 E/Y');
         	$this->set(compact('lang_strings'));
 		}
 

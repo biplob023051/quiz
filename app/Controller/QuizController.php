@@ -4,7 +4,7 @@ class QuizController extends AppController {
     // Paginator property
     public $components = array('RequestHandler', 'Paginator', 'Email');
     public $paginate = array(
-        'limit' => 4
+        'limit' => 10
     );
     // End of pagination
 
@@ -516,6 +516,8 @@ class QuizController extends AppController {
     }
 
     public function table($quizId) {
+        ini_set('max_execution_time', 300); // 5 mins
+        ini_set('memory_limit', '-1');
         if (empty($quizId)) {
             return $this->redirect('/');
         }

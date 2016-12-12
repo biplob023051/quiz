@@ -14,7 +14,7 @@
  	interval = setInterval(checkInternetConnection, 300);
  	function checkInternetConnection() {
  		if (!navigator.onLine) {
- 			$('#submit').attr('disabled', true);
+ 			$('#std_form_submit').attr('disabled', true);
  			$('#confirmed').attr('disabled', true);
  			$('.no-internet').show();
  		} else {
@@ -84,9 +84,9 @@
  	}
 
  	function updateConnection() {
-		$('#submit').attr('disabled', false);
+ 		$('.no-internet').hide();
+		$('#std_form_submit').attr('disabled', false);
 		$('#confirmed').attr('disabled', false);
-		$('.no-internet').hide();
  	}
 
 	$.fn.extend({
@@ -127,7 +127,7 @@
 	$('#StudentFname, #StudentLname, #StudentClass').donetyping(function(){
 		$(this).parent().next().removeClass('glyphicon-ok-sign text-success').addClass('glyphicon-refresh spinning'); // Upload failed indicator
 		if (navigator.onLine) {
-			$('#submit').attr('disabled', true);
+			$('#std_form_submit').attr('disabled', true);
 			updateStudentBasicInfo();
 		} else {
 			std_updated = true;
@@ -161,7 +161,7 @@
 	                	if (std_class != '') {
 	                		$('#std-class').removeClass('glyphicon-refresh spinning').addClass('glyphicon-ok-sign text-success');
 	                	}	    
-	                	$('#submit').attr('disabled', false);            	
+	                	$('#std_form_submit').attr('disabled', false);            	
 	            	} else {
 	            		alert('Something went wrong, please try now');
 	            		window.location.reload();
@@ -172,7 +172,7 @@
 	}
 
 	$(".form-input").change(function() { 
-		$('#submit').attr('disabled', true);
+		$('#std_form_submit').attr('disabled', true);
 		var question_id = $(this).closest('tr').prev().val();
 		var checkbox_record = [];
 		var checkBoxDelete = '';

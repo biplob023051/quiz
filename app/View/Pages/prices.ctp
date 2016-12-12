@@ -12,7 +12,8 @@
                     <tr>
                         <th>&nbsp;</th>
                         <th><?php echo __('FREE'); ?></th>
-                        <th><?php echo __('19 E/Y'); ?></th>
+                        <th><?php echo __('29 E/Y'); ?></th>
+                        <th><?php echo __('49 E/Y'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,21 +21,31 @@
                         <td><?php echo __('Users'); ?></td>
                         <td><?php echo __('1'); ?></td>
                         <td><?php echo __('1'); ?></td>
+                        <td><?php echo __('1'); ?></td>
                     </tr>
                     <tr>
                         <td><?php echo __('Tests'); ?></td>
                         <td><?php echo __('1'); ?></td>
                         <td><?php echo __('Unlimited'); ?></td>
+                        <td><?php echo __('Unlimited'); ?></td>
                     </tr>
                     <tr>
-                        <td><?php echo __('Students/Test'); ?></td>
-                        <td><?php echo __('40'); ?></td>
+                        <td><?php echo __('Days to use'); ?></td>
+                        <td><?php echo '30 ' . __('Days'); ?></td>
+                        <td><?php echo '365 ' . __('Days'); ?></td>
+                        <td><?php echo '365 ' . __('Days'); ?></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo __('Quiz Bank'); ?></td>
+                        <td><?php echo __('Limited Access'); ?></td>
+                        <td><?php echo '-'; ?></td>
                         <td><?php echo __('Unlimited'); ?></td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                         <td><?php echo $this->Html->link(__('Register Now!'), '/user/create', array('class' => 'btn btn-success')); ?></td>
-                        <td><button type="button" id="buy-button" class="btn btn-success"><?php echo __('Buy'); ?></button></td>
+                        <td><button type="button" id="buy-button-29" class="btn btn-success"><?php echo __('Buy'); ?></button></td>
+                        <td><button type="button" id="buy-button-49" class="btn btn-success"><?php echo __('Buy'); ?></button></td>
                     </tr>
                 </tbody>
             </table>
@@ -46,7 +57,7 @@
         </div>
     </div>
 </div>
-<?php echo $this->element('Page/buy_modal', array('package' => __('19 E/Y'))); ?>
+<?php echo $this->element('Page/buy_modal', array('package' => __('29 E/Y'))); ?>
 <script id="app-data" type="application/json">
     <?php
     echo json_encode(array(

@@ -20,7 +20,7 @@ msgstr ""
 #: View/Elements/Invoice/invoice_success_dialog.ctp:7
 #: View/User/settings.ctp:55
 msgid "Upgrade Account"
-msgstr "Tilaa vuosilisenssi (29 €)"
+msgstr "Tilaa vuosilisenssi"
 
 #: Controller/QuestionController.php:60
 msgid "New Question"
@@ -1358,7 +1358,7 @@ msgstr "Vaadi suuret kirjaimet oikein"
 
 #: View/User/success.ctp:5
 msgid "Thank you for creating a user account! We've sent a confirmation email to your given email address. Check your email and click the link in it to activate your account. If you need help, take contact"
-msgstr "Kiitos rekisteröitymisestäsi Verkkotestiin! Lähetimme sähköpostiisi linkin jota klikkaamalla käyttäjätilisi otetaan käyttöön. Jos tarvitset apua, ota yhteyttä."
+msgstr "Kiitos rekisteröitymisestäsi Verkkotestiin! Lähetimme sähköpostiisi linkin jota klikkaamalla käyttäjätilisi otetaan käyttöön. Jos tarvitset apua, ota yhteyttä"
 
 #: View/Emails/html/user_email.ctp:3
 msgid "Thanks for registering with us. To activate your account, please click the link below or simply copy paste the url to your browser."
@@ -1616,3 +1616,66 @@ msgstr "Olet ottanut käyttöön maksimimäärän Testipankin testejä. Päivit�
 msgid "Sorry, we can't process your request! You have left only import"
 msgstr "Pyyntöäsi ei voida toteuttaa. Ladattavien testien jäljellä oleva määräsi on"
 
+#: View/Pages/prices.ctp:38
+msgid "Days to use"
+msgstr "Käyttöaika"
+
+#: View/Pages/prices.ctp:34
+msgid "Days"
+msgstr "pv"
+
+#: View/Pages/prices.ctp:40
+msgid "Limited Access"
+msgstr "Rajoitettu"
+
+#: View/Pages/prices.ctp:15
+msgid "29 E/Y"
+msgstr "29 €/v"
+
+#: View/Pages/prices.ctp:16
+msgid "49 E/Y"
+msgstr "49 €/v"
+
+#: Controller/PagesController.php:89
+msgid "Create Account And Buy 29 E/Y"
+msgstr "Luo tili ja osta 29 €/v"
+
+#: Controller/PagesController.php:90
+msgid "Create Account And Buy 49 E/Y"
+msgstr "Luo tili ja osta 49 €/v"
+
+#: 
+msgid "Thanks for your registration!"
+msgstr "Kiitos rekisteröitymisestäsi!"
+
+#: 
+msgid "Import Quiz"
+msgstr "Ota testi käyttöön"
+
+#: View/User/success.ctp:14
+msgid "Log in"
+msgstr "Kirjaudu sisään"
+
+#: Elements/Invoice/invoice.ctp:10
+msgid "Upgrade your account. You’ll get access to your upgraded account immediately. You’ll shortly receive an invoice of your purchase in your account’s emaill address."
+msgstr "Päivitä käyttäjätilisi. Saat uuden tilisi ominaisuudet käyttöön välittömästi ja laskun sähköpostiisi lähiaikoina."
+
+#: Elements/Invoice/invoice.ctp:14
+msgid "Basic:"
+msgstr "Perustili:"
+
+#: Elements/Invoice/invoice.ctp:14
+msgid "Create and use quizzes freely without limits."
+msgstr "Luo ja käytä testejä rajattomasti."
+
+#: Elements/Invoice/invoice.ctp:23
+msgid "Quiz Bank:"
+msgstr "Testipankki:"
+
+#: Elements/Invoice/invoice.ctp:23
+msgid "In addition to previous, share you own quizzes with other users and save time by using ready-made quizzes in the Quiz Bank."
+msgstr "Testipankki: Edellisen lisäksi, jaa omia testejäsi toisten käyttäjien kanssa ja säästä aikaa käyttämällä Testipankin valmiita testejä."
+
+#: 
+msgid "You have successfully shared the quiz. Please hold for admin approval."
+msgstr "Testisi on jaettu ja odottaa ylläpidon tarkastusta."

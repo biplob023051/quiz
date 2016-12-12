@@ -539,3 +539,7 @@ i.share {
 .no-internet, .connecting-internet, .connected-internet {
     display: none;
 }
+
+.btn-yellow {
+    background-color: #E6E10F;
+}

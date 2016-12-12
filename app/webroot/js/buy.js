@@ -4,8 +4,16 @@
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    $(document).on('click', 'button#buy-button', function () {
-       $('#buy-modal').modal('show');
+    $(document).on('click', 'button#buy-button-29', function () {
+        $('#UserPackage').val('29');
+        $('.modal-header').html(lang_strings['package_29']);
+        $('#buy-modal').modal('show');
+    });
+
+    $(document).on('click', 'button#buy-button-49', function () {
+        $('#UserPackage').val('49');
+        $('.modal-header').html(lang_strings['package_49']);
+        $('#buy-modal').modal('show');
     });
 
     $("#UserDisplayForm").submit(function(event) {
