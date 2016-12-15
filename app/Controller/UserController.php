@@ -165,6 +165,7 @@ class UserController extends AppController {
     }
 
     public function logout() {
+        $this->Session->destroy();
         $this->Session->setFlash(__('You have logged out'), 'notification_form', array(), 'notification');
         return $this->redirect($this->Auth->logout());
     }

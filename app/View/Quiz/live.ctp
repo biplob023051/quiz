@@ -145,7 +145,7 @@
 </div>
 <?php echo $this->element('Quiz/confirm_submit'); ?>
 <div class="row">
-    <div class="col-xs-12 col-md-3 pull-right">
+    <div class="col-xs-12 col-md-4 pull-right">
         <span class="text-danger no-internet"><?php echo __('Sorry, you lost your internet connection.'); ?></span>
         <button type="submit" class="btn btn-primary btn-lg btn-block" id="std_form_submit"><?php echo __('Turn in your quiz') ?></button>
     </div>

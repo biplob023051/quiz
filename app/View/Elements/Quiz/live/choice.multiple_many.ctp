@@ -15,7 +15,7 @@
     <div class="col-xs-12 col-md-6">
         <div class="checkbox">
             <label>
-                <input type="checkbox" class="form-input <?php echo $disabled_class; ?>" <?php echo $checked . ' ' . $disabled_print; ?> value="<?php echo $text ?>" name="data[Answer][<?php echo $number ?>][text][]" />
+                <input type="checkbox" class="form-input tick-mark <?php echo $disabled_class; ?>" <?php echo $checked . ' ' . $disabled_print; ?> value="<?php echo $text ?>" name="data[Answer][<?php echo $number ?>][text][]" />
                 <?php echo $text ?>
             </label>
         </div>

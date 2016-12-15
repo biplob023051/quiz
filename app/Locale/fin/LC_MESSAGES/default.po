@@ -1679,3 +1679,11 @@ msgstr "Testipankki: Edellisen lisäksi, jaa omia testejäsi toisten käyttäjie
 #: 
 msgid "You have successfully shared the quiz. Please hold for admin approval."
 msgstr "Testisi on jaettu ja odottaa ylläpidon tarkastusta."
+
+#: Controller/QuizController.php:104
+msgid "Please hold, your answers are saving..."
+msgstr "Hetkinen, vastauksiasi tallennetaan..."
+
+#: View/Quiz/live.ctp:30
+msgid "Sorry, you lost your internet connection."
+msgstr "Verkkoyhteytesi on valitettavasti katkennut."

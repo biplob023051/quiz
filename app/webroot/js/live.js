@@ -11,10 +11,10 @@
 	var interval;
 	var answered = {};
  	var std_updated = false;
- 	interval = setInterval(checkInternetConnection, 300);
+ 	interval = setInterval(checkInternetConnection, 500);
  	function checkInternetConnection() {
  		if (!navigator.onLine) {
- 			$('#std_form_submit').attr('disabled', true);
+ 			$('#std_form_submit').text(lang_strings['disabled_submit']).attr('disabled', true);
  			$('#confirmed').attr('disabled', true);
  			$('.no-internet').show();
  		} else {
@@ -24,7 +24,6 @@
  			}
 
  			if (!$.isEmptyObject(answered) && !std_updated) {
- 				// updateOffineAnswer();
  				clearInterval(interval);
  				runAjaxCall(0);
  			} 
@@ -33,12 +32,12 @@
 
  	function runAjaxCall(index) {
  		var question = answered[index];
- 		console.log('question', question);
+ 		//console.log('question', student_id);
  		$.ajax({
             dataType: 'json',
             url: appData.baseUrl + 'student/update_answer',
             type: 'post',
-            data: {'question_id': question.question_id, 'text' : question.answer_text, 'checkbox_record' : question.checkbox_record, 'checkBoxDelete' : question.checkBoxDelete, 'checkbox_record_delete' : question.checkbox_record_delete, 'checkBox' : question.checkBox, 'random_id' : question.random_id, 'case_sensitive' : question.case_sensitive},
+            data: {'student_id' : student_id, 'question_id': question.question_id, 'text' : question.answer_text, 'checkbox_record' : question.checkbox_record, 'checkBoxDelete' : question.checkBoxDelete, 'checkbox_record_delete' : question.checkbox_record_delete, 'checkBox' : question.checkBox, 'random_id' : question.random_id, 'case_sensitive' : question.case_sensitive},
             success: function (response)
             {
 				if (response.success) {
@@ -60,38 +59,15 @@
         });
  	}
 
- 	function updateOffineAnswer() {
- 		$.each(answered, function( question_id, question ){
-		    $.ajax({
-		    	//async: false,
-	            dataType: 'json',
-	            url: appData.baseUrl + 'student/update_answer',
-	            type: 'post',
-	            data: {'question_id': question.question_id, 'text' : question.answer_text, 'checkbox_record' : question.checkbox_record, 'checkBoxDelete' : question.checkBoxDelete, 'checkbox_record_delete' : question.checkbox_record_delete, 'checkBox' : question.checkBox, 'random_id' : question.random_id, 'case_sensitive' : question.case_sensitive},
-	            success: function (response)
-	            {
-					if (response.success) {
-						$('#quest-' + question.question_id).removeClass('glyphicon-refresh spinning').addClass('glyphicon-ok-sign text-success');
-					} else {
-						alert('Something went wrong, please try now');
-		            	window.location.reload();
-					}
-	            }
-	        });
-		});
-		answered = {};
-		console.log('answered', answered);
- 	}
-
  	function updateConnection() {
  		$('.no-internet').hide();
-		$('#std_form_submit').attr('disabled', false);
+		$('#std_form_submit').text(lang_strings['enabled_submit']).attr('disabled', false);
 		$('#confirmed').attr('disabled', false);
  	}
 
 	$.fn.extend({
         donetyping: function(callback,timeout){
-            timeout = timeout || 3e3; // 1 second default timeout
+            timeout = timeout || 10e3; // 10 second default timeout
             var timeoutReference,
                 doneTyping = function(el){
                     if (!timeoutReference) return;
@@ -127,7 +103,7 @@
 	$('#StudentFname, #StudentLname, #StudentClass').donetyping(function(){
 		$(this).parent().next().removeClass('glyphicon-ok-sign text-success').addClass('glyphicon-refresh spinning'); // Upload failed indicator
 		if (navigator.onLine) {
-			$('#std_form_submit').attr('disabled', true);
+			$('#std_form_submit').text(lang_strings['disabled_submit']).attr('disabled', true);
 			updateStudentBasicInfo();
 		} else {
 			std_updated = true;
@@ -145,7 +121,7 @@
 	            dataType: 'json',
 	            url: appData.baseUrl + 'student/update_student',
 	            type: 'post',
-	            data: {'fname': fname, 'lname' : lname, 'class' : std_class, 'random_id' : random_id},
+	            data: {'student_id' : student_id, 'fname': fname, 'lname' : lname, 'class' : std_class, 'random_id' : random_id},
 	            success: function (response)
 	            {
 	            	if (response.success) {
@@ -161,7 +137,7 @@
 	                	if (std_class != '') {
 	                		$('#std-class').removeClass('glyphicon-refresh spinning').addClass('glyphicon-ok-sign text-success');
 	                	}	    
-	                	$('#std_form_submit').attr('disabled', false);            	
+	                	$('#std_form_submit').text(lang_strings['enabled_submit']).attr('disabled', false);        	
 	            	} else {
 	            		alert('Something went wrong, please try now');
 	            		window.location.reload();
@@ -171,23 +147,34 @@
 		}	
 	}
 
-	$(".form-input").change(function() { 
-		$('#std_form_submit').attr('disabled', true);
-		var question_id = $(this).closest('tr').prev().val();
+	// For checkbox and radio buttons
+	$(".tick-mark").change(function() { 
+		answering($(this));
+	});
+
+	// For text area and text fields
+	$(".typing").donetyping(function(){
+		answering($(this));
+	});
+
+	// Common method for all input type change or done typing
+	function answering(element) {
+		$('#std_form_submit').text(lang_strings['disabled_submit']).attr('disabled', true);
+		var question_id = element.closest('tr').prev().val();
 		var checkbox_record = [];
 		var checkBoxDelete = '';
 		var checkbox_record_delete = 1;
 		var checkBox = '';
 		// temp
 		var checkBoxName = '';
-		if ($(this).is(':checkbox')) {
-			if ($(this).is(':checked')) {
+		if (element.is(':checkbox')) {
+			if (element.is(':checked')) {
 				checkbox_record_delete = ''; // New Record
 			} 
-			checkBoxName = $(this).attr('name');
+			checkBoxName = element.attr('name');
 			$("input[name='"+checkBoxName+"']").each( function (i) {
-				if ($(this).is(':checked')) {
-					checkbox_record[i] = $(this).val();
+				if (element.is(':checked')) {
+					checkbox_record[i] = element.val();
 				}
 			});
 			// Check if all unchecked
@@ -196,24 +183,22 @@
 			}
 			checkBox = 1;
 		}
-		var ele = $(this);
     	$('#quest-' + question_id).removeClass('glyphicon-ok-sign text-success').addClass('glyphicon-refresh spinning');
 		//$('#studentId').attr('value', response.student_id);
 		var obj_index = Object.keys(answered).length;
 		console.log('obj_index', obj_index);
 		answered[obj_index] = {
 			'question_id' : question_id,
-			'case_sensitive' : $(this).closest('tr').prev().attr('data-case'),
-			'answer_text' : $(this).val(),
+			'case_sensitive' : element.closest('tr').prev().attr('data-case'),
+			'answer_text' : element.val(),
 			'checkbox_record' : checkbox_record,
 			'checkBoxDelete' : checkBoxDelete,
 			'checkbox_record_delete' : checkbox_record_delete,
 			'checkBox' : checkBox,
 			'random_id' : random_id
 		}
-		maxAllowedCheckBoxControl(ele);
-
-	});
+		maxAllowedCheckBoxControl(element);
+	}
 	
 	// if many correct, then checkbox
 	function maxAllowedCheckBoxControl(element) {
@@ -383,10 +368,12 @@
 	}
 
 	function saveStudentRecord() {
+		$(".ajax-loader").show();
+		//$( "#StudentLiveForm" ).prop( "disabled", true );
+		$("#StudentLiveForm :input").attr("disabled", true);
 		var fname = $('#StudentFname').val();
 		var lname = $('#StudentLname').val();
 		var std_class = $('#StudentClass').val();
-		$(".ajax-loader").show();
     	$.ajax({
     		async: false,
 	        dataType: 'json',
@@ -395,7 +382,10 @@
 	        data: {'fname': fname, 'lname' : lname, 'class' : std_class, 'random_id' : random_id},
 	        success: function (response)
 	        {
+	        	student_id = response.student_id;
 	            $('#studentId').attr('value', response.student_id);
+	            //$( "#StudentLiveForm" ).prop( "disabled", false );
+	            $("#StudentLiveForm :input").attr("disabled", false);
 	            $(".ajax-loader").hide();
 	        }
 	    });

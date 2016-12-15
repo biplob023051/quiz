@@ -17,15 +17,15 @@ class StudentController extends AppController {
         $response = array('success' => true);
         // pr($this->request->data);
         // exit;
-        if (!$this->Session->check('student_id')) { // check student record
+        if (empty($this->request->data['student_id']) && !$this->Session->check('student_id')) { // check student record
             // student record new entry
             $this->request->data['fname'] = '';
             $this->request->data['lname'] = '';
             $this->request->data['class'] = '';
             $response = $this->recordStudentData($this->request->data);
+            $this->request->data['student_id'] = $response['student_id'];
         } 
 
-        $this->request->data['student_id'] = (int)$this->Session->read('student_id');
         $student = $this->Student->findById($this->request->data['student_id']);
 
         $checkbox_record_delete = $this->request->data['checkbox_record_delete'];
@@ -174,9 +174,9 @@ class StudentController extends AppController {
     private function recordStudentData() {
         $response = array('success' => false);
         $this->loadModel('Quiz');
-        if ($this->Session->check('student_id')) {
+        if (!empty($this->request->data['student_id']) || $this->Session->check('student_id')) {
             // Update student information
-            $data['Student']['id'] = (int) $this->Session->read('student_id');
+            $data['Student']['id'] = !empty($this->request->data['student_id']) ? $this->request->data['student_id'] : (int) $this->Session->read('student_id');
         } else {
             // Find quiz id
             $quiz = $this->Quiz->findByRandomId((int)$this->request->data['random_id']);

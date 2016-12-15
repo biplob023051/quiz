@@ -488,6 +488,9 @@ class QuizController extends AppController {
             $lang_strings['browser_switch'] = __('Sorry, you are not allowed to switch browser tab');
             $lang_strings['leave_quiz'] = __('Are you sure that you want to leave this quiz?');
 
+            $lang_strings['disabled_submit'] = __('Please hold, your answers are saving...');
+            $lang_strings['enabled_submit'] = __('Turn in your quiz');
+
             $this->disableCache();
             $this->set('data', $data);
             $this->set(compact('lang_strings'));
@@ -552,14 +555,17 @@ class QuizController extends AppController {
         // get student id's for ajax auto checking
         $studentIds = array();
         foreach ($quizDetails['Student'] as $key1 => $value1) {
-            $informations = array();
-            $informations[] = array('fname' => $value1['fname'], 'lname' => $value1['lname'], 'class' => $value1['class']);
-            $answers = array();
-            foreach ($value1['Answer'] as $key2 => $value2) {
-                $answers[$value2['question_id']] = $value2['text'];
+            $diff = strtotime(date('Y-m-d H:i:s')) - strtotime($value1['submitted']);
+            if (empty($value1['status']) && ($diff < 3600)) {
+                $informations = array();
+                $informations[] = array('fname' => $value1['fname'], 'lname' => $value1['lname'], 'class' => $value1['class']);
+                $answers = array();
+                foreach ($value1['Answer'] as $key2 => $value2) {
+                    $answers[$value2['question_id']] = $value2['text'];
+                }
+                $informations[] = $answers;
+                $studentIds[$value1['id']] = $informations;
             }
-            $informations[] = $answers;
-            $studentIds[$value1['id']] = $informations;
         }
     
         
@@ -568,6 +574,9 @@ class QuizController extends AppController {
         $this->set(compact('onlineStds'));
 
         $studentIds = json_encode(array('studentIds' => $studentIds, 'onlineStds' => $onlineStds));
+
+        // pr($studentIds);
+        // exit;
 
         // get student classes
         $classes = Hash::combine($checkPermission['Student'], '{n}.class', '{n}.class');
@@ -633,7 +642,7 @@ class QuizController extends AppController {
         } else {
             $filter = $this->Session->read('Filter');
         }
-        $quizDetails = $this->Quiz->quizDetails((int) $this->request->data['quizId'], $filter);
+        $quizDetails = $this->Quiz->checkNewUpdate((int) $this->request->data['quizId'], $filter);
         $studentIds = array();
         foreach ($quizDetails['Student'] as $key1 => $value1) {
             $informations = array();

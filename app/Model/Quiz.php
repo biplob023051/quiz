@@ -175,6 +175,42 @@ class Quiz extends AppModel {
         return $result;
     }
 
+    // Method for checking ajax_latest
+    public function checkNewUpdate($quizId, $filter) {
+        $studentOptions[] = array(
+            'Student.status' => NULL,
+            'Student.submitted >=' => date('Y-m-d H:i:s', strtotime('-1 hour'))
+        );
+    
+        if (isset($filter['class']) && ($filter['class'] !== 'all')) {
+            $studentOptions[] = array(
+                'Student.class' => $filter['class']
+            );
+        }
+
+        $this->Behaviors->load('Containable');
+        $result = $this->find('first', array(
+                'conditions' => array(
+                    'Quiz.id' => $quizId,
+                ),
+                //'recursive' => 2
+                'contain' => array(
+                    'User', 
+                    'Question' => array(
+                        'Answer', 
+                        'Choice', 
+                        'QuestionType', 
+                        'order' => array('Question.weight DESC', 'Question.id ASC'),
+                        'conditions' => array('Question.question_type_id' => array(1,2,3,4,5))
+                    ), 
+                    'Student' => array('conditions' => $studentOptions, 'Ranking', 'Answer'), 
+                )
+            )
+        );
+        
+        return $result;
+    } 
+
     public function checkPermission($quizId, $user_id) {
         $result = $this->findByIdAndUserId($quizId, $user_id);
         return $result;

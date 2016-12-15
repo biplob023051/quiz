@@ -20,6 +20,7 @@ var interval;
 function getUpdated() {
     var quizId = $("#quizId").text();
     $.ajax({
+        async: false,
         type: "POST",
         url: appData.baseUrl + 'quiz/ajax_latest',
         data: {quizId:quizId},
@@ -46,6 +47,7 @@ function getUpdated() {
                 $("#prev_data").html(data);
                 var openTab = getCookie("tabInfo");
                 $.ajax({
+                    async: false,
                     dataType: 'JSON',
                     type: "POST",
                     url: appData.baseUrl + 'quiz/ajax_update',
@@ -56,7 +58,7 @@ function getUpdated() {
                             updateIndividulaStudent(value);
 
                         })
-                        interval = setInterval(getUpdated, 2000);
+                        interval = setInterval(getUpdated, 5000);
                         // $(".panel").html(data);
                         // testFunc();
                         // interval = setInterval(getUpdated, 2000);
@@ -77,6 +79,7 @@ function updateIndividulaStudent(student_id) {
         var sl = parseInt($("tr#student-" + student_id).find('.question-serial').text());
     }
     $.ajax({
+        async: false,
         dataType: 'html',
         type: "POST",
         url: appData.baseUrl + 'quiz/ajax_student_update',
@@ -117,7 +120,7 @@ $(document).ready(function(){
 
     $("#fixTable").tableHeadFixer({"head" : true, "left" : 2});
 
-    interval = setInterval(getUpdated, 2000);
+    interval = setInterval(getUpdated, 5000);
     testFunc();
     $(".table").tablesorter({ selectorHeaders: 'thead th.sortable' }); 
 }); 
@@ -208,6 +211,7 @@ $(document).ready(function(){
         var std_id = $(this).attr('id');
         var std_online = $(this).closest('tr').find('.online').length;
         $.ajax({
+            async: false,
             dataType: 'json',
             url: appData.baseUrl + 'student/confirmDeleteStudent',
             type: 'post',
@@ -235,6 +239,7 @@ $(document).ready(function(){
        var std_id = $(this).attr('value');
        var infoModal = $('#confirm-delete');
        $.ajax({
+            async: false,
             dataType: 'json',
             url: appData.baseUrl + 'student/deleteStudent',
             type: 'post',
@@ -270,6 +275,7 @@ $(document).ready(function(){
         $('#print_div').html('');
         window.frames["print_frame"].document.body.innerHTML='';
         $.ajax({
+            async: false,
             dataType: 'html',
             type: "POST",
             url: appData.baseUrl + 'quiz/ajax_print_answer',
@@ -335,6 +341,7 @@ $(document).ready(function(){
         var inputField = $(this);
         clearInterval(interval);
         $.ajax({
+            async: false,
             dataType: 'json',
             url: appData.baseUrl + 'student/ajax_std_update',
             type: 'post',
@@ -357,7 +364,7 @@ $(document).ready(function(){
                     alert(response.message);
                 }
                 clearInterval(interval);
-                interval = setInterval(getUpdated, 2000);
+                interval = setInterval(getUpdated, 5000);
             }
         });
     });
@@ -452,6 +459,7 @@ function testFunc() {
         clearInterval(interval);
 
         $.ajax({
+            async: false,
             dataType: 'json',
             url: appData.baseUrl + 'score/update',
             type: 'post',
@@ -485,7 +493,7 @@ function testFunc() {
                     alert('Something went wrong, try again later');
                 }
                 clearInterval(interval);
-                interval = setInterval(getUpdated, 2000);
+                interval = setInterval(getUpdated, 5000);
             }
         });
     });
