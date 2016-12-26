@@ -219,19 +219,32 @@ class UserController extends AppController {
     }
 
     public function contact() {
-        $Email = new CakeEmail();
-        $Email->viewVars($this->request->data);
-        $Email->from(array('admin@webquiz.fi' => 'WebQuiz.fi'));
-        $Email->template('inquary');
-        $Email->emailFormat('html');
-        $Email->to(Configure::read('AdminEmail'));
-        $Email->subject(__('General Inquary'));
-        if ($Email->send()) {
-            $this->Session->setFlash(__('Your email sent successfully'), 'notification_form', array(), 'notification');    
-        } else {
-            $this->Session->setFlash(__('Something went wrong, please try again later'), 'error_form', array(), 'error');
+        if ($this->request->is('post')) {
+            require_once APP . 'Vendor' . DS . '/recaptcha/src/autoload.php';
+            $secret = RECAPTCHA_SERVER_KEY;
+            $recaptcha = new \ReCaptcha\ReCaptcha($secret);
+            $resp = $recaptcha->verify($this->request->data['g-recaptcha-response'], Router::url('/', true));
+            if ($resp->isSuccess()) {
+                $Email = new CakeEmail();
+                $Email->viewVars($this->request->data);
+                $Email->from(array('admin@webquiz.fi' => 'WebQuiz.fi'));
+                $Email->template('inquary');
+                $Email->emailFormat('html');
+                $Email->to(Configure::read('AdminEmail'));
+                $Email->subject(__('General Inquary'));
+                if ($Email->send()) {
+                    $this->Session->setFlash(__('Your email sent successfully'), 'notification_form', array(), 'notification');    
+                } else {
+                    $this->Session->setFlash(__('Something went wrong, please try again later'), 'error_form', array(), 'error');
+                }
+            } else {
+                foreach ($resp->getErrorCodes() as $code) {
+                    $message = '<tt>' . $code  . '</tt> ';
+                }
+                $this->Session->setFlash($message, 'error_form', array(), 'error');
+            }
+            return $this->redirect($this->referer());
         }
-        return $this->redirect($this->referer());
         
     }
 

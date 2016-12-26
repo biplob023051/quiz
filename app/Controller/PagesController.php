@@ -74,6 +74,7 @@ class PagesController extends AppController {
 			$lang_strings['empty_email'] = __('Require Email Address');
 			$lang_strings['invalid_email'] = __('Invalid email');
         	$lang_strings['empty_message'] = __('Require Message');
+        	$lang_strings['empty_captcha'] = __('Please prove you are not robot.');
         	$this->set(compact('lang_strings'));
 		}
 

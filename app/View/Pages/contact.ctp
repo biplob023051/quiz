@@ -1,3 +1,4 @@
+<script src='https://www.google.com/recaptcha/api.js?hl=fi'></script>
 <?php
     $this->Html->script('contact', array('inline' => false));
 ?>
@@ -12,16 +13,21 @@
         <h3><?php echo __('Get in Touch'); ?></h3>
         <form class="form-horizontal" style="margin-top:30px;"  method="post" action="<?php echo $this->request->base; ?>/user/contact" id="contactForm" novalidate="novalidate" accept-charset="utf-8">
             <div class="alert alert-danger" id="error-message" style="display: none;"></div>
-            <div class="form-group">
+            <div class="form-group required">
                 <label for="" class="col-sm-4 control-label"><?php echo __('Your Email'); ?></label>
                 <div class="col-sm-7">
                     <input type="email" name='data[email]' class="form-control" id="email" placeholder="">
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group required">
                 <label for="" class="col-sm-4 control-label"><?php echo __('Message'); ?></label>
                 <div class="col-sm-7">
                     <textarea name='data[message]' id="message" rows="5" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group required">
+                <div class="col-sm-offset-4 col-sm-7">
+                    <div class="g-recaptcha" data-sitekey="<?php echo RECAPTCHA_SECRET_KEY; ?>"></div>
                 </div>
             </div>
             <div class="form-group">
@@ -42,3 +48,10 @@
 <script type="text/javascript">
     var lang_strings = <?php echo json_encode($lang_strings) ?>;
 </script>
+
+<style type="text/css">
+    .form-group.required .control-label:after {
+        content:"*";
+        color:red;
+    }
+</style>

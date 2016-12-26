@@ -17,6 +17,11 @@
 			$("#error-message").html(lang_strings['empty_message']);
 			return;
 		}
+		if(grecaptcha.getResponse() == '') {
+			$("#error-message").show();
+			$("#error-message").html(lang_strings['empty_captcha']);
+			return;
+		} 
 		$('#contactForm').unbind('submit').submit();
 	});
 

@@ -1687,3 +1687,7 @@ msgstr "Hetkinen, vastauksiasi tallennetaan..."
 #: View/Quiz/live.ctp:30
 msgid "Sorry, you lost your internet connection."
 msgstr "Verkkoyhteytesi on valitettavasti katkennut."
+
+#: Controller/PagesController.php:104
+msgid "Please prove you are not robot."
+msgstr "Vahvista, että et ole robotti."
